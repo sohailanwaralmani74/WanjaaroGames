@@ -1,0 +1,6 @@
+{
+  "name": "Wanjaaro – Free Instant Mind & Skill Games",
+  "description": "Play free instant client-side browser games designed to test reflexes, memory, logic, precision, typing, and mental agility with local high score tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
