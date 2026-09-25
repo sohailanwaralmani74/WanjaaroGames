@@ -118,17 +118,23 @@ export function SpeedFlashGame({ onFinish }: GameProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const timeoutRef = useRef<number | null>(null);
   const signalStartRef = useRef<number>(0);
+  const scoreRef = useRef<number>(0);
+  const roundRef = useRef<number>(0);
+  const lastPrematureTapRef = useRef<number>(0);
 
-  const startNextStimulus = (currentRound: number, currentScore: number) => {
-    if (currentRound >= 10) {
+  const scheduleNextStimulus = () => {
+    if (roundRef.current >= 10) {
       setIsPlaying(false);
+      setActiveSignal(null);
       sound.playSuccess();
-      onFinish(currentScore, `${currentScore} pts`);
+      const finalScore = scoreRef.current;
+      setStatusText(`Test complete! Final Score: ${finalScore} pts`);
+      onFinish(finalScore, `${finalScore} pts`);
       return;
     }
 
     setActiveSignal(null);
-    const delay = Math.floor(Math.random() * 1200) + 800;
+    const delay = Math.floor(Math.random() * 1200) + 800; // 0.8s - 2.0s
     timeoutRef.current = window.setTimeout(() => {
       const isTarget = Math.random() > 0.35; // 65% target white, 35% decoy red
       const type = isTarget ? 'white' : 'red';
@@ -136,54 +142,86 @@ export function SpeedFlashGame({ onFinish }: GameProps) {
       signalStartRef.current = performance.now();
       sound.playBeep(type === 'white' ? 660 : 330, 0.05);
 
-      // Timeout for stimuli: 1 second
+      // Stimulus window: 950ms to react or hold fire
       timeoutRef.current = window.setTimeout(() => {
         if (type === 'white') {
-          // Missed target
+          // Missed white target
           sound.playFail();
-          setStatusText('Missed target (-50 pts)');
-          setScore((s) => Math.max(0, s - 50));
+          const newScore = Math.max(0, scoreRef.current - 50);
+          scoreRef.current = newScore;
+          setScore(newScore);
+          setStatusText('Missed target! (-50 pts)');
+        } else {
+          // Successfully avoided red decoy!
+          sound.playSuccess();
+          const newScore = scoreRef.current + 50;
+          scoreRef.current = newScore;
+          setScore(newScore);
+          setStatusText('Good discipline! Held fire on RED (+50 pts)');
         }
-        setRound((r) => r + 1);
-        startNextStimulus(currentRound + 1, currentScore);
-      }, 900);
+
+        const nextRound = roundRef.current + 1;
+        roundRef.current = nextRound;
+        setRound(nextRound);
+        setActiveSignal(null);
+        scheduleNextStimulus();
+      }, 950);
     }, delay);
   };
 
-  const handleStart = () => {
+  const handleStart = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    scoreRef.current = 0;
+    roundRef.current = 0;
     setScore(0);
     setRound(0);
     setIsPlaying(true);
-    setStatusText('Eyes on the beacon!');
-    startNextStimulus(0, 0);
+    setStatusText('Eyes on the beacon! Tap WHITE, hold fire on RED.');
+    scheduleNextStimulus();
   };
 
   const handleTap = () => {
     if (!isPlaying) return;
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
     if (activeSignal === 'white') {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       const latency = Math.round(performance.now() - signalStartRef.current);
       const points = Math.max(50, 400 - latency);
       sound.playSuccess();
+      const nextScore = scoreRef.current + points;
+      scoreRef.current = nextScore;
+      setScore(nextScore);
       setStatusText(`+${points} pts (${latency}ms)`);
-      const nextScore = score + points;
-      setScore(nextScore);
       setActiveSignal(null);
-      setRound((r) => r + 1);
-      startNextStimulus(round + 1, nextScore);
+      const nextRound = roundRef.current + 1;
+      roundRef.current = nextRound;
+      setRound(nextRound);
+      scheduleNextStimulus();
     } else if (activeSignal === 'red') {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       sound.playFail();
-      setStatusText('False Alarm! Tapped on RED (-150 pts)');
-      const nextScore = Math.max(0, score - 150);
+      const nextScore = Math.max(0, scoreRef.current - 150);
+      scoreRef.current = nextScore;
       setScore(nextScore);
+      setStatusText('False Alarm! Tapped on RED decoy (-150 pts)');
       setActiveSignal(null);
-      setRound((r) => r + 1);
-      startNextStimulus(round + 1, nextScore);
+      const nextRound = roundRef.current + 1;
+      roundRef.current = nextRound;
+      setRound(nextRound);
+      scheduleNextStimulus();
     } else {
-      sound.playFail();
-      setStatusText('Premature tap! (-50 pts)');
-      setScore((s) => Math.max(0, s - 50));
+      // activeSignal === null ('Watch...' state)
+      // DO NOT cancel timeoutRef.current so the scheduled beacon still appears!
+      const now = performance.now();
+      if (now - lastPrematureTapRef.current > 350) {
+        lastPrematureTapRef.current = now;
+        sound.playFail();
+        const nextScore = Math.max(0, scoreRef.current - 50);
+        scoreRef.current = nextScore;
+        setScore(nextScore);
+        setStatusText('Premature tap! Wait for the beacon! (-50 pts)');
+      }
     }
   };
 
@@ -201,7 +239,19 @@ export function SpeedFlashGame({ onFinish }: GameProps) {
       </div>
 
       <div
-        onClick={handleTap}
+        onClick={isPlaying ? handleTap : undefined}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.code === 'Space' || e.code === 'Enter') {
+            e.preventDefault();
+            if (!isPlaying) {
+              handleStart();
+            } else {
+              handleTap();
+            }
+          }
+        }}
         className={`w-full h-64 rounded-xl flex flex-col items-center justify-center cursor-pointer border-2 transition-all ${
           activeSignal === 'white'
             ? 'bg-white border-amber-300 shadow-lg shadow-white/30'
@@ -215,16 +265,27 @@ export function SpeedFlashGame({ onFinish }: GameProps) {
             onClick={handleStart}
             className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg shadow-md transition-transform active:scale-95"
           >
-            Start Speed Flash
+            {round > 0 ? 'Play Again' : 'Start Speed Flash'}
           </button>
         ) : (
-          <span
-            className={`text-xl font-bold uppercase tracking-wider ${
-              activeSignal === 'white' ? 'text-black font-extrabold' : 'text-white'
-            }`}
-          >
-            {activeSignal === 'white' ? 'HIT ME!' : activeSignal === 'red' ? 'HOLD FIRE!' : 'Watch...'}
-          </span>
+          <div className="flex flex-col items-center gap-2">
+            <span
+              className={`text-2xl font-extrabold uppercase tracking-wider ${
+                activeSignal === 'white'
+                  ? 'text-black'
+                  : activeSignal === 'red'
+                  ? 'text-white'
+                  : 'text-neutral-400 animate-pulse'
+              }`}
+            >
+              {activeSignal === 'white' ? 'HIT ME!' : activeSignal === 'red' ? 'HOLD FIRE!' : 'Watch...'}
+            </span>
+            {activeSignal === null && (
+              <span className="text-xs text-neutral-500 font-medium">
+                Wait for WHITE • Avoid RED
+              </span>
+            )}
+          </div>
         )}
       </div>
 
