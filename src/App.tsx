@@ -10,6 +10,7 @@ import { DesktopSidebarAdLayout } from './components/ads/DesktopSidebarAdLayout'
 import { TitleIntroAdBanner } from './components/ads/TitleIntroAdBanner';
 import { ClosableStickyMobileAd } from './components/ads/ClosableStickyMobileAd';
 import { AdBanner } from './components/ads/AdBanner';
+import { updateMetaTags } from './utils/seo';
 import {
   Search,
   Trophy,
@@ -39,22 +40,39 @@ export default function App() {
   const [isMuted, setIsMuted] = useState(sound.isSoundMuted());
   const [recentGameIds, setRecentGameIds] = useState<string[]>([]);
 
-  // Parse URL Hash for deep-linking
+  // Parse URL Hash for deep-linking & dynamic SEO metadata
   const handleHashChange = () => {
     const hash = window.location.hash.replace('#', '') || '/';
     if (hash.startsWith('/game/')) {
       const gameId = hash.replace('/game/', '');
       setCurrentRoute({ view: 'game', param: gameId });
+      const g = ALL_GAMES.find((item) => item.id === gameId);
+      if (g) {
+        updateMetaTags({
+          title: `${g.title} – Free Online Reflex & Skill Benchmark | Wanjaaro`,
+          description: `Play ${g.title} online for free on Wanjaaro. ${g.description || g.summary} Zero lag, instant client-side execution, local best score tracking.`,
+          path: `/game/${g.id}`,
+          game: g,
+        });
+      }
     } else if (hash.startsWith('/category/')) {
       const catId = hash.replace('/category/', '');
       setCurrentRoute({ view: 'category', param: catId });
+      const c = CATEGORIES.find((item) => item.id === catId);
+      if (c) {
+        updateMetaTags({
+          title: `${c.name} Games – Free Mind & Reflex Benchmarks | Wanjaaro`,
+          description: `Play free instant ${c.name} games on Wanjaaro. ${c.shortDesc} No registration, 100% client-side, zero latency.`,
+          path: `/category/${c.id}`,
+        });
+      }
     } else if (hash === '/scores') {
       setIsLeaderboardOpen(true);
       setCurrentRoute({ view: 'home' });
+      updateMetaTags({});
     } else {
       setCurrentRoute({ view: 'home' });
-      // Reset document title on home
-      document.title = 'Wanjaaro – Free Mind & Skill Browser Games | Zero Login';
+      updateMetaTags({});
     }
     setRecentGameIds(getRecentGames());
   };
@@ -341,14 +359,8 @@ export default function App() {
               <TitleIntroAdBanner slotId={`wanjaaro-cat-${activeCategory.id}-intro`} />
             </div>
 
-            {/* Desktop 2-Column (25% Ads Sidebar + 75% Category Grid) */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-              {isAdsEnabled && (
-                <div className="hidden lg:block lg:col-span-1">
-                  <DesktopSidebarAdLayout />
-                </div>
-              )}
-
+            {/* Desktop 2-Column: Left 75% Category Grid + Right 25% Sticky Ads Sidebar */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
               <div className={isAdsEnabled ? 'lg:col-span-3 space-y-6' : 'lg:col-span-4 space-y-6'}>
                 {/* Games in Category Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -396,6 +408,18 @@ export default function App() {
                   })}
                 </div>
               </div>
+
+              {/* Right 25% Desktop Ads Column (Sticky, scrolls only when bottom matches loaded page bottom) */}
+              {isAdsEnabled && (
+                <aside
+                  aria-label="Desktop 25% Right Sponsored Column"
+                  className="hidden lg:block lg:col-span-1 h-full select-none"
+                >
+                  <div className="sticky top-20">
+                    <DesktopSidebarAdLayout />
+                  </div>
+                </aside>
+              )}
             </div>
           </div>
         ) : (
@@ -486,16 +510,9 @@ export default function App() {
               <TitleIntroAdBanner slotId="wanjaaro-home-intro-banner" />
             </div>
 
-            {/* Desktop 2-Column Layout: Left 25% Ads & Performance Sidebar + Right 75% Games & Content */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-              {/* Left 25% Column on Desktop */}
-              {isAdsEnabled && (
-                <div className="hidden lg:block lg:col-span-1">
-                  <DesktopSidebarAdLayout />
-                </div>
-              )}
-
-              {/* Right 75% Column on Desktop (or Full Width on Mobile/Tablet) */}
+            {/* Desktop 2-Column Layout: Left 75% Games & Content + Right 25% Sticky Ads */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+              {/* Left 75% Column on Desktop (or Full Width on Mobile/Tablet) */}
               <div className={`space-y-10 ${isAdsEnabled ? 'lg:col-span-3' : 'lg:col-span-4'}`}>
                 {/* Category Filter Pills */}
                 <section className="space-y-4">
@@ -590,6 +607,18 @@ export default function App() {
                   </section>
                 )}
               </div>
+
+              {/* Right 25% Column on Desktop: Sticky Ad Unit */}
+              {isAdsEnabled && (
+                <aside
+                  aria-label="Desktop 25% Right Sponsored Column"
+                  className="hidden lg:block lg:col-span-1 h-full select-none"
+                >
+                  <div className="sticky top-20">
+                    <DesktopSidebarAdLayout />
+                  </div>
+                </aside>
+              )}
             </div>
 
             {/* Rankable SEO & GEO Content Section with FAQs */}

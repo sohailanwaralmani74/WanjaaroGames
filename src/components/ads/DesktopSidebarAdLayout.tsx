@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
-import { Sparkles, Trophy, ExternalLink, ShieldCheck, HelpCircle } from 'lucide-react';
+import React from 'react';
+import { Sparkles, ExternalLink, ShieldCheck } from 'lucide-react';
 import { AdBanner } from './AdBanner';
-import { SAMPLE_SPONSORS } from './adTypes';
 
 interface DesktopSidebarAdLayoutProps {
   showDevTags?: boolean;
 }
 
 export function DesktopSidebarAdLayout({ showDevTags = false }: DesktopSidebarAdLayoutProps) {
-  const [activeTab, setActiveTab] = useState<'sponsor' | 'featured' | 'tips'>('sponsor');
-
   return (
-    <aside
-      aria-label="Desktop 25% Sponsored & Performance Column"
-      className="hidden lg:flex w-full flex-col gap-5 select-none"
+    <div
+      aria-label="Desktop 25% Right Sponsored & Performance Column"
+      className="w-full flex flex-col gap-4 select-none"
     >
       {/* Primary 300x250 Medium Rectangle Sponsor Unit */}
       <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 shadow-xl relative overflow-hidden">
@@ -27,10 +24,10 @@ export function DesktopSidebarAdLayout({ showDevTags = false }: DesktopSidebarAd
 
         <AdBanner
           slotType="medium-rectangle"
-          slotId="wanjaaro-desktop-left-column"
+          slotId="wanjaaro-desktop-right-column"
           showDevTags={showDevTags}
           customConfig={{
-            id: 'sponsor-desktop-left',
+            id: 'sponsor-desktop-right',
             sponsorName: 'HyperSpeed Cloud',
             title: 'Sub-15ms Edge Game Hosting',
             description: 'Deploy HTML5 games with zero cold starts and instant CDN asset delivery worldwide.',
@@ -46,10 +43,10 @@ export function DesktopSidebarAdLayout({ showDevTags = false }: DesktopSidebarAd
         </div>
       </div>
 
-      {/* Skyscraper / Vertical Sticky Card (160x600 or 300x600 Half Page Style) */}
-      <div className="sticky top-20 bg-neutral-900 border border-neutral-800 rounded-2xl p-4 shadow-xl space-y-4">
+      {/* Vertical Card (300x250 / 300x600 Spotlight Style) */}
+      <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 shadow-xl space-y-4">
         <div className="flex items-center justify-between text-[10px] font-mono text-neutral-400 pb-2 border-b border-neutral-800">
-          <span className="uppercase tracking-wider">Spotlight • 300x600</span>
+          <span className="uppercase tracking-wider">Spotlight Sponsor</span>
           <span className="px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 font-mono text-[9px]">
             Zero Gameplay Latency
           </span>
@@ -99,6 +96,6 @@ export function DesktopSidebarAdLayout({ showDevTags = false }: DesktopSidebarAd
           Wanjaaro Zero-Lag Placement Policy
         </div>
       </div>
-    </aside>
+    </div>
   );
 }

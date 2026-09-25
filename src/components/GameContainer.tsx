@@ -19,9 +19,12 @@ import {
   Brain,
   ShieldCheck,
   CheckCircle,
+  BarChart2,
 } from 'lucide-react';
 import { AdBanner } from './ads/AdBanner';
 import { TitleIntroAdBanner } from './ads/TitleIntroAdBanner';
+import { DesktopSidebarAdLayout } from './ads/DesktopSidebarAdLayout';
+import { updateMetaTags } from '../utils/seo';
 
 interface GameContainerProps {
   game: GameMeta;
@@ -58,9 +61,14 @@ export function GameContainer({
     setLastResult(null);
     setGameKey((k) => k + 1);
 
-    // Update document title for SEO & bookmarking
-    document.title = `${game.title} - Free Mind & Skill Game | Wanjaaro`;
-  }, [game.id, game.title]);
+    // Update dynamic SEO & Answer Engine metadata for this game
+    updateMetaTags({
+      title: `${game.title} – Free Online Reflex & Skill Benchmark | Wanjaaro`,
+      description: `Play ${game.title} online on Wanjaaro. ${game.description || game.summary} Free instant client-side execution, zero latency, local best score tracking.`,
+      path: `/game/${game.id}`,
+      game,
+    });
+  }, [game.id, game.title, game.description, game.summary]);
 
   const toggleSound = () => {
     const muted = sound.toggleMute();
@@ -103,25 +111,29 @@ export function GameContainer({
     .slice(0, 4);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6 space-y-8 animate-in fade-in duration-300">
-      {/* Breadcrumb Navigation */}
-      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-neutral-400">
-        <button
-          onClick={onNavigateHome}
-          className="hover:text-amber-400 transition-colors flex items-center gap-1"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" /> Platform Home
-        </button>
-        <span>/</span>
-        <button
-          onClick={() => onNavigateCategory(game.category)}
-          className="hover:text-amber-400 transition-colors"
-        >
-          {category?.name || game.category}
-        </button>
-        <span>/</span>
-        <span className="text-neutral-200 font-medium truncate">{game.title}</span>
-      </nav>
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 animate-in fade-in duration-300">
+      {/* Desktop 2-Column: Left 75% Game Experience + Right 25% Sticky Ads */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Left 75% Column (Full Width on Mobile/Tablet) */}
+        <div className="lg:col-span-3 space-y-6">
+          {/* Breadcrumb Navigation */}
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-neutral-400">
+            <button
+              onClick={onNavigateHome}
+              className="hover:text-amber-400 transition-colors flex items-center gap-1"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" /> Platform Home
+            </button>
+            <span>/</span>
+            <button
+              onClick={() => onNavigateCategory(game.category)}
+              className="hover:text-amber-400 transition-colors"
+            >
+              {category?.name || game.category}
+            </button>
+            <span>/</span>
+            <span className="text-neutral-200 font-medium truncate">{game.title}</span>
+          </nav>
 
       {/* Game Header Bar */}
       <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -317,6 +329,36 @@ export function GameContainer({
             </div>
           </div>
         </div>
+
+        {/* Empirical Performance Tiers (Information Gain for AI & Players) */}
+        <div className="pt-4 border-t border-neutral-850/80">
+          <div className="flex items-center gap-2 text-xs font-semibold text-neutral-300 mb-2.5">
+            <BarChart2 className="w-4 h-4 text-amber-400" />
+            <span>Empirical Performance Benchmarks &amp; Percentiles: {game.title}</span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            <div className="p-2.5 rounded-xl bg-neutral-950/80 border border-neutral-800">
+              <span className="text-[10px] font-mono text-neutral-500 uppercase block">Beginner</span>
+              <span className="text-xs font-semibold text-neutral-300">Baseline Focus</span>
+              <span className="text-[10px] text-neutral-400 block mt-0.5">Initial Calibration</span>
+            </div>
+            <div className="p-2.5 rounded-xl bg-neutral-950/80 border border-neutral-800">
+              <span className="text-[10px] font-mono text-cyan-400 uppercase block">Average</span>
+              <span className="text-xs font-semibold text-white">50th Percentile</span>
+              <span className="text-[10px] text-neutral-400 block mt-0.5">Typical Baseline</span>
+            </div>
+            <div className="p-2.5 rounded-xl bg-neutral-950/80 border border-neutral-800">
+              <span className="text-[10px] font-mono text-amber-400 uppercase block">Advanced</span>
+              <span className="text-xs font-semibold text-white">85th Percentile</span>
+              <span className="text-[10px] text-neutral-400 block mt-0.5">Competitive Tier</span>
+            </div>
+            <div className="p-2.5 rounded-xl bg-neutral-950/80 border border-neutral-800">
+              <span className="text-[10px] font-mono text-emerald-400 uppercase block">Elite Pro</span>
+              <span className="text-xs font-semibold text-emerald-400">99th Percentile</span>
+              <span className="text-[10px] text-neutral-400 block mt-0.5">Peak Neuro-Performance</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Related Games in Same Category */}
@@ -364,6 +406,18 @@ export function GameContainer({
           </div>
         </div>
       )}
+        </div>
+
+        {/* Right 25% Desktop Ads Column (Sticky, scrolls only when bottom matches loaded page bottom) */}
+        <aside
+          aria-label="Desktop 25% Right Sponsored Column"
+          className="hidden lg:block lg:col-span-1 h-full select-none"
+        >
+          <div className="sticky top-20">
+            <DesktopSidebarAdLayout />
+          </div>
+        </aside>
+      </div>
     </div>
   );
 }
