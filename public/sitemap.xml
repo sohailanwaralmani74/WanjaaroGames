@@ -8,563 +8,563 @@
   </url>
   <!-- 12 Skill Categories -->
   <url>
-    <loc>https://wanjaaro.com/#/category/reflex-reaction</loc>
+    <loc>https://wanjaaro.com/category/reflex-reaction</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/category/aim-precision</loc>
+    <loc>https://wanjaaro.com/category/aim-precision</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/category/memory-recall</loc>
+    <loc>https://wanjaaro.com/category/memory-recall</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/category/typing-words</loc>
+    <loc>https://wanjaaro.com/category/typing-words</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/category/perception-vision</loc>
+    <loc>https://wanjaaro.com/category/perception-vision</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/category/logic-puzzles</loc>
+    <loc>https://wanjaaro.com/category/logic-puzzles</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/category/strategy-tactics</loc>
+    <loc>https://wanjaaro.com/category/strategy-tactics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/category/coordination-rhythm</loc>
+    <loc>https://wanjaaro.com/category/coordination-rhythm</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/category/speed-accuracy</loc>
+    <loc>https://wanjaaro.com/category/speed-accuracy</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/category/math-calculation</loc>
+    <loc>https://wanjaaro.com/category/math-calculation</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/category/visual-geometry</loc>
+    <loc>https://wanjaaro.com/category/visual-geometry</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/category/casual-arcade</loc>
+    <loc>https://wanjaaro.com/category/casual-arcade</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- All Instant Games -->
   <url>
-    <loc>https://wanjaaro.com/#/game/reflex-reaction-time</loc>
+    <loc>https://wanjaaro.com/game/reflex-reaction-time</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/reflex-speed-flash</loc>
+    <loc>https://wanjaaro.com/game/reflex-speed-flash</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/reflex-whack-hex</loc>
+    <loc>https://wanjaaro.com/game/reflex-whack-hex</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/reflex-dodge-ball</loc>
+    <loc>https://wanjaaro.com/game/reflex-dodge-ball</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/reflex-audio-snap</loc>
+    <loc>https://wanjaaro.com/game/reflex-audio-snap</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/reflex-color-switch</loc>
+    <loc>https://wanjaaro.com/game/reflex-color-switch</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/reflex-quick-brake</loc>
+    <loc>https://wanjaaro.com/game/reflex-quick-brake</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/reflex-trigger-finger</loc>
+    <loc>https://wanjaaro.com/game/reflex-trigger-finger</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/aim-sniper</loc>
+    <loc>https://wanjaaro.com/game/aim-sniper</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/aim-orbit-tap</loc>
+    <loc>https://wanjaaro.com/game/aim-orbit-tap</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/aim-laser-line</loc>
+    <loc>https://wanjaaro.com/game/aim-laser-line</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/aim-bullseye-drop</loc>
+    <loc>https://wanjaaro.com/game/aim-bullseye-drop</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/aim-micro-hover</loc>
+    <loc>https://wanjaaro.com/game/aim-micro-hover</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/aim-dart-throw</loc>
+    <loc>https://wanjaaro.com/game/aim-dart-throw</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/aim-needle-threader</loc>
+    <loc>https://wanjaaro.com/game/aim-needle-threader</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/aim-gravity-sling</loc>
+    <loc>https://wanjaaro.com/game/aim-gravity-sling</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/memory-simon-sequence</loc>
+    <loc>https://wanjaaro.com/game/memory-simon-sequence</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/memory-card-pairs</loc>
+    <loc>https://wanjaaro.com/game/memory-card-pairs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/memory-spatial-span</loc>
+    <loc>https://wanjaaro.com/game/memory-spatial-span</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/memory-number-span</loc>
+    <loc>https://wanjaaro.com/game/memory-number-span</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/memory-color-order</loc>
+    <loc>https://wanjaaro.com/game/memory-color-order</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/memory-path-memorizer</loc>
+    <loc>https://wanjaaro.com/game/memory-path-memorizer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/memory-icon-stash</loc>
+    <loc>https://wanjaaro.com/game/memory-icon-stash</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/memory-dual-nback</loc>
+    <loc>https://wanjaaro.com/game/memory-dual-nback</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/typing-speed-words</loc>
+    <loc>https://wanjaaro.com/game/typing-speed-words</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/typing-falling-letters</loc>
+    <loc>https://wanjaaro.com/game/typing-falling-letters</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/typing-anagram-rush</loc>
+    <loc>https://wanjaaro.com/game/typing-anagram-rush</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/typing-reverse-echo</loc>
+    <loc>https://wanjaaro.com/game/typing-reverse-echo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/typing-alphabet-sprint</loc>
+    <loc>https://wanjaaro.com/game/typing-alphabet-sprint</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/typing-code-symbols</loc>
+    <loc>https://wanjaaro.com/game/typing-code-symbols</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/typing-word-chain</loc>
+    <loc>https://wanjaaro.com/game/typing-word-chain</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/typing-pangram-hunt</loc>
+    <loc>https://wanjaaro.com/game/typing-pangram-hunt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/perception-odd-color</loc>
+    <loc>https://wanjaaro.com/game/perception-odd-color</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/perception-dot-counter</loc>
+    <loc>https://wanjaaro.com/game/perception-dot-counter</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/perception-stroop-test</loc>
+    <loc>https://wanjaaro.com/game/perception-stroop-test</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/perception-hidden-symbol</loc>
+    <loc>https://wanjaaro.com/game/perception-hidden-symbol</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/perception-size-illusion</loc>
+    <loc>https://wanjaaro.com/game/perception-size-illusion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/perception-angle-guess</loc>
+    <loc>https://wanjaaro.com/game/perception-angle-guess</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/perception-shadow-match</loc>
+    <loc>https://wanjaaro.com/game/perception-shadow-match</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/perception-motion-detect</loc>
+    <loc>https://wanjaaro.com/game/perception-motion-detect</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/logic-lights-out</loc>
+    <loc>https://wanjaaro.com/game/logic-lights-out</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/logic-sliding-15</loc>
+    <loc>https://wanjaaro.com/game/logic-sliding-15</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/logic-tower-hanoi</loc>
+    <loc>https://wanjaaro.com/game/logic-tower-hanoi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/logic-water-pour</loc>
+    <loc>https://wanjaaro.com/game/logic-water-pour</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/logic-binary-flip</loc>
+    <loc>https://wanjaaro.com/game/logic-binary-flip</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/logic-pipes-connect</loc>
+    <loc>https://wanjaaro.com/game/logic-pipes-connect</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/logic-mini-sokoban</loc>
+    <loc>https://wanjaaro.com/game/logic-mini-sokoban</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/logic-knights-tour</loc>
+    <loc>https://wanjaaro.com/game/logic-knights-tour</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/strategy-tic-tac-toe</loc>
+    <loc>https://wanjaaro.com/game/strategy-tic-tac-toe</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/strategy-connect-four</loc>
+    <loc>https://wanjaaro.com/game/strategy-connect-four</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/strategy-nim-matches</loc>
+    <loc>https://wanjaaro.com/game/strategy-nim-matches</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/strategy-reversi-mini</loc>
+    <loc>https://wanjaaro.com/game/strategy-reversi-mini</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/strategy-rock-paper-scissors</loc>
+    <loc>https://wanjaaro.com/game/strategy-rock-paper-scissors</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/strategy-dots-boxes</loc>
+    <loc>https://wanjaaro.com/game/strategy-dots-boxes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/strategy-hex-conquer</loc>
+    <loc>https://wanjaaro.com/game/strategy-hex-conquer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/strategy-mini-chess-puzzle</loc>
+    <loc>https://wanjaaro.com/game/strategy-mini-chess-puzzle</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/coord-rhythm-tap</loc>
+    <loc>https://wanjaaro.com/game/coord-rhythm-tap</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/coord-dual-hand-sync</loc>
+    <loc>https://wanjaaro.com/game/coord-dual-hand-sync</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/coord-ball-balance</loc>
+    <loc>https://wanjaaro.com/game/coord-ball-balance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/coord-orbit-jumper</loc>
+    <loc>https://wanjaaro.com/game/coord-orbit-jumper</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/coord-spiral-tracer</loc>
+    <loc>https://wanjaaro.com/game/coord-spiral-tracer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/coord-wave-sync</loc>
+    <loc>https://wanjaaro.com/game/coord-wave-sync</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/coord-flappy-dot</loc>
+    <loc>https://wanjaaro.com/game/coord-flappy-dot</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/coord-two-finger-cross</loc>
+    <loc>https://wanjaaro.com/game/coord-two-finger-cross</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/speed-click-25</loc>
+    <loc>https://wanjaaro.com/game/speed-click-25</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/speed-clicker-10s</loc>
+    <loc>https://wanjaaro.com/game/speed-clicker-10s</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/speed-swipe-rush</loc>
+    <loc>https://wanjaaro.com/game/speed-swipe-rush</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/speed-quick-sort</loc>
+    <loc>https://wanjaaro.com/game/speed-quick-sort</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/speed-bubble-pop</loc>
+    <loc>https://wanjaaro.com/game/speed-bubble-pop</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/speed-coin-catcher</loc>
+    <loc>https://wanjaaro.com/game/speed-coin-catcher</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/speed-button-mash</loc>
+    <loc>https://wanjaaro.com/game/speed-button-mash</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/speed-match-pair</loc>
+    <loc>https://wanjaaro.com/game/speed-match-pair</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/math-speed-addition</loc>
+    <loc>https://wanjaaro.com/game/math-speed-addition</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/math-24-solver</loc>
+    <loc>https://wanjaaro.com/game/math-24-solver</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/math-multiply-blitz</loc>
+    <loc>https://wanjaaro.com/game/math-multiply-blitz</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/math-prime-or-composite</loc>
+    <loc>https://wanjaaro.com/game/math-prime-or-composite</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/math-missing-operator</loc>
+    <loc>https://wanjaaro.com/game/math-missing-operator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/math-fraction-slice</loc>
+    <loc>https://wanjaaro.com/game/math-fraction-slice</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/math-number-sequence</loc>
+    <loc>https://wanjaaro.com/game/math-number-sequence</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/math-sum-target</loc>
+    <loc>https://wanjaaro.com/game/math-sum-target</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/visual-shape-rotate</loc>
+    <loc>https://wanjaaro.com/game/visual-shape-rotate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/visual-symmetry-match</loc>
+    <loc>https://wanjaaro.com/game/visual-symmetry-match</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/visual-tangled-lines</loc>
+    <loc>https://wanjaaro.com/game/visual-tangled-lines</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/visual-maze-runner</loc>
+    <loc>https://wanjaaro.com/game/visual-maze-runner</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/visual-color-harmony</loc>
+    <loc>https://wanjaaro.com/game/visual-color-harmony</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/visual-tangram-fit</loc>
+    <loc>https://wanjaaro.com/game/visual-tangram-fit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/visual-perimeter-guess</loc>
+    <loc>https://wanjaaro.com/game/visual-perimeter-guess</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/visual-mirror-reflection</loc>
+    <loc>https://wanjaaro.com/game/visual-mirror-reflection</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-snake-classic</loc>
+    <loc>https://wanjaaro.com/game/casual-snake-classic</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-brick-breaker</loc>
+    <loc>https://wanjaaro.com/game/casual-brick-breaker</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-pong-solo</loc>
+    <loc>https://wanjaaro.com/game/casual-pong-solo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-space-dodge</loc>
+    <loc>https://wanjaaro.com/game/casual-space-dodge</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-jump-tower</loc>
+    <loc>https://wanjaaro.com/game/casual-jump-tower</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-pinball-bounce</loc>
+    <loc>https://wanjaaro.com/game/casual-pinball-bounce</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-pachinko-drop</loc>
+    <loc>https://wanjaaro.com/game/casual-pachinko-drop</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-coin-pusher</loc>
+    <loc>https://wanjaaro.com/game/casual-coin-pusher</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-slot-spinner</loc>
+    <loc>https://wanjaaro.com/game/casual-slot-spinner</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-bubble-cannon</loc>
+    <loc>https://wanjaaro.com/game/casual-bubble-cannon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-match-three</loc>
+    <loc>https://wanjaaro.com/game/casual-match-three</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wanjaaro.com/#/game/casual-golf-putt</loc>
+    <loc>https://wanjaaro.com/game/casual-golf-putt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

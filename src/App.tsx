@@ -40,11 +40,29 @@ export default function App() {
   const [isMuted, setIsMuted] = useState(sound.isSoundMuted());
   const [recentGameIds, setRecentGameIds] = useState<string[]>([]);
 
-  // Parse URL Hash for deep-linking & dynamic SEO metadata
-  const handleHashChange = () => {
-    const hash = window.location.hash.replace('#', '') || '/';
-    if (hash.startsWith('/game/')) {
-      const gameId = hash.replace('/game/', '');
+  // Helper to extract clean path from pathname or legacy hash fallback
+  const getCurrentCleanPath = (): string => {
+    // If user arrived with legacy hash like /#/game/xyz, seamlessly convert to clean pathname
+    if (window.location.hash.startsWith('#/')) {
+      const cleanFromHash = window.location.hash.slice(1);
+      window.history.replaceState(null, '', cleanFromHash);
+      return cleanFromHash;
+    }
+    const path = window.location.pathname || '/';
+    // Fallback if 404 query string redirect wasn't consumed
+    if (window.location.search.startsWith('?/')) {
+      const cleanFromSearch = '/' + window.location.search.slice(2).replace(/~and~/g, '&');
+      window.history.replaceState(null, '', cleanFromSearch);
+      return cleanFromSearch;
+    }
+    return path;
+  };
+
+  // Parse Clean URL Path for deep-linking & dynamic SEO metadata
+  const handleRouteChange = () => {
+    const path = getCurrentCleanPath();
+    if (path.startsWith('/game/')) {
+      const gameId = path.replace('/game/', '').replace(/\/$/, '');
       setCurrentRoute({ view: 'game', param: gameId });
       const g = ALL_GAMES.find((item) => item.id === gameId);
       if (g) {
@@ -55,8 +73,8 @@ export default function App() {
           game: g,
         });
       }
-    } else if (hash.startsWith('/category/')) {
-      const catId = hash.replace('/category/', '');
+    } else if (path.startsWith('/category/')) {
+      const catId = path.replace('/category/', '').replace(/\/$/, '');
       setCurrentRoute({ view: 'category', param: catId });
       const c = CATEGORIES.find((item) => item.id === catId);
       if (c) {
@@ -66,35 +84,45 @@ export default function App() {
           path: `/category/${c.id}`,
         });
       }
-    } else if (hash === '/scores') {
+    } else if (path === '/scores') {
       setIsLeaderboardOpen(true);
       setCurrentRoute({ view: 'home' });
-      updateMetaTags({});
+      updateMetaTags({ path: '/' });
     } else {
       setCurrentRoute({ view: 'home' });
-      updateMetaTags({});
+      updateMetaTags({ path: '/' });
     }
     setRecentGameIds(getRecentGames());
   };
 
   useEffect(() => {
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    handleRouteChange();
+    window.addEventListener('popstate', handleRouteChange);
+    window.addEventListener('hashchange', handleRouteChange);
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+      window.removeEventListener('hashchange', handleRouteChange);
+    };
   }, []);
 
+  const navigateTo = (newPath: string) => {
+    if (window.location.pathname !== newPath) {
+      window.history.pushState(null, '', newPath);
+    }
+    handleRouteChange();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const navigateToHome = () => {
-    window.location.hash = '/';
+    navigateTo('/');
   };
 
   const navigateToGame = (gameId: string) => {
-    window.location.hash = `/game/${gameId}`;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateTo(`/game/${gameId}`);
   };
 
   const navigateToCategory = (catId: string) => {
-    window.location.hash = `/category/${catId}`;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateTo(`/category/${catId}`);
   };
 
   const toggleSound = () => {

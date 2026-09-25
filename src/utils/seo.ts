@@ -38,10 +38,17 @@ export function updateMetaTags({
   // 3. Update Standard Meta Description
   setMeta('name', 'description', description);
 
-  // 4. Update OpenGraph Tags
+  // 4. Update OpenGraph Tags & Canonical
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  const fullUrl = `${BASE_URL}${cleanPath === '/' ? '/' : cleanPath}`;
   setMeta('property', 'og:title', title);
   setMeta('property', 'og:description', description);
-  setMeta('property', 'og:url', `${BASE_URL}/#${path}`);
+  setMeta('property', 'og:url', fullUrl);
+
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if (canonical) {
+    canonical.setAttribute('href', fullUrl);
+  }
 
   // 5. Update Twitter / X Cards
   setMeta('name', 'twitter:title', title);
@@ -57,7 +64,7 @@ export function updateMetaTags({
       'applicationCategory': 'GameApplication',
       'operatingSystem': 'Any Web Browser',
       'description': game.description || game.summary,
-      'url': `${BASE_URL}/#/game/${game.id}`,
+      'url': `${BASE_URL}/game/${game.id}`,
       'genre': game.category,
       'offers': {
         '@type': 'Offer',

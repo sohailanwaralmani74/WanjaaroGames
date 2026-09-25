@@ -92,7 +92,7 @@ export function GameContainer({
   };
 
   const handleShare = async () => {
-    const shareText = `I scored ${lastResult?.formatted || personalBest || 'great'} on ${game.title} at Wanjaaro! Can you beat it? https://wanjaaro.com/#/game/${game.id}`;
+    const shareText = `I scored ${lastResult?.formatted || personalBest || 'great'} on ${game.title} at Wanjaaro! Can you beat it? https://wanjaaro.com/game/${game.id}`;
     if (navigator.clipboard) {
       await navigator.clipboard.writeText(shareText);
       setCopiedShare(true);

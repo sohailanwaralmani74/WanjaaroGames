@@ -201,7 +201,13 @@ export function WanjaaroSEOSection() {
                   <tr key={idx} className="hover:bg-neutral-900/40 transition-colors">
                     <td className="py-3 px-4 font-semibold text-white">
                       <a
-                        href={`/#/game/${b.gameId}`}
+                        href={`/game/${b.gameId}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.history.pushState(null, '', `/game/${b.gameId}`);
+                          window.dispatchEvent(new PopStateEvent('popstate'));
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
                         className="text-amber-400 hover:text-amber-300 hover:underline inline-flex items-center gap-1"
                       >
                         {b.test}
@@ -252,7 +258,13 @@ export function WanjaaroSEOSection() {
             {CATEGORIES.map((cat) => (
               <a
                 key={cat.id}
-                href={`/#/category/${cat.id}`}
+                href={`/category/${cat.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.history.pushState(null, '', `/category/${cat.id}`);
+                  window.dispatchEvent(new PopStateEvent('popstate'));
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 className="p-2.5 rounded-xl bg-neutral-950/70 hover:bg-neutral-850 border border-neutral-800 text-xs text-neutral-300 hover:text-amber-400 flex flex-col justify-between transition-colors group"
               >
                 <div className="flex items-center gap-1.5 font-medium truncate">
