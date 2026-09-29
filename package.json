@@ -1,20 +1,30 @@
 {
-  "name": "Jekyll-Gulp-Sass-Autoprefixer-Imagemin-BrowserSync",
+  "name": "datafrog-jekyll-suite",
+  "private": true,
   "version": "1.0.0",
-  "description": "A starter project for Jekyll",
-  "main": "index.js",
-  "repository": "https://github.com/artemsheludko/Jekyll-Gulp-Sass-Autoprefixer-Imagemin-BrowserSync",
-  "author": "Artem Sheludko",
-  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3000",
+    "build": "vite build && tsx scripts/generate-static-pages.ts && tsx scripts/generate-jekyll-content.ts",
+    "preview": "vite preview --port 3000",
+    "lint": "tsc --noEmit"
+  },
   "dependencies": {
-    "browser-sync": "^2.18.13",
-    "child_process": "^1.0.2",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-cache": "^0.4.6",
-    "gulp-imagemin": "^3.2.0",
-    "gulp-sass": "^3.1.0",
-    "imagemin-pngquant": "^5.0.0",
-    "Jekyll-Gulp-Sass-Autoprefixer-Imagemin-BrowserSync": "file:"
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.546.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
   }
 }
