@@ -12,6 +12,12 @@ import { ClosableStickyMobileAd } from './components/ads/ClosableStickyMobileAd'
 import { AdBanner } from './components/ads/AdBanner';
 import { updateMetaTags } from './utils/seo';
 import {
+  findGameBySlugOrId,
+  findCategoryBySlug,
+  getGameUrl,
+  getCategoryUrl,
+} from './utils/routes';
+import {
   Search,
   Trophy,
   Dices,
@@ -42,56 +48,87 @@ export default function App() {
 
   // Helper to extract clean path from pathname or legacy hash fallback
   const getCurrentCleanPath = (): string => {
-    // If user arrived with legacy hash like /#/game/xyz, seamlessly convert to clean pathname
+    // If user arrived with legacy hash like /#/game/xyz or /#xyz, seamlessly convert to clean pathname
     if (window.location.hash.startsWith('#/')) {
-      const cleanFromHash = window.location.hash.slice(1);
+      let cleanFromHash = window.location.hash.slice(1);
+      cleanFromHash = cleanFromHash.replace(/^\/game\//, '/').replace(/^\/category\//, '/');
       window.history.replaceState(null, '', cleanFromHash);
       return cleanFromHash;
     }
     const path = window.location.pathname || '/';
     // Fallback if 404 query string redirect wasn't consumed
     if (window.location.search.startsWith('?/')) {
-      const cleanFromSearch = '/' + window.location.search.slice(2).replace(/~and~/g, '&');
+      let cleanFromSearch = '/' + window.location.search.slice(2).replace(/~and~/g, '&');
+      cleanFromSearch = cleanFromSearch.replace(/^\/game\//, '/').replace(/^\/category\//, '/');
       window.history.replaceState(null, '', cleanFromSearch);
       return cleanFromSearch;
     }
     return path;
   };
 
-  // Parse Clean URL Path for deep-linking & dynamic SEO metadata
+  // Parse Clean Plain URL Path for deep-linking & dynamic SEO metadata
   const handleRouteChange = () => {
-    const path = getCurrentCleanPath();
-    if (path.startsWith('/game/')) {
-      const gameId = path.replace('/game/', '').replace(/\/$/, '');
-      setCurrentRoute({ view: 'game', param: gameId });
-      const g = ALL_GAMES.find((item) => item.id === gameId);
-      if (g) {
-        updateMetaTags({
-          title: `${g.title} – Free Online Reflex & Skill Benchmark | Wanjaaro`,
-          description: `Play ${g.title} online for free on Wanjaaro. ${g.description || g.summary} Zero lag, instant client-side execution, local best score tracking.`,
-          path: `/game/${g.id}`,
-          game: g,
-        });
-      }
-    } else if (path.startsWith('/category/')) {
-      const catId = path.replace('/category/', '').replace(/\/$/, '');
-      setCurrentRoute({ view: 'category', param: catId });
-      const c = CATEGORIES.find((item) => item.id === catId);
-      if (c) {
-        updateMetaTags({
-          title: `${c.name} Games – Free Mind & Reflex Benchmarks | Wanjaaro`,
-          description: `Play free instant ${c.name} games on Wanjaaro. ${c.shortDesc} No registration, 100% client-side, zero latency.`,
-          path: `/category/${c.id}`,
-        });
-      }
-    } else if (path === '/scores') {
+    const rawPath = getCurrentCleanPath();
+    let slug = rawPath.replace(/^\//, '').replace(/\/$/, '');
+
+    // Seamless migration: If URL contains old /game/ or /category/, strip it and clean browser address bar
+    if (slug.startsWith('game/')) {
+      slug = slug.replace(/^game\//, '');
+      window.history.replaceState(null, '', `/${slug}`);
+    } else if (slug.startsWith('category/')) {
+      slug = slug.replace(/^category\//, '');
+      window.history.replaceState(null, '', `/${slug}`);
+    }
+
+    if (!slug) {
+      setCurrentRoute({ view: 'home' });
+      updateMetaTags({ path: '/' });
+      setRecentGameIds(getRecentGames());
+      return;
+    }
+
+    if (slug === 'scores') {
       setIsLeaderboardOpen(true);
       setCurrentRoute({ view: 'home' });
-      updateMetaTags({ path: '/' });
-    } else {
-      setCurrentRoute({ view: 'home' });
-      updateMetaTags({ path: '/' });
+      updateMetaTags({
+        title: 'Top High Scores & Leaderboards | Wanjaaro',
+        description: 'View top scores, reaction latency benchmarks, and personal best records across all instant games on Wanjaaro.',
+        path: '/scores',
+      });
+      setRecentGameIds(getRecentGames());
+      return;
     }
+
+    // 1. Try finding game by exact ID, alias, or stripped name
+    const matchedGame = findGameBySlugOrId(slug);
+    if (matchedGame) {
+      setCurrentRoute({ view: 'game', param: matchedGame.id });
+      updateMetaTags({
+        title: `${matchedGame.title} – Free Online Reflex & Skill Benchmark | Wanjaaro`,
+        description: `Play ${matchedGame.title} online for free on Wanjaaro. ${matchedGame.description || matchedGame.summary} Zero lag, instant client-side execution, local best score tracking.`,
+        path: `/${matchedGame.id}`,
+        game: matchedGame,
+      });
+      setRecentGameIds(getRecentGames());
+      return;
+    }
+
+    // 2. Try finding category
+    const matchedCategory = findCategoryBySlug(slug);
+    if (matchedCategory) {
+      setCurrentRoute({ view: 'category', param: matchedCategory.id });
+      updateMetaTags({
+        title: `${matchedCategory.name} Games – Free Mind & Reflex Benchmarks | Wanjaaro`,
+        description: `Play free instant ${matchedCategory.name} games on Wanjaaro. ${matchedCategory.shortDesc} No registration, 100% client-side, zero latency.`,
+        path: `/${matchedCategory.id}`,
+      });
+      setRecentGameIds(getRecentGames());
+      return;
+    }
+
+    // Fallback: Home
+    setCurrentRoute({ view: 'home' });
+    updateMetaTags({ path: '/' });
     setRecentGameIds(getRecentGames());
   };
 
@@ -118,11 +155,11 @@ export default function App() {
   };
 
   const navigateToGame = (gameId: string) => {
-    navigateTo(`/game/${gameId}`);
+    navigateTo(getGameUrl(gameId));
   };
 
   const navigateToCategory = (catId: string) => {
-    navigateTo(`/category/${catId}`);
+    navigateTo(getCategoryUrl(catId));
   };
 
   const toggleSound = () => {

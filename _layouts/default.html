@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}DataFrog</title>
+    <meta name="description" content="{{ page.description | default: 'Free, private, and instant online tools for PDF, Excel, CSV, JSON, and financial documents. 100% in-browser processing with zero server uploads.' }}">
+    <link rel="icon" type="image/png" href="{{ '/assets/images/datafrog.png' | relative_url }}">
+    <link rel="apple-touch-icon" href="{{ '/assets/images/datafrog.png' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="site-body">
+    <!-- Top Global Header with Mega Menu Navigation -->
+    <header class="site-header" id="site-header">
+      <div class="header-container" id="header-container">
+        
+        <!-- 1. Left: DataFrog Logo with 3D Mascot Image -->
+        <a class="site-logo" id="site-logo-link" href="{{ '/' | relative_url }}" title="DataFrog Home">
+          <img 
+            src="{{ '/assets/images/datafrog.png' | relative_url }}" 
+            alt="DataFrog Mascot Logo" 
+            class="brand-logo-img" 
+            style="width: 44px; height: 44px; object-fit: contain; border-radius: 8px; filter: drop-shadow(0 2px 8px rgba(16, 185, 129, 0.3));" 
+          />
+          <div class="logo-text-group" id="logo-text-group">
+            <span class="logo-brand-name" id="logo-brand-name" style="font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(135deg, #ffffff 40%, #34d399 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">DataFrog</span>
+            <span class="logo-subtext" id="logo-subtext" style="color: #94a3b8; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">Free Online Tools</span>
+          </div>
+        </a>
+
+        <!-- 2. Mega Menu: User-Centric Tool Categories -->
+        <div class="mega-menu-wrapper" id="mega-menu-wrapper">
+          <button 
+            type="button" 
+            class="nav-link nav-mega-btn" 
+            id="mega-menu-trigger" 
+            aria-expanded="false" 
+            aria-haspopup="true"
+            aria-controls="nav-mega-menu"
+          >
+            <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span>All Tools</span>
+            <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+
+          <!-- 3-Column Mega Menu: Task Categories Only -->
+          <div class="nav-mega-menu" id="nav-mega-menu" role="region" aria-label="Tools and Categories Menu">
+            <div class="mega-menu-grid">
+              
+              <!-- Column 1: PDF Tools -->
+              <div class="mega-col">
+                <div class="mega-col-heading">PDF Document Tools</div>
+                <div class="mega-links-list">
+                  <a href="{{ '/pdf/compress-pdf' | relative_url }}" class="mega-item-link {% if page.tool == 'compress-pdf' %}active{% endif %}">
+                    <span class="format-badge format-badge-pdf">HOT</span>
+                    <span class="mega-item-name">Compress PDF (Up to -85%)</span>
+                  </a>
+                  <a href="{{ '/pdf' | relative_url }}" class="mega-item-link {% if page.format == 'pdf' and page.tool != 'compress-pdf' %}active{% endif %}">
+                    <span class="format-badge format-badge-pdf">PDF</span>
+                    <span class="mega-item-name">PDF Tools Suite</span>
+                  </a>
+                  <a href="{{ '/pdf#merge' | relative_url }}" class="mega-item-link">
+                    <span class="format-badge format-badge-pdf">PDF</span>
+                    <span class="mega-item-name">Merge Multiple PDFs</span>
+                  </a>
+                  <a href="{{ '/pdf#split' | relative_url }}" class="mega-item-link">
+                    <span class="format-badge format-badge-pdf">PDF</span>
+                    <span class="mega-item-name">Split &amp; Extract Pages</span>
+                  </a>
+                  <a href="{{ '/pdf#anonymize' | relative_url }}" class="mega-item-link">
+                    <span class="format-badge format-badge-pdf">PDF</span>
+                    <span class="mega-item-name">Redact &amp; Anonymize PDF</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Column 2: Spreadsheets & Tables -->
+              <div class="mega-col">
+                <div class="mega-col-heading">Spreadsheets &amp; Tables</div>
+                <div class="mega-links-list">
+                  <a href="{{ '/pages/excel' | relative_url }}" class="mega-item-link {% if page.format == 'excel' %}active{% endif %}">
+                    <span class="format-badge format-badge-excel">XLS</span>
+                    <span class="mega-item-name">Excel Spreadsheet Tools</span>
+                  </a>
+                  <a href="{{ '/pages/csv' | relative_url }}" class="mega-item-link {% if page.format == 'csv' %}active{% endif %}">
+                    <span class="format-badge format-badge-csv">CSV</span>
+                    <span class="mega-item-name">CSV Cleaner &amp; Fixer</span>
+                  </a>
+                  <a href="{{ '/pages/csv#join' | relative_url }}" class="mega-item-link">
+                    <span class="format-badge format-badge-csv">CSV</span>
+                    <span class="mega-item-name">Merge Two CSV Tables</span>
+                  </a>
+                  <a href="{{ '/pages/excel#convert' | relative_url }}" class="mega-item-link">
+                    <span class="format-badge format-badge-excel">XLS</span>
+                    <span class="mega-item-name">Excel to CSV Converter</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Column 3: Data & Finance Tools -->
+              <div class="mega-col">
+                <div class="mega-col-heading">Data &amp; Banking Tools</div>
+                <div class="mega-links-list">
+                  <a href="{{ '/pages/json' | relative_url }}" class="mega-item-link {% if page.format == 'json' %}active{% endif %}">
+                    <span class="format-badge format-badge-json">JSON</span>
+                    <span class="mega-item-name">JSON Formatter &amp; Repair</span>
+                  </a>
+                  <a href="{{ '/pages/xml' | relative_url }}" class="mega-item-link {% if page.format == 'xml' %}active{% endif %}">
+                    <span class="format-badge format-badge-xml">XML</span>
+                    <span class="mega-item-name">XML Tree Viewer</span>
+                  </a>
+                  <a href="{{ '/pages/financial' | relative_url }}" class="mega-item-link {% if page.format == 'financial' %}active{% endif %}">
+                    <span class="format-badge format-badge-fin">BANK</span>
+                    <span class="mega-item-name">Bank Statement Normalizer</span>
+                  </a>
+                  <a href="{{ '/pages/financial#reconcile' | relative_url }}" class="mega-item-link">
+                    <span class="format-badge format-badge-fin">QBO</span>
+                    <span class="mega-item-name">QuickBooks / QFX Reconciler</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Searchbar -->
+        <div class="global-search-wrapper" id="global-search-wrapper">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input 
+            type="text" 
+            class="global-search-input" 
+            id="global-tools-search" 
+            placeholder="Search tools (e.g. compress pdf, fix csv, format json)..." 
+            aria-label="Search all tools"
+            autocomplete="off"
+          />
+          <span class="search-shortcut-badge" id="search-shortcut-badge">⌘K</span>
+
+          <!-- Dropdown Results Container -->
+          <div class="search-results-dropdown" id="search-results-dropdown" style="display: none;"></div>
+        </div>
+
+        <!-- 4. Quick Direct Links -->
+        <nav class="nav-direct-links" id="nav-direct-links">
+          <a href="{{ '/pdf/compress-pdf' | relative_url }}" class="nav-direct-pill hot-pill">
+            <span class="pill-dot"></span>
+            <span>Compress PDF</span>
+          </a>
+          <a href="{{ '/pdf' | relative_url }}" class="nav-direct-link">PDF</a>
+          <a href="{{ '/pages/excel' | relative_url }}" class="nav-direct-link">Excel</a>
+          <a href="{{ '/pages/csv' | relative_url }}" class="nav-direct-link">CSV</a>
+          <a href="{{ '/pages/json' | relative_url }}" class="nav-direct-link">JSON</a>
+        </nav>
+
+      </div>
+    </header>
+
+    <!-- Main Content Area with 80% Content and 20% Non-Intrusive Sticky Sidebar -->
+    <div class="site-main-layout" id="site-main-layout">
+      <div class="layout-content-wrapper" id="layout-content-wrapper">
+        
+        <!-- 80% Main Primary Content Column -->
+        <main class="primary-content-column" id="primary-content-column" role="main">
+          {{ content }}
+        </main>
+
+        <!-- 20% Sticky Helpful Highlights & Privacy Badges Sidebar -->
+        <aside class="sticky-sidebar-column" id="sticky-sidebar-column" role="complementary" aria-label="Platform Highlights">
+          <div class="sidebar-sticky-wrapper" id="sidebar-sticky-wrapper">
+            
+            <!-- Unit 1: Privacy Guarantee -->
+            <div class="ad-card-unit" id="ad-slot-primary" style="background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%); border: 1px solid rgba(16, 185, 129, 0.25);">
+              <div class="ad-card-header">
+                <span class="ad-badge-sponsor" style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-weight: 800;">100% PRIVATE</span>
+              </div>
+              <div class="ad-card-body">
+                <h4 class="ad-sponsor-title" style="color: #ffffff; font-size: 0.9375rem; margin-bottom: 6px;">Zero Cloud Uploads</h4>
+                <p class="ad-sponsor-desc" style="font-size: 0.8125rem; color: #cbd5e1; line-height: 1.45; margin-bottom: 12px;">
+                  Your confidential documents, spreadsheets, and banking records never leave your computer. Everything runs in-browser.
+                </p>
+                <div style="font-size: 0.75rem; color: #10b981; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                  <span>&check; GDPR &bull; HIPAA Safe</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Unit 2: Featured Quick Tool Card -->
+            <div class="ad-display-unit" id="ad-slot-secondary" style="border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 16px; background: rgba(15, 23, 42, 0.6);">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <span style="background: #ef4444; color: #fff; font-size: 0.625rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">PDF TOOL</span>
+                <span style="font-size: 0.6875rem; color: #10b981; font-weight: 700;">FREE FOREVER</span>
+              </div>
+              <h5 style="color: #ffffff; font-size: 0.875rem; font-weight: 700; margin: 0 0 6px 0;">Compress PDF Online</h5>
+              <p style="font-size: 0.75rem; color: #94a3b8; line-height: 1.4; margin: 0 0 12px 0;">
+                Shrink large PDFs up to 85% with crystal-clear vector text and live preview.
+              </p>
+              <a href="{{ '/pdf/compress-pdf' | relative_url }}" style="display: block; text-align: center; background: #10b981; color: #064e3b; font-weight: 800; font-size: 0.8125rem; padding: 8px 12px; border-radius: 6px; text-decoration: none;">
+                Open Compressor &rarr;
+              </a>
+            </div>
+
+            <!-- Creator & Transparency Note -->
+            <div style="padding: 12px; border-radius: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); text-align: center;">
+              <span style="font-size: 0.75rem; color: #94a3b8;">DataFrog is created by Sohail Anwar to provide private, non-commercial tools for everyone.</span>
+            </div>
+
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Master Footer -->
+    <footer class="site-footer" id="site-footer">
+      <div class="footer-container" id="footer-container">
+        
+        <div class="footer-col-main" id="footer-col-main">
+          <div class="footer-brand" id="footer-brand" style="display: flex; align-items: center; gap: 12px;">
+            <img 
+              src="{{ '/assets/images/datafrog.png' | relative_url }}" 
+              alt="DataFrog Mascot" 
+              style="width: 44px; height: 44px; object-fit: contain; border-radius: 8px;" 
+            />
+            <div>
+              <span class="footer-brand-name" style="font-size: 1.4rem; font-weight: 800; color: #ffffff;">DataFrog</span>
+              <span class="footer-badge" style="display: block; font-size: 0.6875rem; color: #34d399; font-weight: 700; text-transform: uppercase;">100% Free &amp; Private Online Tools</span>
+            </div>
+          </div>
+          <p class="footer-desc" style="font-size: 0.875rem; color: #94a3b8; line-height: 1.6; max-width: 520px; margin-top: 12px;">
+            Free, lightning-fast, and completely private online tools for PDF documents, Excel spreadsheets, CSV data tables, JSON formatting, and bank statements. All processing happens entirely within your web browser — your personal files, financial records, and confidential PDFs are never uploaded to any cloud server.
+          </p>
+
+          <!-- Founder & Creator Profile -->
+          <div class="footer-creator" style="display: flex; align-items: center; gap: 14px; margin-top: 20px; padding: 12px 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; max-width: 440px;">
+            <img 
+              src="{{ '/assets/images/sohail-anwar.png' | relative_url }}" 
+              alt="Sohail Anwar - Founder & Creator of DataFrog" 
+              style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #10b981; flex-shrink: 0;"
+            />
+            <div>
+              <div style="font-size: 0.875rem; font-weight: 700; color: #f8fafc;">Sohail Anwar</div>
+              <div style="font-size: 0.75rem; color: #34d399; font-weight: 600;">Founder &amp; Creator of DataFrog</div>
+              <div style="font-size: 0.6875rem; color: #94a3b8; margin-top: 2px;">Building private, free utilities with zero tracking and zero server uploads.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-col-meta" id="footer-col-meta">
+          <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #64748b; margin-bottom: 12px; letter-spacing: 0.05em;">Popular Online Tools</div>
+          <div class="footer-links-row" style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="{{ '/pdf/compress-pdf' | relative_url }}" class="footer-link" style="color: #34d399; font-weight: 600;">Compress PDF Online (Free)</a>
+            <a href="{{ '/pdf' | relative_url }}" class="footer-link">PDF Tools Suite</a>
+            <a href="{{ '/pages/excel' | relative_url }}" class="footer-link">Excel Spreadsheet Tools</a>
+            <a href="{{ '/pages/csv' | relative_url }}" class="footer-link">CSV Cleaner &amp; Table Joiner</a>
+            <a href="{{ '/pages/json' | relative_url }}" class="footer-link">JSON Formatter &amp; Repair</a>
+            <a href="{{ '/pages/xml' | relative_url }}" class="footer-link">XML Tree Viewer</a>
+            <a href="{{ '/pages/financial' | relative_url }}" class="footer-link">Bank Statement Cleaner</a>
+          </div>
+          <p class="footer-copy" style="margin-top: 20px; font-size: 0.75rem; color: #64748b;">
+            &copy; 2026 DataFrog. All tools free forever. Privacy by Design.
+          </p>
+        </div>
+
+      </div>
+    </footer>
+
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  </body>
+</html>

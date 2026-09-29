@@ -1,267 +1,394 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Wanjaaro – Free Instant Mind & Skill Games</title>
-    <meta name="description" content="Play free instant client-side browser games on Wanjaaro. Test your reflexes, memory, logic, precision, typing, and mental agility with local high score tracking." />
-    <meta name="keywords" content="Wanjaaro, free browser games, brain training games, reflex test, reaction time test, memory games, logic puzzles, typing speed test, aim trainer, casual games, instant games, unblocked games, skill games, HTML5 games" />
+---
+layout: default
+title: Free & Private Online Document, PDF & Spreadsheet Tools
+description: Free, fast, and 100% private online tools for PDF compression, Excel spreadsheets, CSV data tables, JSON formatting, and bank statements. Zero cloud uploads.
+---
+
+<!-- Hero Section -->
+<section class="hero-section" id="hero-section" style="padding: 48px 0 36px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.15) 0%, transparent 60%);">
+  <div class="hero-container" style="max-width: 1080px; margin: 0 auto; text-align: center; padding: 0 16px;">
     
-    <!-- Canonical & Crawl Control -->
-    <link rel="canonical" href="https://wanjaaro.com/" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="revisit-after" content="2 days" />
-    <meta name="rating" content="General" />
-    <meta name="author" content="Wanjaaro Arcade" />
+    <!-- Mascot & Trust Badge -->
+    <div style="display: inline-flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+      <img 
+        src="{{ '/assets/images/datafrog.png' | relative_url }}" 
+        alt="DataFrog Mascot" 
+        style="width: 80px; height: 80px; object-fit: contain; filter: drop-shadow(0 4px 20px rgba(16, 185, 129, 0.4)); animation: float 3s ease-in-out infinite;" 
+      />
+      <div style="text-align: left;">
+        <span class="hero-pill" style="margin: 0; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399; font-weight: 700;">
+          <span class="pill-dot"></span> 100% In-Browser &bull; Zero Server Uploads
+        </span>
+        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 4px; font-weight: 600;">
+          Safe for Invoices, Bank Statements &amp; Sensitive Documents
+        </div>
+      </div>
+    </div>
 
-    <!-- GEO & International Targeting -->
-    <meta name="geo.region" content="US" />
-    <meta name="geo.placename" content="Global" />
-    <meta name="geo.position" content="37.7749;-122.4194" />
-    <meta name="ICBM" content="37.7749, -122.4194" />
-    <meta name="distribution" content="Global" />
-    <meta name="coverage" content="Worldwide" />
-    <meta name="target" content="all" />
-    <meta name="audience" content="all" />
+    <!-- Main Headline for Everyday Users -->
+    <h1 class="hero-title" style="font-size: 2.75rem; font-weight: 800; color: #ffffff; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px;">
+      Free, Private Online Tools for <br>
+      <span style="background: linear-gradient(135deg, #10b981 0%, #6ee7b7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Documents, Spreadsheets &amp; Data</span>
+    </h1>
 
-    <!-- OpenGraph Social Cards -->
-    <meta property="og:site_name" content="Wanjaaro" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Wanjaaro – Free Instant Mind & Skill Games" />
-    <meta property="og:description" content="Play free instant client-side browser games on Wanjaaro. Test your reflexes, memory, logic, precision, typing, and mental agility with local high score tracking." />
-    <meta property="og:url" content="https://wanjaaro.com/" />
-    <meta property="og:locale" content="en_US" />
+    <p class="hero-subtitle" style="font-size: 1.125rem; color: #cbd5e1; max-width: 760px; margin: 0 auto 28px auto; line-height: 1.6;">
+      Compress large PDFs, clean messy CSV tables, convert Excel spreadsheets, format broken JSON, and organize financial statements. No sign-up, no hidden fees, and completely private — your files never leave your device.
+    </p>
 
-    <!-- Twitter / X Cards -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Wanjaaro – Free Instant Mind & Skill Games" />
-    <meta name="twitter:description" content="Play free instant client-side browser games on Wanjaaro. Test your reflexes, memory, logic, precision, typing, and mental agility with local high score tracking." />
+    <!-- Popular Action Buttons -->
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 36px;">
+      <a href="{{ '/pdf/compress-pdf' | relative_url }}" class="btn btn-primary" style="padding: 14px 28px; font-size: 1rem; font-weight: 800; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        <span>Compress PDF Online</span>
+      </a>
 
-    <!-- Single Page Apps for GitHub Pages: restores clean path from 404.html redirect -->
-    <script>
-      (function(l) {
-        if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) { 
-            return s.replace(/~and~/g, '&');
-          }).join('?');
-          window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + decoded + l.hash
-          );
-        }
-      }(window.location));
-    </script>
+      <a href="#tool-categories" class="btn btn-secondary" style="padding: 14px 24px; font-size: 1rem; font-weight: 700;">
+        Browse All Categories &darr;
+      </a>
+      
+      <a href="{{ '/pages/excel' | relative_url }}" class="btn btn-secondary" style="padding: 14px 20px; font-size: 0.9375rem;">
+        Excel Tools
+      </a>
 
-    <!-- Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+      <a href="{{ '/pages/csv' | relative_url }}" class="btn btn-secondary" style="padding: 14px 20px; font-size: 0.9375rem;">
+        CSV Cleaner
+      </a>
 
-    <!-- Schema.org Organization for Knowledge Graph -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Wanjaaro",
-      "url": "https://wanjaaro.com/",
-      "logo": "https://wanjaaro.com/wanjaaro-icon.png",
-      "description": "High-performance browser gaming platform specialized in zero-latency cognitive training, reflex benchmarks, and memory testing.",
-      "knowsAbout": [
-        "Human Reaction Time Benchmarks",
-        "Cognitive Science & Working Memory",
-        "Client-Side Web Game Architecture",
-        "Stroop Effect & Attention Control",
-        "Typing Velocity & Fine Motor Coordination"
-      ]
-    }
-    </script>
+      <a href="{{ '/pages/json' | relative_url }}" class="btn btn-secondary" style="padding: 14px 20px; font-size: 0.9375rem;">
+        JSON Formatter
+      </a>
+    </div>
 
-    <!-- Schema.org WebSite -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Wanjaaro",
-      "alternateName": ["Wanjaaro Games", "Wanjaaro Arcade", "Wanjaaro Cognitive Benchmarks"],
-      "url": "https://wanjaaro.com/",
-      "description": "Universal client-side gaming platform hosting instant mind, reflex, reaction, memory, logic, typing, and puzzle games.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://wanjaaro.com/#/?search={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
+    <!-- Value Propositions Strip -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; text-align: left; max-width: 960px; margin: 0 auto;">
+      
+      <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 16px 20px; display: flex; align-items: flex-start; gap: 12px;">
+        <span style="font-size: 1.5rem;">🔒</span>
+        <div>
+          <div style="font-weight: 700; color: #ffffff; font-size: 0.9375rem;">100% In-Browser Privacy</div>
+          <div style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.4; margin-top: 2px;">Files process locally in browser memory. Nothing is ever sent to a remote server.</div>
+        </div>
+      </div>
 
-    <!-- Schema.org WebApplication / GameApplication -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Wanjaaro Gaming Platform",
-      "applicationCategory": "GameApplication",
-      "operatingSystem": "Web, Windows, macOS, Linux, iOS, Android",
-      "description": "An expanding client-side gaming arcade with instant reflex tests, memory challenges, arithmetic puzzles, typing speed drills, and retro arcade titles with local leaderboard tracking.",
-      "browserRequirements": "Requires JavaScript. Requires HTML5 Canvas 2D and Web Audio API support.",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "ratingCount": "14250",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "featureList": [
-        "100% Free and Client-Side Execution",
-        "Zero Account or Registration Required",
-        "Instant Load Time Under 100ms with Zero Cold Starts",
-        "Sub-1ms Input Handling Eliminating Server Latency",
-        "Local High Score and Personal Best Persistence",
-        "Touch and Keyboard Controls on All Devices",
-        "12 Cognitive Categories: Reflex, Memory, Logic, Aim, Math, Typing, Coordination, Perception, Strategy, Speed Clicking, Wordcraft, Spatial"
-      ]
-    }
-    </script>
+      <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 16px 20px; display: flex; align-items: flex-start; gap: 12px;">
+        <span style="font-size: 1.5rem;">⚡</span>
+        <div>
+          <div style="font-weight: 700; color: #ffffff; font-size: 0.9375rem;">Instant Execution</div>
+          <div style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.4; margin-top: 2px;">No slow cloud uploads or queues. Immediate results powered directly by your device.</div>
+        </div>
+      </div>
 
-    <!-- Schema.org ItemList for Flagship Benchmarks -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      "name": "Wanjaaro Cognitive Benchmarks & Mind Games",
-      "description": "Curated collection of free client-side mind games and human benchmarks.",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Reaction Time Test",
-          "url": "https://wanjaaro.com/#/game/reaction-time"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Chimp Memory Test",
-          "url": "https://wanjaaro.com/#/game/chimp-test"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Aim Precision Trainer",
-          "url": "https://wanjaaro.com/#/game/aim-trainer"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Speed Typist WPM Drill",
-          "url": "https://wanjaaro.com/#/game/speed-typist"
-        },
-        {
-          "@type": "ListItem",
-          "position": 5,
-          "name": "Stroop Color Challenge",
-          "url": "https://wanjaaro.com/#/game/stroop-challenge"
-        },
-        {
-          "@type": "ListItem",
-          "position": 6,
-          "name": "Schulte Grid 5x5",
-          "url": "https://wanjaaro.com/#/game/schulte-grid"
-        },
-        {
-          "@type": "ListItem",
-          "position": 7,
-          "name": "Mental Math Blitz",
-          "url": "https://wanjaaro.com/#/game/math-blitz"
-        },
-        {
-          "@type": "ListItem",
-          "position": 8,
-          "name": "Memory Matrix",
-          "url": "https://wanjaaro.com/#/game/memory-matrix"
-        }
-      ]
-    }
-    </script>
+      <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 16px 20px; display: flex; align-items: flex-start; gap: 12px;">
+        <span style="font-size: 1.5rem;">🆓</span>
+        <div>
+          <div style="font-weight: 700; color: #ffffff; font-size: 0.9375rem;">100% Free Forever</div>
+          <div style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.4; margin-top: 2px;">No sign-up, no subscriptions, no credit card, and no watermarks on your files.</div>
+        </div>
+      </div>
 
-    <!-- Schema.org FAQPage for Answer Engines & Rich Search Results -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is Wanjaaro and how does it work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Wanjaaro is a free, instant browser gaming platform designed for reflex benchmarks, cognitive challenges, memory training, and casual arcade entertainment. Everything runs 100% client-side in your browser using modern HTML5 Canvas, Web Audio, and vanilla JavaScript with zero installs, accounts, or server roundtrip delays."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is an average human visual reaction time benchmark?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The median human visual reaction time is between 200ms and 250ms on a desktop display. Scores below 190ms are considered exceptional (competitive esports tier), while reaction times under 160ms place in the top 1% of the global population. Audio reaction times are typically faster, averaging 140ms to 170ms."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does the Chimpanzee Memory Test work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The Chimp Test is based on Kyoto University's famous primate research with the chimpanzee Ayumu. Numbers 1 through 9 are flashed on a grid for a fraction of a second before turning into blank squares. The player must click the squares in ascending numerical sequence from photographic working memory."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why do client-side games have lower latency than cloud gaming?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Client-side games execute code directly on the user device's local CPU/GPU via JavaScript and requestAnimationFrame, yielding sub-millisecond input response. Cloud gaming platforms require streaming video over network cables, which incurs 30ms to 120ms of uncontrollable network ping, making millisecond reflex benchmarks inaccurate."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Are games on Wanjaaro completely free to play?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, Wanjaaro is 100% free with no paywalls, subscriptions, paid tokens, or intrusive in-game popups. All 90+ games and benchmarks are immediately accessible to everyone worldwide."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does Wanjaaro store high scores and personal bests?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Wanjaaro uses your browser's private localStorage to store personal bests, round counts, and timestamps. No private user data or gameplay statistics are ever uploaded to external servers, ensuring total privacy."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I play Wanjaaro on mobile phones, tablets, and desktop computers?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, every game on Wanjaaro features dual-input architecture with responsive touch controls for mobile screens and precise keyboard/mouse bindings for desktop computers."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can playing brain games and reflex tests improve cognitive processing speed?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Regular practice on cognitive micro-tasks like the Stroop effect, Schulte grids, and rapid visual discrimination stimulates neural plasticity in the prefrontal cortex, enhancing motor activation speed and visual saccadic efficiency."
-          }
-        }
-      ]
-    }
-    </script>
-  </head>
-  <body class="bg-neutral-950 text-neutral-100 antialiased selection:bg-amber-500 selection:text-black min-h-screen">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+    </div>
+
+  </div>
+</section>
+
+<!-- Featured Tool Spotlight: Compress PDF -->
+<section style="padding: 36px 0;">
+  <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0.9) 100%); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 18px; padding: 32px; box-shadow: 0 16px 40px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
+    <div style="max-width: 650px;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+        <span style="background: #ef4444; color: #ffffff; font-size: 0.6875rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.05em;">FEATURED TOOL</span>
+        <span style="color: #34d399; font-size: 0.75rem; font-weight: 700;">★ Most Popular</span>
+        <span style="color: #94a3b8; font-size: 0.75rem;">&bull; Ready to Use</span>
+      </div>
+      <h2 style="font-size: 1.85rem; font-weight: 800; color: #ffffff; margin-bottom: 10px; letter-spacing: -0.02em;">
+        Compress PDF Online (Up to 85% Smaller)
+      </h2>
+      <p style="font-size: 0.9375rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 18px;">
+        Need to email a PDF or upload a resume to a portal with strict file size limits? 
+        Our browser-based compressor shrinks large PDF documents in seconds without blurring text or distorting charts.
+      </p>
+      
+      <!-- Key Features -->
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px;">
+        <span style="background: rgba(255, 255, 255, 0.06); color: #e2e8f0; font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);">
+          ⚡ Live Interactive Viewer
+        </span>
+        <span style="background: rgba(255, 255, 255, 0.06); color: #e2e8f0; font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);">
+          🎯 3 Presets (Recommended, Extreme, Low)
+        </span>
+        <span style="background: rgba(255, 255, 255, 0.06); color: #e2e8f0; font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);">
+          🔒 Zero Cloud Uploads (GDPR &amp; HIPAA Safe)
+        </span>
+        <span style="background: rgba(255, 255, 255, 0.06); color: #e2e8f0; font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);">
+          📊 Instant Before/After Size Metrics
+        </span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 220px;">
+      <div style="background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 14px 24px; text-align: center; width: 100%;">
+        <div style="font-size: 1.75rem; font-weight: 900; color: #10b981; line-height: 1;">Up to -85%</div>
+        <div style="font-size: 0.6875rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; margin-top: 4px;">File Size Reduction</div>
+      </div>
+
+      <a href="{{ '/pdf/compress-pdf' | relative_url }}" class="btn-compress-now" style="text-decoration: none; padding: 14px 28px; font-size: 1rem; font-weight: 800; display: inline-flex; align-items: center; gap: 8px; justify-content: center; width: 100%; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
+        <span>Launch Compressor</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Tool Categories Section (Categorized for Everyday Users) -->
+<section id="tool-categories" style="padding: 24px 0 48px 0;">
+  
+  <div style="margin-bottom: 28px;">
+    <h2 style="font-size: 1.85rem; font-weight: 800; color: #ffffff; letter-spacing: -0.02em; margin-bottom: 8px;">
+      Explore Tools by Category
+    </h2>
+    <p style="color: #94a3b8; font-size: 0.9375rem; margin: 0;">
+      Practical utilities built to solve everyday tasks with documents, spreadsheets, tables, and financial files.
+    </p>
+  </div>
+
+  <!-- CATEGORY 1: PDF Document Tools -->
+  <div style="margin-bottom: 40px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 10px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="background: #ef4444; color: #fff; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 5px;">PDF</span>
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin: 0;">PDF Document Tools</h3>
+      </div>
+      <a href="{{ '/pdf' | relative_url }}" style="color: #34d399; font-size: 0.8125rem; font-weight: 700; text-decoration: none;">
+        View PDF Suite &rarr;
+      </a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+      
+      <!-- Tool: Compress PDF -->
+      <a href="{{ '/pdf/compress-pdf' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 20px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 1.25rem;">📉</span>
+            <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-size: 0.6875rem; font-weight: 800; padding: 2px 8px; border-radius: 4px;">READY &bull; POPULAR</span>
+          </div>
+          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Compress PDF</h4>
+          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
+            Reduce PDF file size up to 85% for email, portals, and web forms. Includes live viewer and download.
+          </p>
+        </div>
+        <span style="color: #10b981; font-size: 0.8125rem; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+          Open Tool &rarr;
+        </span>
+      </a>
+
+      <!-- Tool: Merge PDF -->
+      <a href="{{ '/pdf#merge' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 1.25rem;">📑</span>
+            <span style="background: rgba(255, 255, 255, 0.06); color: #cbd5e1; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">PDF TOOL</span>
+          </div>
+          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Merge Multiple PDFs</h4>
+          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
+            Combine contracts, invoices, and presentation slides into a single organized document.
+          </p>
+        </div>
+        <span style="color: #38bdf8; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
+      </a>
+
+      <!-- Tool: Split PDF -->
+      <a href="{{ '/pdf#split' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 1.25rem;">✂️</span>
+            <span style="background: rgba(255, 255, 255, 0.06); color: #cbd5e1; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">PDF TOOL</span>
+          </div>
+          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Split &amp; Extract Pages</h4>
+          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
+            Extract specific pages or break a long 50-page document into individual single-page files.
+          </p>
+        </div>
+        <span style="color: #38bdf8; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
+      </a>
+
+      <!-- Tool: Redact & Anonymize -->
+      <a href="{{ '/pdf#anonymize' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 1.25rem;">🛡️</span>
+            <span style="background: rgba(255, 255, 255, 0.06); color: #cbd5e1; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">PRIVACY</span>
+          </div>
+          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Redact &amp; Anonymize PDF</h4>
+          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
+            Mask confidential names, tax IDs, and metadata from documents before sharing.
+          </p>
+        </div>
+        <span style="color: #38bdf8; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 2: Spreadsheets & Tables -->
+  <div style="margin-bottom: 40px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 10px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="background: #10b981; color: #064e3b; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 5px;">XLS</span>
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin: 0;">Spreadsheets &amp; Excel Tools</h3>
+      </div>
+      <a href="{{ '/pages/excel' | relative_url }}" style="color: #34d399; font-size: 0.8125rem; font-weight: 700; text-decoration: none;">
+        View Excel Tools &rarr;
+      </a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+      
+      <!-- Tool: Excel Tools -->
+      <a href="{{ '/pages/excel' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 1.25rem;">📊</span>
+            <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">SPREADSHEET</span>
+          </div>
+          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Excel Spreadsheet Studio</h4>
+          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
+            Open, inspect, and build XLSX workbooks with colors, cell formats, and formula calculations.
+          </p>
+        </div>
+        <span style="color: #34d399; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
+      </a>
+
+      <!-- Tool: Excel to CSV -->
+      <a href="{{ '/pages/excel#convert' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 1.25rem;">🔄</span>
+            <span style="background: rgba(255, 255, 255, 0.06); color: #cbd5e1; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">CONVERT</span>
+          </div>
+          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Excel to CSV Converter</h4>
+          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
+            Convert any Microsoft Excel sheet into clean standard CSV or JSON table format.
+          </p>
+        </div>
+        <span style="color: #34d399; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
+      </a>
+
+      <!-- Tool: CSV Cleaner -->
+      <a href="{{ '/pages/csv' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 1.25rem;">🧹</span>
+            <span style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">TABLE FIX</span>
+          </div>
+          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">CSV Cleaner &amp; Delimiter Fixer</h4>
+          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
+            Fix broken commas, tabs, semicolons, and quotes that cause spreadsheets to load improperly.
+          </p>
+        </div>
+        <span style="color: #fbbf24; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
+      </a>
+
+      <!-- Tool: CSV Table Joiner -->
+      <a href="{{ '/pages/csv#join' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 1.25rem;">🔗</span>
+            <span style="background: rgba(255, 255, 255, 0.06); color: #cbd5e1; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">MERGE TABLES</span>
+          </div>
+          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Merge Two CSV Files</h4>
+          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
+            Combine two tables side-by-side using matching column IDs without complex software.
+          </p>
+        </div>
+        <span style="color: #fbbf24; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 3: Data & Banking Tools -->
+  <div style="margin-bottom: 32px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 10px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="background: #f59e0b; color: #78350f; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 5px;">DATA</span>
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin: 0;">Data &amp; Banking Statement Tools</h3>
+      </div>
+      <a href="{{ '/pages/json' | relative_url }}" style="color: #34d399; font-size: 0.8125rem; font-weight: 700; text-decoration: none;">
+        View Data Tools &rarr;
+      </a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+      
+      <!-- Tool: JSON Formatter & Repair -->
+      <a href="{{ '/pages/json' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 1.25rem;">✨</span>
+            <span style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">DATA CLEANER</span>
+          </div>
+          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">JSON Formatter &amp; Repair</h4>
+          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
+            Format messy JSON with neat indentations and automatically heal trailing commas or syntax errors.
+          </p>
+        </div>
+        <span style="color: #fbbf24; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
+      </a>
+
+      <!-- Tool: XML Tree Viewer -->
+      <a href="{{ '/pages/xml' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 1.25rem;">🌳</span>
+            <span style="background: rgba(6, 182, 212, 0.15); color: #22d3ee; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">XML TREE</span>
+          </div>
+          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">XML Document Inspector</h4>
+          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
+            Navigate structured XML records, check for validation errors, and convert XML records into tables.
+          </p>
+        </div>
+        <span style="color: #22d3ee; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
+      </a>
+
+      <!-- Tool: Bank Statement Normalizer -->
+      <a href="{{ '/pages/financial' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 1.25rem;">💳</span>
+            <span style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">BANKING</span>
+          </div>
+          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Bank Statement Cleaner</h4>
+          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
+            Clean and normalize bank statement files (QBO, OFX, QFX, QIF) and reconcile with ledgers.
+          </p>
+        </div>
+        <span style="color: #a78bfa; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
+      </a>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- Founder & Story Section -->
+<section style="padding: 36px 0; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+  <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 18px; padding: 32px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">
+    <img 
+      src="{{ '/assets/images/sohail-anwar.png' | relative_url }}" 
+      alt="Sohail Anwar - Founder & Creator of DataFrog" 
+      style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #10b981; box-shadow: 0 8px 24px rgba(0,0,0,0.4); flex-shrink: 0;"
+    />
+    <div style="max-width: 680px;">
+      <div style="font-size: 0.75rem; font-weight: 800; color: #10b981; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px;">
+        About DataFrog &bull; The Mission
+      </div>
+      <h3 style="font-size: 1.375rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+        Built by Sohail Anwar for Everyday Privacy &amp; Simplicity
+      </h3>
+      <p style="font-size: 0.875rem; color: #cbd5e1; line-height: 1.6; margin: 0;">
+        "Most online file tools force users to upload confidential tax forms, invoices, and personal PDFs to unknown third-party cloud servers, often logging data or charging subscriptions. I built DataFrog so anyone can compress PDFs, clean spreadsheets, and manage files with 100% privacy directly in their browser. No tracking, no fees, and your files never leave your computer."
+      </p>
+    </div>
+  </div>
+</section>

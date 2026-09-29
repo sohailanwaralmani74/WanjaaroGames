@@ -1,0 +1,43 @@
+---
+layout: default
+title: XML Tools — Format, Validate, Search & Convert XML
+format: xml
+description: Free online XML tools for formatting, checking, searching, editing, comparing, and converting XML files and data.
+---
+
+<div class="page-container" id="page-xml">
+  <div class="page-header">
+    <div class="page-badge-row">
+      <span class="page-badge badge-xml">XML</span>
+      <span class="page-badge badge-zero-dep">Private on your device</span>
+      <span class="page-badge badge-methods">Free Tools</span>
+    </div>
+    <h1 class="page-title">XML Tools</h1>
+    <p class="page-subtitle">Format, check, search, edit, compare, and convert XML files and data. Work with your file directly on your device without uploading it to our servers.</p>
+  </div>
+
+  <div class="page-quick-stats">
+    <div class="quick-stat-box"><span class="stat-num">Format</span><span class="stat-lbl">Make XML easier to read</span></div>
+    <div class="quick-stat-box"><span class="stat-num">Check</span><span class="stat-lbl">Find common problems</span></div>
+    <div class="quick-stat-box"><span class="stat-num">Search</span><span class="stat-lbl">Find information quickly</span></div>
+    <div class="quick-stat-box"><span class="stat-num">Convert</span><span class="stat-lbl">Change file format</span></div>
+  </div>
+
+  <div class="page-section">
+    <h2 class="section-subheading">Available XML Tools</h2>
+    <div class="feature-pills-grid">
+      {% assign category_tools = site.data.tools | where: "category", "xml" %}
+      {% if category_tools.size > 0 %}
+        {% for tool in category_tools %}
+          <div class="pill-card">
+            <h4>{{ tool.name }}</h4>
+            {% if tool.description %}<p>{{ tool.description }}</p>{% endif %}
+            {% if tool.url %}<a href="{{ tool.url | relative_url }}" class="btn btn-secondary">Open Tool</a>{% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="section-desc">No tools are currently listed in this category.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>

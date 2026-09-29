@@ -20,7 +20,7 @@ export function WanjaaroSEOSection() {
   const benchmarks = [
     {
       test: 'Reaction Time Test',
-      gameId: 'reaction-time',
+      gameId: 'reflex-reaction-time',
       category: 'Reflex & Reaction',
       metric: 'Millisecond Latency (ms)',
       average: '215ms – 250ms',
@@ -29,7 +29,7 @@ export function WanjaaroSEOSection() {
     },
     {
       test: 'Chimp Memory Test',
-      gameId: 'chimp-test',
+      gameId: 'memory-spatial-span',
       category: 'Memory & Recall',
       metric: 'Working Memory Span',
       average: 'Level 7 – 9',
@@ -38,7 +38,7 @@ export function WanjaaroSEOSection() {
     },
     {
       test: 'Aim Precision Trainer',
-      gameId: 'aim-trainer',
+      gameId: 'aim-sniper',
       category: 'Aim & Precision',
       metric: 'Target Acquisition Time',
       average: '420ms – 520ms',
@@ -47,7 +47,7 @@ export function WanjaaroSEOSection() {
     },
     {
       test: 'Speed Typist Drill',
-      gameId: 'speed-typist',
+      gameId: 'typing-speed-words',
       category: 'Typing & Words',
       metric: 'Net WPM (Words/Min)',
       average: '40 – 60 WPM',
@@ -56,8 +56,8 @@ export function WanjaaroSEOSection() {
     },
     {
       test: 'Stroop Color Challenge',
-      gameId: 'stroop-challenge',
-      category: 'Logic & Puzzles',
+      gameId: 'perception-stroop-test',
+      category: 'Perception & Vision',
       metric: 'Inhibition Delay Cost',
       average: '120ms – 180ms delay',
       elite: '< 60ms delay (High Focus)',
@@ -65,8 +65,8 @@ export function WanjaaroSEOSection() {
     },
     {
       test: 'Schulte Grid 5x5',
-      gameId: 'schulte-grid',
-      category: 'Perception & Vision',
+      gameId: 'speed-click-25',
+      category: 'Speed & Accuracy',
       metric: '25-Digit Search Time',
       average: '30s – 45s',
       elite: '< 20s (Speed Reading)',
@@ -201,10 +201,10 @@ export function WanjaaroSEOSection() {
                   <tr key={idx} className="hover:bg-neutral-900/40 transition-colors">
                     <td className="py-3 px-4 font-semibold text-white">
                       <a
-                        href={`/game/${b.gameId}`}
+                        href={`/${b.gameId}`}
                         onClick={(e) => {
                           e.preventDefault();
-                          window.history.pushState(null, '', `/game/${b.gameId}`);
+                          window.history.pushState(null, '', `/${b.gameId}`);
                           window.dispatchEvent(new PopStateEvent('popstate'));
                           window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
@@ -258,10 +258,10 @@ export function WanjaaroSEOSection() {
             {CATEGORIES.map((cat) => (
               <a
                 key={cat.id}
-                href={`/category/${cat.id}`}
+                href={`/${cat.id}`}
                 onClick={(e) => {
                   e.preventDefault();
-                  window.history.pushState(null, '', `/category/${cat.id}`);
+                  window.history.pushState(null, '', `/${cat.id}`);
                   window.dispatchEvent(new PopStateEvent('popstate'));
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}

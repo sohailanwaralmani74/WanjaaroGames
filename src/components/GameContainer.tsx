@@ -65,7 +65,7 @@ export function GameContainer({
     updateMetaTags({
       title: `${game.title} – Free Online Reflex & Skill Benchmark | Wanjaaro`,
       description: `Play ${game.title} online on Wanjaaro. ${game.description || game.summary} Free instant client-side execution, zero latency, local best score tracking.`,
-      path: `/game/${game.id}`,
+      path: `/${game.id}`,
       game,
     });
   }, [game.id, game.title, game.description, game.summary]);
@@ -92,7 +92,7 @@ export function GameContainer({
   };
 
   const handleShare = async () => {
-    const shareText = `I scored ${lastResult?.formatted || personalBest || 'great'} on ${game.title} at Wanjaaro! Can you beat it? https://wanjaaro.com/game/${game.id}`;
+    const shareText = `I scored ${lastResult?.formatted || personalBest || 'great'} on ${game.title} at Wanjaaro! Can you beat it? https://wanjaaro.com/${game.id}`;
     if (navigator.clipboard) {
       await navigator.clipboard.writeText(shareText);
       setCopiedShare(true);
