@@ -111,38 +111,169 @@ export function MentalMathSprintGame({ onFinish }: GameProps) {
   );
 }
 
-// 74. 24 Game Solver
+// 74. 24 Game Solver (Interactive Expression Builder)
 export function Make24Game({ onFinish }: GameProps) {
-  const [solved, setSolved] = useState(false);
+  const puzzles = [
+    [6, 4, 3, 2],
+    [8, 6, 2, 2],
+    [4, 1, 8, 7],
+    [9, 5, 3, 1],
+    [7, 5, 3, 2],
+  ];
 
-  const check = () => {
-    sound.playSuccess();
-    setSolved(true);
-    onFinish(100, '(8 - 2) × (6 - 2) = 24');
+  const [puzzleIdx, setPuzzleIdx] = useState(0);
+  const [tokens, setTokens] = useState<string[]>([]);
+  const [usedCardIndices, setUsedCardIndices] = useState<number[]>([]);
+  const [score, setScore] = useState(0);
+  const [evalResult, setEvalResult] = useState<string>('');
+
+  const currentNumbers = puzzles[puzzleIdx % puzzles.length];
+
+  const handleAddNumber = (num: number, idx: number) => {
+    if (usedCardIndices.includes(idx)) return;
+    sound.playTap();
+    setTokens((t) => [...t, String(num)]);
+    setUsedCardIndices((u) => [...u, idx]);
+  };
+
+  const handleAddOp = (op: string) => {
+    sound.playTap();
+    setTokens((t) => [...t, op]);
+  };
+
+  const handleBackspace = () => {
+    if (tokens.length === 0) return;
+    sound.playTap();
+    const last = tokens[tokens.length - 1];
+    setTokens((t) => t.slice(0, -1));
+
+    // If last token was a number, free up the card index
+    const num = parseInt(last, 10);
+    if (!isNaN(num)) {
+      const matchIdx = usedCardIndices.find((ci) => currentNumbers[ci] === num);
+      if (matchIdx !== undefined) {
+        setUsedCardIndices((u) => {
+          const arr = [...u];
+          const pos = arr.lastIndexOf(matchIdx);
+          if (pos !== -1) arr.splice(pos, 1);
+          return arr;
+        });
+      }
+    }
+  };
+
+  const handleClear = () => {
+    sound.playTap();
+    setTokens([]);
+    setUsedCardIndices([]);
+    setEvalResult('');
+  };
+
+  const evaluateExpression = () => {
+    if (usedCardIndices.length !== 4) {
+      sound.playFail();
+      setEvalResult('Must use all 4 cards!');
+      return;
+    }
+
+    try {
+      // Convert × and ÷ to * and /
+      const expr = tokens.join(' ').replace(/×/g, '*').replace(/÷/g, '/');
+      // eslint-disable-next-line no-eval
+      const res = Function(`"use strict"; return (${expr})`)();
+
+      if (Math.abs(res - 24) < 0.001) {
+        sound.playSuccess();
+        const nextScore = score + 1;
+        setScore(nextScore);
+        setEvalResult(`= 24! CORRECT! 🎉`);
+
+        if (nextScore >= 2) {
+          setTimeout(() => {
+            onFinish(nextScore, `${nextScore} Puzzles Solved (Make 24)`);
+          }, 800);
+        } else {
+          setTimeout(() => {
+            setPuzzleIdx((i) => i + 1);
+            setTokens([]);
+            setUsedCardIndices([]);
+            setEvalResult('');
+          }, 1200);
+        }
+      } else {
+        sound.playFail();
+        setEvalResult(`= ${Number(res.toFixed(1))} (Need 24)`);
+      }
+    } catch {
+      sound.playFail();
+      setEvalResult('Invalid expression!');
+    }
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Make 24</span>
-        <span className="text-emerald-400 font-bold">{solved ? 'Solved!' : 'Combine to 24'}</span>
+    <div className="flex flex-col items-center gap-3 w-full select-none max-w-sm mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
+        <span className="text-amber-400 font-bold">Make 24 (Combine All 4 Cards)</span>
+        <span className="text-cyan-400 font-bold">Solved: {score}/2</span>
       </div>
 
-      <div className="w-full max-w-sm bg-neutral-900 border border-neutral-800 rounded-xl p-6 flex flex-col items-center gap-4">
-        <div className="flex gap-3 text-3xl font-mono font-bold text-amber-400">
-          <span className="p-3 bg-neutral-800 rounded-lg">8</span>
-          <span className="p-3 bg-neutral-800 rounded-lg">6</span>
-          <span className="p-3 bg-neutral-800 rounded-lg">2</span>
-          <span className="p-3 bg-neutral-800 rounded-lg">2</span>
+      <div className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-5 flex flex-col items-center gap-4 shadow-2xl">
+        {/* 4 Number Cards */}
+        <div className="grid grid-cols-4 gap-2.5 w-full">
+          {currentNumbers.map((num, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleAddNumber(num, idx)}
+              disabled={usedCardIndices.includes(idx)}
+              className="h-16 rounded-xl bg-slate-900 border-2 border-amber-500/60 disabled:border-slate-800 disabled:opacity-25 disabled:bg-slate-950 text-white font-mono font-bold text-2xl shadow-md active:scale-95 transition-all"
+            >
+              {num}
+            </button>
+          ))}
         </div>
-        <p className="text-xs text-neutral-400">Formula: (8 - 2) × (6 - 2) = 6 × 4 = 24</p>
-        <button
-          onClick={check}
-          className="px-6 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-xs"
-        >
-          Verify Solution
-        </button>
+
+        {/* Expression Display */}
+        <div className="w-full min-h-12 bg-slate-900/90 border border-slate-700 rounded-xl px-3 py-2 flex items-center justify-between font-mono text-lg text-cyan-300">
+          <span className="truncate">{tokens.join(' ') || 'Build expression...'}</span>
+          <span className="text-xs font-bold text-amber-400 ml-2 whitespace-nowrap">{evalResult}</span>
+        </div>
+
+        {/* Operator Controls */}
+        <div className="grid grid-cols-6 gap-2 w-full">
+          {['+', '-', '×', '÷', '(', ')'].map((op) => (
+            <button
+              key={op}
+              onClick={() => handleAddOp(op)}
+              className="py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-mono font-bold rounded-lg text-lg active:scale-95 transition-all"
+            >
+              {op}
+            </button>
+          ))}
+        </div>
+
+        {/* Action Controls */}
+        <div className="grid grid-cols-3 gap-2 w-full">
+          <button
+            onClick={handleClear}
+            className="py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg text-xs"
+          >
+            CLEAR
+          </button>
+          <button
+            onClick={handleBackspace}
+            className="py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg text-xs"
+          >
+            ⌫ BACK
+          </button>
+          <button
+            onClick={evaluateExpression}
+            className="py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-lg text-xs shadow-md shadow-emerald-600/30"
+          >
+            = 24 ?
+          </button>
+        </div>
       </div>
+      <p className="text-[11px] text-slate-400 font-mono">Use all 4 numbers with + - × ÷ ( ) to total 24</p>
     </div>
   );
 }
@@ -256,86 +387,176 @@ export function PrimeDetectiveGame({ onFinish }: GameProps) {
   );
 }
 
-// 77. Missing Operator
+// 77. Missing Operator (Dynamic Arithmetic Fill)
 export function MissingOperatorGame({ onFinish }: GameProps) {
+  const [round, setRound] = useState(0);
   const [score, setScore] = useState(0);
+  const [problem, setProblem] = useState({ a: 12, b: 4, target: 3, correctOp: '÷' });
+
+  const generateProblem = () => {
+    const ops = ['+', '-', '×', '÷'] as const;
+    const op = ops[Math.floor(Math.random() * ops.length)];
+    let a = 0;
+    let b = 0;
+    let target = 0;
+
+    if (op === '+') {
+      a = Math.floor(Math.random() * 25) + 5;
+      b = Math.floor(Math.random() * 25) + 5;
+      target = a + b;
+    } else if (op === '-') {
+      a = Math.floor(Math.random() * 40) + 15;
+      b = Math.floor(Math.random() * 14) + 1;
+      target = a - b;
+    } else if (op === '×') {
+      a = Math.floor(Math.random() * 9) + 2;
+      b = Math.floor(Math.random() * 9) + 2;
+      target = a * b;
+    } else if (op === '÷') {
+      b = Math.floor(Math.random() * 8) + 2;
+      target = Math.floor(Math.random() * 9) + 2;
+      a = b * target;
+    }
+
+    setProblem({ a, b, target, correctOp: op });
+  };
+
+  useEffect(() => {
+    generateProblem();
+  }, []);
 
   const handleOp = (op: string) => {
-    if (op === '×') {
+    if (op === problem.correctOp) {
       sound.playSuccess();
-      const next = score + 1;
-      setScore(next);
-      if (next >= 5) {
-        onFinish(next, `${next} Equations Balanced`);
+      const nextScore = score + 1;
+      setScore(nextScore);
+      const nextRound = round + 1;
+      setRound(nextRound);
+
+      if (nextRound >= 5) {
+        onFinish(nextScore, `${nextScore}/5 Equations Balanced`);
+      } else {
+        generateProblem();
       }
     } else {
       sound.playFail();
+      const nextRound = round + 1;
+      setRound(nextRound);
+      if (nextRound >= 5) {
+        onFinish(score, `${score}/5 Equations Balanced`);
+      } else {
+        generateProblem();
+      }
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Fill Missing Operator</span>
-        <span className="text-amber-400 font-bold">{score}/5</span>
+    <div className="flex flex-col items-center gap-3 w-full select-none max-w-sm mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
+        <span>Missing Operator</span>
+        <span className="text-amber-400 font-bold">Round {round + 1}/5</span>
       </div>
 
-      <div className="w-full max-w-sm bg-neutral-900 border border-neutral-800 rounded-xl p-6 flex flex-col items-center gap-6">
-        <span className="text-3xl font-mono font-bold text-white">4 [ ? ] 7 = 28</span>
-        <div className="flex gap-3">
+      <div className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col items-center gap-6 shadow-2xl">
+        <div className="flex items-center gap-3 text-3xl font-mono font-bold text-white bg-slate-900 border border-slate-700 px-6 py-4 rounded-xl shadow-inner">
+          <span>{problem.a}</span>
+          <span className="text-amber-400 font-bold px-2 py-0.5 bg-amber-500/20 border border-amber-500/40 rounded-lg">?</span>
+          <span>{problem.b}</span>
+          <span>=</span>
+          <span className="text-cyan-400">{problem.target}</span>
+        </div>
+
+        <div className="grid grid-cols-4 gap-3 w-full">
           {['+', '-', '×', '÷'].map((op) => (
             <button
               key={op}
               onClick={() => handleOp(op)}
-              className="w-12 h-12 bg-neutral-800 hover:bg-neutral-750 text-xl font-bold rounded-lg text-white"
+              className="py-3 bg-slate-800 hover:bg-slate-700 text-2xl font-bold font-mono rounded-xl text-white shadow-md active:scale-95 transition-all"
             >
               {op}
             </button>
           ))}
         </div>
       </div>
+      <p className="text-[11px] text-slate-400 font-mono">Select the operator that balances the equation</p>
     </div>
   );
 }
 
-// 78. Fraction Visualizer
+// 78. Fraction Visualizer (Interactive Pie Benchmark)
 export function FractionPieGame({ onFinish }: GameProps) {
+  const fractionList = [
+    { num: 1, den: 2, label: '1/2', angle: 180 },
+    { num: 3, den: 4, label: '3/4', angle: 270 },
+    { num: 2, den: 3, label: '2/3', angle: 240 },
+    { num: 1, den: 4, label: '1/4', angle: 90 },
+    { num: 5, den: 8, label: '5/8', angle: 225 },
+    { num: 3, den: 8, label: '3/8', angle: 135 },
+  ];
+
+  const [round, setRound] = useState(0);
   const [score, setScore] = useState(0);
 
+  const cur = fractionList[round % fractionList.length];
+  // Generate 4 multiple choices including the correct one
+  const choices = [cur.label, ...fractionList.filter((f) => f.label !== cur.label).slice(0, 3).map((f) => f.label)].sort(
+    () => 0.5 - Math.random()
+  );
+
   const choose = (frac: string) => {
-    if (frac === '3/4') {
+    if (frac === cur.label) {
       sound.playSuccess();
-      const next = score + 1;
-      setScore(next);
-      if (next >= 5) {
-        onFinish(next, `${next} Fractions Matched`);
-      }
+      const nextScore = score + 1;
+      setScore(nextScore);
     } else {
       sound.playFail();
     }
+
+    const nextRound = round + 1;
+    setRound(nextRound);
+    if (nextRound >= 5) {
+      onFinish(score + (frac === cur.label ? 1 : 0), `${score + (frac === cur.label ? 1 : 0)}/5 Fractions Identified`);
+    }
   };
 
+  // SVG Pie Wedge
+  const rad = (deg: number) => ((deg - 90) * Math.PI) / 180;
+  const startX = 60 + 50 * Math.cos(rad(0));
+  const startY = 60 + 50 * Math.sin(rad(0));
+  const endX = 60 + 50 * Math.cos(rad(cur.angle));
+  const endY = 60 + 50 * Math.sin(rad(cur.angle));
+  const largeArc = cur.angle > 180 ? 1 : 0;
+  const pathD = `M 60 60 L ${startX} ${startY} A 50 50 0 ${largeArc} 1 ${endX} ${endY} Z`;
+
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Fraction Match</span>
-        <span className="text-cyan-400 font-bold">{score}/5</span>
+    <div className="flex flex-col items-center gap-3 w-full select-none max-w-sm mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
+        <span>Fraction Visualizer</span>
+        <span className="text-cyan-400 font-bold">Round {round + 1}/5</span>
       </div>
 
-      <div className="w-full max-w-sm bg-neutral-900 border border-neutral-800 rounded-xl p-6 flex flex-col items-center gap-6">
-        <p className="text-xs text-neutral-400">Match 75% filled pie:</p>
-        <div className="flex gap-3">
-          {['1/2', '3/4', '2/3', '5/8'].map((f) => (
+      <div className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col items-center gap-6 shadow-2xl">
+        {/* Pie SVG */}
+        <div className="w-32 h-32 rounded-full border-4 border-slate-700 bg-slate-900 p-1 flex items-center justify-center shadow-lg">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="50" fill="#1e293b" />
+            <path d={pathD} fill="#10b981" />
+          </svg>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 w-full">
+          {choices.map((f) => (
             <button
               key={f}
               onClick={() => choose(f)}
-              className="px-4 py-2 bg-neutral-800 hover:bg-neutral-750 font-mono font-bold rounded-lg text-white text-sm"
+              className="py-3 bg-slate-800 hover:bg-slate-700 font-mono font-bold rounded-xl text-white text-base shadow-md active:scale-95 transition-all"
             >
               {f}
             </button>
           ))}
         </div>
       </div>
+      <p className="text-[11px] text-slate-400 font-mono">Identify the highlighted green sector value</p>
     </div>
   );
 }
