@@ -1,0 +1,43 @@
+# Wanjaaro – Free Instant Mind & Skill Games
+
+> Wanjaaro (https://wanjaaro.com) is a high-performance web gaming platform featuring 100 client-side mind, reflex, memory, and cognitive skill benchmarks. All games execute entirely in the browser with sub-1ms input latency, zero server lag, and persistent local high-score tracking. No login or installation required.
+
+## Main Navigation & Discovery
+
+- [Home Hub](https://wanjaaro.com/): Browse all 100 instant mind and skill benchmark games
+- [Leaderboard & High Scores](https://wanjaaro.com/scores): Top local benchmark records, reaction latencies, and accuracy streaks
+
+## Categories
+
+- [Reflex & Reaction](https://wanjaaro.com/reflex-reaction): Reaction time tests, color flash reflexes, brake triggers, and auditory latency tests
+- [Aim & Precision](https://wanjaaro.com/aim-precision): Precision crosshairs, laser optics mirrors, micro steadiness, and orbital slingshots
+- [Memory & Recall](https://wanjaaro.com/memory-recall): Simon chime sequences, card matrix pairs, spatial grid spans, and digit recall
+- [Typing & Words](https://wanjaaro.com/typing-words): Speed typing sprints, burst word waterfalls, typing accuracy drills, and anagram scrambles
+- [Perception & Vision](https://wanjaaro.com/perception-vision): Odd color discernment, motion tracking, change blindness detection, and peripheral acuity
+- [Logic & Deduction](https://wanjaaro.com/logic-puzzles): Circuit logic gates, sliding tile number matrix, deduction grids, and tower sequencing
+- [Strategy & Tactics](https://wanjaaro.com/strategy-tactics): Connect four, grid tactics, Othello flips, and tactical path blocking
+- [Coordination & Rhythm](https://wanjaaro.com/coordination-rhythm): Rhythm beats, dual-hand tap sync, orbit timing gates, and tempo matching
+- [Speed & Accuracy](https://wanjaaro.com/speed-accuracy): Quick math blitz, rapid object sorting, target clicking rushes, and shape matches
+- [Math & Mental Calc](https://wanjaaro.com/math-calculation): Arithmetic sprint, prime factorization, 24 solver, and sequence extrapolation
+- [Visual & Geometry](https://wanjaaro.com/visual-geometry): Spatial mental rotation, line untangling, isometric views, and symmetry folds
+- [Casual & Arcade](https://wanjaaro.com/casual-arcade): Classic brick breaker, snake arcade, pong paddle duel, and 2048 tiles
+
+## Featured Benchmark Games
+
+- [Reaction Time Test](https://wanjaaro.com/reflex-reaction-time): Measure millisecond visual synaptic response time
+- [Laser Mirror Align](https://wanjaaro.com/aim-laser-line): Rotate optical mirrors to reflect laser beam through target crystals
+- [Precision Sniper](https://wanjaaro.com/aim-sniper): Micro-target accuracy and click precision under shrinking targets
+- [Simon Chime Sequence](https://wanjaaro.com/memory-simon-sequence): Auditory and visual working memory pattern recall
+- [Card Matrix Pairs](https://wanjaaro.com/memory-card-pairs): 4x4 symbol matching memory matrix
+- [Gravity Slingshot](https://wanjaaro.com/aim-gravity-sling): Orbital trajectory aim around planetary gravitational wells
+- [Typing Sprint](https://wanjaaro.com/typing-speed-sprint): Sixty-second Words Per Minute (WPM) accuracy benchmark
+- [Odd Color Out](https://wanjaaro.com/perception-odd-color): Discriminate subtle chrominance and luminance variances
+- [Circuit Gate Puzzle](https://wanjaaro.com/logic-circuit-connect): Boolean logic gate puzzles (AND, OR, XOR)
+- [Brick Breaker](https://wanjaaro.com/arcade-brick-breaker): Timeless arcade physics bouncer
+
+## Technical Architecture
+
+- Client-Side Execution: All games run 100% locally via React, TypeScript, and modern HTML5 Canvas/SVG APIs.
+- Zero Lag: Sub-millisecond input handling without server latency.
+- SEO & AI Discovery: Pre-rendered static HTML routes at plain paths (e.g. `/reflex-reaction-time`, `/scores`), Schema.org SoftwareApplication JSON-LD entities, and OpenGraph metadata.
+- Host Compatibility: Configured with `_redirects`, `404.html` SPA routing, `.nojekyll`, and static directory indexes.

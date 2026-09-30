@@ -1,394 +1,77 @@
----
-layout: default
-title: Free & Private Online Document, PDF & Spreadsheet Tools
-description: Free, fast, and 100% private online tools for PDF compression, Excel spreadsheets, CSV data tables, JSON formatting, and bank statements. Zero cloud uploads.
----
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%236366f1'/><path d='M30 50h40M50 30v40' stroke='white' stroke-width='12' stroke-linecap='round'/></svg>" />
+    <title>Falling Coin Basket – Free Online Reflex &amp; Skill Benchmark | Wanjaaro</title>
+    <meta name="description" content="Play Falling Coin Basket online for free on Wanjaaro. Move your basket to catch falling gold coins while dodging falling black anvils. Zero lag, instant client-side execution, local best score tracking." />
+    <link rel="canonical" href="https://wanjaaro.com/speed-coin-catcher" />
 
-<!-- Hero Section -->
-<section class="hero-section" id="hero-section" style="padding: 48px 0 36px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.15) 0%, transparent 60%);">
-  <div class="hero-container" style="max-width: 1080px; margin: 0 auto; text-align: center; padding: 0 16px;">
-    
-    <!-- Mascot & Trust Badge -->
-    <div style="display: inline-flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-      <img 
-        src="{{ '/assets/images/datafrog.png' | relative_url }}" 
-        alt="DataFrog Mascot" 
-        style="width: 80px; height: 80px; object-fit: contain; filter: drop-shadow(0 4px 20px rgba(16, 185, 129, 0.4)); animation: float 3s ease-in-out infinite;" 
-      />
-      <div style="text-align: left;">
-        <span class="hero-pill" style="margin: 0; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399; font-weight: 700;">
-          <span class="pill-dot"></span> 100% In-Browser &bull; Zero Server Uploads
-        </span>
-        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 4px; font-weight: 600;">
-          Safe for Invoices, Bank Statements &amp; Sensitive Documents
-        </div>
-      </div>
-    </div>
+    <!-- OpenGraph Metadata -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Falling Coin Basket – Free Online Reflex &amp; Skill Benchmark | Wanjaaro" />
+    <meta property="og:description" content="Play Falling Coin Basket online for free on Wanjaaro. Move your basket to catch falling gold coins while dodging falling black anvils. Zero lag, instant client-side execution, local best score tracking." />
+    <meta property="og:url" content="https://wanjaaro.com/speed-coin-catcher" />
+    <meta property="og:site_name" content="Wanjaaro" />
 
-    <!-- Main Headline for Everyday Users -->
-    <h1 class="hero-title" style="font-size: 2.75rem; font-weight: 800; color: #ffffff; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px;">
-      Free, Private Online Tools for <br>
-      <span style="background: linear-gradient(135deg, #10b981 0%, #6ee7b7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Documents, Spreadsheets &amp; Data</span>
-    </h1>
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Falling Coin Basket – Free Online Reflex &amp; Skill Benchmark | Wanjaaro" />
+    <meta name="twitter:description" content="Play Falling Coin Basket online for free on Wanjaaro. Move your basket to catch falling gold coins while dodging falling black anvils. Zero lag, instant client-side execution, local best score tracking." />
 
-    <p class="hero-subtitle" style="font-size: 1.125rem; color: #cbd5e1; max-width: 760px; margin: 0 auto 28px auto; line-height: 1.6;">
-      Compress large PDFs, clean messy CSV tables, convert Excel spreadsheets, format broken JSON, and organize financial statements. No sign-up, no hidden fees, and completely private — your files never leave your device.
-    </p>
-
-    <!-- Popular Action Buttons -->
-    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 36px;">
-      <a href="{{ '/pdf/compress-pdf' | relative_url }}" class="btn btn-primary" style="padding: 14px 28px; font-size: 1rem; font-weight: 800; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
-        <span>Compress PDF Online</span>
-      </a>
-
-      <a href="#tool-categories" class="btn btn-secondary" style="padding: 14px 24px; font-size: 1rem; font-weight: 700;">
-        Browse All Categories &darr;
-      </a>
-      
-      <a href="{{ '/pages/excel' | relative_url }}" class="btn btn-secondary" style="padding: 14px 20px; font-size: 0.9375rem;">
-        Excel Tools
-      </a>
-
-      <a href="{{ '/pages/csv' | relative_url }}" class="btn btn-secondary" style="padding: 14px 20px; font-size: 0.9375rem;">
-        CSV Cleaner
-      </a>
-
-      <a href="{{ '/pages/json' | relative_url }}" class="btn btn-secondary" style="padding: 14px 20px; font-size: 0.9375rem;">
-        JSON Formatter
-      </a>
-    </div>
-
-    <!-- Value Propositions Strip -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; text-align: left; max-width: 960px; margin: 0 auto;">
-      
-      <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 16px 20px; display: flex; align-items: flex-start; gap: 12px;">
-        <span style="font-size: 1.5rem;">🔒</span>
-        <div>
-          <div style="font-weight: 700; color: #ffffff; font-size: 0.9375rem;">100% In-Browser Privacy</div>
-          <div style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.4; margin-top: 2px;">Files process locally in browser memory. Nothing is ever sent to a remote server.</div>
-        </div>
-      </div>
-
-      <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 16px 20px; display: flex; align-items: flex-start; gap: 12px;">
-        <span style="font-size: 1.5rem;">⚡</span>
-        <div>
-          <div style="font-weight: 700; color: #ffffff; font-size: 0.9375rem;">Instant Execution</div>
-          <div style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.4; margin-top: 2px;">No slow cloud uploads or queues. Immediate results powered directly by your device.</div>
-        </div>
-      </div>
-
-      <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 16px 20px; display: flex; align-items: flex-start; gap: 12px;">
-        <span style="font-size: 1.5rem;">🆓</span>
-        <div>
-          <div style="font-weight: 700; color: #ffffff; font-size: 0.9375rem;">100% Free Forever</div>
-          <div style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.4; margin-top: 2px;">No sign-up, no subscriptions, no credit card, and no watermarks on your files.</div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-<!-- Featured Tool Spotlight: Compress PDF -->
-<section style="padding: 36px 0;">
-  <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0.9) 100%); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 18px; padding: 32px; box-shadow: 0 16px 40px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
-    <div style="max-width: 650px;">
-      <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-        <span style="background: #ef4444; color: #ffffff; font-size: 0.6875rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.05em;">FEATURED TOOL</span>
-        <span style="color: #34d399; font-size: 0.75rem; font-weight: 700;">★ Most Popular</span>
-        <span style="color: #94a3b8; font-size: 0.75rem;">&bull; Ready to Use</span>
-      </div>
-      <h2 style="font-size: 1.85rem; font-weight: 800; color: #ffffff; margin-bottom: 10px; letter-spacing: -0.02em;">
-        Compress PDF Online (Up to 85% Smaller)
-      </h2>
-      <p style="font-size: 0.9375rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 18px;">
-        Need to email a PDF or upload a resume to a portal with strict file size limits? 
-        Our browser-based compressor shrinks large PDF documents in seconds without blurring text or distorting charts.
-      </p>
-      
-      <!-- Key Features -->
-      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px;">
-        <span style="background: rgba(255, 255, 255, 0.06); color: #e2e8f0; font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);">
-          ⚡ Live Interactive Viewer
-        </span>
-        <span style="background: rgba(255, 255, 255, 0.06); color: #e2e8f0; font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);">
-          🎯 3 Presets (Recommended, Extreme, Low)
-        </span>
-        <span style="background: rgba(255, 255, 255, 0.06); color: #e2e8f0; font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);">
-          🔒 Zero Cloud Uploads (GDPR &amp; HIPAA Safe)
-        </span>
-        <span style="background: rgba(255, 255, 255, 0.06); color: #e2e8f0; font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);">
-          📊 Instant Before/After Size Metrics
-        </span>
-      </div>
-    </div>
-
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 220px;">
-      <div style="background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 14px 24px; text-align: center; width: 100%;">
-        <div style="font-size: 1.75rem; font-weight: 900; color: #10b981; line-height: 1;">Up to -85%</div>
-        <div style="font-size: 0.6875rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; margin-top: 4px;">File Size Reduction</div>
-      </div>
-
-      <a href="{{ '/pdf/compress-pdf' | relative_url }}" class="btn-compress-now" style="text-decoration: none; padding: 14px 28px; font-size: 1rem; font-weight: 800; display: inline-flex; align-items: center; gap: 8px; justify-content: center; width: 100%; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
-        <span>Launch Compressor</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- Tool Categories Section (Categorized for Everyday Users) -->
-<section id="tool-categories" style="padding: 24px 0 48px 0;">
-  
-  <div style="margin-bottom: 28px;">
-    <h2 style="font-size: 1.85rem; font-weight: 800; color: #ffffff; letter-spacing: -0.02em; margin-bottom: 8px;">
-      Explore Tools by Category
-    </h2>
-    <p style="color: #94a3b8; font-size: 0.9375rem; margin: 0;">
-      Practical utilities built to solve everyday tasks with documents, spreadsheets, tables, and financial files.
-    </p>
-  </div>
-
-  <!-- CATEGORY 1: PDF Document Tools -->
-  <div style="margin-bottom: 40px;">
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 10px;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <span style="background: #ef4444; color: #fff; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 5px;">PDF</span>
-        <h3 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin: 0;">PDF Document Tools</h3>
-      </div>
-      <a href="{{ '/pdf' | relative_url }}" style="color: #34d399; font-size: 0.8125rem; font-weight: 700; text-decoration: none;">
-        View PDF Suite &rarr;
-      </a>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
-      
-      <!-- Tool: Compress PDF -->
-      <a href="{{ '/pdf/compress-pdf' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 20px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-            <span style="font-size: 1.25rem;">📉</span>
-            <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-size: 0.6875rem; font-weight: 800; padding: 2px 8px; border-radius: 4px;">READY &bull; POPULAR</span>
-          </div>
-          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Compress PDF</h4>
-          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
-            Reduce PDF file size up to 85% for email, portals, and web forms. Includes live viewer and download.
-          </p>
-        </div>
-        <span style="color: #10b981; font-size: 0.8125rem; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-          Open Tool &rarr;
-        </span>
-      </a>
-
-      <!-- Tool: Merge PDF -->
-      <a href="{{ '/pdf#merge' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-            <span style="font-size: 1.25rem;">📑</span>
-            <span style="background: rgba(255, 255, 255, 0.06); color: #cbd5e1; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">PDF TOOL</span>
-          </div>
-          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Merge Multiple PDFs</h4>
-          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
-            Combine contracts, invoices, and presentation slides into a single organized document.
-          </p>
-        </div>
-        <span style="color: #38bdf8; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
-      </a>
-
-      <!-- Tool: Split PDF -->
-      <a href="{{ '/pdf#split' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-            <span style="font-size: 1.25rem;">✂️</span>
-            <span style="background: rgba(255, 255, 255, 0.06); color: #cbd5e1; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">PDF TOOL</span>
-          </div>
-          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Split &amp; Extract Pages</h4>
-          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
-            Extract specific pages or break a long 50-page document into individual single-page files.
-          </p>
-        </div>
-        <span style="color: #38bdf8; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
-      </a>
-
-      <!-- Tool: Redact & Anonymize -->
-      <a href="{{ '/pdf#anonymize' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-            <span style="font-size: 1.25rem;">🛡️</span>
-            <span style="background: rgba(255, 255, 255, 0.06); color: #cbd5e1; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">PRIVACY</span>
-          </div>
-          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Redact &amp; Anonymize PDF</h4>
-          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
-            Mask confidential names, tax IDs, and metadata from documents before sharing.
-          </p>
-        </div>
-        <span style="color: #38bdf8; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
-      </a>
-
-    </div>
-  </div>
-
-  <!-- CATEGORY 2: Spreadsheets & Tables -->
-  <div style="margin-bottom: 40px;">
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 10px;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <span style="background: #10b981; color: #064e3b; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 5px;">XLS</span>
-        <h3 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin: 0;">Spreadsheets &amp; Excel Tools</h3>
-      </div>
-      <a href="{{ '/pages/excel' | relative_url }}" style="color: #34d399; font-size: 0.8125rem; font-weight: 700; text-decoration: none;">
-        View Excel Tools &rarr;
-      </a>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
-      
-      <!-- Tool: Excel Tools -->
-      <a href="{{ '/pages/excel' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-            <span style="font-size: 1.25rem;">📊</span>
-            <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">SPREADSHEET</span>
-          </div>
-          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Excel Spreadsheet Studio</h4>
-          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
-            Open, inspect, and build XLSX workbooks with colors, cell formats, and formula calculations.
-          </p>
-        </div>
-        <span style="color: #34d399; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
-      </a>
-
-      <!-- Tool: Excel to CSV -->
-      <a href="{{ '/pages/excel#convert' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-            <span style="font-size: 1.25rem;">🔄</span>
-            <span style="background: rgba(255, 255, 255, 0.06); color: #cbd5e1; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">CONVERT</span>
-          </div>
-          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Excel to CSV Converter</h4>
-          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
-            Convert any Microsoft Excel sheet into clean standard CSV or JSON table format.
-          </p>
-        </div>
-        <span style="color: #34d399; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
-      </a>
-
-      <!-- Tool: CSV Cleaner -->
-      <a href="{{ '/pages/csv' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-            <span style="font-size: 1.25rem;">🧹</span>
-            <span style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">TABLE FIX</span>
-          </div>
-          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">CSV Cleaner &amp; Delimiter Fixer</h4>
-          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
-            Fix broken commas, tabs, semicolons, and quotes that cause spreadsheets to load improperly.
-          </p>
-        </div>
-        <span style="color: #fbbf24; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
-      </a>
-
-      <!-- Tool: CSV Table Joiner -->
-      <a href="{{ '/pages/csv#join' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-            <span style="font-size: 1.25rem;">🔗</span>
-            <span style="background: rgba(255, 255, 255, 0.06); color: #cbd5e1; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">MERGE TABLES</span>
-          </div>
-          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Merge Two CSV Files</h4>
-          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
-            Combine two tables side-by-side using matching column IDs without complex software.
-          </p>
-        </div>
-        <span style="color: #fbbf24; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
-      </a>
-
-    </div>
-  </div>
-
-  <!-- CATEGORY 3: Data & Banking Tools -->
-  <div style="margin-bottom: 32px;">
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 10px;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <span style="background: #f59e0b; color: #78350f; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 5px;">DATA</span>
-        <h3 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin: 0;">Data &amp; Banking Statement Tools</h3>
-      </div>
-      <a href="{{ '/pages/json' | relative_url }}" style="color: #34d399; font-size: 0.8125rem; font-weight: 700; text-decoration: none;">
-        View Data Tools &rarr;
-      </a>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
-      
-      <!-- Tool: JSON Formatter & Repair -->
-      <a href="{{ '/pages/json' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-            <span style="font-size: 1.25rem;">✨</span>
-            <span style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">DATA CLEANER</span>
-          </div>
-          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">JSON Formatter &amp; Repair</h4>
-          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
-            Format messy JSON with neat indentations and automatically heal trailing commas or syntax errors.
-          </p>
-        </div>
-        <span style="color: #fbbf24; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
-      </a>
-
-      <!-- Tool: XML Tree Viewer -->
-      <a href="{{ '/pages/xml' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-            <span style="font-size: 1.25rem;">🌳</span>
-            <span style="background: rgba(6, 182, 212, 0.15); color: #22d3ee; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">XML TREE</span>
-          </div>
-          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">XML Document Inspector</h4>
-          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
-            Navigate structured XML records, check for validation errors, and convert XML records into tables.
-          </p>
-        </div>
-        <span style="color: #22d3ee; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
-      </a>
-
-      <!-- Tool: Bank Statement Normalizer -->
-      <a href="{{ '/pages/financial' | relative_url }}" style="text-decoration: none; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-            <span style="font-size: 1.25rem;">💳</span>
-            <span style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">BANKING</span>
-          </div>
-          <h4 style="font-size: 1.0625rem; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Bank Statement Cleaner</h4>
-          <p style="font-size: 0.8125rem; color: #94a3b8; line-height: 1.5; margin: 0 0 14px 0;">
-            Clean and normalize bank statement files (QBO, OFX, QFX, QIF) and reconcile with ledgers.
-          </p>
-        </div>
-        <span style="color: #a78bfa; font-size: 0.8125rem; font-weight: 700;">Open Tool &rarr;</span>
-      </a>
-
-    </div>
-  </div>
-
-</section>
-
-<!-- Founder & Story Section -->
-<section style="padding: 36px 0; border-top: 1px solid rgba(255, 255, 255, 0.08);">
-  <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 18px; padding: 32px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">
-    <img 
-      src="{{ '/assets/images/sohail-anwar.png' | relative_url }}" 
-      alt="Sohail Anwar - Founder & Creator of DataFrog" 
-      style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #10b981; box-shadow: 0 8px 24px rgba(0,0,0,0.4); flex-shrink: 0;"
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
     />
-    <div style="max-width: 680px;">
-      <div style="font-size: 0.75rem; font-weight: 800; color: #10b981; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px;">
-        About DataFrog &bull; The Mission
-      </div>
-      <h3 style="font-size: 1.375rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
-        Built by Sohail Anwar for Everyday Privacy &amp; Simplicity
-      </h3>
-      <p style="font-size: 0.875rem; color: #cbd5e1; line-height: 1.6; margin: 0;">
-        "Most online file tools force users to upload confidential tax forms, invoices, and personal PDFs to unknown third-party cloud servers, often logging data or charging subscriptions. I built DataFrog so anyone can compress PDFs, clean spreadsheets, and manage files with 100% privacy directly in their browser. No tracking, no fees, and your files never leave your computer."
-      </p>
-    </div>
-  </div>
-</section>
+
+    <!-- JSON-LD Structured Data for Wanjaaro -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Wanjaaro",
+        "url": "https://wanjaaro.com/",
+        "description": "Play free instant client-side browser games on Wanjaaro. Test your reflexes, memory, logic, precision, typing, and mental agility with local high score tracking.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://wanjaaro.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-Dezk74gN.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CS-GzWlv.css">
+  
+    <!-- Page Specific Schema.org Entity -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Falling Coin Basket",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any Modern Web Browser (Desktop, Mobile, Tablet)",
+  "description": "Move your basket to catch falling gold coins while dodging falling black anvils.",
+  "url": "https://wanjaaro.com/speed-coin-catcher",
+  "genre": "speed-accuracy",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "100% Free and Client-Side Execution",
+    "Sub-1ms Input Response with 0ms Network Lag",
+    "Local High Score and Personal Best Tracking",
+    "Full Mobile Touch and Desktop Keyboard Support"
+  ]
+}
+    </script>
+  </head>
+  <body class="bg-slate-950 text-slate-100 min-h-screen antialiased selection:bg-indigo-500 selection:text-white">
+    <div id="root"></div>
+  </body>
+</html>
