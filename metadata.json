@@ -1,6 +1,6 @@
 {
-  "name": "PDF Engine - Jekyll",
-  "description": "DataFrog: 100% Free & Private Online Document & Data Tools Suite (PDF Compression, Excel Spreadsheets, CSV Cleaner, JSON Formatter, Financial Statements)",
+  "name": "Wanjaaro Games",
+  "description": "Play free instant client-side browser games on Wanjaaro. Test your reflexes, memory, logic, precision, typing, and mental agility with local high score tracking.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

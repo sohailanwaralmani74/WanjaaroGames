@@ -109,6 +109,7 @@ export function CardPairsGame({ onFinish }: GameProps) {
   const [deck, setDeck] = useState<{ id: number; symbol: string; flipped: boolean; matched: boolean }[]>([]);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const initDeck = () => {
     const doubled = [...symbols, ...symbols]
@@ -117,14 +118,17 @@ export function CardPairsGame({ onFinish }: GameProps) {
     setDeck(doubled);
     setFlippedIndices([]);
     setMoves(0);
+    setIsCompleted(false);
   };
 
   useEffect(() => {
     initDeck();
   }, []);
 
+  const matchedPairs = deck.filter((c) => c.matched).length / 2;
+
   const handleCardClick = (idx: number) => {
-    if (flippedIndices.length >= 2 || deck[idx].flipped || deck[idx].matched) return;
+    if (flippedIndices.length >= 2 || deck[idx].flipped || deck[idx].matched || isCompleted) return;
 
     sound.playTap();
     const newDeck = [...deck];
@@ -146,7 +150,10 @@ export function CardPairsGame({ onFinish }: GameProps) {
 
         // Check victory
         if (newDeck.every((c) => c.matched)) {
-          onFinish(moves + 1, `${moves + 1} moves`);
+          setIsCompleted(true);
+          setTimeout(() => {
+            onFinish(moves + 1, `${moves + 1} moves`);
+          }, 600);
         }
       } else {
         sound.playFail();
@@ -162,28 +169,39 @@ export function CardPairsGame({ onFinish }: GameProps) {
 
   return (
     <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Flips: {moves}</span>
-        <button onClick={initDeck} className="text-xs text-neutral-400 hover:text-white underline">
-          Shuffle
-        </button>
+      <div className="flex justify-between items-center w-full text-xs font-mono text-neutral-300 px-2">
+        <span className="text-emerald-400 font-bold">Pairs Found: {matchedPairs} / 8</span>
+        <div className="flex items-center gap-3">
+          <span className="text-amber-400 font-bold">Moves: {moves}</span>
+          <button onClick={initDeck} className="text-xs text-neutral-400 hover:text-white underline">
+            Shuffle
+          </button>
+        </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-2.5 p-3 bg-neutral-900 border border-neutral-800 rounded-xl">
+      <div className="grid grid-cols-4 gap-2.5 p-3 bg-neutral-900 border border-neutral-800 rounded-xl relative">
         {deck.map((card, idx) => (
           <button
             key={card.id}
             onClick={() => handleCardClick(idx)}
             className={`w-14 h-16 sm:w-16 sm:h-20 rounded-lg flex items-center justify-center text-2xl font-bold transition-all ${
-              card.flipped || card.matched
+              card.matched
+                ? 'bg-emerald-950/80 border-2 border-emerald-400 text-white shadow-emerald-950/50 shadow-lg scale-95'
+                : card.flipped
                 ? 'bg-neutral-800 border-2 border-amber-400 text-white shadow-md'
-                : 'bg-neutral-950 border border-neutral-800 text-neutral-600 hover:border-neutral-700'
+                : 'bg-neutral-950 border border-neutral-800 text-neutral-600 hover:border-neutral-700 active:scale-95'
             }`}
           >
             {card.flipped || card.matched ? card.symbol : '?'}
           </button>
         ))}
       </div>
+
+      {isCompleted && (
+        <div className="text-emerald-400 font-extrabold text-xs text-center animate-bounce">
+          🎉 All 8 Pairs Matched in {moves} Moves!
+        </div>
+      )}
     </div>
   );
 }

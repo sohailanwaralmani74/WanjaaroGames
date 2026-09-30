@@ -707,9 +707,6 @@ export default function App() {
             <p className="leading-relaxed">
               An expanding ecosystem of instant, high-performance browser games focused on mind, skill, reaction, memory, reflex, puzzle, and casual entertainment.
             </p>
-            <p className="text-[11px] text-neutral-500">
-              Free to deploy on GitHub Pages. Zero backend, zero cookies, zero logins.
-            </p>
           </div>
 
           <div>

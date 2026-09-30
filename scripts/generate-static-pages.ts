@@ -48,27 +48,27 @@ function generateHtml({
 
   // Meta description
   html = html.replace(
-    /<meta name="description" content="[\s\S]*?" \/>/i,
+    /<meta\s+[^>]*?name="description"[^>]*?>/i,
     `<meta name="description" content="${escapeHtml(description)}" />`
   );
 
   // Canonical
   const cleanPath = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
   const fullUrl = `${BASE_URL}${cleanPath === '/' ? '/' : cleanPath}`;
-  html = html.replace(/<link rel="canonical" href="[\s\S]*?" \/>/i, `<link rel="canonical" href="${fullUrl}" />`);
+  html = html.replace(/<link\s+[^>]*?rel="canonical"[^>]*?>/i, `<link rel="canonical" href="${fullUrl}" />`);
 
   // OpenGraph
-  html = html.replace(/<meta property="og:title" content="[\s\S]*?" \/>/i, `<meta property="og:title" content="${escapeHtml(title)}" />`);
+  html = html.replace(/<meta\s+[^>]*?property="og:title"[^>]*?>/i, `<meta property="og:title" content="${escapeHtml(title)}" />`);
   html = html.replace(
-    /<meta property="og:description" content="[\s\S]*?" \/>/i,
+    /<meta\s+[^>]*?property="og:description"[^>]*?>/i,
     `<meta property="og:description" content="${escapeHtml(description)}" />`
   );
-  html = html.replace(/<meta property="og:url" content="[\s\S]*?" \/>/i, `<meta property="og:url" content="${fullUrl}" />`);
+  html = html.replace(/<meta\s+[^>]*?property="og:url"[^>]*?>/i, `<meta property="og:url" content="${fullUrl}" />`);
 
   // Twitter
-  html = html.replace(/<meta name="twitter:title" content="[\s\S]*?" \/>/i, `<meta name="twitter:title" content="${escapeHtml(title)}" />`);
+  html = html.replace(/<meta\s+[^>]*?name="twitter:title"[^>]*?>/i, `<meta name="twitter:title" content="${escapeHtml(title)}" />`);
   html = html.replace(
-    /<meta name="twitter:description" content="[\s\S]*?" \/>/i,
+    /<meta\s+[^>]*?name="twitter:description"[^>]*?>/i,
     `<meta name="twitter:description" content="${escapeHtml(description)}" />`
   );
 
