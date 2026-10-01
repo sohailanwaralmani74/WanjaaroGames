@@ -1,4 +1,5 @@
-import { CategoryInfo, GameMeta } from '../types/game';
+import { CategoryInfo, GameMeta, BaseGameMeta } from '../types/game';
+import { GAME_CONTENT_REGISTRY } from './gameContent';
 
 export const CATEGORIES: CategoryInfo[] = [
   {
@@ -87,7 +88,7 @@ export const CATEGORIES: CategoryInfo[] = [
   },
 ];
 
-export const GAMES_CATALOG: GameMeta[] = [
+export const GAMES_CATALOG: (BaseGameMeta & Partial<GameMeta>)[] = [
   // 1. Reflex & Reaction
   {
     id: 'reflex-reaction-time',
@@ -95,7 +96,7 @@ export const GAMES_CATALOG: GameMeta[] = [
     category: 'reflex-reaction',
     summary: 'Wait for the red screen to flash green, then tap immediately to measure response latency.',
     instructions: 'Tap or click to arm the sensor. Wait patiently while the screen is red. As soon as it flashes green, tap as fast as humanly possible. Tapping too early incurs a false-start penalty.',
-    mechanic: 'Random millisecond delay delay generator with high-resolution performance.now() latency delta capture.',
+    mechanic: 'Random millisecond delay generator with high-resolution timer latency delta capture.',
     controls: 'all',
     skillsTested: ['Visual Reflex', 'Motor Speed', 'Impulse Inhibition'],
     scoringUnit: 'ms',
@@ -1511,6 +1512,90 @@ export const GAMES_CATALOG: GameMeta[] = [
     proTips: 'On curved greens, aim slightly above the cup to allow natural slope drift to carry the ball in.',
     tags: ['golf', 'putt', 'physics', 'sports'],
   },
+  {
+    id: 'solitaire',
+    title: 'Klondike Solitaire Classic',
+    category: 'casual-arcade',
+    summary: 'The timeless 52-card Klondike patience card game with draw 1, foundation auto-moves, and smooth tableau cascading.',
+    instructions: 'Build the 4 foundation piles from Ace to King by suit. In the tableau, build descending sequences in alternating colors. Drag or click cards to move them.',
+    mechanic: 'Standard 52-card Klondike Solitaire rules with dual-color alternating tableau and suit-sorted foundation piles.',
+    controls: 'all',
+    skillsTested: ['Strategic Planning', 'Card Sequencing', 'Pattern Recognition'],
+    scoringUnit: 'pts',
+    scoringCriterion: 'higher',
+    proTips: 'Prioritize uncovering face-down cards in deeper tableau columns before drawing from the stock pile.',
+    tags: ['solitaire', 'cards', 'klondike', 'classic', 'patience'],
+  },
+  {
+    id: 'sudoku',
+    title: 'Master Sudoku 9x9',
+    category: 'logic-puzzles',
+    summary: 'Clean, distraction-free 9x9 Sudoku logic puzzle with pencil candidate notes, mistake checking, and multiple difficulties.',
+    instructions: 'Fill the 9x9 grid so every row, column, and 3x3 block contains the digits 1 through 9 exactly once without repeating.',
+    mechanic: 'Deductive combinatorial number placement with conflict highlighting and candidate annotation.',
+    controls: 'all',
+    skillsTested: ['Logical Deduction', 'Elimination Reasoning', 'Spatial Patterning'],
+    scoringUnit: 'pts',
+    scoringCriterion: 'higher',
+    proTips: 'Use note mode to mark candidates in cells with only 2 or 3 possibilities, then look for naked pairs.',
+    tags: ['sudoku', 'numbers', 'logic', 'puzzle', 'brain'],
+  },
+  {
+    id: 'mahjong',
+    title: 'Mahjong Solitaire Classic',
+    category: 'casual-arcade',
+    summary: 'Match open pairs of identical Chinese tiles in a traditional 3D layered pyramid layout.',
+    instructions: 'Select and match pairs of identical free tiles to clear the board. A tile is free if it has no tiles above it and has at least one open side (left or right).',
+    mechanic: 'Layered isometric tile removal puzzle with free-tile adjacency validation.',
+    controls: 'all',
+    skillsTested: ['Visual Search', 'Depth Perception', 'Pair Matching'],
+    scoringUnit: 'pts',
+    scoringCriterion: 'higher',
+    proTips: 'Focus on clearing tall stacks and long horizontal rows first to open up the widest selection of candidate tiles.',
+    tags: ['mahjong', 'tiles', 'solitaire', 'matching', 'chinese'],
+  },
+  {
+    id: 'nonogram',
+    title: 'Picross Nonogram Logic',
+    category: 'logic-puzzles',
+    summary: 'Deduce hidden pixel art illustrations using row and column number clues.',
+    instructions: 'The numbers along rows and columns indicate groups of consecutive filled squares. Left-click or tap to fill a square; right-click or toggle cross mode to mark empty cells.',
+    mechanic: 'Binary constraint satisfaction logic grid with numerical line runs.',
+    controls: 'all',
+    skillsTested: ['Line Deduction', 'Cross-Referencing', 'Spatial Logic'],
+    scoringUnit: 'pts',
+    scoringCriterion: 'higher',
+    proTips: 'Start with clues that span the entire row or column, then cross out cells that cannot possibly be filled.',
+    tags: ['nonogram', 'picross', 'griddlers', 'pixel', 'logic'],
+  },
+  {
+    id: 'daily-puzzle',
+    title: 'Daily Mind Puzzle',
+    category: 'logic-puzzles',
+    summary: 'A fresh handcrafted daily brain teaser every single calendar day with streak tracking and shareable results.',
+    instructions: 'Find four groups of four related items that share an underlying concept or category. You have 4 mistake lives to solve the daily puzzle.',
+    mechanic: 'Conceptual categorization and lateral association with calendar-synced daily seed.',
+    controls: 'all',
+    skillsTested: ['Semantic Association', 'Lateral Thinking', 'Vocabulary'],
+    scoringUnit: 'pts',
+    scoringCriterion: 'higher',
+    proTips: 'Beware of red herrings—some words might seem to fit multiple categories, so find unambiguous groups first.',
+    tags: ['daily', 'connections', 'puzzle', 'words', 'brain'],
+  },
+  {
+    id: 'idle-games',
+    title: 'Galactic Ore Miner (Idle)',
+    category: 'casual-arcade',
+    summary: 'Excavate cosmic minerals, purchase automated drill rigs, and ascend through cosmic tiers in an addictive incremental game.',
+    instructions: 'Click the cosmic core to extract ore, purchase automated plasma drills and orbital extractors, upgrade click efficiency, and ascend for permanent cosmic multipliers.',
+    mechanic: 'Exponential incremental idle clicker with passive OPS calculations, critical strikes, and ascension prestige.',
+    controls: 'all',
+    skillsTested: ['Resource Management', 'Optimization', 'Efficiency Planning'],
+    scoringUnit: 'ore',
+    scoringCriterion: 'higher',
+    proTips: 'Invest early in automated extractors to establish passive income, then save up for major multiplier upgrades.',
+    tags: ['idle', 'clicker', 'incremental', 'mining', 'upgrade'],
+  },
 ];
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -1532,6 +1617,7 @@ const CATEGORY_ICONS: Record<string, string> = {
 CATEGORIES.forEach((cat) => {
   cat.icon = CATEGORY_ICONS[cat.id] || '🎮';
   cat.description = cat.shortDesc;
+  cat.gameCount = GAMES_CATALOG.filter((g) => g.category === cat.id).length;
 });
 
 // Decorate each game with rich helpers
@@ -1539,12 +1625,43 @@ GAMES_CATALOG.forEach((game, index) => {
   game.icon = CATEGORY_ICONS[game.category] || '🎮';
   game.description = game.summary;
   game.howToPlay = game.instructions;
-  game.objective = game.summary;
   game.scoreUnit = game.scoringUnit;
   game.skill = game.skillsTested?.[0] || 'Reflex';
+
+  const extra = GAME_CONTENT_REGISTRY[game.id];
+  if (extra) {
+    game.objective = extra.objective;
+    game.whatItMeasures = extra.whatItMeasures;
+    game.tips = extra.tips;
+    game.faq = extra.faq;
+    game.benchmark = extra.benchmark;
+  } else {
+    game.objective = game.summary;
+    game.whatItMeasures = `This game measures your coordination, accuracy, and timing under active game mechanics.`;
+    game.tips = [
+      'Observe the target layout before taking action.',
+      'Maintain a calm, steady rhythm to maximize accuracy.',
+      'Learn from previous mistakes to improve your personal best score.',
+    ];
+    game.faq = [
+      {
+        question: `How do you win or score points in ${game.title}?`,
+        answer: `Follow the objective by completing goals accurately to build up your score in ${game.scoringUnit}.`,
+      },
+      {
+        question: `Are scores saved automatically?`,
+        answer: `Yes, all personal bests and round totals are saved locally in your browser's localStorage.`,
+      },
+      {
+        question: `What controls are supported?`,
+        answer: `This game supports responsive touch controls on mobile devices as well as mouse and keyboard controls on desktop.`,
+      },
+    ];
+  }
+
   // Varied organic difficulty progression
   const diffs: ('Easy' | 'Medium' | 'Hard')[] = ['Easy', 'Medium', 'Medium', 'Hard'];
   game.difficulty = diffs[index % diffs.length];
 });
 
-export const ALL_GAMES = GAMES_CATALOG;
+export const ALL_GAMES: GameMeta[] = GAMES_CATALOG as GameMeta[];

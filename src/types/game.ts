@@ -22,7 +22,19 @@ export interface CategoryInfo {
   gameCount: number;
 }
 
-export interface GameMeta {
+export interface GameBenchmark {
+  metric: string;
+  average: string;
+  elite: string;
+  source: string;
+}
+
+export interface GameFaq {
+  question: string;
+  answer: string;
+}
+
+export interface BaseGameMeta {
   id: string;
   title: string;
   category: CategoryId;
@@ -30,7 +42,6 @@ export interface GameMeta {
   description?: string;
   instructions: string;
   howToPlay?: string;
-  objective?: string;
   mechanic: string;
   controls: 'touch' | 'mouse' | 'keyboard' | 'all';
   skillsTested: string[];
@@ -40,8 +51,16 @@ export interface GameMeta {
   scoringUnit: string;
   scoreUnit?: string;
   scoringCriterion: 'higher' | 'lower'; // 'higher' = more points is better; 'lower' = fewer ms/moves is better
-  proTips: string;
+  proTips?: string;
   tags: string[];
+}
+
+export interface GameMeta extends BaseGameMeta {
+  objective: string;
+  whatItMeasures: string;
+  tips: string[];
+  faq: GameFaq[];
+  benchmark?: GameBenchmark;
 }
 
 export interface GameScoreEntry {

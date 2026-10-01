@@ -41,15 +41,41 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Wanjaaro",
-        "url": "https://wanjaaro.com/",
-        "description": "Play free instant client-side browser games on Wanjaaro. Test your reflexes, memory, logic, precision, typing, and mental agility with local high score tracking.",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://wanjaaro.com/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://wanjaaro.com/#website",
+            "name": "Wanjaaro",
+            "url": "https://wanjaaro.com/",
+            "description": "Play free instant client-side browser games on Wanjaaro. Test your reflexes, memory, logic, precision, typing, and mental agility with local high score tracking.",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://wanjaaro.com/?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://wanjaaro.com/#organization",
+            "name": "Wanjaaro",
+            "url": "https://wanjaaro.com/",
+            "logo": "https://wanjaaro.com/favicon.ico"
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://wanjaaro.com/#webapp",
+            "name": "Wanjaaro Mind & Skill Arcade",
+            "url": "https://wanjaaro.com/",
+            "applicationCategory": "GameApplication",
+            "operatingSystem": "All modern browsers (Desktop, Mobile, Tablet)",
+            "description": "Comprehensive suite of 100+ instant client-side cognitive benchmarks, reflex tests, and brain puzzles.",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          }
+        ]
       }
     </script>
   </head>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, ShieldCheck } from 'lucide-react';
-import { AdBanner } from './AdBanner';
+import { AdsterraAd } from './AdsterraAd';
 
 interface DesktopSideRailsProps {
   showDevTags?: boolean;
@@ -12,13 +12,13 @@ export function DesktopSideRails({ showDevTags = false }: DesktopSideRailsProps)
 
   return (
     <>
-      {/* Left Gutter Rail (Only on Ultra-Wide / Desktop Screens: >= 1440px) */}
+      {/* Left Gutter Rail (Only on Ultra-Wide / Desktop Screens: >= 1536px) */}
       {leftVisible && (
         <aside
           aria-label="Desktop Side Advertisement Left"
-          className="hidden 2xl:flex fixed left-4 top-24 bottom-6 z-20 flex-col items-center justify-start pointer-events-auto select-none transition-opacity"
+          className="hidden 2xl:flex fixed left-3 top-24 bottom-6 z-20 flex-col items-center justify-start pointer-events-auto select-none transition-opacity"
         >
-          <div className="relative group">
+          <div className="relative group bg-neutral-900/90 border border-neutral-800 rounded-2xl p-2 shadow-2xl">
             {/* Dismiss button */}
             <button
               onClick={() => setLeftVisible(false)}
@@ -29,20 +29,7 @@ export function DesktopSideRails({ showDevTags = false }: DesktopSideRailsProps)
               <X className="w-3 h-3" />
             </button>
 
-            <AdBanner
-              slotType="skyscraper"
-              slotId="wanjaaro-desktop-left-rail"
-              showDevTags={showDevTags}
-              customConfig={{
-                id: 'rail-left',
-                sponsorName: 'SpeedStack',
-                title: 'Lightning Fast Global Cloud Hosting',
-                description: 'Serverless compute & edge edge latency under 15ms.',
-                ctaText: 'Deploy Now',
-                badge: 'Verified Hosting',
-                colorGradient: 'from-blue-600/15 via-indigo-600/10 to-violet-600/15',
-              }}
-            />
+            <AdsterraAd size="160x600" />
 
             <div className="flex items-center justify-center gap-1 text-[9px] text-neutral-400 mt-2 font-mono">
               <ShieldCheck className="w-3 h-3 text-emerald-400" />
@@ -52,13 +39,13 @@ export function DesktopSideRails({ showDevTags = false }: DesktopSideRailsProps)
         </aside>
       )}
 
-      {/* Right Gutter Rail (Only on Ultra-Wide / Desktop Screens: >= 1440px) */}
+      {/* Right Gutter Rail (Only on Ultra-Wide / Desktop Screens: >= 1536px) */}
       {rightVisible && (
         <aside
           aria-label="Desktop Side Advertisement Right"
-          className="hidden 2xl:flex fixed right-4 top-24 bottom-6 z-20 flex-col items-center justify-start pointer-events-auto select-none transition-opacity"
+          className="hidden 2xl:flex fixed right-3 top-24 bottom-6 z-20 flex-col items-center justify-start pointer-events-auto select-none transition-opacity"
         >
-          <div className="relative group">
+          <div className="relative group bg-neutral-900/90 border border-neutral-800 rounded-2xl p-2 shadow-2xl">
             {/* Dismiss button */}
             <button
               onClick={() => setRightVisible(false)}
@@ -69,20 +56,7 @@ export function DesktopSideRails({ showDevTags = false }: DesktopSideRailsProps)
               <X className="w-3 h-3" />
             </button>
 
-            <AdBanner
-              slotType="skyscraper"
-              slotId="wanjaaro-desktop-right-rail"
-              showDevTags={showDevTags}
-              customConfig={{
-                id: 'rail-right',
-                sponsorName: 'ProFocus Optics',
-                title: 'Blue-Light Gaming Glasses',
-                description: 'High contrast visual clarity & zero fatigue during sessions.',
-                ctaText: 'View Collection',
-                badge: 'Eye Comfort',
-                colorGradient: 'from-emerald-500/15 via-teal-600/10 to-cyan-500/15',
-              }}
-            />
+            <AdsterraAd size="160x600" />
 
             <div className="flex items-center justify-center gap-1 text-[9px] text-neutral-400 mt-2 font-mono">
               <ShieldCheck className="w-3 h-3 text-emerald-400" />

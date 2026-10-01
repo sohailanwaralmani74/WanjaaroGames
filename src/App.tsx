@@ -6,9 +6,11 @@ import { GameContainer } from './components/GameContainer';
 import { LeaderboardModal } from './components/LeaderboardModal';
 import { WanjaaroLogo } from './components/WanjaaroLogo';
 import { WanjaaroSEOSection } from './components/WanjaaroSEOSection';
+import { BenchmarksView } from './components/BenchmarksView';
 import { DesktopSidebarAdLayout } from './components/ads/DesktopSidebarAdLayout';
 import { TitleIntroAdBanner } from './components/ads/TitleIntroAdBanner';
 import { ClosableStickyMobileAd } from './components/ads/ClosableStickyMobileAd';
+import { DesktopSideRails } from './components/ads/DesktopSideRails';
 import { AdBanner } from './components/ads/AdBanner';
 import { updateMetaTags } from './utils/seo';
 import {
@@ -29,12 +31,13 @@ import {
   CheckCircle,
   Menu,
   X,
+  BarChart2,
 } from 'lucide-react';
 
 export default function App() {
   // Navigation Route State
   const [currentRoute, setCurrentRoute] = useState<{
-    view: 'home' | 'game' | 'category';
+    view: 'home' | 'game' | 'category' | 'benchmarks';
     param?: string;
   }>({ view: 'home' });
 
@@ -94,6 +97,17 @@ export default function App() {
         title: 'Top High Scores & Leaderboards | Wanjaaro',
         description: 'View top scores, reaction latency benchmarks, and personal best records across all instant games on Wanjaaro.',
         path: '/scores',
+      });
+      setRecentGameIds(getRecentGames());
+      return;
+    }
+
+    if (slug === 'benchmarks') {
+      setCurrentRoute({ view: 'benchmarks' });
+      updateMetaTags({
+        title: 'Global Cognitive & Reflex Performance Benchmarks | Wanjaaro',
+        description: 'Standardized empirical reference distributions, median population norms, and elite tier thresholds across reflex latency, memory capacity, aim precision, and puzzle deduction speed.',
+        path: '/benchmarks',
       });
       setRecentGameIds(getRecentGames());
       return;
@@ -217,8 +231,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 flex flex-col font-sans selection:bg-amber-400 selection:text-black pb-24 lg:pb-0">
-      {/* Mobile & Tablet Closable Sticky Bottom Ad */}
-      {isAdsEnabled && <ClosableStickyMobileAd />}
+      {/* Ultra-Wide Desktop Side Rails (160x600 Skyscraper in outer gutters on 2xl: >= 1536px) */}
+      {isAdsEnabled && <DesktopSideRails />}
+
+      {/* Mobile & Tablet Closable Sticky Bottom Ad (Shown on catalog & browsing views so it NEVER overlaps active gameplay) */}
+      {isAdsEnabled && currentRoute.view !== 'game' && <ClosableStickyMobileAd />}
 
       {/* Top Navigation Bar */}
       <header className="sticky top-0 z-40 bg-neutral-950/85 backdrop-blur-md border-b border-neutral-850 px-4 sm:px-8 py-3.5">
@@ -262,6 +279,15 @@ export default function App() {
 
           {/* Desktop & Tablet Navigation Controls (Intact on Tablet/Desktop, Hidden on Mobile) */}
           <div className="hidden sm:flex items-center gap-2">
+            <button
+              onClick={() => navigateTo('/benchmarks')}
+              title="Global Cognitive Benchmarks & Percentiles"
+              className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-neutral-300 hover:text-amber-400 transition-colors flex items-center gap-1.5 text-xs font-medium"
+            >
+              <BarChart2 className="w-4 h-4 text-amber-400" />
+              <span>Benchmarks</span>
+            </button>
+
             <button
               onClick={handleRandomGame}
               title="Launch Random Game"
@@ -359,6 +385,20 @@ export default function App() {
               <span className="text-[10px] font-mono text-emerald-400">Local Save</span>
             </button>
 
+            <button
+              onClick={() => {
+                navigateTo('/benchmarks');
+                setIsMobileMenuOpen(false);
+              }}
+              className="w-full p-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-neutral-200 hover:text-amber-400 flex items-center justify-between text-xs font-medium transition-colors"
+            >
+              <div className="flex items-center gap-2.5">
+                <BarChart2 className="w-4 h-4 text-amber-400" />
+                <span>Global Benchmarks &amp; Data</span>
+              </div>
+              <span className="text-[10px] font-mono text-cyan-400">Dataset</span>
+            </button>
+
             <div className="pt-2 border-t border-neutral-900">
               <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider mb-2 px-1">
                 Browse Skill Categories
@@ -385,7 +425,12 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1">
-        {currentRoute.view === 'game' && activeGame ? (
+        {currentRoute.view === 'benchmarks' ? (
+          <BenchmarksView
+            onNavigateGame={navigateToGame}
+            onNavigateHome={navigateToHome}
+          />
+        ) : currentRoute.view === 'game' && activeGame ? (
           <GameContainer
             game={activeGame}
             onNavigateHome={navigateToHome}
@@ -511,7 +556,7 @@ export default function App() {
 
               <p className="text-sm sm:text-base text-neutral-300 max-w-2xl mx-auto leading-relaxed">
                 A browser-based arcade engineered for instant cognitive training, precision benchmarks, and casual amusement.
-                Zero accounts, zero trackers, 100% free and client-side with persistent local high scores.
+                100% free and client-side with persistent local high scores and no account registration required.
               </p>
 
               {/* Dynamic Stats Counters */}
@@ -756,6 +801,9 @@ export default function App() {
         <div className="max-w-7xl mx-auto pt-8 mt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-neutral-500">
           <p>© {new Date().getFullYear()} Wanjaaro Platform. All rights reserved.</p>
           <div className="flex gap-4">
+            <button onClick={() => navigateTo('/benchmarks')} className="hover:text-amber-400 font-medium">
+              Global Benchmarks
+            </button>
             <button onClick={() => setIsLeaderboardOpen(true)} className="hover:text-neutral-300">
               My Scores
             </button>

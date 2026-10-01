@@ -24,6 +24,8 @@ import {
 import { AdBanner } from './ads/AdBanner';
 import { TitleIntroAdBanner } from './ads/TitleIntroAdBanner';
 import { DesktopSidebarAdLayout } from './ads/DesktopSidebarAdLayout';
+import { AdsterraAd } from './ads/AdsterraAd';
+import { PrivacyModal } from './PrivacyModal';
 import { updateMetaTags } from '../utils/seo';
 
 interface GameContainerProps {
@@ -45,6 +47,7 @@ export function GameContainer({
   const [lastResult, setLastResult] = useState<{ score: number; formatted: string; isNewPb: boolean } | null>(null);
   const [gameKey, setGameKey] = useState(0); // to force remount game on restart
   const [copiedShare, setCopiedShare] = useState(false);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
 
   const category = CATEGORIES.find((c) => c.id === game.category);
 
@@ -272,93 +275,147 @@ export function GameContainer({
         <AdBanner slotType="leaderboard" slotId={`wanjaaro-${game.id}-bottom-banner`} />
       </section>
 
-      {/* Comprehensive How-To-Play & Cognitive Guide (Rich Content) */}
+      {/* Comprehensive How-To-Play, Tips, FAQs & Mechanics Guide */}
       <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 sm:p-8 space-y-6">
         <div>
           <h2 className="text-lg font-bold text-white flex items-center gap-2">
             <Info className="w-5 h-5 text-amber-400" />
-            Game Guide & Mechanics: {game.title}
+            Game Guide &amp; Mechanics: {game.title}
           </h2>
           <p className="text-sm text-neutral-400 mt-1">
-            Learn the rules, the underlying cognitive science, scoring metrics, and strategies to improve your score.
+            Rules, gameplay objective, specific strategies, and answers to common questions.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-          {/* Rules & Controls */}
+          {/* Rules & Objective */}
           <div className="space-y-4">
             <div className="bg-neutral-950/70 border border-neutral-850 p-4 rounded-xl space-y-2">
               <h3 className="text-sm font-semibold text-neutral-200 flex items-center gap-2">
-                <Target className="w-4 h-4 text-emerald-400" /> How to Play
+                <Target className="w-4 h-4 text-emerald-400" /> Objective
               </h3>
-              <p className="text-xs text-neutral-300 leading-relaxed">{game.howToPlay}</p>
+              <p className="text-xs text-neutral-300 leading-relaxed">{game.objective}</p>
             </div>
 
             <div className="bg-neutral-950/70 border border-neutral-850 p-4 rounded-xl space-y-2">
               <h3 className="text-sm font-semibold text-neutral-200 flex items-center gap-2">
-                <Clock className="w-4 h-4 text-cyan-400" /> Scoring & Objective
+                <Clock className="w-4 h-4 text-cyan-400" /> How to Play &amp; Scoring
               </h3>
-              <p className="text-xs text-neutral-300 leading-relaxed">
-                Objective: <strong>{game.objective || game.summary}</strong>. Scores are measured in <strong>{game.scoreUnit || game.scoringUnit}</strong>.
-                Achieving a {(game.scoreUnit || game.scoringUnit || 'points').toLowerCase()} ranking reflects faster neuromuscular processing, precise finger
-                trajectory, and optimal visual saccades.
+              <p className="text-xs text-neutral-300 leading-relaxed mb-1.5">{game.howToPlay || game.instructions}</p>
+              <p className="text-xs text-neutral-400">
+                Scored in <strong>{game.scoringUnit}</strong> ({game.scoringCriterion === 'lower' ? 'lower values indicate better performance' : 'higher scores indicate better performance'}).
               </p>
             </div>
           </div>
 
-          {/* Cognitive Benefits & Strategy */}
+          {/* What This Game Measures & Privacy */}
           <div className="space-y-4">
             <div className="bg-neutral-950/70 border border-neutral-850 p-4 rounded-xl space-y-2">
               <h3 className="text-sm font-semibold text-neutral-200 flex items-center gap-2">
-                <Brain className="w-4 h-4 text-amber-400" /> Cognitive Skills Tested
+                <Brain className="w-4 h-4 text-amber-400" /> What This Game Measures
               </h3>
               <p className="text-xs text-neutral-300 leading-relaxed">
-                This game directly trains your <strong>{game.skill}</strong> faculties and <strong>{game.mechanic}</strong>{' '}
-                patterns. Consistent 3-minute daily sessions stimulate neuroplasticity in the prefrontal cortex and motor strip.
+                {game.whatItMeasures}
               </p>
             </div>
 
             <div className="bg-neutral-950/70 border border-neutral-850 p-4 rounded-xl space-y-2">
               <h3 className="text-sm font-semibold text-neutral-200 flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-indigo-400" /> Privacy & Local Leaderboard
+                <ShieldCheck className="w-4 h-4 text-indigo-400" /> Privacy &amp; Data Storage
               </h3>
               <p className="text-xs text-neutral-300 leading-relaxed">
-                100% Free & Client-Side. Your personal bests, total rounds played ({playCount} rounds), and preferences are
-                saved locally in your browser’s localStorage. No cookies, trackers, or accounts required.
+                Scores and personal records ({playCount} rounds played) are saved locally in your browser's localStorage. This site may use cookies for advertisements and analytics as described in the{' '}
+                <button
+                  onClick={() => setIsPrivacyOpen(true)}
+                  className="text-amber-400 hover:underline font-medium"
+                >
+                  Privacy Policy
+                </button>.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Empirical Performance Tiers (Information Gain for AI & Players) */}
-        <div className="pt-4 border-t border-neutral-850/80">
-          <div className="flex items-center gap-2 text-xs font-semibold text-neutral-300 mb-2.5">
-            <BarChart2 className="w-4 h-4 text-amber-400" />
-            <span>Empirical Performance Benchmarks &amp; Percentiles: {game.title}</span>
+        {/* Tips Section (3-5 specific tips per game) */}
+        {game.tips && game.tips.length > 0 && (
+          <div className="pt-4 border-t border-neutral-850/80 space-y-3">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-400" /> Strategy &amp; Gameplay Tips
+            </h3>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {game.tips.map((tip, idx) => (
+                <li
+                  key={idx}
+                  className="bg-neutral-950/60 border border-neutral-850 p-3 rounded-xl text-xs text-neutral-300 flex items-start gap-2.5"
+                >
+                  <span className="font-mono text-amber-400 font-bold shrink-0">{idx + 1}.</span>
+                  <span className="leading-relaxed">{tip}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-            <div className="p-2.5 rounded-xl bg-neutral-950/80 border border-neutral-800">
-              <span className="text-[10px] font-mono text-neutral-500 uppercase block">Beginner</span>
-              <span className="text-xs font-semibold text-neutral-300">Baseline Focus</span>
-              <span className="text-[10px] text-neutral-400 block mt-0.5">Initial Calibration</span>
+        )}
+
+        {/* Sourced Benchmark Section (Rendered ONLY if verified source exists) */}
+        {game.benchmark && (
+          <div className="pt-4 border-t border-neutral-850/80 space-y-3">
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                <BarChart2 className="w-4 h-4 text-amber-400" /> Verified Performance Benchmark
+              </h3>
+              <span className="text-[11px] font-mono text-neutral-400">
+                Source: {game.benchmark.source}
+              </span>
             </div>
-            <div className="p-2.5 rounded-xl bg-neutral-950/80 border border-neutral-800">
-              <span className="text-[10px] font-mono text-cyan-400 uppercase block">Average</span>
-              <span className="text-xs font-semibold text-white">50th Percentile</span>
-              <span className="text-[10px] text-neutral-400 block mt-0.5">Typical Baseline</span>
-            </div>
-            <div className="p-2.5 rounded-xl bg-neutral-950/80 border border-neutral-800">
-              <span className="text-[10px] font-mono text-amber-400 uppercase block">Advanced</span>
-              <span className="text-xs font-semibold text-white">85th Percentile</span>
-              <span className="text-[10px] text-neutral-400 block mt-0.5">Competitive Tier</span>
-            </div>
-            <div className="p-2.5 rounded-xl bg-neutral-950/80 border border-neutral-800">
-              <span className="text-[10px] font-mono text-emerald-400 uppercase block">Elite Pro</span>
-              <span className="text-xs font-semibold text-emerald-400">99th Percentile</span>
-              <span className="text-[10px] text-neutral-400 block mt-0.5">Peak Neuro-Performance</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="p-3 rounded-xl bg-neutral-950/80 border border-neutral-800">
+                <span className="text-[10px] font-mono text-neutral-500 uppercase block">Metric</span>
+                <span className="text-xs font-semibold text-white mt-0.5 block">{game.benchmark.metric}</span>
+              </div>
+              <div className="p-3 rounded-xl bg-neutral-950/80 border border-neutral-800">
+                <span className="text-[10px] font-mono text-cyan-400 uppercase block">Population Average</span>
+                <span className="text-xs font-semibold text-white mt-0.5 block">{game.benchmark.average}</span>
+              </div>
+              <div className="p-3 rounded-xl bg-neutral-950/80 border border-neutral-800">
+                <span className="text-[10px] font-mono text-emerald-400 uppercase block">Elite Tier</span>
+                <span className="text-xs font-semibold text-emerald-400 mt-0.5 block">{game.benchmark.elite}</span>
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
+        {/* FAQ Section (3 specific questions per game) */}
+        {game.faq && game.faq.length > 0 && (
+          <div className="pt-4 border-t border-neutral-850/80 space-y-3">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <Info className="w-4 h-4 text-amber-400" /> Frequently Asked Questions
+            </h3>
+            <div className="space-y-2">
+              {game.faq.map((item, idx) => (
+                <details
+                  key={idx}
+                  className="bg-neutral-950/60 border border-neutral-850 rounded-xl p-3.5 text-xs group"
+                >
+                  <summary className="font-semibold text-neutral-200 cursor-pointer hover:text-amber-400 transition-colors flex items-center justify-between">
+                    <span>{item.question}</span>
+                    <span className="text-neutral-500 group-open:rotate-180 transition-transform text-xs">▼</span>
+                  </summary>
+                  <p className="mt-2 text-neutral-400 leading-relaxed pt-2 border-t border-neutral-900">
+                    {item.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Privacy Policy Modal */}
+      <PrivacyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
+
+      {/* Mobile/Tablet Safe Ad Unit: 300x250 Medium Rectangle (Hidden on Desktop) */}
+      <div className="lg:hidden w-full flex justify-center py-2 select-none">
+        <AdsterraAd size="300x250" />
       </div>
 
       {/* Related Games in Same Category */}

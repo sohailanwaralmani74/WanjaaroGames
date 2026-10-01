@@ -1,5 +1,11 @@
 import React from 'react';
 import { GameProps } from './ReflexGames';
+import { SolitaireGame } from './SolitaireGame';
+import { SudokuGame } from './SudokuGame';
+import { MahjongGame } from './MahjongGame';
+import { NonogramGame } from './NonogramGame';
+import { DailyPuzzleGame } from './DailyPuzzleGame';
+import { IdleMinerGame } from './IdleMinerGame';
 import {
   ReactionTimeGame,
   SpeedFlashGame,
@@ -396,6 +402,34 @@ export function GameDispatcher({ gameId, onFinish }: GameDispatcherProps) {
     case 'casual-golf-putt':
     case 'casual-mini-golf':
       return <MiniGolfGame onFinish={onFinish} />;
+
+    // New Classic & Daily & Idle Games
+    case 'solitaire':
+    case 'casual-solitaire':
+      return <SolitaireGame onFinish={onFinish} />;
+
+    case 'sudoku':
+    case 'logic-sudoku':
+      return <SudokuGame onFinish={onFinish} />;
+
+    case 'mahjong':
+    case 'casual-mahjong':
+      return <MahjongGame onFinish={onFinish} />;
+
+    case 'nonogram':
+    case 'logic-nonogram':
+    case 'picross':
+      return <NonogramGame onFinish={onFinish} />;
+
+    case 'daily-puzzle':
+    case 'logic-daily-puzzle':
+    case 'daily-challenge':
+      return <DailyPuzzleGame onFinish={onFinish} />;
+
+    case 'idle-games':
+    case 'idle-miner':
+    case 'casual-idle-miner':
+      return <IdleMinerGame onFinish={onFinish} />;
 
     default:
       return (

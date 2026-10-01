@@ -34,6 +34,12 @@
 - [Odd Color Out](https://wanjaaro.com/perception-odd-color): Discriminate subtle chrominance and luminance variances
 - [Circuit Gate Puzzle](https://wanjaaro.com/logic-circuit-connect): Boolean logic gate puzzles (AND, OR, XOR)
 - [Brick Breaker](https://wanjaaro.com/arcade-brick-breaker): Timeless arcade physics bouncer
+- [Klondike Solitaire](https://wanjaaro.com/solitaire): Classic 52-card patience puzzle with draw 1 and smooth cascading tableau
+- [Master Sudoku](https://wanjaaro.com/sudoku): Pure 9x9 Sudoku logic puzzle with pencil candidate notes and conflict detection
+- [Mahjong Solitaire](https://wanjaaro.com/mahjong): Traditional 3D layered Chinese tile matching puzzle
+- [Picross Nonogram](https://wanjaaro.com/nonogram): Japanese picture logic grid puzzle with row and column run clues
+- [Daily Mind Puzzle](https://wanjaaro.com/daily-puzzle): Daily handcrafted 4x4 concept connection challenge with streak tracking
+- [Galactic Ore Miner](https://wanjaaro.com/idle-games): Incremental idle space mining game with automated drills and cosmic prestige
 
 ## Technical Architecture
 

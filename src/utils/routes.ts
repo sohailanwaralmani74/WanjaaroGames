@@ -33,6 +33,13 @@ export const GAME_ALIASES: Record<string, string> = {
   'connect-four': 'strategy-connect-four',
   'snake-classic': 'casual-snake-classic',
   'brick-breaker': 'casual-brick-breaker',
+  'klondike': 'solitaire',
+  'klondike-solitaire': 'solitaire',
+  'picross': 'nonogram',
+  'daily': 'daily-puzzle',
+  'daily-challenge': 'daily-puzzle',
+  'idle-miner': 'idle-games',
+  'clicker': 'idle-games',
 };
 
 /**
