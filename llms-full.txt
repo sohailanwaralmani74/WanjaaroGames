@@ -14,7 +14,7 @@
 
 - **Client-Side Execution**: Every game runs 100% on the user device processor and GPU. No frames or game loops are streamed from cloud servers, eliminating network round-trip ping jitter (typically 30ms-120ms on cloud services).
 - **High-Resolution Microsecond Timing**: Latency measurements utilize hardware-backed browser timestamps with sub-millisecond precision relative to `requestAnimationFrame` display refresh intervals.
-- **Privacy & Data Storage**: High scores, reaction time percentiles, round counts, and daily puzzle streaks are stored exclusively in the user's browser `localStorage`. No account registration, email, or login credentials are required. Third-party advertising cookies may be served according to the site's Privacy Policy (https://wanjaaro.com/privacy/).
+- **Privacy & Data Storage**: High scores, reaction time percentiles, round counts, and daily puzzle streaks are stored exclusively in the user's browser `localStorage`. No account registration, email, or login credentials are required. Third-party advertising cookies may be served according to the site's Privacy Policy (https://wanjaaro.com/privacy).
 - **Dual-Input Responsive Calibrations**: Supports touch inputs for mobile/tablet displays alongside precision keyboard and mouse polling for desktop workstations.
 
 ---
@@ -40,64 +40,64 @@ The following reference norms are derived from experimental cognitive literature
 ## 3. Skill Categories Overview
 
 ### Reflex & Reaction (8 Games)
-- **URL**: https://wanjaaro.com/reflex-reaction/
+- **URL**: https://wanjaaro.com/reflex-reaction
 - **Description**: Test raw nervous system latency and millisecond reaction speeds.
-- **Available Games**: [Reaction Time Test](https://wanjaaro.com/reflex-reaction-time/), [Speed Flash Reflex](https://wanjaaro.com/reflex-speed-flash/), [Hex Whack Reflex](https://wanjaaro.com/reflex-whack-hex/), [Dodge Vector](https://wanjaaro.com/reflex-dodge-ball/), [Sound Reflex Cue](https://wanjaaro.com/reflex-audio-snap/), [Chroma Snap](https://wanjaaro.com/reflex-color-switch/), [Stoplight Precision](https://wanjaaro.com/reflex-quick-brake/), [Trigger Tap Sprint](https://wanjaaro.com/reflex-trigger-finger/)
+- **Available Games**: [Reaction Time Test](https://wanjaaro.com/reflex-reaction-time), [Speed Flash Reflex](https://wanjaaro.com/reflex-speed-flash), [Hex Whack Reflex](https://wanjaaro.com/reflex-whack-hex), [Dodge Vector](https://wanjaaro.com/reflex-dodge-ball), [Sound Reflex Cue](https://wanjaaro.com/reflex-audio-snap), [Chroma Snap](https://wanjaaro.com/reflex-color-switch), [Stoplight Precision](https://wanjaaro.com/reflex-quick-brake), [Trigger Tap Sprint](https://wanjaaro.com/reflex-trigger-finger)
 
 ### Aim & Precision (8 Games)
-- **URL**: https://wanjaaro.com/aim-precision/
+- **URL**: https://wanjaaro.com/aim-precision
 - **Description**: Fine motor control, cursor micro-adjustments, and trajectory timing.
-- **Available Games**: [Precision Sniper](https://wanjaaro.com/aim-sniper/), [Orbit Synchronizer](https://wanjaaro.com/aim-orbit-tap/), [Laser Mirror Align](https://wanjaaro.com/aim-laser-line/), [Bullseye Drop](https://wanjaaro.com/aim-bullseye-drop/), [Micro Steady Hand](https://wanjaaro.com/aim-micro-hover/), [Dart Board Flick](https://wanjaaro.com/aim-dart-throw/), [Needle Threader](https://wanjaaro.com/aim-needle-threader/), [Gravity Slingshot](https://wanjaaro.com/aim-gravity-sling/)
+- **Available Games**: [Precision Sniper](https://wanjaaro.com/aim-sniper), [Orbit Synchronizer](https://wanjaaro.com/aim-orbit-tap), [Laser Mirror Align](https://wanjaaro.com/aim-laser-line), [Bullseye Drop](https://wanjaaro.com/aim-bullseye-drop), [Micro Steady Hand](https://wanjaaro.com/aim-micro-hover), [Dart Board Flick](https://wanjaaro.com/aim-dart-throw), [Needle Threader](https://wanjaaro.com/aim-needle-threader), [Gravity Slingshot](https://wanjaaro.com/aim-gravity-sling)
 
 ### Memory & Recall (8 Games)
-- **URL**: https://wanjaaro.com/memory-recall/
+- **URL**: https://wanjaaro.com/memory-recall
 - **Description**: Working memory, sequence retention, and spatial pattern recall.
-- **Available Games**: [Chime Sequence Recall](https://wanjaaro.com/memory-simon-sequence/), [Card Matrix Pairs](https://wanjaaro.com/memory-card-pairs/), [Spatial Span Matrix](https://wanjaaro.com/memory-spatial-span/), [Digit Span Challenge](https://wanjaaro.com/memory-number-span/), [Palette Spectrum Recall](https://wanjaaro.com/memory-color-order/), [Labyrinth Path Echo](https://wanjaaro.com/memory-path-memorizer/), [Missing Object Spotter](https://wanjaaro.com/memory-icon-stash/), [1-Back Matrix Match](https://wanjaaro.com/memory-dual-nback/)
+- **Available Games**: [Chime Sequence Recall](https://wanjaaro.com/memory-simon-sequence), [Card Matrix Pairs](https://wanjaaro.com/memory-card-pairs), [Spatial Span Matrix](https://wanjaaro.com/memory-spatial-span), [Digit Span Challenge](https://wanjaaro.com/memory-number-span), [Palette Spectrum Recall](https://wanjaaro.com/memory-color-order), [Labyrinth Path Echo](https://wanjaaro.com/memory-path-memorizer), [Missing Object Spotter](https://wanjaaro.com/memory-icon-stash), [1-Back Matrix Match](https://wanjaaro.com/memory-dual-nback)
 
 ### Typing & Words (8 Games)
-- **URL**: https://wanjaaro.com/typing-words/
+- **URL**: https://wanjaaro.com/typing-words
 - **Description**: Keystroke velocity, vocabulary parsing, and anagram agility.
-- **Available Games**: [Speed Wordsmith](https://wanjaaro.com/typing-speed-words/), [Falling Letter Rain](https://wanjaaro.com/typing-falling-letters/), [Anagram Rush](https://wanjaaro.com/typing-anagram-rush/), [Reverse Typist](https://wanjaaro.com/typing-reverse-echo/), [A-to-Z Alphabet Sprint](https://wanjaaro.com/typing-alphabet-sprint/), [Syntax Striker](https://wanjaaro.com/typing-code-symbols/), [Word Chain Relay](https://wanjaaro.com/typing-word-chain/), [Pangram Speed Run](https://wanjaaro.com/typing-pangram-hunt/)
+- **Available Games**: [Speed Wordsmith](https://wanjaaro.com/typing-speed-words), [Falling Letter Rain](https://wanjaaro.com/typing-falling-letters), [Anagram Rush](https://wanjaaro.com/typing-anagram-rush), [Reverse Typist](https://wanjaaro.com/typing-reverse-echo), [A-to-Z Alphabet Sprint](https://wanjaaro.com/typing-alphabet-sprint), [Syntax Striker](https://wanjaaro.com/typing-code-symbols), [Word Chain Relay](https://wanjaaro.com/typing-word-chain), [Pangram Speed Run](https://wanjaaro.com/typing-pangram-hunt)
 
 ### Perception & Vision (8 Games)
-- **URL**: https://wanjaaro.com/perception-vision/
+- **URL**: https://wanjaaro.com/perception-vision
 - **Description**: Visual discrimination, optical illusion resistance, and hue acuity.
-- **Available Games**: [Odd Hue Spotter](https://wanjaaro.com/perception-odd-color/), [Subitizing Flash](https://wanjaaro.com/perception-dot-counter/), [Stroop Color Conflict](https://wanjaaro.com/perception-stroop-test/), [Camouflage Glyph](https://wanjaaro.com/perception-hidden-symbol/), [Ebbinghaus Size Match](https://wanjaaro.com/perception-size-illusion/), [Angle Estimator](https://wanjaaro.com/perception-angle-guess/), [Shadow Silhouette Match](https://wanjaaro.com/perception-shadow-match/), [Coherent Motion Spotter](https://wanjaaro.com/perception-motion-detect/)
+- **Available Games**: [Odd Hue Spotter](https://wanjaaro.com/perception-odd-color), [Subitizing Flash](https://wanjaaro.com/perception-dot-counter), [Stroop Color Conflict](https://wanjaaro.com/perception-stroop-test), [Camouflage Glyph](https://wanjaaro.com/perception-hidden-symbol), [Ebbinghaus Size Match](https://wanjaaro.com/perception-size-illusion), [Angle Estimator](https://wanjaaro.com/perception-angle-guess), [Shadow Silhouette Match](https://wanjaaro.com/perception-shadow-match), [Coherent Motion Spotter](https://wanjaaro.com/perception-motion-detect)
 
 ### Logic & Puzzles (11 Games)
-- **URL**: https://wanjaaro.com/logic-puzzles/
+- **URL**: https://wanjaaro.com/logic-puzzles
 - **Description**: Algorithmic problem-solving, state manipulation, and deductive reasoning.
-- **Available Games**: [Lights Out Matrix](https://wanjaaro.com/logic-lights-out/), [Sliding Tile 8-Puzzle](https://wanjaaro.com/logic-sliding-15/), [Tower of Hanoi](https://wanjaaro.com/logic-tower-hanoi/), [Water Jug Riddle](https://wanjaaro.com/logic-water-pour/), [Binary Byte Switcher](https://wanjaaro.com/logic-binary-flip/), [Flow Conduit Pipes](https://wanjaaro.com/logic-pipes-connect/), [Crate Pusher Sokoban](https://wanjaaro.com/logic-mini-sokoban/), [Knight's Leap Puzzle](https://wanjaaro.com/logic-knights-tour/), [Master Sudoku 9x9](https://wanjaaro.com/sudoku/), [Picross Nonogram Logic](https://wanjaaro.com/nonogram/), [Daily Mind Puzzle](https://wanjaaro.com/daily-puzzle/)
+- **Available Games**: [Lights Out Matrix](https://wanjaaro.com/logic-lights-out), [Sliding Tile 8-Puzzle](https://wanjaaro.com/logic-sliding-15), [Tower of Hanoi](https://wanjaaro.com/logic-tower-hanoi), [Water Jug Riddle](https://wanjaaro.com/logic-water-pour), [Binary Byte Switcher](https://wanjaaro.com/logic-binary-flip), [Flow Conduit Pipes](https://wanjaaro.com/logic-pipes-connect), [Crate Pusher Sokoban](https://wanjaaro.com/logic-mini-sokoban), [Knight's Leap Puzzle](https://wanjaaro.com/logic-knights-tour), [Master Sudoku 9x9](https://wanjaaro.com/sudoku), [Picross Nonogram Logic](https://wanjaaro.com/nonogram), [Daily Mind Puzzle](https://wanjaaro.com/daily-puzzle)
 
 ### Strategy & Tactics (8 Games)
-- **URL**: https://wanjaaro.com/strategy-tactics/
+- **URL**: https://wanjaaro.com/strategy-tactics
 - **Description**: Forward planning, adversarial prediction, and spatial control.
-- **Available Games**: [Tic-Tac-Toe Smart AI](https://wanjaaro.com/strategy-tic-tac-toe/), [Four in a Line](https://wanjaaro.com/strategy-connect-four/), [Game of Nim](https://wanjaaro.com/strategy-nim-matches/), [Mini Reversi 6x6](https://wanjaaro.com/strategy-reversi-mini/), [Predictive RPS Master](https://wanjaaro.com/strategy-rock-paper-scissors/), [Dots and Boxes](https://wanjaaro.com/strategy-dots-boxes/), [Hex Territory Conquer](https://wanjaaro.com/strategy-hex-conquer/), [Chess Mate-in-One](https://wanjaaro.com/strategy-mini-chess-puzzle/)
+- **Available Games**: [Tic-Tac-Toe Smart AI](https://wanjaaro.com/strategy-tic-tac-toe), [Four in a Line](https://wanjaaro.com/strategy-connect-four), [Game of Nim](https://wanjaaro.com/strategy-nim-matches), [Mini Reversi 6x6](https://wanjaaro.com/strategy-reversi-mini), [Predictive RPS Master](https://wanjaaro.com/strategy-rock-paper-scissors), [Dots and Boxes](https://wanjaaro.com/strategy-dots-boxes), [Hex Territory Conquer](https://wanjaaro.com/strategy-hex-conquer), [Chess Mate-in-One](https://wanjaaro.com/strategy-mini-chess-puzzle)
 
 ### Coordination & Rhythm (8 Games)
-- **URL**: https://wanjaaro.com/coordination-rhythm/
+- **URL**: https://wanjaaro.com/coordination-rhythm
 - **Description**: Temporal synchronization, dual-input coordination, and equilibrium.
-- **Available Games**: [BPM Metronome Tap](https://wanjaaro.com/coord-rhythm-tap/), [Dual Hand Steering](https://wanjaaro.com/coord-dual-hand-sync/), [Gyro Platform Balance](https://wanjaaro.com/coord-ball-balance/), [Orbit Ring Hopper](https://wanjaaro.com/coord-orbit-jumper/), [Spiral Curve Tracer](https://wanjaaro.com/coord-spiral-tracer/), [Wave Frequency Match](https://wanjaaro.com/coord-wave-sync/), [Aero Pulse Flap](https://wanjaaro.com/coord-flappy-dot/), [Twin Gate Crossing](https://wanjaaro.com/coord-two-finger-cross/)
+- **Available Games**: [BPM Metronome Tap](https://wanjaaro.com/coord-rhythm-tap), [Dual Hand Steering](https://wanjaaro.com/coord-dual-hand-sync), [Gyro Platform Balance](https://wanjaaro.com/coord-ball-balance), [Orbit Ring Hopper](https://wanjaaro.com/coord-orbit-jumper), [Spiral Curve Tracer](https://wanjaaro.com/coord-spiral-tracer), [Wave Frequency Match](https://wanjaaro.com/coord-wave-sync), [Aero Pulse Flap](https://wanjaaro.com/coord-flappy-dot), [Twin Gate Crossing](https://wanjaaro.com/coord-two-finger-cross)
 
 ### Speed & Accuracy (8 Games)
-- **URL**: https://wanjaaro.com/speed-accuracy/
+- **URL**: https://wanjaaro.com/speed-accuracy
 - **Description**: Rapid sorting, rapid-fire decisions, and burst throughput under pressure.
-- **Available Games**: [Schulte 1-to-25 Matrix](https://wanjaaro.com/speed-click-25/), [10-Second CPS Clicker](https://wanjaaro.com/speed-clicker-10s/), [Arrow Direction Rush](https://wanjaaro.com/speed-swipe-rush/), [Bin Sort Rush](https://wanjaaro.com/speed-quick-sort/), [Bubble Burst 30s](https://wanjaaro.com/speed-bubble-pop/), [Falling Coin Basket](https://wanjaaro.com/speed-coin-catcher/), [Alternating Mash A-B](https://wanjaaro.com/speed-button-mash/), [Flash Identical Check](https://wanjaaro.com/speed-match-pair/)
+- **Available Games**: [Schulte 1-to-25 Matrix](https://wanjaaro.com/speed-click-25), [10-Second CPS Clicker](https://wanjaaro.com/speed-clicker-10s), [Arrow Direction Rush](https://wanjaaro.com/speed-swipe-rush), [Bin Sort Rush](https://wanjaaro.com/speed-quick-sort), [Bubble Burst 30s](https://wanjaaro.com/speed-bubble-pop), [Falling Coin Basket](https://wanjaaro.com/speed-coin-catcher), [Alternating Mash A-B](https://wanjaaro.com/speed-button-mash), [Flash Identical Check](https://wanjaaro.com/speed-match-pair)
 
 ### Math & Mental Calc (8 Games)
-- **URL**: https://wanjaaro.com/math-calculation/
+- **URL**: https://wanjaaro.com/math-calculation
 - **Description**: Arithmetic agility, sequence extrapolation, and numerical puzzles.
-- **Available Games**: [Mental Math Sprint](https://wanjaaro.com/math-speed-addition/), [Make 24 Puzzle](https://wanjaaro.com/math-24-solver/), [Times Table Blitz](https://wanjaaro.com/math-multiply-blitz/), [Prime Detective](https://wanjaaro.com/math-prime-or-composite/), [Missing Operator Sign](https://wanjaaro.com/math-missing-operator/), [Fraction Visual Matcher](https://wanjaaro.com/math-fraction-slice/), [Number Sequence Extrapolator](https://wanjaaro.com/math-number-sequence/), [Sum Target Matrix](https://wanjaaro.com/math-sum-target/)
+- **Available Games**: [Mental Math Sprint](https://wanjaaro.com/math-speed-addition), [Make 24 Puzzle](https://wanjaaro.com/math-24-solver), [Times Table Blitz](https://wanjaaro.com/math-multiply-blitz), [Prime Detective](https://wanjaaro.com/math-prime-or-composite), [Missing Operator Sign](https://wanjaaro.com/math-missing-operator), [Fraction Visual Matcher](https://wanjaaro.com/math-fraction-slice), [Number Sequence Extrapolator](https://wanjaaro.com/math-number-sequence), [Sum Target Matrix](https://wanjaaro.com/math-sum-target)
 
 ### Visual & Geometry (8 Games)
-- **URL**: https://wanjaaro.com/visual-geometry/
+- **URL**: https://wanjaaro.com/visual-geometry
 - **Description**: Spatial rotation, topological untangling, and symmetry deduction.
-- **Available Games**: [Mental Rotation Challenge](https://wanjaaro.com/visual-shape-rotate/), [Symmetry Mirror Painter](https://wanjaaro.com/visual-symmetry-match/), [Planar Graph Untangler](https://wanjaaro.com/visual-tangled-lines/), [Micro Labyrinth Pathfinder](https://wanjaaro.com/visual-maze-runner/), [Spectrum Hue Sorter](https://wanjaaro.com/visual-color-harmony/), [Tangram Polygon Fit](https://wanjaaro.com/visual-tangram-fit/), [Perimeter Length Comparer](https://wanjaaro.com/visual-perimeter-guess/), [Mirror Coordinate Plotter](https://wanjaaro.com/visual-mirror-reflection/)
+- **Available Games**: [Mental Rotation Challenge](https://wanjaaro.com/visual-shape-rotate), [Symmetry Mirror Painter](https://wanjaaro.com/visual-symmetry-match), [Planar Graph Untangler](https://wanjaaro.com/visual-tangled-lines), [Micro Labyrinth Pathfinder](https://wanjaaro.com/visual-maze-runner), [Spectrum Hue Sorter](https://wanjaaro.com/visual-color-harmony), [Tangram Polygon Fit](https://wanjaaro.com/visual-tangram-fit), [Perimeter Length Comparer](https://wanjaaro.com/visual-perimeter-guess), [Mirror Coordinate Plotter](https://wanjaaro.com/visual-mirror-reflection)
 
 ### Casual & Arcade (15 Games)
-- **URL**: https://wanjaaro.com/casual-arcade/
+- **URL**: https://wanjaaro.com/casual-arcade
 - **Description**: Timeless arcade action, physics bouncers, and instant gameplay loops.
-- **Available Games**: [Retro Snake Arcade](https://wanjaaro.com/casual-snake-classic/), [Paddle Brick Buster](https://wanjaaro.com/casual-brick-breaker/), [Solo Pong Rally](https://wanjaaro.com/casual-pong-solo/), [Asteroid Field Navigator](https://wanjaaro.com/casual-space-dodge/), [Vertical Platform Bouncer](https://wanjaaro.com/casual-jump-tower/), [Mini Pinball Bouncer](https://wanjaaro.com/casual-pinball-bounce/), [Pachinko Peg Drop](https://wanjaaro.com/casual-pachinko-drop/), [Arcade Coin Pusher](https://wanjaaro.com/casual-coin-pusher/), [Lucky Classic Reels](https://wanjaaro.com/casual-slot-spinner/), [Bubble Cannon Matcher](https://wanjaaro.com/casual-bubble-cannon/), [Jewel Blitz Swap](https://wanjaaro.com/casual-match-three/), [Mini Golf Hole-in-One](https://wanjaaro.com/casual-golf-putt/), [Klondike Solitaire Classic](https://wanjaaro.com/solitaire/), [Mahjong Solitaire Classic](https://wanjaaro.com/mahjong/), [Galactic Ore Miner (Idle)](https://wanjaaro.com/idle-games/)
+- **Available Games**: [Retro Snake Arcade](https://wanjaaro.com/casual-snake-classic), [Paddle Brick Buster](https://wanjaaro.com/casual-brick-breaker), [Solo Pong Rally](https://wanjaaro.com/casual-pong-solo), [Asteroid Field Navigator](https://wanjaaro.com/casual-space-dodge), [Vertical Platform Bouncer](https://wanjaaro.com/casual-jump-tower), [Mini Pinball Bouncer](https://wanjaaro.com/casual-pinball-bounce), [Pachinko Peg Drop](https://wanjaaro.com/casual-pachinko-drop), [Arcade Coin Pusher](https://wanjaaro.com/casual-coin-pusher), [Lucky Classic Reels](https://wanjaaro.com/casual-slot-spinner), [Bubble Cannon Matcher](https://wanjaaro.com/casual-bubble-cannon), [Jewel Blitz Swap](https://wanjaaro.com/casual-match-three), [Mini Golf Hole-in-One](https://wanjaaro.com/casual-golf-putt), [Klondike Solitaire Classic](https://wanjaaro.com/solitaire), [Mahjong Solitaire Classic](https://wanjaaro.com/mahjong), [Galactic Ore Miner (Idle)](https://wanjaaro.com/idle-games)
 
 ---
 
@@ -107,8 +107,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 1. Reaction Time Test
 
-- **Canonical URL**: https://wanjaaro.com/reflex-reaction-time/
-- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction/)
+- **Canonical URL**: https://wanjaaro.com/reflex-reaction-time
+- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **ms** (lower values indicate superior performance)
@@ -135,8 +135,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 2. Speed Flash Reflex
 
-- **Canonical URL**: https://wanjaaro.com/reflex-speed-flash/
-- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction/)
+- **Canonical URL**: https://wanjaaro.com/reflex-speed-flash
+- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -162,8 +162,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 3. Hex Whack Reflex
 
-- **Canonical URL**: https://wanjaaro.com/reflex-whack-hex/
-- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction/)
+- **Canonical URL**: https://wanjaaro.com/reflex-whack-hex
+- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -189,8 +189,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 4. Dodge Vector
 
-- **Canonical URL**: https://wanjaaro.com/reflex-dodge-ball/
-- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction/)
+- **Canonical URL**: https://wanjaaro.com/reflex-dodge-ball
+- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **sec** (higher values indicate superior performance)
@@ -216,8 +216,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 5. Sound Reflex Cue
 
-- **Canonical URL**: https://wanjaaro.com/reflex-audio-snap/
-- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction/)
+- **Canonical URL**: https://wanjaaro.com/reflex-audio-snap
+- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **ms** (lower values indicate superior performance)
@@ -243,8 +243,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 6. Chroma Snap
 
-- **Canonical URL**: https://wanjaaro.com/reflex-color-switch/
-- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction/)
+- **Canonical URL**: https://wanjaaro.com/reflex-color-switch
+- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -270,8 +270,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 7. Stoplight Precision
 
-- **Canonical URL**: https://wanjaaro.com/reflex-quick-brake/
-- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction/)
+- **Canonical URL**: https://wanjaaro.com/reflex-quick-brake
+- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -297,8 +297,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 8. Trigger Tap Sprint
 
-- **Canonical URL**: https://wanjaaro.com/reflex-trigger-finger/
-- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction/)
+- **Canonical URL**: https://wanjaaro.com/reflex-trigger-finger
+- **Category**: Reflex & Reaction (https://wanjaaro.com/reflex-reaction)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -324,8 +324,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 9. Precision Sniper
 
-- **Canonical URL**: https://wanjaaro.com/aim-sniper/
-- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision/)
+- **Canonical URL**: https://wanjaaro.com/aim-sniper
+- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -351,8 +351,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 10. Orbit Synchronizer
 
-- **Canonical URL**: https://wanjaaro.com/aim-orbit-tap/
-- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision/)
+- **Canonical URL**: https://wanjaaro.com/aim-orbit-tap
+- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **streak** (higher values indicate superior performance)
@@ -378,8 +378,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 11. Laser Mirror Align
 
-- **Canonical URL**: https://wanjaaro.com/aim-laser-line/
-- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision/)
+- **Canonical URL**: https://wanjaaro.com/aim-laser-line
+- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -405,8 +405,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 12. Bullseye Drop
 
-- **Canonical URL**: https://wanjaaro.com/aim-bullseye-drop/
-- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision/)
+- **Canonical URL**: https://wanjaaro.com/aim-bullseye-drop
+- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -432,8 +432,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 13. Micro Steady Hand
 
-- **Canonical URL**: https://wanjaaro.com/aim-micro-hover/
-- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision/)
+- **Canonical URL**: https://wanjaaro.com/aim-micro-hover
+- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision)
 - **Difficulty**: Easy
 - **Controls**: mouse
 - **Scoring**: Measured in **sec** (lower values indicate superior performance)
@@ -459,8 +459,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 14. Dart Board Flick
 
-- **Canonical URL**: https://wanjaaro.com/aim-dart-throw/
-- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision/)
+- **Canonical URL**: https://wanjaaro.com/aim-dart-throw
+- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -486,8 +486,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 15. Needle Threader
 
-- **Canonical URL**: https://wanjaaro.com/aim-needle-threader/
-- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision/)
+- **Canonical URL**: https://wanjaaro.com/aim-needle-threader
+- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -513,8 +513,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 16. Gravity Slingshot
 
-- **Canonical URL**: https://wanjaaro.com/aim-gravity-sling/
-- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision/)
+- **Canonical URL**: https://wanjaaro.com/aim-gravity-sling
+- **Category**: Aim & Precision (https://wanjaaro.com/aim-precision)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -540,8 +540,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 17. Chime Sequence Recall
 
-- **Canonical URL**: https://wanjaaro.com/memory-simon-sequence/
-- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall/)
+- **Canonical URL**: https://wanjaaro.com/memory-simon-sequence
+- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **streak** (higher values indicate superior performance)
@@ -567,8 +567,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 18. Card Matrix Pairs
 
-- **Canonical URL**: https://wanjaaro.com/memory-card-pairs/
-- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall/)
+- **Canonical URL**: https://wanjaaro.com/memory-card-pairs
+- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -594,8 +594,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 19. Spatial Span Matrix
 
-- **Canonical URL**: https://wanjaaro.com/memory-spatial-span/
-- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall/)
+- **Canonical URL**: https://wanjaaro.com/memory-spatial-span
+- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -622,8 +622,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 20. Digit Span Challenge
 
-- **Canonical URL**: https://wanjaaro.com/memory-number-span/
-- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall/)
+- **Canonical URL**: https://wanjaaro.com/memory-number-span
+- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **streak** (higher values indicate superior performance)
@@ -650,8 +650,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 21. Palette Spectrum Recall
 
-- **Canonical URL**: https://wanjaaro.com/memory-color-order/
-- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall/)
+- **Canonical URL**: https://wanjaaro.com/memory-color-order
+- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -677,8 +677,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 22. Labyrinth Path Echo
 
-- **Canonical URL**: https://wanjaaro.com/memory-path-memorizer/
-- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall/)
+- **Canonical URL**: https://wanjaaro.com/memory-path-memorizer
+- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **streak** (higher values indicate superior performance)
@@ -704,8 +704,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 23. Missing Object Spotter
 
-- **Canonical URL**: https://wanjaaro.com/memory-icon-stash/
-- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall/)
+- **Canonical URL**: https://wanjaaro.com/memory-icon-stash
+- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -731,8 +731,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 24. 1-Back Matrix Match
 
-- **Canonical URL**: https://wanjaaro.com/memory-dual-nback/
-- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall/)
+- **Canonical URL**: https://wanjaaro.com/memory-dual-nback
+- **Category**: Memory & Recall (https://wanjaaro.com/memory-recall)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -758,8 +758,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 25. Speed Wordsmith
 
-- **Canonical URL**: https://wanjaaro.com/typing-speed-words/
-- **Category**: Typing & Words (https://wanjaaro.com/typing-words/)
+- **Canonical URL**: https://wanjaaro.com/typing-speed-words
+- **Category**: Typing & Words (https://wanjaaro.com/typing-words)
 - **Difficulty**: Easy
 - **Controls**: keyboard
 - **Scoring**: Measured in **wpm** (higher values indicate superior performance)
@@ -786,8 +786,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 26. Falling Letter Rain
 
-- **Canonical URL**: https://wanjaaro.com/typing-falling-letters/
-- **Category**: Typing & Words (https://wanjaaro.com/typing-words/)
+- **Canonical URL**: https://wanjaaro.com/typing-falling-letters
+- **Category**: Typing & Words (https://wanjaaro.com/typing-words)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -813,8 +813,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 27. Anagram Rush
 
-- **Canonical URL**: https://wanjaaro.com/typing-anagram-rush/
-- **Category**: Typing & Words (https://wanjaaro.com/typing-words/)
+- **Canonical URL**: https://wanjaaro.com/typing-anagram-rush
+- **Category**: Typing & Words (https://wanjaaro.com/typing-words)
 - **Difficulty**: Medium
 - **Controls**: keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -840,8 +840,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 28. Reverse Typist
 
-- **Canonical URL**: https://wanjaaro.com/typing-reverse-echo/
-- **Category**: Typing & Words (https://wanjaaro.com/typing-words/)
+- **Canonical URL**: https://wanjaaro.com/typing-reverse-echo
+- **Category**: Typing & Words (https://wanjaaro.com/typing-words)
 - **Difficulty**: Hard
 - **Controls**: keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -867,8 +867,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 29. A-to-Z Alphabet Sprint
 
-- **Canonical URL**: https://wanjaaro.com/typing-alphabet-sprint/
-- **Category**: Typing & Words (https://wanjaaro.com/typing-words/)
+- **Canonical URL**: https://wanjaaro.com/typing-alphabet-sprint
+- **Category**: Typing & Words (https://wanjaaro.com/typing-words)
 - **Difficulty**: Easy
 - **Controls**: keyboard
 - **Scoring**: Measured in **sec** (lower values indicate superior performance)
@@ -894,8 +894,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 30. Syntax Striker
 
-- **Canonical URL**: https://wanjaaro.com/typing-code-symbols/
-- **Category**: Typing & Words (https://wanjaaro.com/typing-words/)
+- **Canonical URL**: https://wanjaaro.com/typing-code-symbols
+- **Category**: Typing & Words (https://wanjaaro.com/typing-words)
 - **Difficulty**: Medium
 - **Controls**: keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -921,8 +921,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 31. Word Chain Relay
 
-- **Canonical URL**: https://wanjaaro.com/typing-word-chain/
-- **Category**: Typing & Words (https://wanjaaro.com/typing-words/)
+- **Canonical URL**: https://wanjaaro.com/typing-word-chain
+- **Category**: Typing & Words (https://wanjaaro.com/typing-words)
 - **Difficulty**: Medium
 - **Controls**: keyboard
 - **Scoring**: Measured in **streak** (higher values indicate superior performance)
@@ -948,8 +948,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 32. Pangram Speed Run
 
-- **Canonical URL**: https://wanjaaro.com/typing-pangram-hunt/
-- **Category**: Typing & Words (https://wanjaaro.com/typing-words/)
+- **Canonical URL**: https://wanjaaro.com/typing-pangram-hunt
+- **Category**: Typing & Words (https://wanjaaro.com/typing-words)
 - **Difficulty**: Hard
 - **Controls**: keyboard
 - **Scoring**: Measured in **sec** (lower values indicate superior performance)
@@ -975,8 +975,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 33. Odd Hue Spotter
 
-- **Canonical URL**: https://wanjaaro.com/perception-odd-color/
-- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision/)
+- **Canonical URL**: https://wanjaaro.com/perception-odd-color
+- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1002,8 +1002,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 34. Subitizing Flash
 
-- **Canonical URL**: https://wanjaaro.com/perception-dot-counter/
-- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision/)
+- **Canonical URL**: https://wanjaaro.com/perception-dot-counter
+- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1029,8 +1029,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 35. Stroop Color Conflict
 
-- **Canonical URL**: https://wanjaaro.com/perception-stroop-test/
-- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision/)
+- **Canonical URL**: https://wanjaaro.com/perception-stroop-test
+- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1057,8 +1057,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 36. Camouflage Glyph
 
-- **Canonical URL**: https://wanjaaro.com/perception-hidden-symbol/
-- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision/)
+- **Canonical URL**: https://wanjaaro.com/perception-hidden-symbol
+- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1084,8 +1084,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 37. Ebbinghaus Size Match
 
-- **Canonical URL**: https://wanjaaro.com/perception-size-illusion/
-- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision/)
+- **Canonical URL**: https://wanjaaro.com/perception-size-illusion
+- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **%** (higher values indicate superior performance)
@@ -1111,8 +1111,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 38. Angle Estimator
 
-- **Canonical URL**: https://wanjaaro.com/perception-angle-guess/
-- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision/)
+- **Canonical URL**: https://wanjaaro.com/perception-angle-guess
+- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1138,8 +1138,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 39. Shadow Silhouette Match
 
-- **Canonical URL**: https://wanjaaro.com/perception-shadow-match/
-- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision/)
+- **Canonical URL**: https://wanjaaro.com/perception-shadow-match
+- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1165,8 +1165,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 40. Coherent Motion Spotter
 
-- **Canonical URL**: https://wanjaaro.com/perception-motion-detect/
-- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision/)
+- **Canonical URL**: https://wanjaaro.com/perception-motion-detect
+- **Category**: Perception & Vision (https://wanjaaro.com/perception-vision)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1192,8 +1192,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 41. Lights Out Matrix
 
-- **Canonical URL**: https://wanjaaro.com/logic-lights-out/
-- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles/)
+- **Canonical URL**: https://wanjaaro.com/logic-lights-out
+- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -1219,8 +1219,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 42. Sliding Tile 8-Puzzle
 
-- **Canonical URL**: https://wanjaaro.com/logic-sliding-15/
-- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles/)
+- **Canonical URL**: https://wanjaaro.com/logic-sliding-15
+- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -1246,8 +1246,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 43. Tower of Hanoi
 
-- **Canonical URL**: https://wanjaaro.com/logic-tower-hanoi/
-- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles/)
+- **Canonical URL**: https://wanjaaro.com/logic-tower-hanoi
+- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -1273,8 +1273,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 44. Water Jug Riddle
 
-- **Canonical URL**: https://wanjaaro.com/logic-water-pour/
-- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles/)
+- **Canonical URL**: https://wanjaaro.com/logic-water-pour
+- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -1300,8 +1300,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 45. Binary Byte Switcher
 
-- **Canonical URL**: https://wanjaaro.com/logic-binary-flip/
-- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles/)
+- **Canonical URL**: https://wanjaaro.com/logic-binary-flip
+- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1327,8 +1327,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 46. Flow Conduit Pipes
 
-- **Canonical URL**: https://wanjaaro.com/logic-pipes-connect/
-- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles/)
+- **Canonical URL**: https://wanjaaro.com/logic-pipes-connect
+- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -1354,8 +1354,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 47. Crate Pusher Sokoban
 
-- **Canonical URL**: https://wanjaaro.com/logic-mini-sokoban/
-- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles/)
+- **Canonical URL**: https://wanjaaro.com/logic-mini-sokoban
+- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -1381,8 +1381,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 48. Knight's Leap Puzzle
 
-- **Canonical URL**: https://wanjaaro.com/logic-knights-tour/
-- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles/)
+- **Canonical URL**: https://wanjaaro.com/logic-knights-tour
+- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **streak** (higher values indicate superior performance)
@@ -1408,8 +1408,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 49. Tic-Tac-Toe Smart AI
 
-- **Canonical URL**: https://wanjaaro.com/strategy-tic-tac-toe/
-- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics/)
+- **Canonical URL**: https://wanjaaro.com/strategy-tic-tac-toe
+- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1435,8 +1435,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 50. Four in a Line
 
-- **Canonical URL**: https://wanjaaro.com/strategy-connect-four/
-- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics/)
+- **Canonical URL**: https://wanjaaro.com/strategy-connect-four
+- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1462,8 +1462,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 51. Game of Nim
 
-- **Canonical URL**: https://wanjaaro.com/strategy-nim-matches/
-- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics/)
+- **Canonical URL**: https://wanjaaro.com/strategy-nim-matches
+- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **streak** (higher values indicate superior performance)
@@ -1489,8 +1489,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 52. Mini Reversi 6x6
 
-- **Canonical URL**: https://wanjaaro.com/strategy-reversi-mini/
-- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics/)
+- **Canonical URL**: https://wanjaaro.com/strategy-reversi-mini
+- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1516,8 +1516,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 53. Predictive RPS Master
 
-- **Canonical URL**: https://wanjaaro.com/strategy-rock-paper-scissors/
-- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics/)
+- **Canonical URL**: https://wanjaaro.com/strategy-rock-paper-scissors
+- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1543,8 +1543,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 54. Dots and Boxes
 
-- **Canonical URL**: https://wanjaaro.com/strategy-dots-boxes/
-- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics/)
+- **Canonical URL**: https://wanjaaro.com/strategy-dots-boxes
+- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1570,8 +1570,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 55. Hex Territory Conquer
 
-- **Canonical URL**: https://wanjaaro.com/strategy-hex-conquer/
-- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics/)
+- **Canonical URL**: https://wanjaaro.com/strategy-hex-conquer
+- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -1597,8 +1597,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 56. Chess Mate-in-One
 
-- **Canonical URL**: https://wanjaaro.com/strategy-mini-chess-puzzle/
-- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics/)
+- **Canonical URL**: https://wanjaaro.com/strategy-mini-chess-puzzle
+- **Category**: Strategy & Tactics (https://wanjaaro.com/strategy-tactics)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **streak** (higher values indicate superior performance)
@@ -1624,8 +1624,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 57. BPM Metronome Tap
 
-- **Canonical URL**: https://wanjaaro.com/coord-rhythm-tap/
-- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm/)
+- **Canonical URL**: https://wanjaaro.com/coord-rhythm-tap
+- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **ms** (lower values indicate superior performance)
@@ -1651,8 +1651,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 58. Dual Hand Steering
 
-- **Canonical URL**: https://wanjaaro.com/coord-dual-hand-sync/
-- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm/)
+- **Canonical URL**: https://wanjaaro.com/coord-dual-hand-sync
+- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **sec** (higher values indicate superior performance)
@@ -1678,8 +1678,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 59. Gyro Platform Balance
 
-- **Canonical URL**: https://wanjaaro.com/coord-ball-balance/
-- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm/)
+- **Canonical URL**: https://wanjaaro.com/coord-ball-balance
+- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **sec** (higher values indicate superior performance)
@@ -1705,8 +1705,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 60. Orbit Ring Hopper
 
-- **Canonical URL**: https://wanjaaro.com/coord-orbit-jumper/
-- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm/)
+- **Canonical URL**: https://wanjaaro.com/coord-orbit-jumper
+- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1732,8 +1732,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 61. Spiral Curve Tracer
 
-- **Canonical URL**: https://wanjaaro.com/coord-spiral-tracer/
-- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm/)
+- **Canonical URL**: https://wanjaaro.com/coord-spiral-tracer
+- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1759,8 +1759,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 62. Wave Frequency Match
 
-- **Canonical URL**: https://wanjaaro.com/coord-wave-sync/
-- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm/)
+- **Canonical URL**: https://wanjaaro.com/coord-wave-sync
+- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1786,8 +1786,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 63. Aero Pulse Flap
 
-- **Canonical URL**: https://wanjaaro.com/coord-flappy-dot/
-- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm/)
+- **Canonical URL**: https://wanjaaro.com/coord-flappy-dot
+- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1813,8 +1813,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 64. Twin Gate Crossing
 
-- **Canonical URL**: https://wanjaaro.com/coord-two-finger-cross/
-- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm/)
+- **Canonical URL**: https://wanjaaro.com/coord-two-finger-cross
+- **Category**: Coordination & Rhythm (https://wanjaaro.com/coordination-rhythm)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1840,8 +1840,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 65. Schulte 1-to-25 Matrix
 
-- **Canonical URL**: https://wanjaaro.com/speed-click-25/
-- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy/)
+- **Canonical URL**: https://wanjaaro.com/speed-click-25
+- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **sec** (lower values indicate superior performance)
@@ -1868,8 +1868,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 66. 10-Second CPS Clicker
 
-- **Canonical URL**: https://wanjaaro.com/speed-clicker-10s/
-- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy/)
+- **Canonical URL**: https://wanjaaro.com/speed-clicker-10s
+- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1895,8 +1895,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 67. Arrow Direction Rush
 
-- **Canonical URL**: https://wanjaaro.com/speed-swipe-rush/
-- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy/)
+- **Canonical URL**: https://wanjaaro.com/speed-swipe-rush
+- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1922,8 +1922,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 68. Bin Sort Rush
 
-- **Canonical URL**: https://wanjaaro.com/speed-quick-sort/
-- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy/)
+- **Canonical URL**: https://wanjaaro.com/speed-quick-sort
+- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1949,8 +1949,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 69. Bubble Burst 30s
 
-- **Canonical URL**: https://wanjaaro.com/speed-bubble-pop/
-- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy/)
+- **Canonical URL**: https://wanjaaro.com/speed-bubble-pop
+- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -1976,8 +1976,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 70. Falling Coin Basket
 
-- **Canonical URL**: https://wanjaaro.com/speed-coin-catcher/
-- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy/)
+- **Canonical URL**: https://wanjaaro.com/speed-coin-catcher
+- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2003,8 +2003,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 71. Alternating Mash A-B
 
-- **Canonical URL**: https://wanjaaro.com/speed-button-mash/
-- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy/)
+- **Canonical URL**: https://wanjaaro.com/speed-button-mash
+- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2030,8 +2030,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 72. Flash Identical Check
 
-- **Canonical URL**: https://wanjaaro.com/speed-match-pair/
-- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy/)
+- **Canonical URL**: https://wanjaaro.com/speed-match-pair
+- **Category**: Speed & Accuracy (https://wanjaaro.com/speed-accuracy)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2057,8 +2057,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 73. Mental Math Sprint
 
-- **Canonical URL**: https://wanjaaro.com/math-speed-addition/
-- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation/)
+- **Canonical URL**: https://wanjaaro.com/math-speed-addition
+- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2084,8 +2084,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 74. Make 24 Puzzle
 
-- **Canonical URL**: https://wanjaaro.com/math-24-solver/
-- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation/)
+- **Canonical URL**: https://wanjaaro.com/math-24-solver
+- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2111,8 +2111,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 75. Times Table Blitz
 
-- **Canonical URL**: https://wanjaaro.com/math-multiply-blitz/
-- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation/)
+- **Canonical URL**: https://wanjaaro.com/math-multiply-blitz
+- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **sec** (lower values indicate superior performance)
@@ -2138,8 +2138,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 76. Prime Detective
 
-- **Canonical URL**: https://wanjaaro.com/math-prime-or-composite/
-- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation/)
+- **Canonical URL**: https://wanjaaro.com/math-prime-or-composite
+- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2165,8 +2165,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 77. Missing Operator Sign
 
-- **Canonical URL**: https://wanjaaro.com/math-missing-operator/
-- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation/)
+- **Canonical URL**: https://wanjaaro.com/math-missing-operator
+- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2192,8 +2192,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 78. Fraction Visual Matcher
 
-- **Canonical URL**: https://wanjaaro.com/math-fraction-slice/
-- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation/)
+- **Canonical URL**: https://wanjaaro.com/math-fraction-slice
+- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2219,8 +2219,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 79. Number Sequence Extrapolator
 
-- **Canonical URL**: https://wanjaaro.com/math-number-sequence/
-- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation/)
+- **Canonical URL**: https://wanjaaro.com/math-number-sequence
+- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2246,8 +2246,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 80. Sum Target Matrix
 
-- **Canonical URL**: https://wanjaaro.com/math-sum-target/
-- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation/)
+- **Canonical URL**: https://wanjaaro.com/math-sum-target
+- **Category**: Math & Mental Calc (https://wanjaaro.com/math-calculation)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2273,8 +2273,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 81. Mental Rotation Challenge
 
-- **Canonical URL**: https://wanjaaro.com/visual-shape-rotate/
-- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry/)
+- **Canonical URL**: https://wanjaaro.com/visual-shape-rotate
+- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2300,8 +2300,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 82. Symmetry Mirror Painter
 
-- **Canonical URL**: https://wanjaaro.com/visual-symmetry-match/
-- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry/)
+- **Canonical URL**: https://wanjaaro.com/visual-symmetry-match
+- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **sec** (lower values indicate superior performance)
@@ -2327,8 +2327,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 83. Planar Graph Untangler
 
-- **Canonical URL**: https://wanjaaro.com/visual-tangled-lines/
-- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry/)
+- **Canonical URL**: https://wanjaaro.com/visual-tangled-lines
+- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -2354,8 +2354,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 84. Micro Labyrinth Pathfinder
 
-- **Canonical URL**: https://wanjaaro.com/visual-maze-runner/
-- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry/)
+- **Canonical URL**: https://wanjaaro.com/visual-maze-runner
+- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **sec** (lower values indicate superior performance)
@@ -2381,8 +2381,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 85. Spectrum Hue Sorter
 
-- **Canonical URL**: https://wanjaaro.com/visual-color-harmony/
-- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry/)
+- **Canonical URL**: https://wanjaaro.com/visual-color-harmony
+- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -2408,8 +2408,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 86. Tangram Polygon Fit
 
-- **Canonical URL**: https://wanjaaro.com/visual-tangram-fit/
-- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry/)
+- **Canonical URL**: https://wanjaaro.com/visual-tangram-fit
+- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2435,8 +2435,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 87. Perimeter Length Comparer
 
-- **Canonical URL**: https://wanjaaro.com/visual-perimeter-guess/
-- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry/)
+- **Canonical URL**: https://wanjaaro.com/visual-perimeter-guess
+- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2462,8 +2462,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 88. Mirror Coordinate Plotter
 
-- **Canonical URL**: https://wanjaaro.com/visual-mirror-reflection/
-- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry/)
+- **Canonical URL**: https://wanjaaro.com/visual-mirror-reflection
+- **Category**: Visual & Geometry (https://wanjaaro.com/visual-geometry)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2489,8 +2489,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 89. Retro Snake Arcade
 
-- **Canonical URL**: https://wanjaaro.com/casual-snake-classic/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-snake-classic
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2516,8 +2516,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 90. Paddle Brick Buster
 
-- **Canonical URL**: https://wanjaaro.com/casual-brick-breaker/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-brick-breaker
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2543,8 +2543,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 91. Solo Pong Rally
 
-- **Canonical URL**: https://wanjaaro.com/casual-pong-solo/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-pong-solo
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **streak** (higher values indicate superior performance)
@@ -2570,8 +2570,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 92. Asteroid Field Navigator
 
-- **Canonical URL**: https://wanjaaro.com/casual-space-dodge/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-space-dodge
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2597,8 +2597,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 93. Vertical Platform Bouncer
 
-- **Canonical URL**: https://wanjaaro.com/casual-jump-tower/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-jump-tower
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2624,8 +2624,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 94. Mini Pinball Bouncer
 
-- **Canonical URL**: https://wanjaaro.com/casual-pinball-bounce/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-pinball-bounce
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2651,8 +2651,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 95. Pachinko Peg Drop
 
-- **Canonical URL**: https://wanjaaro.com/casual-pachinko-drop/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-pachinko-drop
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2678,8 +2678,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 96. Arcade Coin Pusher
 
-- **Canonical URL**: https://wanjaaro.com/casual-coin-pusher/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-coin-pusher
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2705,8 +2705,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 97. Lucky Classic Reels
 
-- **Canonical URL**: https://wanjaaro.com/casual-slot-spinner/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-slot-spinner
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2732,8 +2732,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 98. Bubble Cannon Matcher
 
-- **Canonical URL**: https://wanjaaro.com/casual-bubble-cannon/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-bubble-cannon
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2759,8 +2759,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 99. Jewel Blitz Swap
 
-- **Canonical URL**: https://wanjaaro.com/casual-match-three/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-match-three
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2786,8 +2786,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 100. Mini Golf Hole-in-One
 
-- **Canonical URL**: https://wanjaaro.com/casual-golf-putt/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/casual-golf-putt
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **moves** (lower values indicate superior performance)
@@ -2813,8 +2813,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 101. Klondike Solitaire Classic
 
-- **Canonical URL**: https://wanjaaro.com/solitaire/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/solitaire
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2841,8 +2841,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 102. Master Sudoku 9x9
 
-- **Canonical URL**: https://wanjaaro.com/sudoku/
-- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles/)
+- **Canonical URL**: https://wanjaaro.com/sudoku
+- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2869,8 +2869,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 103. Mahjong Solitaire Classic
 
-- **Canonical URL**: https://wanjaaro.com/mahjong/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/mahjong
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2896,8 +2896,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 104. Picross Nonogram Logic
 
-- **Canonical URL**: https://wanjaaro.com/nonogram/
-- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles/)
+- **Canonical URL**: https://wanjaaro.com/nonogram
+- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles)
 - **Difficulty**: Hard
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2923,8 +2923,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 105. Daily Mind Puzzle
 
-- **Canonical URL**: https://wanjaaro.com/daily-puzzle/
-- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles/)
+- **Canonical URL**: https://wanjaaro.com/daily-puzzle
+- **Category**: Logic & Puzzles (https://wanjaaro.com/logic-puzzles)
 - **Difficulty**: Easy
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **pts** (higher values indicate superior performance)
@@ -2950,8 +2950,8 @@ Below is the exhaustive reference documentation for all 106 games on Wanjaaro.
 
 ### 106. Galactic Ore Miner (Idle)
 
-- **Canonical URL**: https://wanjaaro.com/idle-games/
-- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade/)
+- **Canonical URL**: https://wanjaaro.com/idle-games
+- **Category**: Casual & Arcade (https://wanjaaro.com/casual-arcade)
 - **Difficulty**: Medium
 - **Controls**: Mouse, Touch, and Keyboard
 - **Scoring**: Measured in **ore** (higher values indicate superior performance)
