@@ -38,12 +38,12 @@ export function updateMetaTags({
   // 3. Update Standard Meta Description
   setMeta('name', 'description', description);
 
-  // 4. Update OpenGraph Tags & Canonical
-  let normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  if (normalizedPath !== '/' && !normalizedPath.endsWith('/')) {
-    normalizedPath = `${normalizedPath}/`;
+  // 4. Update OpenGraph Tags & Canonical (Strictly no trailing slashes, clean modern paths)
+  let cleanPath = path.startsWith('/') ? path : `/${path}`;
+  if (cleanPath !== '/' && cleanPath.endsWith('/')) {
+    cleanPath = cleanPath.replace(/\/+$/, '');
   }
-  const fullUrl = `${BASE_URL}${normalizedPath}`;
+  const fullUrl = cleanPath === '/' ? `${BASE_URL}/` : `${BASE_URL}${cleanPath}`;
   setMeta('property', 'og:title', title);
   setMeta('property', 'og:description', description);
   setMeta('property', 'og:url', fullUrl);
@@ -67,7 +67,7 @@ export function updateMetaTags({
       'applicationCategory': 'GameApplication',
       'operatingSystem': 'Any Web Browser',
       'description': game.description || game.summary,
-      'url': `${BASE_URL}/${game.id}/`,
+      'url': `${BASE_URL}/${game.id}`,
       'genre': game.category,
       'offers': {
         '@type': 'Offer',

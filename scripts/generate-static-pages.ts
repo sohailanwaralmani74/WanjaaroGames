@@ -56,9 +56,12 @@ function generateHtml({
     `<meta name="description" content="${escapeHtml(description)}" />`
   );
 
-  // Canonical
-  const cleanPath = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
-  const fullUrl = `${BASE_URL}${cleanPath === '/' ? '/' : cleanPath}`;
+  // Canonical (Strictly no trailing slash for any subpath; root keeps '/')
+  let cleanPath = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
+  if (cleanPath.length > 1 && cleanPath.endsWith('/')) {
+    cleanPath = cleanPath.replace(/\/+$/, '');
+  }
+  const fullUrl = cleanPath === '/' ? `${BASE_URL}/` : `${BASE_URL}${cleanPath}`;
   html = html.replace(/<link\s+[^>]*?rel="canonical"[^>]*?>/i, `<link rel="canonical" href="${fullUrl}" />`);
 
   // OpenGraph
@@ -100,6 +103,50 @@ function generateHtml({
   }
 
   return html;
+}
+
+function generateStaticFooter(): string {
+  return `
+    <footer style="margin-top:48px;border-top:1px solid #1e293b;padding-top:28px;font-size:12px;color:#94a3b8;line-height:1.6;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:24px;margin-bottom:24px;">
+        <div>
+          <p style="margin:0 0 8px 0;color:#ffffff;font-weight:700;font-size:14px;">Wanjaaro Platform</p>
+          <p style="margin:0 0 10px 0;font-size:12px;color:#64748b;">
+            Zero-latency client-side browser gaming. 100% free with local score storage and no mandatory account sign-up.
+          </p>
+          <a href="/" style="color:#f59e0b;font-weight:600;text-decoration:none;">&larr; Platform Homepage</a>
+        </div>
+        <div>
+          <p style="margin:0 0 8px 0;color:#ffffff;font-weight:700;font-size:13px;">Cognitive Disciplines</p>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            ${CATEGORIES.slice(0, 6)
+              .map((c) => `<a href="/${c.id}" style="color:#cbd5e1;text-decoration:none;">${escapeHtml(c.name)}</a>`)
+              .join('')}
+          </div>
+        </div>
+        <div>
+          <p style="margin:0 0 8px 0;color:#ffffff;font-weight:700;font-size:13px;">More Disciplines</p>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            ${CATEGORIES.slice(6)
+              .map((c) => `<a href="/${c.id}" style="color:#cbd5e1;text-decoration:none;">${escapeHtml(c.name)}</a>`)
+              .join('')}
+          </div>
+        </div>
+        <div>
+          <p style="margin:0 0 8px 0;color:#ffffff;font-weight:700;font-size:13px;">Benchmarks &amp; Legal</p>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <a href="/benchmarks" style="color:#38bdf8;text-decoration:none;">Global Benchmarks &amp; Norms</a>
+            <a href="/scores" style="color:#cbd5e1;text-decoration:none;">High Scores &amp; Leaderboards</a>
+            <a href="/privacy" style="color:#cbd5e1;text-decoration:none;">Privacy Policy &amp; Terms</a>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #1e293b;padding-top:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:11px;color:#64748b;">
+        <span>&copy; ${new Date().getFullYear()} Wanjaaro. All rights reserved.</span>
+        <span>Empirical Cognitive &amp; Reflex Arcade</span>
+      </div>
+    </footer>
+  `;
 }
 
 // 0. GENERATE RICH HOMEPAGE (dist/index.html)
@@ -404,6 +451,24 @@ const homeBodyContent = `
 
       <section style="margin-bottom:36px;">
         <h2 style="font-size:20px;font-weight:800;color:#ffffff;margin-bottom:14px;">
+          All 12 Cognitive Disciplines &amp; Skill Categories
+        </h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));gap:12px;font-size:13px;">
+          ${CATEGORIES.map(
+            (c) => `
+            <a href="/${c.id}" style="background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:12px;color:#cbd5e1;text-decoration:none;display:block;">
+              <div style="font-size:22px;margin-bottom:4px;">${c.icon}</div>
+              <div style="font-weight:700;color:#ffffff;margin-bottom:2px;">${escapeHtml(c.name)}</div>
+              <div style="font-size:11px;color:#94a3b8;line-height:1.4;">${escapeHtml(c.shortDesc)}</div>
+              <div style="font-size:11px;color:#38bdf8;font-weight:600;margin-top:6px;">${c.gameCount} Games &rarr;</div>
+            </a>
+          `
+          ).join('')}
+        </div>
+      </section>
+
+      <section style="margin-bottom:36px;">
+        <h2 style="font-size:20px;font-weight:800;color:#ffffff;margin-bottom:14px;">
           Complete Directory of Instant Games
         </h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));gap:10px;font-size:12px;">
@@ -419,18 +484,7 @@ const homeBodyContent = `
       </section>
     </main>
 
-    <footer style="border-top:1px solid #1e293b;padding-top:24px;margin-top:40px;font-size:12px;color:#64748b;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-      <div>
-        <p style="margin:0 0 4px 0;color:#94a3b8;font-weight:600;">Wanjaaro – Pure Client-Side Mind &amp; Reflex Arcade</p>
-        <p style="margin:0;">100% free client-side gameplay. Local score storage with no account logins required. See <a href="/privacy" style="color:#94a3b8;text-decoration:underline;">Privacy Policy</a>.</p>
-      </div>
-      <div>
-        <a href="/" style="color:#94a3b8;text-decoration:none;margin-right:12px;">Home</a>
-        <a href="/scores" style="color:#94a3b8;text-decoration:none;margin-right:12px;">Leaderboard</a>
-        <a href="/solitaire" style="color:#94a3b8;text-decoration:none;margin-right:12px;">Solitaire</a>
-        <a href="/sudoku" style="color:#94a3b8;text-decoration:none;">Sudoku</a>
-      </div>
-    </footer>
+    ${generateStaticFooter()}
   </div>
 `;
 
@@ -682,18 +736,14 @@ for (const game of ALL_GAMES) {
         </div>
       </section>
 
-      <footer style="margin-top:40px;border-top:1px solid #1e293b;padding-top:16px;font-size:12px;color:#64748b;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-        <a href="/" style="color:#38bdf8;text-decoration:none;">&larr; Back to All Games</a>
-        <a href="/privacy" style="color:#94a3b8;text-decoration:none;">Privacy Policy</a>
-        <span>&copy; Wanjaaro Platform</span>
-      </footer>
+      ${generateStaticFooter()}
     </div>
   `;
 
   const html = generateHtml({
     title: pageTitle,
     description: pageDesc,
-    canonicalPath: `/${game.id}/`,
+    canonicalPath: `/${game.id}`,
     jsonLd: gameSchema,
     bodyContent,
   });
@@ -711,12 +761,12 @@ for (const game of ALL_GAMES) {
   <head>
     <meta charset="utf-8">
     <title>Redirecting to ${escapeHtml(game.title)}...</title>
-    <link rel="canonical" href="${BASE_URL}/${game.id}/">
-    <meta http-equiv="refresh" content="0; url=/${game.id}/">
-    <script>window.location.replace('/${game.id}/');</script>
+    <link rel="canonical" href="${BASE_URL}/${game.id}">
+    <meta http-equiv="refresh" content="0; url=/${game.id}">
+    <script>window.location.replace('/${game.id}');</script>
   </head>
   <body>
-    <p>Moved permanently. <a href="/${game.id}/">Click here to play ${escapeHtml(game.title)}</a>.</p>
+    <p>Moved permanently. <a href="/${game.id}">Click here to play ${escapeHtml(game.title)}</a>.</p>
   </body>
 </html>`;
   fs.writeFileSync(path.resolve(legacyDir, 'index.html'), redirectHtml, 'utf8');
@@ -735,11 +785,11 @@ for (const cat of CATEGORIES) {
     '@type': 'CollectionPage',
     name: `${cat.name} Games`,
     description: cat.shortDesc,
-    url: `${BASE_URL}/${cat.id}/`,
+    url: `${BASE_URL}/${cat.id}`,
     hasPart: categoryGames.map((g) => ({
       '@type': 'SoftwareApplication',
       name: g.title,
-      url: `${BASE_URL}/${g.id}/`,
+      url: `${BASE_URL}/${g.id}`,
       description: g.summary,
     })),
   };
@@ -771,13 +821,13 @@ for (const cat of CATEGORIES) {
                 <span style="font-size:10px;font-family:monospace;background:#1e293b;color:#f59e0b;padding:2px 6px;border-radius:4px;">${escapeHtml(g.difficulty || 'Normal')}</span>
               </div>
               <h2 style="font-size:16px;font-weight:700;color:#ffffff;margin:0 0 6px 0;">
-                <a href="/${g.id}/" style="color:#ffffff;text-decoration:none;">${escapeHtml(g.title)}</a>
+                <a href="/${g.id}" style="color:#ffffff;text-decoration:none;">${escapeHtml(g.title)}</a>
               </h2>
               <p style="font-size:13px;color:#94a3b8;margin:0 0 10px 0;line-height:1.4;">${escapeHtml(g.summary)}</p>
             </div>
             <div style="border-top:1px solid #1e293b;padding-top:8px;margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
               <span style="font-size:11px;color:#64748b;font-family:monospace;">${escapeHtml(g.scoringUnit || 'pts')}</span>
-              <a href="/${g.id}/" style="color:#38bdf8;font-size:12px;font-weight:700;text-decoration:none;">Play &rarr;</a>
+              <a href="/${g.id}" style="color:#38bdf8;font-size:12px;font-weight:700;text-decoration:none;">Play &rarr;</a>
             </div>
           </article>
         `
@@ -785,17 +835,32 @@ for (const cat of CATEGORIES) {
           .join('')}
       </section>
 
-      <footer style="margin-top:40px;border-top:1px solid #1e293b;padding-top:16px;font-size:12px;color:#64748b;display:flex;justify-content:space-between;">
-        <a href="/" style="color:#38bdf8;text-decoration:none;">&larr; Back to All Categories</a>
-        <span>&copy; Wanjaaro Platform</span>
-      </footer>
+      <!-- Cross-Link Other Disciplines (Eliminates category orphans) -->
+      <section style="margin-top:36px;border-top:1px solid #1e293b;padding-top:24px;">
+        <h2 style="font-size:18px;font-weight:700;color:#ffffff;margin-bottom:14px;">Explore Other Cognitive Disciplines</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));gap:12px;">
+          ${CATEGORIES.filter((c) => c.id !== cat.id)
+            .map(
+              (oc) => `
+            <a href="/${oc.id}" style="background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:12px;color:#cbd5e1;text-decoration:none;display:block;">
+              <div style="font-size:20px;margin-bottom:4px;">${oc.icon}</div>
+              <div style="font-weight:700;color:#ffffff;font-size:13px;">${escapeHtml(oc.name)}</div>
+              <div style="font-size:11px;color:#94a3b8;margin-top:2px;">${oc.gameCount} games available &rarr;</div>
+            </a>
+          `
+            )
+            .join('')}
+        </div>
+      </section>
+
+      ${generateStaticFooter()}
     </div>
   `;
 
   const html = generateHtml({
     title: pageTitle,
     description: pageDesc,
-    canonicalPath: `/${cat.id}/`,
+    canonicalPath: `/${cat.id}`,
     jsonLd: categorySchema,
     bodyContent,
   });
@@ -813,12 +878,12 @@ for (const cat of CATEGORIES) {
   <head>
     <meta charset="utf-8">
     <title>Redirecting to ${escapeHtml(cat.name)} Games...</title>
-    <link rel="canonical" href="${BASE_URL}/${cat.id}/">
-    <meta http-equiv="refresh" content="0; url=/${cat.id}/">
-    <script>window.location.replace('/${cat.id}/');</script>
+    <link rel="canonical" href="${BASE_URL}/${cat.id}">
+    <meta http-equiv="refresh" content="0; url=/${cat.id}">
+    <script>window.location.replace('/${cat.id}');</script>
   </head>
   <body>
-    <p>Moved permanently. <a href="/${cat.id}/">Click here to view ${escapeHtml(cat.name)} Games</a>.</p>
+    <p>Moved permanently. <a href="/${cat.id}">Click here to view ${escapeHtml(cat.name)} Games</a>.</p>
   </body>
 </html>`;
   fs.writeFileSync(path.resolve(legacyDir, 'index.html'), redirectHtml, 'utf8');
@@ -835,12 +900,12 @@ for (const [alias, targetGameId] of Object.entries(GAME_ALIASES)) {
   <head>
     <meta charset="utf-8">
     <title>Redirecting to ${escapeHtml(targetGame.title)}...</title>
-    <link rel="canonical" href="${BASE_URL}/${targetGame.id}/">
-    <meta http-equiv="refresh" content="0; url=/${targetGame.id}/">
-    <script>window.location.replace('/${targetGame.id}/');</script>
+    <link rel="canonical" href="${BASE_URL}/${targetGame.id}">
+    <meta http-equiv="refresh" content="0; url=/${targetGame.id}">
+    <script>window.location.replace('/${targetGame.id}');</script>
   </head>
   <body>
-    <p>Moved permanently. <a href="/${targetGame.id}/">Click here to play ${escapeHtml(targetGame.title)}</a>.</p>
+    <p>Moved permanently. <a href="/${targetGame.id}">Click here to play ${escapeHtml(targetGame.title)}</a>.</p>
   </body>
 </html>`;
 
@@ -869,17 +934,14 @@ const scoresBodyContent = `
         We do not require account logins, keeping your score data on your device. Cookies may be used for ads and analytics as described in the Privacy Policy.
       </p>
     </section>
-    <footer style="margin-top:40px;border-top:1px solid #1e293b;padding-top:16px;font-size:12px;color:#64748b;display:flex;justify-content:space-between;">
-      <a href="/" style="color:#38bdf8;text-decoration:none;">&larr; Back to Games</a>
-      <span>&copy; Wanjaaro Platform</span>
-    </footer>
+    ${generateStaticFooter()}
   </div>
 `;
 
 const scoresHtml = generateHtml({
   title: 'Top High Scores & Leaderboards | Wanjaaro',
   description: 'View top scores, reaction latency benchmarks, and personal best records across all instant games on Wanjaaro.',
-  canonicalPath: '/scores/',
+  canonicalPath: '/scores',
   bodyContent: scoresBodyContent,
 });
 const scoresDir = path.resolve(distDir, 'scores');
@@ -917,17 +979,14 @@ const privacyBodyContent = `
         We do not collect names, email addresses, passwords, phone numbers, or payment card details. All games are completely free to play without registration.
       </p>
     </section>
-    <footer style="margin-top:40px;border-top:1px solid #1e293b;padding-top:16px;font-size:12px;color:#64748b;display:flex;justify-content:space-between;">
-      <a href="/" style="color:#38bdf8;text-decoration:none;">&larr; Back to Games</a>
-      <span>&copy; Wanjaaro Platform</span>
-    </footer>
+    ${generateStaticFooter()}
   </div>
 `;
 
 const privacyHtml = generateHtml({
   title: 'Privacy Policy | Wanjaaro',
   description: 'Learn about data storage, browser localStorage for scores, and third-party advertising cookies on Wanjaaro.',
-  canonicalPath: '/privacy/',
+  canonicalPath: '/privacy',
   bodyContent: privacyBodyContent,
 });
 const privacyDir = path.resolve(distDir, 'privacy');
@@ -945,7 +1004,7 @@ const benchmarksSchema = {
       name: 'Global Cognitive & Reflex Performance Norms',
       description:
         'Standardized empirical percentile distributions, median norms, and elite tier thresholds across visual reaction time, working memory span, precision aim acquisition, and typing velocity.',
-      url: `${BASE_URL}/benchmarks/`,
+      url: `${BASE_URL}/benchmarks`,
       creator: {
         '@type': 'Organization',
         name: 'Wanjaaro',
@@ -966,7 +1025,7 @@ const benchmarksSchema = {
           '@type': 'ListItem',
           position: 2,
           name: 'Benchmarks',
-          item: `${BASE_URL}/benchmarks/`,
+          item: `${BASE_URL}/benchmarks`,
         },
       ],
     },
@@ -1047,7 +1106,7 @@ const benchmarksBodyContent = `
               (b) => `
               <tr style="border-bottom:1px solid #1e293b;">
                 <td style="padding:10px 12px;font-weight:700;color:#ffffff;">
-                  <a href="/${b.gameId}/" style="color:#38bdf8;text-decoration:none;">${escapeHtml(b.name)}</a>
+                  <a href="/${b.gameId}" style="color:#38bdf8;text-decoration:none;">${escapeHtml(b.name)}</a>
                 </td>
                 <td style="padding:10px 12px;font-family:monospace;color:#94a3b8;">${escapeHtml(b.metric)} (${b.unit})</td>
                 <td style="padding:10px 12px;font-family:monospace;">${b.p10} ${b.unit}</td>
@@ -1085,10 +1144,7 @@ const benchmarksBodyContent = `
       </div>
     </section>
 
-    <footer style="margin-top:40px;border-top:1px solid #1e293b;padding-top:16px;font-size:12px;color:#64748b;display:flex;justify-content:space-between;">
-      <a href="/" style="color:#38bdf8;text-decoration:none;">&larr; Back to Games Hub</a>
-      <span>Wanjaaro Empirical Data Hub &copy; ${new Date().getFullYear()}</span>
-    </footer>
+    ${generateStaticFooter()}
   </div>
 `;
 
@@ -1096,7 +1152,7 @@ const benchmarksHtml = generateHtml({
   title: 'Global Cognitive & Reflex Performance Benchmarks | Wanjaaro',
   description:
     'Standardized empirical reference distributions, median population norms, and elite tier thresholds across reflex latency, memory capacity, aim precision, and puzzle deduction speed.',
-  canonicalPath: '/benchmarks/',
+  canonicalPath: '/benchmarks',
   jsonLd: benchmarksSchema,
   bodyContent: benchmarksBodyContent,
 });
@@ -1118,16 +1174,16 @@ fs.writeFileSync(path.resolve(distDir, '_redirects'), '/* /index.html 200\n', 'u
 const todayIso = new Date().toISOString().slice(0, 10);
 const sitemapUrls = [
   `<url><loc>${BASE_URL}/</loc><lastmod>${todayIso}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>`,
-  `<url><loc>${BASE_URL}/benchmarks/</loc><lastmod>${todayIso}</lastmod><changefreq>daily</changefreq><priority>0.95</priority></url>`,
-  `<url><loc>${BASE_URL}/scores/</loc><lastmod>${todayIso}</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>`,
-  `<url><loc>${BASE_URL}/privacy/</loc><lastmod>${todayIso}</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>`,
+  `<url><loc>${BASE_URL}/benchmarks</loc><lastmod>${todayIso}</lastmod><changefreq>daily</changefreq><priority>0.95</priority></url>`,
+  `<url><loc>${BASE_URL}/scores</loc><lastmod>${todayIso}</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>`,
+  `<url><loc>${BASE_URL}/privacy</loc><lastmod>${todayIso}</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>`,
   ...CATEGORIES.map(
     (c) =>
-      `<url><loc>${BASE_URL}/${c.id}/</loc><lastmod>${todayIso}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>`
+      `<url><loc>${BASE_URL}/${c.id}</loc><lastmod>${todayIso}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>`
   ),
   ...ALL_GAMES.map(
     (g) =>
-      `<url><loc>${BASE_URL}/${g.id}/</loc><lastmod>${todayIso}</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>`
+      `<url><loc>${BASE_URL}/${g.id}</loc><lastmod>${todayIso}</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>`
   ),
 ];
 

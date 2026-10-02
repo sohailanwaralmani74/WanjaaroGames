@@ -28,7 +28,7 @@ let content = `# Wanjaaro – Complete Empirical Cognitive & Skill Games Knowled
 
 - **Client-Side Execution**: Every game runs 100% on the user device processor and GPU. No frames or game loops are streamed from cloud servers, eliminating network round-trip ping jitter (typically 30ms-120ms on cloud services).
 - **High-Resolution Microsecond Timing**: Latency measurements utilize hardware-backed browser timestamps with sub-millisecond precision relative to \`requestAnimationFrame\` display refresh intervals.
-- **Privacy & Data Storage**: High scores, reaction time percentiles, round counts, and daily puzzle streaks are stored exclusively in the user's browser \`localStorage\`. No account registration, email, or login credentials are required. Third-party advertising cookies may be served according to the site's Privacy Policy (https://wanjaaro.com/privacy/).
+- **Privacy & Data Storage**: High scores, reaction time percentiles, round counts, and daily puzzle streaks are stored exclusively in the user's browser \`localStorage\`. No account registration, email, or login credentials are required. Third-party advertising cookies may be served according to the site's Privacy Policy (https://wanjaaro.com/privacy).
 - **Dual-Input Responsive Calibrations**: Supports touch inputs for mobile/tablet displays alongside precision keyboard and mouse polling for desktop workstations.
 
 ---
@@ -54,9 +54,9 @@ content += `\n---
 for (const cat of CATEGORIES) {
   const catGames = ALL_GAMES.filter((g) => g.category === cat.id);
   content += `### ${cat.name} (${cat.gameCount} Games)\n`;
-  content += `- **URL**: https://wanjaaro.com/${cat.id}/\n`;
+  content += `- **URL**: https://wanjaaro.com/${cat.id}\n`;
   content += `- **Description**: ${cat.shortDesc}\n`;
-  content += `- **Available Games**: ${catGames.map((g) => `[${g.title}](https://wanjaaro.com/${g.id}/)`).join(', ')}\n\n`;
+  content += `- **Available Games**: ${catGames.map((g) => `[${g.title}](https://wanjaaro.com/${g.id})`).join(', ')}\n\n`;
 }
 
 content += `---
@@ -73,8 +73,8 @@ for (let i = 0; i < ALL_GAMES.length; i++) {
   const catName = catObj ? catObj.name : g.category;
 
   content += `### ${i + 1}. ${g.title}\n\n`;
-  content += `- **Canonical URL**: https://wanjaaro.com/${g.id}/\n`;
-  content += `- **Category**: ${catName} (https://wanjaaro.com/${g.category}/)\n`;
+  content += `- **Canonical URL**: https://wanjaaro.com/${g.id}\n`;
+  content += `- **Category**: ${catName} (https://wanjaaro.com/${g.category})\n`;
   content += `- **Difficulty**: ${g.difficulty || 'Normal'}\n`;
   content += `- **Controls**: ${g.controls === 'all' ? 'Mouse, Touch, and Keyboard' : g.controls}\n`;
   content += `- **Scoring**: Measured in **${g.scoringUnit}** (${g.scoringCriterion === 'lower' ? 'lower values indicate superior performance' : 'higher values indicate superior performance'})\n`;

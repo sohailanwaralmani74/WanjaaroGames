@@ -7,6 +7,7 @@ import { LeaderboardModal } from './components/LeaderboardModal';
 import { WanjaaroLogo } from './components/WanjaaroLogo';
 import { WanjaaroSEOSection } from './components/WanjaaroSEOSection';
 import { BenchmarksView } from './components/BenchmarksView';
+import { PrivacyView } from './components/PrivacyView';
 import { DesktopSidebarAdLayout } from './components/ads/DesktopSidebarAdLayout';
 import { TitleIntroAdBanner } from './components/ads/TitleIntroAdBanner';
 import { ClosableStickyMobileAd } from './components/ads/ClosableStickyMobileAd';
@@ -37,7 +38,7 @@ import {
 export default function App() {
   // Navigation Route State
   const [currentRoute, setCurrentRoute] = useState<{
-    view: 'home' | 'game' | 'category' | 'benchmarks';
+    view: 'home' | 'game' | 'category' | 'benchmarks' | 'privacy';
     param?: string;
   }>({ view: 'home' });
 
@@ -74,6 +75,12 @@ export default function App() {
     const rawPath = getCurrentCleanPath();
     let slug = rawPath.replace(/^\//, '').replace(/\/$/, '');
 
+    // Clean trailing slashes from browser address bar (except root '/')
+    if (window.location.pathname.length > 1 && window.location.pathname.endsWith('/')) {
+      const cleanPath = window.location.pathname.replace(/\/+$/, '');
+      window.history.replaceState(null, '', cleanPath + window.location.search);
+    }
+
     // Seamless migration: If URL contains old /game/ or /category/, strip it and clean browser address bar
     if (slug.startsWith('game/')) {
       slug = slug.replace(/^game\//, '');
@@ -108,6 +115,17 @@ export default function App() {
         title: 'Global Cognitive & Reflex Performance Benchmarks | Wanjaaro',
         description: 'Standardized empirical reference distributions, median population norms, and elite tier thresholds across reflex latency, memory capacity, aim precision, and puzzle deduction speed.',
         path: '/benchmarks',
+      });
+      setRecentGameIds(getRecentGames());
+      return;
+    }
+
+    if (slug === 'privacy') {
+      setCurrentRoute({ view: 'privacy' });
+      updateMetaTags({
+        title: 'Privacy Policy | Wanjaaro',
+        description: 'Wanjaaro is committed to user privacy. 100% free client-side gameplay, zero mandatory accounts, transparent local storage disclosure.',
+        path: '/privacy',
       });
       setRecentGameIds(getRecentGames());
       return;
@@ -157,8 +175,12 @@ export default function App() {
   }, []);
 
   const navigateTo = (newPath: string) => {
-    if (window.location.pathname !== newPath) {
-      window.history.pushState(null, '', newPath);
+    let clean = newPath;
+    if (clean.length > 1 && clean.endsWith('/')) {
+      clean = clean.replace(/\/+$/, '');
+    }
+    if (window.location.pathname !== clean) {
+      window.history.pushState(null, '', clean);
     }
     handleRouteChange();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -241,12 +263,16 @@ export default function App() {
       <header className="sticky top-0 z-40 bg-neutral-950/85 backdrop-blur-md border-b border-neutral-850 px-4 sm:px-8 py-3.5">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           {/* Logo & Brand */}
-          <div
-            onClick={navigateToHome}
-            className="cursor-pointer shrink-0"
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              navigateToHome();
+            }}
+            className="cursor-pointer shrink-0 no-underline"
           >
             <WanjaaroLogo size="sm" showTagline />
-          </div>
+          </a>
 
           {/* Search Bar */}
           <div className="flex-1 max-w-md hidden md:block">
@@ -279,14 +305,18 @@ export default function App() {
 
           {/* Desktop & Tablet Navigation Controls (Intact on Tablet/Desktop, Hidden on Mobile) */}
           <div className="hidden sm:flex items-center gap-2">
-            <button
-              onClick={() => navigateTo('/benchmarks')}
+            <a
+              href="/benchmarks"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo('/benchmarks');
+              }}
               title="Global Cognitive Benchmarks & Percentiles"
-              className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-neutral-300 hover:text-amber-400 transition-colors flex items-center gap-1.5 text-xs font-medium"
+              className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-neutral-300 hover:text-amber-400 transition-colors flex items-center gap-1.5 text-xs font-medium no-underline"
             >
               <BarChart2 className="w-4 h-4 text-amber-400" />
               <span>Benchmarks</span>
-            </button>
+            </a>
 
             <button
               onClick={handleRandomGame}
@@ -297,14 +327,18 @@ export default function App() {
               <span>Random Pick</span>
             </button>
 
-            <button
-              onClick={() => setIsLeaderboardOpen(true)}
+            <a
+              href="/scores"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsLeaderboardOpen(true);
+              }}
               title="View Local High Scores"
-              className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-neutral-300 hover:text-amber-400 transition-colors flex items-center gap-1.5 text-xs font-medium"
+              className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-neutral-300 hover:text-amber-400 transition-colors flex items-center gap-1.5 text-xs font-medium no-underline"
             >
               <Trophy className="w-4 h-4 text-amber-400" />
               <span>Trophies</span>
-            </button>
+            </a>
 
             <button
               onClick={toggleSound}
@@ -371,33 +405,53 @@ export default function App() {
               <span className="text-[10px] font-mono text-neutral-500">Instant pick</span>
             </button>
 
-            <button
-              onClick={() => {
+            <a
+              href="/scores"
+              onClick={(e) => {
+                e.preventDefault();
                 setIsLeaderboardOpen(true);
                 setIsMobileMenuOpen(false);
               }}
-              className="w-full p-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-neutral-200 hover:text-amber-400 flex items-center justify-between text-xs font-medium transition-colors"
+              className="w-full p-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-neutral-200 hover:text-amber-400 flex items-center justify-between text-xs font-medium transition-colors no-underline"
             >
               <div className="flex items-center gap-2.5">
                 <Trophy className="w-4 h-4 text-amber-400" />
                 <span>My High Scores &amp; Trophies</span>
               </div>
               <span className="text-[10px] font-mono text-emerald-400">Local Save</span>
-            </button>
+            </a>
 
-            <button
-              onClick={() => {
+            <a
+              href="/benchmarks"
+              onClick={(e) => {
+                e.preventDefault();
                 navigateTo('/benchmarks');
                 setIsMobileMenuOpen(false);
               }}
-              className="w-full p-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-neutral-200 hover:text-amber-400 flex items-center justify-between text-xs font-medium transition-colors"
+              className="w-full p-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-neutral-200 hover:text-amber-400 flex items-center justify-between text-xs font-medium transition-colors no-underline"
             >
               <div className="flex items-center gap-2.5">
                 <BarChart2 className="w-4 h-4 text-amber-400" />
                 <span>Global Benchmarks &amp; Data</span>
               </div>
               <span className="text-[10px] font-mono text-cyan-400">Dataset</span>
-            </button>
+            </a>
+
+            <a
+              href="/privacy"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo('/privacy');
+                setIsMobileMenuOpen(false);
+              }}
+              className="w-full p-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-neutral-200 hover:text-amber-400 flex items-center justify-between text-xs font-medium transition-colors no-underline"
+            >
+              <div className="flex items-center gap-2.5">
+                <CheckCircle className="w-4 h-4 text-emerald-400" />
+                <span>Privacy &amp; Data Policy</span>
+              </div>
+              <span className="text-[10px] font-mono text-neutral-400">Disclosures</span>
+            </a>
 
             <div className="pt-2 border-t border-neutral-900">
               <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider mb-2 px-1">
@@ -405,17 +459,19 @@ export default function App() {
               </div>
               <div className="grid grid-cols-2 gap-1.5">
                 {CATEGORIES.map((cat) => (
-                  <button
+                  <a
                     key={cat.id}
-                    onClick={() => {
+                    href={`/${cat.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
                       navigateToCategory(cat.id);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="p-2 rounded-lg bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-left text-xs text-neutral-300 hover:text-amber-400 flex items-center gap-1.5 truncate transition-colors"
+                    className="p-2 rounded-lg bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-left text-xs text-neutral-300 hover:text-amber-400 flex items-center gap-1.5 truncate transition-colors no-underline"
                   >
                     <span>{cat.icon}</span>
                     <span className="truncate">{cat.name}</span>
-                  </button>
+                  </a>
                 ))}
               </div>
             </div>
@@ -429,6 +485,11 @@ export default function App() {
           <BenchmarksView
             onNavigateGame={navigateToGame}
             onNavigateHome={navigateToHome}
+          />
+        ) : currentRoute.view === 'privacy' ? (
+          <PrivacyView
+            onNavigateHome={navigateToHome}
+            onNavigateCategory={navigateToCategory}
           />
         ) : currentRoute.view === 'game' && activeGame ? (
           <GameContainer
@@ -456,12 +517,16 @@ export default function App() {
                   <span>Local Best Tracking</span>
                 </div>
               </div>
-              <button
-                onClick={navigateToHome}
-                className="px-4 py-2 bg-neutral-800 hover:bg-neutral-750 text-neutral-300 rounded-xl text-xs font-medium border border-neutral-700 self-start md:self-center"
+              <a
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateToHome();
+                }}
+                className="px-4 py-2 bg-neutral-800 hover:bg-neutral-750 text-neutral-300 rounded-xl text-xs font-medium border border-neutral-700 self-start md:self-center transition-colors no-underline"
               >
                 ← Back to All Categories
-              </button>
+              </a>
             </div>
 
             {/* Mobile & Tablet Ad under title & intro */}
@@ -477,10 +542,14 @@ export default function App() {
                   {filteredGames.map((game) => {
                     const stat = getScore(game.id);
                     return (
-                      <div
+                      <a
                         key={game.id}
-                        onClick={() => navigateToGame(game.id)}
-                        className="bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 hover:border-neutral-700 rounded-2xl p-5 cursor-pointer transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between group shadow-sm"
+                        href={`/${game.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigateToGame(game.id);
+                        }}
+                        className="bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 hover:border-neutral-700 rounded-2xl p-5 cursor-pointer transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between group shadow-sm no-underline text-inherit"
                       >
                         <div className="space-y-2">
                           <div className="flex items-center justify-between">
@@ -513,9 +582,35 @@ export default function App() {
                             <span className="text-neutral-600">Unplayed</span>
                           )}
                         </div>
-                      </div>
+                      </a>
                     );
                   })}
+                </div>
+
+                {/* Cross-Link Other Disciplines (Eliminating Category Orphans) */}
+                <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 space-y-4">
+                  <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                    <span>🧭</span> Explore Other Skill Disciplines
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
+                    {CATEGORIES.filter((c) => c.id !== activeCategory.id).map((otherCat) => (
+                      <a
+                        key={otherCat.id}
+                        href={`/${otherCat.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigateToCategory(otherCat.id);
+                        }}
+                        className="p-3 rounded-xl bg-neutral-950/70 hover:bg-neutral-850 border border-neutral-800/80 hover:border-neutral-700 transition-colors flex items-center gap-2.5 text-xs text-neutral-300 hover:text-amber-400 no-underline"
+                      >
+                        <span className="text-base">{otherCat.icon}</span>
+                        <div className="truncate">
+                          <div className="font-semibold truncate">{otherCat.name}</div>
+                          <div className="text-[10px] text-neutral-500 font-mono">{otherCat.gameCount} games</div>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -592,10 +687,14 @@ export default function App() {
                   {recentGames.map((rg) => {
                     const stat = getScore(rg.id);
                     return (
-                      <div
+                      <a
                         key={rg.id}
-                        onClick={() => navigateToGame(rg.id)}
-                        className="bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 hover:border-neutral-700 p-3.5 rounded-xl cursor-pointer transition-colors flex flex-col justify-between group"
+                        href={`/${rg.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigateToGame(rg.id);
+                        }}
+                        className="bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 hover:border-neutral-700 p-3.5 rounded-xl cursor-pointer transition-colors flex flex-col justify-between group no-underline text-inherit"
                       >
                         <div className="flex items-center gap-2">
                           <span className="text-xl">{rg.icon}</span>
@@ -608,7 +707,7 @@ export default function App() {
                             Best: {stat.formattedScore}
                           </div>
                         )}
-                      </div>
+                      </a>
                     );
                   })}
                 </div>
@@ -648,10 +747,14 @@ export default function App() {
                       All Games ({ALL_GAMES.length})
                     </button>
                     {CATEGORIES.map((cat) => (
-                      <button
+                      <a
                         key={cat.id}
-                        onClick={() => setSelectedCategory(cat.id)}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-colors flex items-center gap-1.5 ${
+                        href={`/${cat.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigateToCategory(cat.id);
+                        }}
+                        className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-colors flex items-center gap-1.5 no-underline ${
                           selectedCategory === cat.id
                             ? 'bg-amber-400 text-black font-bold shadow-md shadow-amber-400/20'
                             : 'bg-neutral-900 hover:bg-neutral-850 text-neutral-300 border border-neutral-800'
@@ -659,7 +762,7 @@ export default function App() {
                       >
                         <span>{cat.icon}</span>
                         <span>{cat.name}</span>
-                      </button>
+                      </a>
                     ))}
                   </div>
                 </section>
@@ -669,10 +772,14 @@ export default function App() {
                   {filteredGames.map((game) => {
                     const stat = getScore(game.id);
                     return (
-                      <div
+                      <a
                         key={game.id}
-                        onClick={() => navigateToGame(game.id)}
-                        className="bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 hover:border-neutral-700 rounded-2xl p-5 cursor-pointer transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between group shadow-sm"
+                        href={`/${game.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigateToGame(game.id);
+                        }}
+                        className="bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 hover:border-neutral-700 rounded-2xl p-5 cursor-pointer transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between group shadow-sm no-underline text-inherit"
                       >
                         <div className="space-y-2">
                           <div className="flex items-center justify-between">
@@ -705,9 +812,57 @@ export default function App() {
                             <span className="text-neutral-600">Unplayed</span>
                           )}
                         </div>
-                      </div>
+                      </a>
                     );
                   })}
+                </section>
+
+                {/* Dedicated Cognitive Disciplines Directory (Guarantees crawlable internal links to all 12 categories) */}
+                <section className="bg-neutral-900/90 border border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div>
+                      <h2 className="text-xl sm:text-2xl font-extrabold text-white flex items-center gap-2">
+                        <span>🧠</span> All 12 Cognitive &amp; Skill Categories
+                      </h2>
+                      <p className="text-xs sm:text-sm text-neutral-400 mt-1">
+                        Explore dedicated benchmark collections grouped by neural, reflex, and logic disciplines.
+                      </p>
+                    </div>
+                    <span className="text-xs font-mono text-amber-400 font-semibold">{CATEGORIES.length} Categories</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {CATEGORIES.map((cat) => (
+                      <a
+                        key={cat.id}
+                        href={`/${cat.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigateToCategory(cat.id);
+                        }}
+                        className="p-4 rounded-2xl bg-neutral-950/70 hover:bg-neutral-850 border border-neutral-800/80 hover:border-neutral-700 transition-all hover:-translate-y-0.5 group flex flex-col justify-between space-y-3 no-underline text-inherit"
+                      >
+                        <div className="space-y-1.5">
+                          <div className="flex items-center justify-between">
+                            <span className="text-2xl">{cat.icon}</span>
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-neutral-900 text-neutral-400 border border-neutral-800 group-hover:border-amber-400/40 group-hover:text-amber-400 transition-colors">
+                              {cat.gameCount} games
+                            </span>
+                          </div>
+                          <h3 className="text-sm font-bold text-white group-hover:text-amber-400 transition-colors">
+                            {cat.name}
+                          </h3>
+                          <p className="text-xs text-neutral-400 line-clamp-2 leading-relaxed">
+                            {cat.shortDesc}
+                          </p>
+                        </div>
+                        <div className="text-[11px] text-amber-400 font-medium flex items-center gap-1 pt-1">
+                          <span>Explore Category</span>
+                          <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </section>
 
                 {/* Bottom Leaderboard Banner */}
@@ -759,12 +914,16 @@ export default function App() {
             <ul className="space-y-1.5">
               {CATEGORIES.slice(0, 6).map((cat) => (
                 <li key={cat.id}>
-                  <button
-                    onClick={() => navigateToCategory(cat.id)}
-                    className="hover:text-amber-400 transition-colors"
+                  <a
+                    href={`/${cat.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateToCategory(cat.id);
+                    }}
+                    className="hover:text-amber-400 transition-colors block"
                   >
                     {cat.name}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -775,23 +934,62 @@ export default function App() {
             <ul className="space-y-1.5">
               {CATEGORIES.slice(6).map((cat) => (
                 <li key={cat.id}>
-                  <button
-                    onClick={() => navigateToCategory(cat.id)}
-                    className="hover:text-amber-400 transition-colors"
+                  <a
+                    href={`/${cat.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateToCategory(cat.id);
+                    }}
+                    className="hover:text-amber-400 transition-colors block"
                   >
                     {cat.name}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-200">Architecture &amp; Privacy</h4>
-            <p className="leading-relaxed">
-              Every score, personal best, and preference is saved directly to your browser's local storage.
-            </p>
-            <div className="flex items-center gap-1.5 text-emerald-400">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-200">Resources &amp; Privacy</h4>
+            <ul className="space-y-1.5">
+              <li>
+                <a
+                  href="/benchmarks"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo('/benchmarks');
+                  }}
+                  className="hover:text-amber-400 transition-colors block"
+                >
+                  Global Benchmarks &amp; Norms
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/scores"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsLeaderboardOpen(true);
+                  }}
+                  className="hover:text-amber-400 transition-colors block"
+                >
+                  High Scores &amp; Leaderboards
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/privacy"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo('/privacy');
+                  }}
+                  className="hover:text-amber-400 transition-colors block text-amber-400/90 font-medium"
+                >
+                  Privacy Policy &amp; Terms
+                </a>
+              </li>
+            </ul>
+            <div className="pt-2 flex items-center gap-1.5 text-emerald-400 text-[11px]">
               <CheckCircle className="w-3.5 h-3.5" />
               <span>100% Client-Side Verified</span>
             </div>
@@ -800,19 +998,50 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto pt-8 mt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-neutral-500">
           <p>© {new Date().getFullYear()} Wanjaaro Platform. All rights reserved.</p>
-          <div className="flex gap-4">
-            <button onClick={() => navigateTo('/benchmarks')} className="hover:text-amber-400 font-medium">
+          <div className="flex gap-4 flex-wrap justify-center">
+            <a
+              href="/benchmarks"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo('/benchmarks');
+              }}
+              className="hover:text-amber-400 font-medium no-underline"
+            >
               Global Benchmarks
-            </button>
-            <button onClick={() => setIsLeaderboardOpen(true)} className="hover:text-neutral-300">
+            </a>
+            <a
+              href="/scores"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsLeaderboardOpen(true);
+              }}
+              className="hover:text-neutral-300 no-underline"
+            >
               My Scores
-            </button>
+            </a>
+            <a
+              href="/privacy"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo('/privacy');
+              }}
+              className="hover:text-neutral-300 no-underline"
+            >
+              Privacy Policy
+            </a>
             <button onClick={handleRandomGame} className="hover:text-neutral-300">
               Random Game
             </button>
-            <button onClick={navigateToHome} className="hover:text-neutral-300">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateToHome();
+              }}
+              className="hover:text-neutral-300 no-underline"
+            >
               Back to Top
-            </button>
+            </a>
           </div>
         </div>
       </footer>

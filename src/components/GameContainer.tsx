@@ -121,19 +121,27 @@ export function GameContainer({
         <div className="lg:col-span-3 space-y-6">
           {/* Breadcrumb Navigation */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-neutral-400">
-            <button
-              onClick={onNavigateHome}
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateHome();
+              }}
               className="hover:text-amber-400 transition-colors flex items-center gap-1"
             >
               <ArrowLeft className="w-3.5 h-3.5" /> Platform Home
-            </button>
+            </a>
             <span>/</span>
-            <button
-              onClick={() => onNavigateCategory(game.category)}
+            <a
+              href={`/${game.category}`}
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateCategory(game.category);
+              }}
               className="hover:text-amber-400 transition-colors"
             >
               {category?.name || game.category}
-            </button>
+            </a>
             <span>/</span>
             <span className="text-neutral-200 font-medium truncate">{game.title}</span>
           </nav>
@@ -425,22 +433,30 @@ export function GameContainer({
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
               More {category?.name} Games
             </h2>
-            <button
-              onClick={() => onNavigateCategory(game.category)}
+            <a
+              href={`/${game.category}`}
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateCategory(game.category);
+              }}
               className="text-xs text-amber-400 hover:text-amber-300 font-medium flex items-center gap-1"
             >
               View All {categoryGames.length} <ChevronRight className="w-3.5 h-3.5" />
-            </button>
+            </a>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {relatedGames.map((rel) => {
               const relStat = getScore(rel.id);
               return (
-                <div
+                <a
                   key={rel.id}
-                  onClick={() => onNavigateGame(rel.id)}
-                  className="bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 hover:border-neutral-700 rounded-xl p-4 cursor-pointer transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between group"
+                  href={`/${rel.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateGame(rel.id);
+                  }}
+                  className="bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 hover:border-neutral-700 rounded-xl p-4 cursor-pointer transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between group no-underline text-inherit"
                 >
                   <div className="space-y-1.5">
                     <span className="text-2xl block mb-2">{rel.icon}</span>
@@ -457,7 +473,7 @@ export function GameContainer({
                       <span className="text-neutral-500">Unplayed</span>
                     )}
                   </div>
-                </div>
+                </a>
               );
             })}
           </div>
