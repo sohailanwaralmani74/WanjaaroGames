@@ -22,4 +22,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://wanjaaro.com/sitemap.xml
+Sitemap: https://reptilebirds.com/sitemap.xml

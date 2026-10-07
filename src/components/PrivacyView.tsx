@@ -34,10 +34,10 @@ export function PrivacyView({ onNavigateHome, onNavigateCategory }: PrivacyViewP
             <span>Transparency &amp; Local Storage Commitment</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-extrabold text-white">
-            Wanjaaro Privacy Policy
+            ReptileBirds Privacy Policy
           </h1>
           <p className="text-sm text-neutral-400 max-w-xl">
-            100% free client-side gameplay. We believe in high-performance browser gaming without intrusive account walls, mandatory logins, or server tracking.
+            100% free client-side experience. We believe in high-performance web browsing without intrusive account walls, mandatory logins, or server tracking.
           </p>
         </div>
         <a
@@ -48,7 +48,7 @@ export function PrivacyView({ onNavigateHome, onNavigateCategory }: PrivacyViewP
           }}
           className="px-4 py-2 bg-neutral-800 hover:bg-neutral-750 text-neutral-300 rounded-xl text-xs font-medium border border-neutral-700 self-start md:self-center transition-colors"
         >
-          ← Back to Games
+          ← Back to Home
         </a>
       </div>
 
@@ -57,10 +57,10 @@ export function PrivacyView({ onNavigateHome, onNavigateCategory }: PrivacyViewP
         <section className="space-y-3">
           <h2 className="text-base font-bold text-white flex items-center gap-2">
             <HardDrive className="w-5 h-5 text-emerald-400" />
-            1. Local Storage for Game Scores &amp; Personal Bests
+            1. Local Storage &amp; Preferences
           </h2>
           <p>
-            Your personal records, reaction time percentiles, round counts, and sound preferences are stored strictly on your device using HTML5 <code className="text-amber-400 font-mono text-xs bg-neutral-950 px-1.5 py-0.5 rounded">localStorage</code>. This data never leaves your browser and is not collected, stored, or processed on our backend servers.
+            Your preferences and local settings are stored strictly on your device using HTML5 <code className="text-amber-400 font-mono text-xs bg-neutral-950 px-1.5 py-0.5 rounded">localStorage</code>. This data never leaves your browser and is not collected, stored, or processed on our backend servers.
           </p>
         </section>
 
@@ -70,7 +70,7 @@ export function PrivacyView({ onNavigateHome, onNavigateCategory }: PrivacyViewP
             2. Cookies and Advertising Partners
           </h2>
           <p>
-            Wanjaaro does not require user accounts or logins. However, to keep this platform free and accessible to everyone worldwide, we display third-party advertisements and may utilize analytics tools to measure platform performance.
+            ReptileBirds does not require user accounts or logins. However, to keep this platform free and accessible to everyone worldwide, we display third-party advertisements and may utilize analytics tools to measure platform performance.
           </p>
           <p className="text-neutral-400 text-xs">
             Third-party advertising networks (including Google AdSense, CPM networks, and programmatic partners) may place or read cookies and web beacons on your browser to serve non-intrusive advertisements based on your visits to this website and other sites across the internet. You can manage or disable advertising cookies at any time via your browser settings or opt-out programs like the Network Advertising Initiative.
@@ -83,7 +83,7 @@ export function PrivacyView({ onNavigateHome, onNavigateCategory }: PrivacyViewP
             3. Zero Personal Data Collection
           </h2>
           <p>
-            We do not collect names, email addresses, passwords, phone numbers, or payment card information. All 106+ games on Wanjaaro are immediately accessible without registration or subscription fees.
+            We do not collect names, email addresses, passwords, phone numbers, or payment card information. All resources on ReptileBirds are immediately accessible without registration or subscription fees.
           </p>
         </section>
 
@@ -93,7 +93,7 @@ export function PrivacyView({ onNavigateHome, onNavigateCategory }: PrivacyViewP
             4. Managing or Clearing Your Data
           </h2>
           <p>
-            Because your game data is stored exclusively in your local browser, you can delete all your records at any time by clearing your browser cache or site data for <code className="text-amber-400 font-mono text-xs bg-neutral-950 px-1.5 py-0.5 rounded">wanjaaro.com</code>.
+            Because your local data is stored exclusively in your browser, you can delete all your records at any time by clearing your browser cache or site data for <code className="text-amber-400 font-mono text-xs bg-neutral-950 px-1.5 py-0.5 rounded">reptilebirds.com</code>.
           </p>
         </section>
 

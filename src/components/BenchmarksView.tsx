@@ -459,7 +459,7 @@ export function BenchmarksView({ onNavigateGame, onNavigateHome }: BenchmarksVie
               <Zap className="w-4 h-4 text-amber-400" /> Zero Network Round-Trip Delay
             </h3>
             <p>
-              Unlike cloud-hosted reflex tests that transmit input packets over the internet, Wanjaaro benchmarks run
+              Unlike cloud-hosted reflex tests that transmit input packets over the internet, ReptileBirds benchmarks run
               100% locally in your client browser. This eliminates the 30ms to 100ms ping jitter that skews online reflex
               measurements.
             </p>
@@ -495,7 +495,7 @@ export function BenchmarksView({ onNavigateGame, onNavigateHome }: BenchmarksVie
             <strong className="text-white">Visual Reaction Time:</strong> Kosinski, R. J. (2008). <em>A literature review on reaction time</em>. Clemson University. Aggregated visual response times establish a normal human baseline of 215ms–250ms for simple visual stimulus tasks.
           </li>
           <li className="p-3 rounded-xl bg-neutral-900 border border-neutral-800">
-            <strong className="text-white">Chimpanzee vs. Human Spatial Memory:</strong> Inoue, S., &amp; Matsuzawa, T. (2007). <em>Working memory of higher cognitive functions in chimpanzees</em>. Current Biology, 17(23), R1004-R1005. Recreated in Wanjaaro's Chimp Memory Test.
+            <strong className="text-white">Chimpanzee vs. Human Spatial Memory:</strong> Inoue, S., &amp; Matsuzawa, T. (2007). <em>Working memory of higher cognitive functions in chimpanzees</em>. Current Biology, 17(23), R1004-R1005.
           </li>
           <li className="p-3 rounded-xl bg-neutral-900 border border-neutral-800">
             <strong className="text-white">Cognitive Interference (Stroop Effect):</strong> Stroop, J. R. (1935). <em>Studies of interference in serial verbal reactions</em>. Journal of Experimental Psychology, 18(6), 643–662.
@@ -548,9 +548,9 @@ export function BenchmarksView({ onNavigateGame, onNavigateHome }: BenchmarksVie
       {/* Footer Back link */}
       <footer className="pt-6 border-t border-neutral-800 flex justify-between items-center text-xs text-neutral-400">
         <button onClick={onNavigateHome} className="text-amber-400 hover:underline flex items-center gap-1">
-          &larr; Back to Games Hub
+          &larr; Back to Home
         </button>
-        <span>Wanjaaro Empirical Data Hub &copy; {new Date().getFullYear()}</span>
+        <span>ReptileBirds Empirical Data Hub &copy; {new Date().getFullYear()}</span>
       </footer>
     </div>
   );

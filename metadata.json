@@ -1,6 +1,5 @@
 {
-  "name": "Wanjaaro Games",
-  "description": "Play free instant client-side browser games on Wanjaaro. Test your reflexes, memory, logic, precision, typing, and mental agility with local high score tracking.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "name": "Snake and Ladder Game Online – Free | Reptile Birds",
+  "description": "Play Snake and Ladder (Snakes and Ladders) online free at reptilebirds.com. Classic 10x10 jungle board game with Solo Race, Daily Board, Vs Computer, and Local Multiplayer.",
+  "requestFramePermissions": []
 }

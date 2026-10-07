@@ -120,13 +120,13 @@ export function WanjaaroLogo({ size = 'md', showTagline = false }: WanjaaroLogoP
         <span
           className={`font-black tracking-tight leading-none ${textSizes} font-['Syne',sans-serif]`}
         >
-          <span className="bg-gradient-to-r from-amber-400 via-rose-400 to-cyan-400 bg-clip-text text-transparent">
-            Wanjaaro
+          <span className="bg-gradient-to-r from-emerald-400 via-amber-400 to-cyan-400 bg-clip-text text-transparent">
+            ReptileBirds
           </span>
         </span>
         {showTagline && (
           <span className="text-[10px] tracking-wider uppercase font-semibold text-neutral-400 mt-0.5 font-mono">
-            Mind &amp; Skill Arcade
+            Official Platform
           </span>
         )}
       </div>

@@ -1,12 +1,12 @@
-title: "Wanjaaro — Free Instant Mind, Reflex & Skill Benchmarks"
-description: "Train your reflexes, memory, logic, and precision with over 100 instant client-side browser games on Wanjaaro. Zero lag, no registration required."
+title: "ReptileBirds — Official Platform"
+description: "Explore ReptileBirds at reptilebirds.com."
 permalink: ':title'
 baseurl: ""
-url: "https://wanjaaro.com"
+url: "https://reptilebirds.com"
 site-twitter: 
 image: 
-author: Wanjaaro
-about-author: "High-Performance Zero-Latency Mind & Skill Arcade"
+author: ReptileBirds
+about-author: "ReptileBirds Platform"
 social-github: sohailanwaralmani74
 
 exclude: ["node_modules", "package.json", "package-lock.json", "src", "dist"]

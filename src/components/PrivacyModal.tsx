@@ -27,7 +27,7 @@ export function PrivacyModal({ isOpen, onClose }: PrivacyModalProps) {
               <h2 id="privacy-modal-title" className="text-base font-bold text-white">
                 Privacy Policy
               </h2>
-              <p className="text-xs text-neutral-400">Wanjaaro Gaming Platform</p>
+              <p className="text-xs text-neutral-400">ReptileBirds Platform</p>
             </div>
           </div>
           <button
@@ -43,10 +43,10 @@ export function PrivacyModal({ isOpen, onClose }: PrivacyModalProps) {
         <div className="p-6 overflow-y-auto space-y-6 text-xs sm:text-sm text-neutral-300 leading-relaxed">
           <section className="space-y-2">
             <h3 className="text-sm font-semibold text-white flex items-center gap-2">
-              <HardDrive className="w-4 h-4 text-emerald-400" /> 1. Local Storage for Game Scores
+              <HardDrive className="w-4 h-4 text-emerald-400" /> 1. Local Storage
             </h3>
             <p>
-              Your personal high scores, best reaction latencies, total rounds played, daily puzzle streaks, and audio mute settings are stored exclusively on your device using your browser's standard <code className="text-amber-400 font-mono text-xs">localStorage</code>. This data never leaves your browser and is not transmitted to our servers.
+              Your local preferences and settings are stored exclusively on your device using your browser's standard <code className="text-amber-400 font-mono text-xs">localStorage</code>. This data never leaves your browser and is not transmitted to our servers.
             </p>
           </section>
 
@@ -55,7 +55,7 @@ export function PrivacyModal({ isOpen, onClose }: PrivacyModalProps) {
               <Cookie className="w-4 h-4 text-amber-400" /> 2. Cookies and Third-Party Advertising
             </h3>
             <p>
-              Wanjaaro does not require user accounts or logins. However, this website displays third-party advertisements and may utilize analytics tools to measure platform usage. These third-party vendors (such as Google AdSense and analytics partners) may place or read cookies and web beacons on your browser to serve relevant ads based on your prior visits to this website or other sites across the internet.
+              ReptileBirds does not require user accounts or logins. However, this website displays third-party advertisements and may utilize analytics tools to measure platform usage. These third-party vendors (such as Google AdSense and analytics partners) may place or read cookies and web beacons on your browser to serve relevant ads based on your prior visits to this website or other sites across the internet.
             </p>
             <p className="text-neutral-400 text-xs">
               You can manage or opt out of personalized advertising by visiting the Network Advertising Initiative opt-out page or adjusting your browser cookie settings.
@@ -67,14 +67,14 @@ export function PrivacyModal({ isOpen, onClose }: PrivacyModalProps) {
               <Eye className="w-4 h-4 text-cyan-400" /> 3. No Personal Data Collection
             </h3>
             <p>
-              We do not collect names, email addresses, passwords, phone numbers, or payment card details. Every game on Wanjaaro is accessible without registration or financial transactions.
+              We do not collect names, email addresses, passwords, phone numbers, or payment card details. Every feature on ReptileBirds is accessible without registration or financial transactions.
             </p>
           </section>
 
           <section className="space-y-2">
             <h3 className="text-sm font-semibold text-white">4. Managing Your Data</h3>
             <p>
-              You can clear your local scores, preferences, and cached cookies at any time by clearing your browser data or cache for <code className="text-amber-400 font-mono text-xs">wanjaaro.com</code> in your browser settings.
+              You can clear your local preferences and cached cookies at any time by clearing your browser data or cache for <code className="text-amber-400 font-mono text-xs">reptilebirds.com</code> in your browser settings.
             </p>
           </section>
         </div>

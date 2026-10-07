@@ -1,4 +1,4 @@
-# Robots.txt for Wanjaaro Gaming Platform (https://wanjaaro.com)
+# Robots.txt for ReptileBirds Platform (https://reptilebirds.com)
 # All search crawlers and AI search/discovery bots are welcome.
 
 User-agent: *
@@ -45,4 +45,4 @@ User-agent: CCBot
 Allow: /
 
 # Sitemap Index
-Sitemap: https://wanjaaro.com/sitemap.xml
+Sitemap: https://reptilebirds.com/sitemap.xml
