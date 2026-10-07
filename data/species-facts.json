@@ -1,0 +1,186 @@
+[
+  {
+    "species": "Scarlet Macaw",
+    "scientificName": "Ara macao",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Bald Eagle",
+    "scientificName": "Haliaeetus leucocephalus",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Barn Owl",
+    "scientificName": "Tyto alba",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Emperor Penguin",
+    "scientificName": "Aptenodytes forsteri",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Indian Peafowl",
+    "scientificName": "Pavo cristatus",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Greater Flamingo",
+    "scientificName": "Phoenicopterus roseus",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Peregrine Falcon",
+    "scientificName": "Falco peregrinus",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Common Kingfisher",
+    "scientificName": "Alcedo atthis",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Mallard",
+    "scientificName": "Anas platyrhynchos",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Ball Python",
+    "scientificName": "Python regius",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "King Cobra",
+    "scientificName": "Ophiophagus hannah",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Komodo Dragon",
+    "scientificName": "Varanus komodoensis",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Nile Crocodile",
+    "scientificName": "Crocodylus niloticus",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Green Sea Turtle",
+    "scientificName": "Chelonia mydas",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Leopard Gecko",
+    "scientificName": "Eublepharis macularius",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Green Iguana",
+    "scientificName": "Iguana iguana",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Panther Chameleon",
+    "scientificName": "Furcifer pardalis",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Central Bearded Dragon",
+    "scientificName": "Pogona vitticeps",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Red-tailed Hawk",
+    "scientificName": "Buteo jamaicensis",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Green Tree Python",
+    "scientificName": "Morelia viridis",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Corn Snake",
+    "scientificName": "Pantherophis guttatus",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Garter Snake",
+    "scientificName": "Thamnophis sirtalis",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Emerald Boa",
+    "scientificName": "Corallus caninus",
+    "type": "reptile",
+    "fact": "",
+    "source": "",
+    "verified": false
+  }
+]
