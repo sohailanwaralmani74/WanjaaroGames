@@ -3,16 +3,166 @@ import { CategoryInfo, GameMeta, BaseGameMeta } from '../types/game';
 export const CATEGORIES: CategoryInfo[] = [
   {
     id: 'casual-arcade',
-    name: 'Board & Family Classics',
-    shortDesc: 'Classic 100% client-side board games with fair cryptographic dice.',
+    name: 'Reptile & Bird Arcade Classics',
+    shortDesc: '100% client-side reptile and bird games with local personal records.',
     description:
-      'Play traditional board games online in your browser with zero accounts and local personal records.',
+      'Play original reptile and bird browser games on ReptileBirds with zero accounts and local high scores.',
     iconName: 'Gamepad2',
-    gameCount: 1,
+    gameCount: 4,
   },
 ];
 
 export const ALL_GAMES: GameMeta[] = [
+  {
+    id: 'snake-escape',
+    title: 'Snake Escape',
+    category: 'casual-arcade',
+    summary:
+      'Play Snake Escape online free on ReptileBirds. Slither through an 800x800 field eating mice while dodging diving Hawks, Peregrine Falcons, Bald Eagles, and Barn Owls.',
+    description:
+      'Control a continuous-trail snake foraging for mice in a top-down meadow arena while birds of prey hunt from above. Use tall grass patches to slow raptor tracking, burrow underground with Space, and unlock 6 real snake skins.',
+    instructions:
+      'Steer with pointer/touch, WASD, Arrow keys, or the virtual joystick. Escape circular bird shadows before the 0.6s lock ring fills and impacts, or press Space to burrow underground for 2 seconds.',
+    mechanic: 'Continuous 2D top-down arena evasion with multi-phase raptor lock-on and burrow cooldowns',
+    controls: 'all',
+    skillsTested: ['Spatial Evasion', 'Cooldown Timing', 'Threat Prioritization'],
+    difficulty: 'Medium',
+    scoringUnit: 'points',
+    scoringCriterion: 'higher',
+    tags: ['snake escape', 'bird of prey game', 'snake survival', 'daily challenge', 'arcade'],
+    objective:
+      'Eat field mice and golden mice, survive 30-second waves of diving raptors, and chain +25 point near-miss dodges before losing all 3 hearts.',
+    whatItMeasures:
+      'Measures real-time trajectory control, peripheral threat tracking, and defensive cooldown timing.',
+    tips: [
+      'Duck into green tall grass patches to cut every bird of prey’s tracking phase down to 1.0 second.',
+      'Leave a locked strike ring right before the bird dives to earn a +25 point Near-Miss bonus.',
+      'Save your 2-second Burrow (Space) for overlapping Bald Eagle or night-wave Barn Owl lock-ons.',
+    ],
+    faq: [
+      {
+        question: 'How do Bird of Prey attacks work in Snake Escape?',
+        answer:
+          'Each raptor casts a circular ground shadow that tracks your snake for up to 1.5 seconds, locks in place for 0.6 seconds as the warning ring fills (0.4s for Peregrine Falcons), and then dives. If any segment of your snake is inside the circle at impact, you lose a heart.',
+      },
+      {
+        question: 'What are the 4 Birds of Prey in Snake Escape?',
+        answer:
+          'Red-tailed Hawk (Wave 1, standard dive), Peregrine Falcon (Wave 3, fast tracking & 0.4s lock), Bald Eagle (Wave 5, massive strike circle), and Barn Owl (Wave 7 night waves, darkened field & pulsing warning ring).',
+      },
+      {
+        question: 'How do I unlock the 6 Snake Escape skins?',
+        answer:
+          'Skins unlock automatically by cumulative mice eaten across all modes: Ball Python (0), Green Tree Python (50), Corn Snake (150), King Cobra (300), Garter Snake (600), and Emerald Boa (1,000).',
+      },
+    ],
+    benchmark: {
+      metric: 'Survival Mode Score',
+      average: '650 pts',
+      elite: '2,200 pts',
+      source: 'ReptileBirds Arena Survival Distribution',
+    },
+  },
+  {
+    id: 'matching-card-game',
+    title: 'Matching Card Game',
+    category: 'casual-arcade',
+    summary:
+      'Play Matching Card Game (Memory Match) online free on ReptileBirds. Flip cards to match pairs of 9 birds and 9 reptiles across Easy, Medium, Hard, and Expert grids.',
+    description:
+      'Flip cards to find matching pairs of 18 real bird and reptile species drawn with original SVG art. Includes Classic, Timed, Daily Challenge, and Two-Player pass-and-play modes.',
+    instructions:
+      'Click, tap, or use Arrow keys + Enter/Space to flip two cards per turn. Matching pairs stay face-up and build your combo streak; non-matching pairs flip back after 900 ms.',
+    mechanic: 'Grid memory pair matching with seeded daily boards and streak combo multipliers',
+    controls: 'all',
+    skillsTested: ['Visual Memory', 'Spatial Recall', 'Pattern Recognition'],
+    difficulty: 'Medium',
+    scoringUnit: 'points',
+    scoringCriterion: 'higher',
+    tags: ['matching card game', 'memory game', 'concentration', 'find the pairs', 'daily challenge'],
+    objective:
+      'Match all bird and reptile card pairs in the fewest moves and fastest time while chaining consecutive match combos.',
+    whatItMeasures:
+      'Measures short-term spatial recall, pair location retention, and move efficiency.',
+    tips: [
+      'Chain consecutive matches without a miss to earn up to +300 combo bonus points per pair.',
+      'Earn a 3-star rating by finishing the board in moves less than or equal to 1.5 times the number of pairs.',
+      'Play Daily Challenge mode to compete on a date-seeded 4x4 Medium board identical for every player that day.',
+    ],
+    faq: [
+      {
+        question: 'What is the difference between Matching Card Game, Memory Game, and Concentration?',
+        answer:
+          'All three names refer to the classic pair-matching card game where players flip two face-down cards per turn to recall and match identical pairs.',
+      },
+      {
+        question: 'How are stars and combo points calculated in Matching Card Game?',
+        answer:
+          'Each match awards 100 base points plus +50 per consecutive streak step (up to +300). Finishing in <= 1.5x pairs moves earns 3 stars; <= 2.5x pairs earns 2 stars.',
+      },
+      {
+        question: 'How does the Daily Challenge work?',
+        answer:
+          'Daily Challenge uses today’s date (YYYY-MM-DD) as a deterministic seed to pick 8 balanced bird and reptile pairs on a 4x4 grid so everyone plays the exact same layout.',
+      },
+    ],
+    benchmark: {
+      metric: 'Medium 4x4 Score',
+      average: '950 pts',
+      elite: '1,850 pts',
+      source: 'ReptileBirds Memory Match Standard Distribution',
+    },
+  },
+  {
+    id: 'snake-game',
+    title: 'Snake Game',
+    category: 'casual-arcade',
+    summary:
+      'Play Snake Game online free on ReptileBirds. Hunt mice across 15x15, 20x20, or 25x25 grids, unlock 6 real snake species skins, and master Classic, Wrap-Around, Jungle, and Daily Challenge modes.',
+    description:
+      'Guide a real-species-inspired python hunting mice on a customizable grid. Features a 2-turn input buffer, bonus golden eggs, speed multipliers up to x3, and 6 unlockable SVG snake skins.',
+    instructions:
+      'Steer your snake with Arrow keys, WASD, touch swipes, or the on-screen D-pad. Eat mice (+10 pts × speed multiplier) and bonus golden eggs (+50 pts) while avoiding walls, obstacles, and your own body.',
+    mechanic: 'Fixed-timestep grid pursuit with BFS-verified obstacle generation and seeded daily runs',
+    controls: 'all',
+    skillsTested: ['Spatial Planning', 'Reaction Speed', 'Pathfinding'],
+    difficulty: 'Medium',
+    scoringUnit: 'points',
+    scoringCriterion: 'higher',
+    tags: ['snake game', 'python game', 'classic snake', 'daily challenge', 'arcade'],
+    objective:
+      'Grow the longest snake and achieve the highest score by hunting mice and bonus eggs without colliding with walls, obstacles, or your own tail.',
+    whatItMeasures:
+      'Measures spatial path planning, turn timing under increasing tick speeds, and obstacle avoidance.',
+    tips: [
+      'Use rapid double-key inputs freely—the 2-input direction queue guarantees fast corner turns are never dropped.',
+      'Watch the shrinking timer ring on the bonus golden egg that spawns every 5 mice for an instant +50 point boost.',
+      'In Jungle mode, keep near the outer perimeter lanes as obstacle density rises with each level.',
+    ],
+    faq: [
+      {
+        question: 'What are the 4 modes in Snake Game on ReptileBirds?',
+        answer:
+          'You can play Classic (deadly walls), Wrap-Around (pass through borders to the opposite side), Jungle (rocks and logs that scale with level), and Daily Challenge (deterministic date-seeded run).',
+      },
+      {
+        question: 'How do I unlock the 6 snake skins?',
+        answer:
+          'Skins unlock automatically based on cumulative mice eaten across all runs: Ball Python (0), Green Tree Python (50), Corn Snake (150), King Cobra (300), Garter Snake (600), and Emerald Boa (1,000).',
+      },
+      {
+        question: 'Can Jungle obstacles ever trap my snake or block food?',
+        answer:
+          'No. Every obstacle layout and food spawn is verified with a Breadth-First Search reachability check so no dead-end pockets or unreachable mice ever occur.',
+      },
+    ],
+    benchmark: {
+      metric: 'Classic 20x20 Score',
+      average: '240 pts',
+      elite: '850 pts',
+      source: 'ReptileBirds Standard Grid Arcade Distribution',
+    },
+  },
   {
     id: 'snake-and-ladder',
     title: 'Snake and Ladder',
@@ -20,7 +170,7 @@ export const ALL_GAMES: GameMeta[] = [
     summary:
       'Play Snake and Ladder (Snakes and Ladders) online free on a 10x10 jungle board with 8 climbing vines, 8 real snake species, and 4 modes.',
     description:
-      'Experience the classic 10x10 Snake and Ladder board game at reptilebirds.com. Choose from 4 original SVG bird tokens (Parrot, Owl, Eagle, Penguin) and play Solo Race, Daily Board, Vs Computer, or Local Pass-and-Play Multiplayer.',
+      'Experience the classic 10x10 Snake and Ladder board game on ReptileBirds. Choose from 4 original SVG bird tokens (Parrot, Owl, Eagle, Penguin) and play Solo Race, Daily Board, Vs Computer, or Local Pass-and-Play Multiplayer.',
     instructions:
       'Roll the six-sided die using touch, mouse, or Space/Enter. Climb green vines from bottom to top, avoid snake heads that slide you down to their tails, and land on square 100 with an exact roll.',
     mechanic: '10x10 boustrophedon board with cryptographic dice and seeded daily boards',

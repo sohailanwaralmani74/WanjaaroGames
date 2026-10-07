@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+:root {
+  --rb-jungle-bg: #022c22;
+  --rb-jungle-surface: #064e3b;
+  --rb-jungle-card-back: #065f46;
+  --rb-jungle-card-front: #0f172a;
+  --rb-jungle-border: #10b981;
+  --rb-jungle-accent: #34d399;
+  --rb-jungle-gold: #fbbf24;
+  --rb-jungle-text: #ecfdf5;
+}
+
+.rb-light-theme {
+  --rb-jungle-bg: #ecfdf5;
+  --rb-jungle-surface: #d1fae5;
+  --rb-jungle-card-back: #059669;
+  --rb-jungle-card-front: #ffffff;
+  --rb-jungle-border: #047857;
+  --rb-jungle-accent: #059669;
+  --rb-jungle-gold: #d97706;
+  --rb-jungle-text: #064e3b;
+}

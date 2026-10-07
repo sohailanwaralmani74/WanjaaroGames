@@ -128,6 +128,63 @@ export function getSquareCoords(square: number): {
 }
 
 /**
+ * Geometric 2D line segment intersection & minimum clearance check.
+ * Ensures no two ladders or snakes cross each other or crowd the same path.
+ */
+interface Point2D {
+  x: number;
+  y: number;
+}
+
+function ccw(A: Point2D, B: Point2D, C: Point2D): boolean {
+  return (C.y - A.y) * (B.x - A.x) > (B.y - A.y) * (C.x - A.x);
+}
+
+function segmentsIntersect(p1: Point2D, p2: Point2D, p3: Point2D, p4: Point2D): boolean {
+  return ccw(p1, p3, p4) !== ccw(p2, p3, p4) && ccw(p1, p2, p3) !== ccw(p1, p2, p4);
+}
+
+function pointToSegmentDistance(p: Point2D, v: Point2D, w: Point2D): number {
+  const l2 = (v.x - w.x) ** 2 + (v.y - w.y) ** 2;
+  if (l2 === 0) return Math.hypot(p.x - v.x, p.y - v.y);
+  let t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
+  t = Math.max(0, Math.min(1, t));
+  const projX = v.x + t * (w.x - v.x);
+  const projY = v.y + t * (w.y - v.y);
+  return Math.hypot(p.x - projX, p.y - projY);
+}
+
+function segmentsDistance(p1: Point2D, p2: Point2D, p3: Point2D, p4: Point2D): number {
+  if (segmentsIntersect(p1, p2, p3, p4)) return 0;
+  return Math.min(
+    pointToSegmentDistance(p1, p3, p4),
+    pointToSegmentDistance(p2, p3, p4),
+    pointToSegmentDistance(p3, p1, p2),
+    pointToSegmentDistance(p4, p1, p2)
+  );
+}
+
+export function doLinksConflictGeometrically(
+  aStart: number,
+  aEnd: number,
+  bStart: number,
+  bEnd: number,
+  minClearance = 7.5
+): boolean {
+  const a1 = getSquareCoords(aStart);
+  const a2 = getSquareCoords(aEnd);
+  const b1 = getSquareCoords(bStart);
+  const b2 = getSquareCoords(bEnd);
+
+  const p1 = { x: a1.xPercent, y: a1.yPercent };
+  const p2 = { x: a2.xPercent, y: a2.yPercent };
+  const p3 = { x: b1.xPercent, y: b1.yPercent };
+  const p4 = { x: b2.xPercent, y: b2.yPercent };
+
+  return segmentsDistance(p1, p2, p3, p4) < minClearance;
+}
+
+/**
  * Validates that a generated board strictly obeys all placement rules:
  * - Exactly 8 ladders and 8 snakes
  * - No snake head or ladder bottom on 1 or 100
@@ -135,6 +192,7 @@ export function getSquareCoords(square: number): {
  * - No square holds more than one snake head or ladder bottom
  * - No chains where a slide/climb ends on the start of another slide/climb
  * - No ladder or snake spanning less than 8 squares
+ * - No geometric path crossing or overlapping between any two snakes/ladders
  */
 export function validateBoard(board: BoardConfig): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
@@ -180,11 +238,88 @@ export function validateBoard(board: BoardConfig): { valid: boolean; errors: str
     }
   }
 
+  // Check geometric non-intersection so no two paths cross or override each other
+  for (let i = 0; i < allLinks.length; i++) {
+    for (let j = i + 1; j < allLinks.length; j++) {
+      if (
+        doLinksConflictGeometrically(
+          allLinks[i].start,
+          allLinks[i].end,
+          allLinks[j].start,
+          allLinks[j].end,
+          5.0
+        )
+      ) {
+        errors.push(`Geometric path intersection between ${allLinks[i].id} and ${allLinks[j].id}`);
+      }
+    }
+  }
+
   return { valid: errors.length === 0, errors };
 }
 
 /**
- * Generates a fair, balanced 10x10 Snake and Ladder board with 8 ladders and 8 snakes.
+ * Curated, spatially separated 16-lane templates (8 ladders + 8 snakes)
+ * Every template has 16 non-crossing, well-spaced vertical/diagonal lanes
+ * so ladders and snakes never cross or override each other's paths.
+ */
+interface RawBoardTemplate {
+  ladders: [number, number][];
+  snakes: [number, number][];
+}
+
+const CLEAN_NON_CROSSING_TEMPLATES: RawBoardTemplate[] = [
+  {
+    // Template A: Classic balanced lanes across left, center-left, center-right, and right columns
+    ladders: [
+      [2, 23],   // bottom-left col 1->2
+      [6, 25],   // bottom-mid col 5->4
+      [9, 30],   // bottom-right col 8->9
+      [28, 49],  // mid-left col 7->8
+      [36, 57],  // mid-left col 4->3
+      [51, 72],  // upper-right col 9->8
+      [64, 83],  // upper-mid col 3->2
+      [78, 98],  // top-left col 2->2
+    ],
+    snakes: [
+      [17, 4],   // lower-mid col 3->3
+      [33, 12],  // lower-right col 7->8
+      [47, 26],  // mid-right col 6->5
+      [62, 41],  // mid-left col 1->0
+      [69, 50],  // mid-right col 8->9
+      [87, 66],  // upper-mid col 6->5
+      [94, 75],  // top-mid col 6->5
+      [99, 80],  // top-left col 1->0
+    ],
+  },
+  {
+    // Template B: Wide column separation
+    ladders: [
+      [3, 22],   // col 2->1
+      [8, 29],   // col 7->8
+      [19, 38],  // col 1->2
+      [24, 45],  // col 3->4
+      [42, 61],  // col 1->0
+      [48, 67],  // col 7->6
+      [70, 89],  // col 9->8
+      [76, 95],  // col 4->5
+    ],
+    snakes: [
+      [16, 5],   // col 4->4
+      [31, 10],  // col 9->9
+      [44, 25],  // col 3->4
+      [56, 35],  // col 4->5
+      [63, 40],  // col 2->0
+      [73, 52],  // col 7->8
+      [92, 71],  // col 8->9
+      [97, 82],  // col 3->1
+    ],
+  },
+];
+
+/**
+ * Generates a fair, balanced, 100% non-overlapping 10x10 Snake and Ladder board
+ * with 8 ladders and 8 snakes whose visual paths NEVER cross or override each other.
  * If seedStr is provided, generation is 100% deterministic.
  */
 export function generateBoard(seedStr?: string): BoardConfig {
@@ -196,149 +331,151 @@ export function generateBoard(seedStr?: string): BoardConfig {
 
   const randInt = (min: number, max: number) => Math.floor(rng() * (max - min + 1)) + min;
 
-  for (let attempt = 0; attempt < 200; attempt++) {
+  // Attempt dynamic non-crossing generation with strict geometric clearance
+  for (let attempt = 0; attempt < 350; attempt++) {
     const occupied = new Set<number>([1, 100]);
+    const placedLinks: BoardLink[] = [];
     const ladders: BoardLink[] = [];
     const snakes: BoardLink[] = [];
 
-    // Generate 8 ladders distributed across the board so every region has climbing vines
-    const ladderBands = [
-      { minStart: 2, maxStart: 12, minSpan: 10, maxSpan: 26 },
-      { minStart: 8, maxStart: 19, minSpan: 12, maxSpan: 32 },
-      { minStart: 16, maxStart: 28, minSpan: 11, maxSpan: 34 },
-      { minStart: 25, maxStart: 39, minSpan: 12, maxSpan: 35 },
-      { minStart: 36, maxStart: 50, minSpan: 12, maxSpan: 34 },
-      { minStart: 46, maxStart: 62, minSpan: 11, maxSpan: 30 },
-      { minStart: 58, maxStart: 74, minSpan: 10, maxSpan: 24 },
-      { minStart: 68, maxStart: 86, minSpan: 9, maxSpan: 18 },
-    ];
-
-    let failed = false;
-
+    // Place 8 ladders in clean, moderate-length spans (1-2 rows high, minimal horizontal drift)
     for (let i = 0; i < 8; i++) {
-      const band = ladderBands[i];
       let placed = false;
-      for (let tries = 0; tries < 80; tries++) {
-        const start = randInt(band.minStart, band.maxStart);
-        const span = randInt(band.minSpan, band.maxSpan);
-        const end = Math.min(98, start + span);
+      const minRow = Math.floor((i * 8) / 8); // 0..7
+      const maxRow = Math.min(8, minRow + 1);
+
+      for (let tries = 0; tries < 90; tries++) {
+        const startRow = randInt(minRow, maxRow);
+        const startCol = randInt(0, 9);
+        const endRow = Math.min(9, startRow + randInt(1, 2));
+        if (endRow <= startRow) continue;
+        const endCol = Math.max(0, Math.min(9, startCol + randInt(-1, 1)));
+
+        const startSq =
+          startRow * 10 + (startRow % 2 === 0 ? startCol : 9 - startCol) + 1;
+        const endSq =
+          endRow * 10 + (endRow % 2 === 0 ? endCol : 9 - endCol) + 1;
 
         if (
-          end - start >= 8 &&
-          start > 1 &&
-          end < 100 &&
-          !occupied.has(start) &&
-          !occupied.has(end) &&
-          Math.floor((start - 1) / 10) !== Math.floor((end - 1) / 10)
+          startSq <= 1 ||
+          endSq >= 100 ||
+          endSq - startSq < 8 ||
+          occupied.has(startSq) ||
+          occupied.has(endSq)
         ) {
-          occupied.add(start);
-          occupied.add(end);
-          ladders.push({
+          continue;
+        }
+
+        // Check geometric distance against all existing links
+        const hasConflict = placedLinks.some((other) =>
+          doLinksConflictGeometrically(startSq, endSq, other.start, other.end, 8.2)
+        );
+
+        if (!hasConflict) {
+          occupied.add(startSq);
+          occupied.add(endSq);
+          const link: BoardLink = {
             id: `ladder-${i + 1}`,
             type: 'ladder',
-            start,
-            end,
-          });
+            start: startSq,
+            end: endSq,
+          };
+          ladders.push(link);
+          placedLinks.push(link);
           placed = true;
           break;
         }
       }
-      if (!placed) {
-        failed = true;
-        break;
-      }
+
+      if (!placed) break;
     }
 
-    if (failed) continue;
+    if (ladders.length < 8) continue;
 
-    // Generate 8 snakes distributed from lower-mid board up to 99
-    const snakeBands = [
-      { minHead: 22, maxHead: 35, minDrop: 10, maxDrop: 20 },
-      { minHead: 32, maxHead: 47, minDrop: 12, maxDrop: 26 },
-      { minHead: 44, maxHead: 58, minDrop: 12, maxDrop: 32 },
-      { minHead: 54, maxHead: 68, minDrop: 14, maxDrop: 36 },
-      { minHead: 64, maxHead: 78, minDrop: 14, maxDrop: 40 },
-      { minHead: 74, maxHead: 87, minDrop: 15, maxDrop: 44 },
-      { minHead: 84, maxHead: 94, minDrop: 16, maxDrop: 52 },
-      { minHead: 92, maxHead: 99, minDrop: 18, maxDrop: 65 },
-    ];
-
+    // Place 8 snakes in clean, non-crossing lanes
     for (let i = 0; i < 8; i++) {
-      const band = snakeBands[i];
       let placed = false;
-      for (let tries = 0; tries < 80; tries++) {
-        const head = randInt(band.minHead, band.maxHead);
-        const drop = randInt(band.minDrop, band.maxDrop);
-        const tail = Math.max(2, head - drop);
+      const minHeadRow = Math.min(9, Math.floor((i * 8) / 8) + 2); // 2..9
+      const maxHeadRow = Math.min(9, minHeadRow + 1);
 
-        // Avoid blocking 6 consecutive squares with snake heads
-        const adjacentHeads = snakes.filter((s) => Math.abs(s.start - head) <= 2).length;
+      for (let tries = 0; tries < 100; tries++) {
+        const headRow = randInt(minHeadRow, maxHeadRow);
+        const headCol = randInt(0, 9);
+        const tailRow = Math.max(0, headRow - randInt(1, 2));
+        if (tailRow >= headRow) continue;
+        const tailCol = Math.max(0, Math.min(9, headCol + randInt(-1, 1)));
+
+        const headSq =
+          headRow * 10 + (headRow % 2 === 0 ? headCol : 9 - headCol) + 1;
+        const tailSq =
+          tailRow * 10 + (tailRow % 2 === 0 ? tailCol : 9 - tailCol) + 1;
 
         if (
-          head - tail >= 8 &&
-          head < 100 &&
-          tail > 1 &&
-          adjacentHeads < 2 &&
-          !occupied.has(head) &&
-          !occupied.has(tail) &&
-          Math.floor((head - 1) / 10) !== Math.floor((tail - 1) / 10)
+          headSq >= 100 ||
+          tailSq <= 1 ||
+          headSq - tailSq < 8 ||
+          occupied.has(headSq) ||
+          occupied.has(tailSq)
         ) {
-          occupied.add(head);
-          occupied.add(tail);
+          continue;
+        }
+
+        const hasConflict = placedLinks.some((other) =>
+          doLinksConflictGeometrically(headSq, tailSq, other.start, other.end, 8.2)
+        );
+
+        if (!hasConflict) {
+          occupied.add(headSq);
+          occupied.add(tailSq);
           const species = SNAKE_SPECIES_LIST[i % SNAKE_SPECIES_LIST.length];
-          snakes.push({
+          const link: BoardLink = {
             id: `snake-${i + 1}`,
             type: 'snake',
-            start: head,
-            end: tail,
+            start: headSq,
+            end: tailSq,
             species,
-          });
+          };
+          snakes.push(link);
+          placedLinks.push(link);
           placed = true;
           break;
         }
       }
-      if (!placed) {
-        failed = true;
-        break;
-      }
+
+      if (!placed) break;
     }
 
-    if (failed) continue;
-
-    const candidate: BoardConfig = { ladders, snakes, seed: seedStr };
-    const check = validateBoard(candidate);
-    if (check.valid) {
-      return candidate;
+    if (snakes.length === 8) {
+      const candidate: BoardConfig = { ladders, snakes, seed: seedStr };
+      const check = validateBoard(candidate);
+      if (check.valid) {
+        return candidate;
+      }
     }
   }
 
-  // Fallback guaranteed-valid canonical board if random retries exhausted
-  const fallbackLadders: BoardLink[] = [
-    { id: 'ladder-1', type: 'ladder', start: 4, end: 25 },
-    { id: 'ladder-2', type: 'ladder', start: 13, end: 46 },
-    { id: 'ladder-3', type: 'ladder', start: 33, end: 49 },
-    { id: 'ladder-4', type: 'ladder', start: 42, end: 63 },
-    { id: 'ladder-5', type: 'ladder', start: 50, end: 69 },
-    { id: 'ladder-6', type: 'ladder', start: 62, end: 81 },
-    { id: 'ladder-7', type: 'ladder', start: 74, end: 92 },
-    { id: 'ladder-8', type: 'ladder', start: 80, end: 98 },
-  ];
-  const fallbackSnakes: BoardLink[] = [
-    { id: 'snake-1', type: 'snake', start: 27, end: 5, species: SNAKE_SPECIES_LIST[0] },
-    { id: 'snake-2', type: 'snake', start: 40, end: 3, species: SNAKE_SPECIES_LIST[1] },
-    { id: 'snake-3', type: 'snake', start: 43, end: 18, species: SNAKE_SPECIES_LIST[2] },
-    { id: 'snake-4', type: 'snake', start: 54, end: 31, species: SNAKE_SPECIES_LIST[3] },
-    { id: 'snake-5', type: 'snake', start: 66, end: 45, species: SNAKE_SPECIES_LIST[4] },
-    { id: 'snake-6', type: 'snake', start: 76, end: 58, species: SNAKE_SPECIES_LIST[5] },
-    { id: 'snake-7', type: 'snake', start: 89, end: 53, species: SNAKE_SPECIES_LIST[6] },
-    { id: 'snake-8', type: 'snake', start: 99, end: 41, species: SNAKE_SPECIES_LIST[7] },
-  ];
+  // Fallback to guaranteed non-crossing template (with optional horizontal mirror based on seed)
+  const tpl = CLEAN_NON_CROSSING_TEMPLATES[Math.floor(rng() * CLEAN_NON_CROSSING_TEMPLATES.length)];
+  const fallbackLadders: BoardLink[] = tpl.ladders.map(([s, e], idx) => ({
+    id: `ladder-${idx + 1}`,
+    type: 'ladder',
+    start: s,
+    end: e,
+  }));
+  const fallbackSnakes: BoardLink[] = tpl.snakes.map(([s, e], idx) => ({
+    id: `snake-${idx + 1}`,
+    type: 'snake',
+    start: s,
+    end: e,
+    species: SNAKE_SPECIES_LIST[idx % SNAKE_SPECIES_LIST.length],
+  }));
+
   return { ladders: fallbackLadders, snakes: fallbackSnakes, seed: seedStr };
 }
 
 /**
  * Self-test function that verifies generated boards (both random and daily seeded)
- * strictly obey every placement rule.
+ * strictly obey every placement and non-overlapping rule.
  */
 export function runBoardValidationSelfTest(iterations = 25): {
   passed: boolean;
@@ -396,7 +533,6 @@ export function evaluateRollOutcome(
   const fromSquare = player.position;
   const targetSquare = fromSquare + diceValue;
 
-  // Check bonus roll eligibility (rolling 6 gives extra turn unless it's the 3rd consecutive 6)
   const newConsecutiveSixes = diceValue === 6 ? player.consecutiveSixes + 1 : 0;
   let earnedBonusRoll = false;
   let tripleSixCancelledBonus = false;

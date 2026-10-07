@@ -7,8 +7,43 @@
     "verified": false
   },
   {
+    "species": "Green Tree Python",
+    "scientificName": "Morelia viridis",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Corn Snake",
+    "scientificName": "Pantherophis guttatus",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
     "species": "King Cobra",
     "scientificName": "Ophiophagus hannah",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Garter Snake",
+    "scientificName": "Thamnophis sirtalis",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Emerald Boa",
+    "scientificName": "Corallus caninus",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Emerald Tree Boa",
+    "scientificName": "Corallus caninus",
     "fact": "",
     "source": "",
     "verified": false
@@ -28,22 +63,8 @@
     "verified": false
   },
   {
-    "species": "Emerald Tree Boa",
-    "scientificName": "Corallus caninus",
-    "fact": "",
-    "source": "",
-    "verified": false
-  },
-  {
     "species": "Black Mamba",
     "scientificName": "Dendroaspis polylepis",
-    "fact": "",
-    "source": "",
-    "verified": false
-  },
-  {
-    "species": "Corn Snake",
-    "scientificName": "Pantherophis guttatus",
     "fact": "",
     "source": "",
     "verified": false

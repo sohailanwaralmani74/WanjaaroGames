@@ -1,18 +1,25 @@
 import React from 'react';
 import { SnakeAndLadderGame } from './snakeAndLadder/SnakeAndLadderGame';
+import { SnakeGame } from './snakeGame/SnakeGame';
+import { MatchingCardGame } from './matchingCard/MatchingCardGame';
+import { SnakeEscapeGame } from './snakeEscape/SnakeEscapeGame';
 
 export interface GameProps {
-  onFinish: (score: number, formattedScore: string) => void;
+  onComplete?: (score: number) => void;
 }
 
-interface DispatcherProps {
+export const GameDispatcher: React.FC<{
   gameId: string;
-  onFinish: (score: number, formattedScore: string) => void;
-}
-
-export function GameDispatcher({ gameId }: DispatcherProps) {
-  if (gameId === 'snake-and-ladder' || !gameId) {
-    return <SnakeAndLadderGame />;
+  onComplete?: (score: number) => void;
+}> = ({ gameId }) => {
+  if (gameId === 'snake-escape') {
+    return <SnakeEscapeGame />;
+  }
+  if (gameId === 'matching-card-game') {
+    return <MatchingCardGame />;
+  }
+  if (gameId === 'snake-game') {
+    return <SnakeGame />;
   }
   return <SnakeAndLadderGame />;
-}
+};
