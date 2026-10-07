@@ -1,0 +1,58 @@
+[
+  {
+    "species": "Ball Python",
+    "scientificName": "Python regius",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "King Cobra",
+    "scientificName": "Ophiophagus hannah",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Green Anaconda",
+    "scientificName": "Eunectes murinus",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Western Diamondback Rattlesnake",
+    "scientificName": "Crotalus atrox",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Emerald Tree Boa",
+    "scientificName": "Corallus caninus",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Black Mamba",
+    "scientificName": "Dendroaspis polylepis",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Corn Snake",
+    "scientificName": "Pantherophis guttatus",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Gaboon Viper",
+    "scientificName": "Bitis gabonica",
+    "fact": "",
+    "source": "",
+    "verified": false
+  }
+]
