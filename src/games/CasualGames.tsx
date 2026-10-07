@@ -604,108 +604,275 @@ export function SoloPongGame({ onFinish }: GameProps) {
   );
 }
 
-// 92. Starship Asteroid Dodger
+// 92. Starship Asteroid Dodger (3-Lane Interactive Arcade)
 export function SpaceAsteroidsGame({ onFinish }: GameProps) {
-  const [score, setScore] = useState(0);
+  const [shipLane, setShipLane] = useState(1); // 0, 1, 2
+  const [asteroids, setAsteroids] = useState<{ id: number; lane: number; row: number }[]>([]);
+  const [dodged, setDodged] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const dodge = () => {
-    sound.playSuccess();
-    const next = score + 1;
-    setScore(next);
-    if (next >= 10) {
-      onFinish(next, `${next} Asteroids Dodged`);
-    }
+  useEffect(() => {
+    if (!isPlaying) return;
+    const interval = setInterval(() => {
+      setAsteroids((prev) => {
+        const moved = prev.map((a) => ({ ...a, row: a.row + 1 }));
+        // Check collision at row 4
+        const hit = moved.find((a) => a.row === 4 && a.lane === shipLane);
+        if (hit) {
+          sound.playFail();
+          setIsPlaying(false);
+          onFinish(dodged, `${dodged} Asteroids Dodged`);
+          return [];
+        }
+        const passed = moved.filter((a) => a.row > 4).length;
+        if (passed > 0) {
+          sound.playBeep(600, 0.03);
+          setDodged((d) => {
+            const next = d + passed;
+            if (next >= 15) {
+              sound.playSuccess();
+              setIsPlaying(false);
+              onFinish(15, '15 Asteroids Cleared! 🚀');
+            }
+            return next;
+          });
+        }
+        const active = moved.filter((a) => a.row <= 4);
+        if (Math.random() < 0.75) {
+          active.push({ id: Date.now() + Math.random(), lane: Math.floor(Math.random() * 3), row: 0 });
+        }
+        return active;
+      });
+    }, 320);
+    return () => clearInterval(interval);
+  }, [isPlaying, shipLane, dodged, onFinish]);
+
+  const startGame = () => {
+    sound.playTap();
+    setShipLane(1);
+    setAsteroids([{ id: 1, lane: Math.floor(Math.random() * 3), row: 0 }]);
+    setDodged(0);
+    setIsPlaying(true);
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
+    <div className="flex flex-col items-center gap-2.5 w-full select-none max-w-xs mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
         <span>Asteroid Dodger</span>
-        <span className="text-cyan-400 font-bold">Cleared: {score}/10</span>
+        <span className="text-cyan-400 font-bold">Dodged: {dodged}/15</span>
       </div>
 
-      <div className="w-full max-w-sm h-48 bg-neutral-900 border border-neutral-800 rounded-xl flex flex-col items-center justify-center p-4 gap-4">
-        <span className="text-4xl">🚀</span>
-        <button
-          onClick={dodge}
-          className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg text-xs"
-        >
-          THRUST BURST
-        </button>
+      <div className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 relative overflow-hidden">
+        <div className="grid grid-cols-3 gap-2 h-52">
+          {[0, 1, 2].map((lane) => (
+            <div
+              key={lane}
+              onClick={() => {
+                sound.playTap();
+                setShipLane(lane);
+              }}
+              className="bg-slate-900/70 border border-slate-800/80 rounded-lg relative flex flex-col justify-between items-center py-2 cursor-pointer hover:bg-slate-900"
+            >
+              {[0, 1, 2, 3, 4].map((r) => {
+                const hasRock = asteroids.some((a) => a.lane === lane && a.row === r);
+                const isShip = r === 4 && shipLane === lane;
+                return (
+                  <div key={r} className="h-9 flex items-center justify-center text-2xl">
+                    {isShip ? '🚀' : hasRock ? '☄️' : ''}
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+
+        {!isPlaying && (
+          <div className="absolute inset-0 bg-slate-950/85 flex flex-col items-center justify-center gap-2 p-4">
+            <span className="text-3xl">🚀</span>
+            <p className="text-xs text-slate-300 text-center">Tap lanes or buttons below to dodge incoming meteors!</p>
+            <button
+              onClick={startGame}
+              className="px-5 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black rounded-lg text-xs"
+            >
+              Launch Ship
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div className="grid grid-cols-3 gap-2 w-full">
+        {['◀ Left', 'Center', 'Right ▶'].map((label, idx) => (
+          <button
+            key={idx}
+            onClick={() => {
+              sound.playTap();
+              setShipLane(idx);
+            }}
+            className={`py-2 rounded-lg font-bold text-xs border transition-all ${
+              shipLane === idx
+                ? 'bg-cyan-500 text-slate-950 border-cyan-400'
+                : 'bg-slate-900 text-slate-300 border-slate-800'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
       </div>
     </div>
   );
 }
 
-// 93. Vertical Bouncer Platformer
+// 93. Vertical Bouncer Platformer (Interactive Lane Jumper)
 export function VerticalBouncerGame({ onFinish }: GameProps) {
   const [height, setHeight] = useState(0);
+  const [playerCol, setPlayerCol] = useState(1);
+  const [platforms, setPlatforms] = useState<number[]>([1, 0, 2, 1]);
 
-  const bounce = () => {
-    sound.playTap();
-    const next = height + 50;
-    setHeight(next);
-    if (next >= 500) {
-      sound.playSuccess();
-      onFinish(next, `${next}m Altitude Climbed`);
+  const jumpTo = (col: number) => {
+    if (col === platforms[0]) {
+      sound.playTap();
+      const nextH = height + 50;
+      setPlayerCol(col);
+      setHeight(nextH);
+      setPlatforms((prev) => [...prev.slice(1), Math.floor(Math.random() * 3)]);
+      if (nextH >= 600) {
+        sound.playSuccess();
+        onFinish(nextH, `${nextH}m Altitude Climbed!`);
+      }
+    } else {
+      sound.playFail();
+      setHeight(0);
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Vertical Bouncer</span>
-        <span className="text-emerald-400 font-bold">{height}m</span>
+    <div className="flex flex-col items-center gap-2.5 w-full select-none max-w-xs mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
+        <span>Sky Jumper</span>
+        <span className="text-emerald-400 font-bold">{height}m / 600m</span>
       </div>
 
-      <div className="w-full max-w-sm h-48 bg-neutral-900 border border-neutral-800 rounded-xl flex flex-col items-center justify-center p-4 gap-4">
-        <div className="text-4xl animate-bounce">🦘</div>
-        <button
-          onClick={bounce}
-          className="px-6 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-xs"
-        >
-          BOUNCE HIGHER
-        </button>
+      <div className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 flex flex-col gap-2">
+        {/* Upcoming platforms from top to bottom */}
+        {[...platforms].reverse().map((platCol, rIdx) => {
+          const isNextTarget = rIdx === platforms.length - 1;
+          return (
+            <div key={rIdx} className="grid grid-cols-3 gap-2 h-9 items-center">
+              {[0, 1, 2].map((c) => (
+                <div
+                  key={c}
+                  onClick={() => isNextTarget && jumpTo(c)}
+                  className={`h-full rounded-lg flex items-center justify-center transition-all ${
+                    platCol === c
+                      ? isNextTarget
+                        ? 'bg-emerald-500/30 border-2 border-emerald-400 cursor-pointer hover:bg-emerald-500/40'
+                        : 'bg-slate-800 border border-slate-700'
+                      : 'bg-slate-900/40'
+                  }`}
+                >
+                  {platCol === c && <span className="text-xs font-mono text-emerald-300">▬▬▬</span>}
+                </div>
+              ))}
+            </div>
+          );
+        })}
+
+        {/* Current Jumper Row */}
+        <div className="grid grid-cols-3 gap-2 h-10 items-center border-t border-slate-800 pt-1">
+          {[0, 1, 2].map((c) => (
+            <div key={c} className="flex items-center justify-center text-2xl">
+              {playerCol === c ? '🦘' : ''}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-2 w-full">
+        {[0, 1, 2].map((c) => (
+          <button
+            key={c}
+            onClick={() => jumpTo(c)}
+            className="py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs active:scale-95 transition-transform"
+          >
+            Jump Col {c + 1}
+          </button>
+        ))}
       </div>
     </div>
   );
 }
 
-// 94. Mini Pinball Bumpers
+// 94. Mini Pinball Bumpers (Interactive Bumper Target Arena)
 export function MiniPinballGame({ onFinish }: GameProps) {
   const [points, setPoints] = useState(0);
+  const [activeBumper, setActiveBumper] = useState(1);
+  const [ballPos, setBallPos] = useState(1);
+  const [shotsLeft, setShotsLeft] = useState(8);
 
-  const flip = () => {
-    sound.playSuccess();
-    const next = points + 250;
-    setPoints(next);
-    if (next >= 1500) {
-      onFinish(next, `${next} Pinball Score`);
+  const launchFlipper = (lane: number) => {
+    if (shotsLeft <= 0) return;
+    setBallPos(lane);
+    const isDirectHit = lane === activeBumper;
+    const gained = isDirectHit ? 300 : 100;
+    const nextPts = points + gained;
+    const nextShots = shotsLeft - 1;
+
+    if (isDirectHit) sound.playSuccess();
+    else sound.playTap();
+
+    setPoints(nextPts);
+    setShotsLeft(nextShots);
+    setActiveBumper(Math.floor(Math.random() * 3));
+
+    if (nextPts >= 1500 || nextShots <= 0) {
+      onFinish(nextPts, `${nextPts} Pinball Score`);
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Pinball Bumpers</span>
-        <span className="text-amber-400 font-bold">Score: {points}</span>
+    <div className="flex flex-col items-center gap-2.5 w-full select-none max-w-xs mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
+        <span>Balls: {shotsLeft}</span>
+        <span className="text-amber-400 font-bold">Score: {points}/1500</span>
       </div>
 
-      <div className="w-full max-w-sm h-48 bg-neutral-900 border border-neutral-800 rounded-xl flex flex-col items-center justify-center p-4 gap-4">
-        <div className="flex gap-4">
-          <div className="w-12 h-12 rounded-full bg-rose-500 border-2 border-white flex items-center justify-center font-bold text-white text-xs">
-            100
-          </div>
-          <div className="w-12 h-12 rounded-full bg-amber-500 border-2 border-white flex items-center justify-center font-bold text-black text-xs">
-            250
-          </div>
+      <div className="w-full h-48 bg-slate-950 border border-slate-800 rounded-xl flex flex-col justify-between p-4">
+        <div className="grid grid-cols-3 gap-3">
+          {[0, 1, 2].map((idx) => (
+            <button
+              key={idx}
+              onClick={() => launchFlipper(idx)}
+              className={`h-16 rounded-full border-2 flex flex-col items-center justify-center font-bold transition-all active:scale-90 ${
+                activeBumper === idx
+                  ? 'bg-amber-500 border-white text-slate-950 shadow-lg shadow-amber-500/40 scale-105'
+                  : 'bg-rose-900/60 border-rose-500/50 text-rose-200'
+              }`}
+            >
+              <span className="text-xs font-black">{activeBumper === idx ? '300' : '100'}</span>
+              <span className="text-[9px] uppercase">{activeBumper === idx ? 'BONUS' : 'BUMP'}</span>
+            </button>
+          ))}
         </div>
-        <button
-          onClick={flip}
-          className="px-8 py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-lg text-xs"
-        >
-          TRIGGER FLIPPERS
-        </button>
+
+        <div className="grid grid-cols-3 gap-3 items-center text-center">
+          {[0, 1, 2].map((idx) => (
+            <div key={idx} className="text-xl">
+              {ballPos === idx ? '⚪' : '·'}
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-3 gap-2">
+          {['Left Flipper', 'Center Shot', 'Right Flipper'].map((lbl, idx) => (
+            <button
+              key={idx}
+              onClick={() => launchFlipper(idx)}
+              className="py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-lg text-[11px] active:scale-95"
+            >
+              {lbl}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -713,33 +880,98 @@ export function MiniPinballGame({ onFinish }: GameProps) {
 
 // 95. Pachinko Steel Ball Peg Maze
 export function PachinkoDropGame({ onFinish }: GameProps) {
-  const [drops, setDrops] = useState(0);
+  const [dropsLeft, setDropsLeft] = useState(5);
+  const [totalScore, setTotalScore] = useState(0);
+  const [ballCol, setBallCol] = useState<number | null>(null);
+  const [ballRow, setBallRow] = useState(0);
+  const buckets = [100, 300, 500, 300, 100];
 
-  const dropBall = () => {
+  const dropAtColumn = (startCol: number) => {
+    if (ballCol !== null || dropsLeft <= 0) return;
     sound.playTap();
-    const next = drops + 1;
-    setDrops(next);
-    if (next >= 5) {
-      sound.playSuccess();
-      onFinish(next * 100, `${next * 100} Pachinko Credits`);
-    }
+    let curCol = startCol;
+    let curRow = 0;
+    setBallCol(curCol);
+    setBallRow(0);
+
+    const interval = setInterval(() => {
+      curRow += 1;
+      if (curRow < 4) {
+        const shift = Math.random() > 0.5 ? 1 : -1;
+        curCol = Math.max(0, Math.min(4, curCol + shift));
+        setBallCol(curCol);
+        setBallRow(curRow);
+        sound.playBeep(480 + curRow * 60, 0.03);
+      } else {
+        clearInterval(interval);
+        const pts = buckets[curCol];
+        sound.playSuccess();
+        setBallCol(null);
+        setTotalScore((prev) => {
+          const nextScore = prev + pts;
+          setDropsLeft((d) => {
+            const nextDrops = d - 1;
+            if (nextDrops <= 0) {
+              onFinish(nextScore, `${nextScore} Pachinko Credits`);
+            }
+            return nextDrops;
+          });
+          return nextScore;
+        });
+      }
+    }, 160);
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Pachinko Pegs</span>
-        <span className="text-cyan-400 font-bold">Drops: {drops}/5</span>
+    <div className="flex flex-col items-center gap-2.5 w-full select-none max-w-xs mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
+        <span>Balls Left: {dropsLeft}</span>
+        <span className="text-cyan-400 font-bold">Credits: {totalScore}</span>
       </div>
 
-      <div className="w-full max-w-sm h-48 bg-neutral-900 border border-neutral-800 rounded-xl flex flex-col items-center justify-center p-4 gap-4">
-        <span className="text-4xl animate-bounce">⚪</span>
-        <button
-          onClick={dropBall}
-          className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg text-xs"
-        >
-          LAUNCH STEEL BALL
-        </button>
+      <div className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 flex flex-col gap-2">
+        {/* Dropper Buttons */}
+        <div className="grid grid-cols-5 gap-1.5">
+          {[0, 1, 2, 3, 4].map((c) => (
+            <button
+              key={c}
+              disabled={ballCol !== null}
+              onClick={() => dropAtColumn(c)}
+              className="py-1.5 bg-cyan-600 hover:bg-cyan-500 disabled:opacity-40 text-white font-bold rounded text-[10px]"
+            >
+              ▼ Drop
+            </button>
+          ))}
+        </div>
+
+        {/* Peg Matrix */}
+        <div className="flex flex-col gap-2 py-2 bg-slate-900 rounded-lg px-2">
+          {[0, 1, 2, 3].map((r) => (
+            <div key={r} className="grid grid-cols-5 gap-1.5 h-7 items-center text-center">
+              {[0, 1, 2, 3, 4].map((c) => (
+                <div key={c} className="text-sm">
+                  {ballCol === c && ballRow === r ? '⚪' : '•'}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Multiplier Pockets */}
+        <div className="grid grid-cols-5 gap-1.5">
+          {buckets.map((pts, c) => (
+            <div
+              key={c}
+              className={`py-1.5 rounded text-center font-mono text-[10px] font-bold border ${
+                pts === 500
+                  ? 'bg-amber-500/20 border-amber-400 text-amber-300'
+                  : 'bg-slate-900 border-slate-800 text-slate-300'
+              }`}
+            >
+              {pts}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -747,32 +979,54 @@ export function PachinkoDropGame({ onFinish }: GameProps) {
 
 // 96. Motorized Coin Pusher Shelf
 export function CoinPusherGame({ onFinish }: GameProps) {
-  const [pushed, setPushed] = useState(0);
+  const [shelf, setShelf] = useState<number[]>([2, 3, 4, 2, 3]); // coins per column (max 5 before falling)
+  const [collected, setCollected] = useState(0);
 
-  const push = () => {
-    sound.playSuccess();
-    const next = pushed + 3;
-    setPushed(next);
-    if (next >= 15) {
-      onFinish(next, `${next} Coins Over Edge!`);
+  const dropCoinInCol = (col: number) => {
+    sound.playTap();
+    const next = [...shelf];
+    next[col] += 1;
+    let fallen = 0;
+    if (next[col] >= 5) {
+      fallen = 3;
+      next[col] = 2;
+      sound.playSuccess();
+    }
+    setShelf(next);
+    if (fallen > 0) {
+      const nextTotal = collected + fallen;
+      setCollected(nextTotal);
+      if (nextTotal >= 15) {
+        onFinish(nextTotal, `${nextTotal} Coins Cascaded!`);
+      }
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Coin Pusher</span>
-        <span className="text-amber-400 font-bold">Cascaded: {pushed}/15</span>
+    <div className="flex flex-col items-center gap-2.5 w-full select-none max-w-xs mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
+        <span>Coin Pusher Ledge</span>
+        <span className="text-amber-400 font-bold">Collected: {collected}/15</span>
       </div>
 
-      <div className="w-full max-w-sm h-48 bg-neutral-900 border border-neutral-800 rounded-xl flex flex-col items-center justify-center p-4 gap-4">
-        <div className="flex gap-1 text-2xl">🪙🪙🪙</div>
-        <button
-          onClick={push}
-          className="px-6 py-2 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-lg text-xs"
-        >
-          CYCLE PUSHER BLADE
-        </button>
+      <div className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 flex flex-col gap-3">
+        <div className="grid grid-cols-5 gap-2">
+          {shelf.map((count, col) => (
+            <button
+              key={col}
+              onClick={() => dropCoinInCol(col)}
+              className="flex flex-col justify-end items-center h-36 bg-slate-900 hover:bg-slate-850 border border-slate-800 rounded-lg p-2 gap-1 transition-all active:scale-95"
+            >
+              {Array.from({ length: count }).map((_, i) => (
+                <span key={i} className="text-lg leading-none">🪙</span>
+              ))}
+              <span className="text-[10px] font-mono text-amber-400 mt-1">{count}/5</span>
+            </button>
+          ))}
+        </div>
+        <p className="text-[11px] text-slate-400 text-center font-mono">
+          Tap any chute to drop a coin and push stacks of 5 over the edge!
+        </p>
       </div>
     </div>
   );
@@ -897,67 +1151,165 @@ export function SlotReelsGame({ onFinish }: GameProps) {
   );
 }
 
-// 98. Bubble Cluster Cannon
+// 98. Bubble Cluster Cannon (Interactive Color Match Launcher)
 export function BubbleCannonGame({ onFinish }: GameProps) {
+  const colors = ['🔵', '🔴', '🟢', '🟡'];
+  const [clusters, setClusters] = useState<string[]>(['🔵', '🔴', '🟢', '🟡', '🔵']);
+  const [ammo, setAmmo] = useState('🔵');
   const [cleared, setCleared] = useState(0);
 
-  const fire = () => {
-    sound.playSuccess();
-    const next = cleared + 3;
-    setCleared(next);
-    if (next >= 12) {
-      onFinish(next, `${next} Bubbles Cleared`);
+  const shootAt = (idx: number) => {
+    if (clusters[idx] === ammo) {
+      sound.playSuccess();
+      const nextCleared = cleared + 3;
+      setCleared(nextCleared);
+
+      const nextClusters = [...clusters];
+      nextClusters[idx] = colors[Math.floor(Math.random() * colors.length)];
+      setClusters(nextClusters);
+      setAmmo( nextClusters[Math.floor(Math.random() * nextClusters.length)] );
+
+      if (nextCleared >= 15) {
+        onFinish(nextCleared, `${nextCleared} Bubbles Popped! 🫧`);
+      }
+    } else {
+      sound.playFail();
+      // Swap ammo to give player a fresh color
+      setAmmo(clusters[Math.floor(Math.random() * clusters.length)]);
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
+    <div className="flex flex-col items-center gap-2.5 w-full select-none max-w-xs mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
         <span>Bubble Cannon</span>
-        <span className="text-cyan-400 font-bold">Cleared: {cleared}/12</span>
+        <span className="text-cyan-400 font-bold">Popped: {cleared}/15</span>
       </div>
 
-      <div className="w-full max-w-sm h-48 bg-neutral-900 border border-neutral-800 rounded-xl flex flex-col items-center justify-center p-4 gap-4">
-        <div className="flex gap-2 text-3xl">🔵🔴🟢</div>
-        <button
-          onClick={fire}
-          className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg text-xs"
-        >
-          AIM & FIRE BUBBLE
-        </button>
+      <div className="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col items-center justify-between h-48">
+        {/* Ceiling Bubble Clusters */}
+        <div className="grid grid-cols-5 gap-2 w-full">
+          {clusters.map((col, idx) => (
+            <button
+              key={idx}
+              onClick={() => shootAt(idx)}
+              className="h-12 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-xl flex items-center justify-center text-2xl active:scale-90 transition-transform"
+            >
+              {col}
+            </button>
+          ))}
+        </div>
+
+        {/* Cannon Launcher */}
+        <div className="flex flex-col items-center gap-1">
+          <div className="w-14 h-14 rounded-full bg-slate-900 border-2 border-cyan-400 flex items-center justify-center text-3xl shadow-lg shadow-cyan-500/20">
+            {ammo}
+          </div>
+          <span className="text-[10px] font-mono text-cyan-400 uppercase font-bold">
+            Tap matching {ammo} cluster above!
+          </span>
+        </div>
       </div>
     </div>
   );
 }
 
-// 99. Match-3 Gem Blitz
+// 99. Match-3 Gem Blitz (Interactive 4x4 Gem Swapper)
 export function JewelBlitzGame({ onFinish }: GameProps) {
-  const [combos, setCombos] = useState(0);
+  const gems = ['💎', '🔮', '🔶', '💚'];
+  const [grid, setGrid] = useState<string[]>(() =>
+    Array.from({ length: 16 }, (_, i) => gems[i % 4])
+  );
+  const [selected, setSelected] = useState<number | null>(null);
+  const [score, setScore] = useState(0);
 
-  const swap = () => {
-    sound.playSuccess();
-    const next = combos + 1;
-    setCombos(next);
-    if (next >= 5) {
-      onFinish(next * 200, `${next * 200} Gem Cascade Points`);
+  const handleGemClick = (idx: number) => {
+    if (selected === null) {
+      sound.playTap();
+      setSelected(idx);
+      return;
+    }
+    if (selected === idx) {
+      setSelected(null);
+      return;
+    }
+
+    const r1 = Math.floor(selected / 4);
+    const c1 = selected % 4;
+    const r2 = Math.floor(idx / 4);
+    const c2 = idx % 4;
+
+    if (Math.abs(r1 - r2) + Math.abs(c1 - c2) === 1) {
+      const next = [...grid];
+      const temp = next[selected];
+      next[selected] = next[idx];
+      next[idx] = temp;
+
+      // Check any row or col of 3+ matching gems
+      let matchedIndices = new Set<number>();
+      for (let r = 0; r < 4; r++) {
+        for (let c = 0; c < 2; c++) {
+          const i = r * 4 + c;
+          if (next[i] === next[i + 1] && next[i] === next[i + 2]) {
+            matchedIndices.add(i);
+            matchedIndices.add(i + 1);
+            matchedIndices.add(i + 2);
+          }
+        }
+      }
+      for (let c = 0; c < 4; c++) {
+        for (let r = 0; r < 2; r++) {
+          const i = r * 4 + c;
+          if (next[i] === next[i + 4] && next[i] === next[i + 8]) {
+            matchedIndices.add(i);
+            matchedIndices.add(i + 4);
+            matchedIndices.add(i + 8);
+          }
+        }
+      }
+
+      if (matchedIndices.size > 0) {
+        sound.playSuccess();
+        matchedIndices.forEach((mIdx) => {
+          next[mIdx] = gems[Math.floor(Math.random() * gems.length)];
+        });
+        const nextScore = score + matchedIndices.size * 100;
+        setScore(nextScore);
+        if (nextScore >= 1200) {
+          onFinish(nextScore, `${nextScore} Gem Blitz Score! 💎`);
+        }
+      } else {
+        sound.playTap();
+      }
+      setGrid(next);
+      setSelected(null);
+    } else {
+      sound.playTap();
+      setSelected(idx);
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Jewel Blitz</span>
-        <span className="text-amber-400 font-bold">Combos: {combos}/5</span>
+    <div className="flex flex-col items-center gap-2.5 w-full select-none max-w-xs mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
+        <span>Jewel Blitz (Swap Adjacent)</span>
+        <span className="text-amber-400 font-bold">{score}/1200 pts</span>
       </div>
 
-      <div className="w-full max-w-sm h-48 bg-neutral-900 border border-neutral-800 rounded-xl flex flex-col items-center justify-center p-4 gap-4">
-        <div className="flex gap-2 text-3xl">💎✨💍💎</div>
-        <button
-          onClick={swap}
-          className="px-6 py-2 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-lg text-xs"
-        >
-          SWAP ADJACENT GEMS
-        </button>
+      <div className="grid grid-cols-4 gap-2 p-3 bg-slate-950 border border-slate-800 rounded-xl">
+        {grid.map((gem, idx) => (
+          <button
+            key={idx}
+            onClick={() => handleGemClick(idx)}
+            className={`w-12 h-12 rounded-xl text-2xl flex items-center justify-center transition-all active:scale-90 ${
+              selected === idx
+                ? 'bg-amber-500/30 border-2 border-amber-400 scale-105'
+                : 'bg-slate-900 hover:bg-slate-800 border border-slate-800'
+            }`}
+          >
+            {gem}
+          </button>
+        ))}
       </div>
     </div>
   );

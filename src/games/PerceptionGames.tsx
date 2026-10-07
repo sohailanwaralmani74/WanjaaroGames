@@ -483,39 +483,60 @@ export function AngleEstimatorGame({ onFinish }: GameProps) {
 
 // 39. Shadow Silhouette Match
 export function ShadowMatchGame({ onFinish }: GameProps) {
-  const [correctOption, setCorrectOption] = useState(2);
+  const shapes = [
+    { name: 'Hexagon', target: '⬢', options: ['⬢', '⬟', '◆', '▲'], correctIdx: 0 },
+    { name: 'Star', target: '★', options: ['✦', '★', '✶', '✿'], correctIdx: 1 },
+    { name: 'Spade', target: '♠', options: ['♣', '♥', '♠', '♦'], correctIdx: 2 },
+    { name: 'Crescent', target: '☾', options: ['●', '◐', '◑', '☾'], correctIdx: 3 },
+    { name: 'Diamond', target: '◆', options: ['◆', '◼', '▲', '⬢'], correctIdx: 0 },
+  ];
+
+  const [round, setRound] = useState(0);
   const [score, setScore] = useState(0);
+  const [rotation, setRotation] = useState(45);
+
+  const cur = shapes[round % shapes.length];
 
   const handleSelect = (idx: number) => {
-    if (idx === correctOption) {
+    if (idx === cur.correctIdx) {
       sound.playSuccess();
       const nextScore = score + 100;
       setScore(nextScore);
-      onFinish(nextScore, `${nextScore} pts (Matched!)`);
-      setCorrectOption(Math.floor(Math.random() * 3));
+      const nextRound = round + 1;
+      if (nextRound >= 5) {
+        onFinish(nextScore, `${nextScore} pts (5/5 Silhouettes)`);
+      } else {
+        setRound(nextRound);
+        setRotation((r) => (r + 75) % 360);
+      }
     } else {
       sound.playFail();
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Shadow Projection</span>
+    <div className="flex flex-col items-center gap-3 w-full select-none max-w-sm mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
+        <span>Shadow Silhouette ({round + 1}/5)</span>
         <span className="text-emerald-400 font-bold">Score: {score}</span>
       </div>
 
-      <div className="w-full max-w-sm bg-neutral-900 border border-neutral-800 rounded-xl p-6 flex flex-col items-center gap-6">
-        <div className="text-5xl p-4 bg-neutral-800 rounded-2xl shadow-inner">
-          🔺
+      <div className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-5 flex flex-col items-center gap-4">
+        <div className="w-24 h-24 bg-neutral-950 border border-neutral-800 rounded-2xl flex items-center justify-center shadow-inner">
+          <span
+            style={{ transform: `rotate(${rotation}deg)` }}
+            className="text-5xl text-amber-400 select-none inline-block transition-transform duration-300"
+          >
+            {cur.target}
+          </span>
         </div>
-        <p className="text-xs text-neutral-400">Match the cast shadow silhouette:</p>
-        <div className="flex gap-4">
-          {['▲', '◼', '●'].map((sym, i) => (
+        <p className="text-xs text-neutral-400">Select the exact matching rotated shadow silhouette:</p>
+        <div className="grid grid-cols-4 gap-3 w-full">
+          {cur.options.map((sym, i) => (
             <button
               key={i}
-              onClick={() => handleSelect(i === 0 ? correctOption : (correctOption + 1) % 3)}
-              className="w-14 h-14 bg-neutral-800 hover:bg-neutral-750 text-2xl flex items-center justify-center rounded-lg border border-neutral-700"
+              onClick={() => handleSelect(i)}
+              className="h-14 bg-neutral-800 hover:bg-neutral-750 text-3xl text-neutral-950 drop-shadow-[0_0_2px_rgba(255,255,255,0.6)] flex items-center justify-center rounded-xl border border-neutral-700 active:scale-95 transition-transform"
             >
               {sym}
             </button>
@@ -526,53 +547,114 @@ export function ShadowMatchGame({ onFinish }: GameProps) {
   );
 }
 
-// 40. Coherent Motion Spotter
+// 40. Coherent Motion Spotter (Animated Random Dot Kinematogram)
 export function CoherentMotionGame({ onFinish }: GameProps) {
   const [direction, setDirection] = useState<'left' | 'right'>('right');
   const [score, setScore] = useState(0);
+  const [round, setRound] = useState(0);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const animRef = useRef<number | null>(null);
 
-  const startTrial = () => {
-    setDirection(Math.random() > 0.5 ? 'left' : 'right');
+  const dotsRef = useRef<{ x: number; y: number; coherent: boolean; vx: number; vy: number }[]>([]);
+
+  const initDots = (dir: 'left' | 'right') => {
+    const dots = [];
+    for (let i = 0; i < 65; i++) {
+      const coherent = i < 25; // ~38% coherence
+      const speed = 1.6;
+      const angle = Math.random() * Math.PI * 2;
+      dots.push({
+        x: Math.random() * 280,
+        y: Math.random() * 160,
+        coherent,
+        vx: coherent ? (dir === 'right' ? speed : -speed) : Math.cos(angle) * speed,
+        vy: coherent ? 0 : Math.sin(angle) * speed,
+      });
+    }
+    dotsRef.current = dots;
   };
 
-  const handleGuess = (d: 'left' | 'right') => {
-    if (d === direction) {
-      sound.playSuccess();
-      const nextScore = score + 1;
-      setScore(nextScore);
-      if (nextScore >= 5) {
-        onFinish(nextScore, `${nextScore} coherent drift detections`);
-      } else {
-        startTrial();
+  useEffect(() => {
+    const initialDir = Math.random() > 0.5 ? 'left' : 'right';
+    setDirection(initialDir);
+    initDots(initialDir);
+
+    const loop = () => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.fillStyle = '#090d16';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          ctx.fillStyle = '#38bdf8';
+          for (const d of dotsRef.current) {
+            d.x = (d.x + d.vx + canvas.width) % canvas.width;
+            d.y = (d.y + d.vy + canvas.height) % canvas.height;
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, 2.2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
       }
+      animRef.current = requestAnimationFrame(loop);
+    };
+    animRef.current = requestAnimationFrame(loop);
+
+    return () => {
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+    };
+  }, []);
+
+  const handleGuess = (d: 'left' | 'right') => {
+    const isCorrect = d === direction;
+    if (isCorrect) {
+      sound.playSuccess();
     } else {
       sound.playFail();
-      startTrial();
+    }
+    const nextScore = isCorrect ? score + 1 : score;
+    const nextRound = round + 1;
+    setScore(nextScore);
+    setRound(nextRound);
+
+    if (nextRound >= 5) {
+      onFinish(nextScore, `${nextScore}/5 Coherent Drift Detections`);
+    } else {
+      const nextDir = Math.random() > 0.5 ? 'left' : 'right';
+      setDirection(nextDir);
+      initDots(nextDir);
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Motion Drift</span>
-        <span className="text-cyan-400 font-bold">Detected: {score}/5</span>
+    <div className="flex flex-col items-center gap-3 w-full select-none max-w-sm mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
+        <span>Coherent Motion ({round + 1}/5)</span>
+        <span className="text-cyan-400 font-bold">Score: {score}/5</span>
       </div>
 
-      <div className="w-full max-w-sm h-48 bg-neutral-900 border border-neutral-800 rounded-xl p-6 flex flex-col items-center justify-between">
+      <div className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-4 flex flex-col items-center gap-3">
+        <canvas
+          ref={canvasRef}
+          width={280}
+          height={150}
+          className="rounded-lg border border-neutral-800 bg-slate-950 block"
+        />
         <p className="text-xs text-neutral-400 text-center">
-          Which horizontal direction is the subtle particle drift moving?
+          Observe the dot field: which way is the coherent signal drifting?
         </p>
 
-        <div className="flex gap-4">
+        <div className="flex gap-3 w-full">
           <button
             onClick={() => handleGuess('left')}
-            className="px-6 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-lg text-sm"
+            className="flex-1 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-lg text-xs active:scale-95 transition-transform"
           >
             ◀ LEFT DRIFT
           </button>
           <button
             onClick={() => handleGuess('right')}
-            className="px-6 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-lg text-sm"
+            className="flex-1 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-lg text-xs active:scale-95 transition-transform"
           >
             RIGHT DRIFT ▶
           </button>

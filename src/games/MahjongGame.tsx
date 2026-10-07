@@ -224,26 +224,26 @@ export function MahjongGame({ onFinish }: GameProps) {
   const remainingCount = tiles.filter((t) => !t.removed).length;
 
   return (
-    <div className="flex flex-col items-center gap-4 w-full select-none max-w-2xl mx-auto">
+    <div className="flex flex-col items-center gap-2.5 w-full select-none max-w-xl mx-auto">
       {/* Top Header Bar */}
-      <div className="flex justify-between items-center w-full px-4 py-2 bg-slate-900 border border-slate-800 rounded-2xl text-xs font-mono text-slate-300 shadow-lg">
-        <div className="flex items-center gap-4">
-          <span className="font-bold text-white flex items-center gap-1.5">
+      <div className="flex justify-between items-center w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-xs font-mono text-slate-300 shadow">
+        <div className="flex items-center gap-3">
+          <span className="font-bold text-white flex items-center gap-1">
             🀄 Mahjong Solitaire
           </span>
           <span className="text-emerald-400">Score: {score}</span>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="text-slate-400">Remaining: {remainingCount}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-slate-400">Left: {remainingCount}</span>
           <button
             onClick={handleHint}
-            className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-xs font-bold transition-all active:scale-95"
+            className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-xs font-bold transition-all active:scale-95"
           >
             💡 Hint
           </button>
           <button
             onClick={initBoard}
-            className="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-xs transition-all active:scale-95"
+            className="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-xs transition-all active:scale-95"
           >
             New Deal
           </button>
@@ -251,8 +251,8 @@ export function MahjongGame({ onFinish }: GameProps) {
       </div>
 
       {/* Mahjong Solitaire Board */}
-      <div className="relative w-full aspect-[4/3] bg-gradient-to-b from-slate-950 to-slate-900 border-2 border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl overflow-hidden flex items-center justify-center">
-        <div className="relative w-[340px] sm:w-[460px] h-[260px] sm:h-[320px]">
+      <div className="relative w-full h-[290px] sm:h-[310px] bg-gradient-to-b from-slate-950 to-slate-900 border-2 border-slate-800 rounded-2xl p-3 shadow-xl overflow-hidden flex items-center justify-center">
+        <div className="relative w-[332px] h-[264px]">
           {tiles.map((tile) => {
             if (tile.removed) return null;
 
@@ -276,7 +276,7 @@ export function MahjongGame({ onFinish }: GameProps) {
                   top: `${top}px`,
                   zIndex,
                 }}
-                className={`absolute w-12 sm:w-14 h-15 sm:h-16 rounded-xl border-2 flex flex-col items-center justify-between p-1 transition-all ${
+                className={`absolute w-12 h-15 rounded-xl border-2 flex flex-col items-center justify-between p-1 transition-all ${
                   isSelected
                     ? 'bg-amber-100 border-amber-400 ring-4 ring-amber-400/80 -translate-y-2 shadow-2xl scale-105'
                     : isHint

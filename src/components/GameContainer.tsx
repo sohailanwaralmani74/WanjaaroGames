@@ -114,96 +114,84 @@ export function GameContainer({
     .slice(0, 4);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 animate-in fade-in duration-300">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 animate-in fade-in duration-300">
       {/* Desktop 2-Column: Left 75% Game Experience + Right 25% Sticky Ads */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
         {/* Left 75% Column (Full Width on Mobile/Tablet) */}
-        <div className="lg:col-span-3 space-y-6">
-          {/* Breadcrumb Navigation */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-neutral-400">
-            <a
-              href="/"
-              onClick={(e) => {
-                e.preventDefault();
-                onNavigateHome();
-              }}
-              className="hover:text-amber-400 transition-colors flex items-center gap-1"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" /> Platform Home
-            </a>
-            <span>/</span>
-            <a
-              href={`/${game.category}`}
-              onClick={(e) => {
-                e.preventDefault();
-                onNavigateCategory(game.category);
-              }}
-              className="hover:text-amber-400 transition-colors"
-            >
-              {category?.name || game.category}
-            </a>
-            <span>/</span>
-            <span className="text-neutral-200 font-medium truncate">{game.title}</span>
-          </nav>
-
-      {/* Game Header Bar */}
-      <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2.5 flex-wrap">
-            <h1 className="text-2xl font-bold tracking-tight text-white">{game.title}</h1>
-            <span className="text-xs px-2.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700">
-              {game.mechanic}
-            </span>
-            <span
-              className={`text-[11px] px-2 py-0.5 rounded-md font-mono font-medium ${
-                game.difficulty === 'Easy'
-                  ? 'bg-emerald-950/60 text-emerald-400 border border-emerald-800'
-                  : game.difficulty === 'Medium'
-                  ? 'bg-amber-950/60 text-amber-400 border border-amber-800'
-                  : 'bg-rose-950/60 text-rose-400 border border-rose-800'
-              }`}
-            >
-              {game.difficulty}
-            </span>
-          </div>
-          <p className="text-sm text-neutral-400 mt-1 max-w-xl">{game.description}</p>
-        </div>
-
-        {/* Action Controls & Best Score */}
-        <div className="flex items-center gap-3 shrink-0">
-          {personalBest && (
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-300 text-xs font-mono font-medium">
-              <Trophy className="w-4 h-4 text-amber-400" />
-              <span>Best: <strong>{personalBest}</strong></span>
+        <div className="lg:col-span-3 space-y-3">
+          {/* Compact Breadcrumb + Game Header Bar */}
+          <div className="bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="min-w-0">
+              <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[11px] text-neutral-400 mb-0.5">
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateHome();
+                  }}
+                  className="hover:text-amber-400 transition-colors flex items-center gap-1 shrink-0"
+                >
+                  <ArrowLeft className="w-3 h-3" /> Home
+                </a>
+                <span>/</span>
+                <a
+                  href={`/${game.category}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigateCategory(game.category);
+                  }}
+                  className="hover:text-amber-400 transition-colors truncate"
+                >
+                  {category?.name || game.category}
+                </a>
+              </nav>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="text-lg sm:text-xl font-bold tracking-tight text-white">{game.title}</h1>
+                <span
+                  className={`text-[10px] px-2 py-0.5 rounded font-mono font-medium ${
+                    game.difficulty === 'Easy'
+                      ? 'bg-emerald-950/60 text-emerald-400 border border-emerald-800'
+                      : game.difficulty === 'Medium'
+                      ? 'bg-amber-950/60 text-amber-400 border border-amber-800'
+                      : 'bg-rose-950/60 text-rose-400 border border-rose-800'
+                  }`}
+                >
+                  {game.difficulty}
+                </span>
+              </div>
+              <p className="text-xs text-neutral-400 line-clamp-1 mt-0.5">{game.description}</p>
             </div>
-          )}
 
-          <button
-            onClick={toggleSound}
-            title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
-            className="p-2 rounded-xl bg-neutral-800 hover:bg-neutral-750 text-neutral-300 border border-neutral-700 transition-colors"
-          >
-            {isMuted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
-          </button>
+            {/* Action Controls & Best Score */}
+            <div className="flex items-center gap-2 shrink-0">
+              {personalBest && (
+                <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-lg text-amber-300 text-xs font-mono font-medium">
+                  <Trophy className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Best: <strong>{personalBest}</strong></span>
+                </div>
+              )}
 
-          <button
-            onClick={handleRestart}
-            title="Restart Game"
-            className="p-2 rounded-xl bg-neutral-800 hover:bg-neutral-750 text-neutral-300 border border-neutral-700 transition-colors flex items-center gap-1.5 text-xs"
-          >
-            <RotateCcw className="w-4 h-4" />
-            <span className="hidden sm:inline">Restart</span>
-          </button>
-        </div>
-      </div>
+              <button
+                onClick={toggleSound}
+                title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
+                className="p-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-750 text-neutral-300 border border-neutral-700 transition-colors"
+              >
+                {isMuted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
+              </button>
 
-      {/* Ad under title and intro description (Mobile & Tablet priority) */}
-      <section aria-label="Game Title Sponsor" className="w-full">
-        <TitleIntroAdBanner slotId={`wanjaaro-${game.id}-intro-banner`} />
-      </section>
+              <button
+                onClick={handleRestart}
+                title="Restart Game"
+                className="px-2.5 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-750 text-neutral-300 border border-neutral-700 transition-colors flex items-center gap-1 text-xs"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Restart</span>
+              </button>
+            </div>
+          </div>
 
-      {/* Main Interactive Game Canvas Container */}
-      <div className="relative bg-neutral-950 border border-neutral-800 rounded-2xl p-6 sm:p-8 shadow-2xl flex flex-col items-center justify-center min-h-[380px] overflow-hidden">
+          {/* Main Interactive Game Canvas Container */}
+          <div className="relative bg-neutral-950 border border-neutral-800 rounded-2xl p-3 sm:p-4 shadow-2xl flex flex-col items-center justify-center min-h-[280px] overflow-hidden">
         {/* Subtle grid pattern background */}
         <div
           className="absolute inset-0 opacity-[0.03] pointer-events-none"

@@ -253,17 +253,17 @@ export function SudokuGame({ onFinish }: GameProps) {
   });
 
   return (
-    <div className="flex flex-col items-center gap-4 w-full select-none max-w-lg mx-auto">
+    <div className="flex flex-col items-center gap-2.5 w-full select-none max-w-md mx-auto">
       {/* Top Header Bar */}
-      <div className="flex justify-between items-center w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-2xl text-xs font-mono text-slate-300 shadow-lg">
-        <div className="flex items-center gap-2">
+      <div className="flex justify-between items-center w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-xs font-mono text-slate-300 shadow">
+        <div className="flex items-center gap-1.5">
           {(['easy', 'medium', 'hard'] as Difficulty[]).map((diff) => (
             <button
               key={diff}
               onClick={() => startNewGame(diff)}
-              className={`px-3 py-1 rounded-lg capitalize font-sans transition-all active:scale-95 ${
+              className={`px-2.5 py-0.5 rounded-lg capitalize font-sans transition-all active:scale-95 ${
                 difficulty === diff
-                  ? 'bg-amber-400 text-slate-950 font-bold shadow-md'
+                  ? 'bg-amber-400 text-slate-950 font-bold shadow'
                   : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
               }`}
             >
@@ -271,15 +271,15 @@ export function SudokuGame({ onFinish }: GameProps) {
             </button>
           ))}
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <span className="text-rose-400">Mistakes: {mistakes}</span>
           <span className="text-cyan-400 font-bold">⏱ {formatTime(time)}</span>
         </div>
       </div>
 
       {/* 9x9 Grid */}
-      <div className="p-2 sm:p-3 bg-slate-950 border-2 border-slate-700 rounded-2xl shadow-2xl">
-        <div className="grid grid-cols-9 gap-[1px] bg-slate-700 border-2 border-slate-600 rounded-xl overflow-hidden">
+      <div className="p-1.5 sm:p-2 bg-slate-950 border-2 border-slate-700 rounded-xl shadow-xl">
+        <div className="grid grid-cols-9 gap-[1px] bg-slate-700 border-2 border-slate-600 rounded-lg overflow-hidden">
           {currentBoard.map((val, idx) => {
             const r = Math.floor(idx / 9);
             const c = idx % 9;
@@ -301,7 +301,7 @@ export function SudokuGame({ onFinish }: GameProps) {
               <button
                 key={idx}
                 onClick={() => handleCellClick(idx)}
-                className={`w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center font-mono text-base sm:text-lg font-bold transition-colors relative ${borderRight} ${borderBottom} ${
+                className={`w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center font-mono text-sm sm:text-base font-bold transition-colors relative ${borderRight} ${borderBottom} ${
                   isSelected
                     ? 'bg-cyan-500 text-slate-950 ring-2 ring-cyan-400 z-10'
                     : isError
@@ -318,7 +318,7 @@ export function SudokuGame({ onFinish }: GameProps) {
                 {val > 0 ? (
                   val
                 ) : notes[idx] && notes[idx].length > 0 ? (
-                  <div className="grid grid-cols-3 gap-0.5 w-full h-full p-0.5 text-[8px] text-slate-400 leading-none">
+                  <div className="grid grid-cols-3 gap-0 w-full h-full p-0.5 text-[7px] text-slate-400 leading-none">
                     {Array.from({ length: 9 }, (_, i) => i + 1).map((n) => (
                       <span key={n} className="flex items-center justify-center">
                         {notes[idx].includes(n) ? n : ''}
@@ -335,18 +335,18 @@ export function SudokuGame({ onFinish }: GameProps) {
       </div>
 
       {/* Action Controls: Erase, Notes, Hint */}
-      <div className="flex justify-between w-full px-2">
+      <div className="flex justify-between w-full px-1">
         <button
           onClick={handleErase}
-          className="flex-1 py-2 mx-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition-all active:scale-95"
+          className="flex-1 py-1.5 mx-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-bold transition-all active:scale-95"
         >
           ⌫ Erase
         </button>
         <button
           onClick={() => setIsNoteMode((n) => !n)}
-          className={`flex-1 py-2 mx-1 rounded-xl text-xs font-bold transition-all active:scale-95 ${
+          className={`flex-1 py-1.5 mx-1 rounded-lg text-xs font-bold transition-all active:scale-95 ${
             isNoteMode
-              ? 'bg-amber-400 text-slate-950 font-black shadow-md shadow-amber-400/20'
+              ? 'bg-amber-400 text-slate-950 font-black shadow'
               : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
           }`}
         >
@@ -354,14 +354,14 @@ export function SudokuGame({ onFinish }: GameProps) {
         </button>
         <button
           onClick={handleHint}
-          className="flex-1 py-2 mx-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition-all active:scale-95"
+          className="flex-1 py-1.5 mx-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-bold transition-all active:scale-95"
         >
           💡 Hint
         </button>
       </div>
 
       {/* Number Pad (1-9) */}
-      <div className="grid grid-cols-9 gap-1.5 w-full">
+      <div className="grid grid-cols-9 gap-1 w-full">
         {Array.from({ length: 9 }, (_, i) => i + 1).map((digit) => {
           const remaining = numberCounts[digit - 1];
           return (
@@ -369,10 +369,10 @@ export function SudokuGame({ onFinish }: GameProps) {
               key={digit}
               onClick={() => handleNumberInput(digit)}
               disabled={remaining <= 0}
-              className="py-3 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:hover:bg-slate-800 text-white font-mono font-bold text-lg rounded-xl shadow-md active:scale-95 transition-all flex flex-col items-center justify-center leading-none"
+              className="py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:hover:bg-slate-800 text-white font-mono font-bold text-base rounded-lg shadow active:scale-95 transition-all flex flex-col items-center justify-center leading-none"
             >
               <span>{digit}</span>
-              <span className="text-[9px] text-slate-400 mt-1">{remaining}</span>
+              <span className="text-[8px] text-slate-400 mt-0.5">{remaining}</span>
             </button>
           );
         })}

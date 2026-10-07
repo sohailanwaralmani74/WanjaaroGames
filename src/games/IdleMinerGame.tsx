@@ -180,10 +180,10 @@ export function IdleMinerGame({ onFinish }: GameProps) {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 w-full select-none max-w-2xl mx-auto">
+    <div className="flex flex-col items-center gap-2.5 w-full select-none max-w-2xl mx-auto">
       {/* Top Header Bar */}
-      <div className="flex justify-between items-center w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-2xl text-xs font-mono text-slate-300 shadow-lg">
-        <div className="flex items-center gap-3">
+      <div className="flex justify-between items-center w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-xs font-mono text-slate-300 shadow-lg">
+        <div className="flex items-center gap-2">
           <span className="font-bold text-white flex items-center gap-1.5">
             🪐 Galactic Ore Miner
           </span>
@@ -197,22 +197,22 @@ export function IdleMinerGame({ onFinish }: GameProps) {
       </div>
 
       {/* Main Game Screen: Click Area + Shop */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
         {/* Left Column: Cosmic Asteroid Node */}
-        <div className="p-6 bg-slate-950 border-2 border-slate-800 rounded-3xl shadow-2xl flex flex-col items-center justify-between min-h-[360px] relative overflow-hidden">
+        <div className="p-4 bg-slate-950 border-2 border-slate-800 rounded-2xl shadow-2xl flex flex-col items-center justify-between min-h-[290px] relative overflow-hidden">
           {/* Ore Counter */}
-          <div className="text-center space-y-1">
-            <span className="text-3xl sm:text-4xl font-black font-mono text-amber-400">
+          <div className="text-center space-y-0.5">
+            <span className="text-2xl sm:text-3xl font-black font-mono text-amber-400">
               {Math.floor(ore).toLocaleString()}
             </span>
-            <p className="text-xs text-slate-400 font-mono">Cosmic Ore</p>
+            <p className="text-[11px] text-slate-400 font-mono">Cosmic Ore</p>
           </div>
 
           {/* Interactive Clickable Asteroid */}
           <div className="relative">
             <button
               onClick={handleClickCore}
-              className="w-40 h-40 sm:w-44 sm:h-44 rounded-full bg-gradient-to-br from-indigo-600 via-purple-700 to-slate-900 border-4 border-amber-400/80 shadow-2xl shadow-indigo-500/30 flex items-center justify-center text-6xl active:scale-92 transition-transform cursor-pointer relative group"
+              className="w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-gradient-to-br from-indigo-600 via-purple-700 to-slate-900 border-4 border-amber-400/80 shadow-2xl shadow-indigo-500/30 flex items-center justify-center text-5xl active:scale-92 transition-transform cursor-pointer relative group"
             >
               <span className="group-hover:rotate-12 transition-transform duration-300">💎</span>
             </button>
@@ -233,7 +233,7 @@ export function IdleMinerGame({ onFinish }: GameProps) {
           <button
             onClick={buyClickUpgrade}
             disabled={ore < clickUpgradeCost}
-            className="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 disabled:opacity-40 border border-slate-700 rounded-xl text-xs font-mono flex items-center justify-between text-slate-200 transition-all active:scale-95"
+            className="w-full py-2 px-3 bg-slate-900 hover:bg-slate-800 disabled:opacity-40 border border-slate-700 rounded-xl text-xs font-mono flex items-center justify-between text-slate-200 transition-all active:scale-95"
           >
             <span>Upgrade Drill (Lvl {clickPower})</span>
             <span className="text-amber-400 font-bold">{clickUpgradeCost} Ore</span>
@@ -241,12 +241,12 @@ export function IdleMinerGame({ onFinish }: GameProps) {
         </div>
 
         {/* Right Column: Automated Generators & Ascension */}
-        <div className="p-4 sm:p-5 bg-slate-950 border-2 border-slate-800 rounded-3xl shadow-2xl flex flex-col justify-between gap-3">
+        <div className="p-3 sm:p-4 bg-slate-950 border-2 border-slate-800 rounded-2xl shadow-2xl flex flex-col justify-between gap-2">
           <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-300 px-1">
             Automated Harvesters
           </h4>
 
-          <div className="space-y-2 flex-1 overflow-y-auto max-h-[320px] pr-1">
+          <div className="space-y-1.5 flex-1 overflow-y-auto max-h-[250px] pr-1">
             {generators.map((gen) => {
               const canAfford = ore >= gen.cost;
               return (
@@ -254,10 +254,10 @@ export function IdleMinerGame({ onFinish }: GameProps) {
                   key={gen.id}
                   onClick={() => buyGenerator(gen.id)}
                   disabled={!canAfford}
-                  className="w-full p-2.5 bg-slate-900 hover:bg-slate-850 disabled:opacity-40 border border-slate-800 rounded-xl flex items-center justify-between transition-all active:scale-98"
+                  className="w-full p-2 bg-slate-900 hover:bg-slate-850 disabled:opacity-40 border border-slate-800 rounded-xl flex items-center justify-between transition-all active:scale-98"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">{gen.icon}</span>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-xl">{gen.icon}</span>
                     <div className="text-left">
                       <p className="text-xs font-bold text-white">{gen.name}</p>
                       <p className="text-[10px] text-cyan-400 font-mono">
@@ -279,7 +279,7 @@ export function IdleMinerGame({ onFinish }: GameProps) {
             <button
               onClick={handlePrestige}
               disabled={!canPrestige}
-              className={`w-full py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all active:scale-95 ${
+              className={`w-full py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all active:scale-95 ${
                 canPrestige
                   ? 'bg-gradient-to-r from-amber-500 to-rose-500 text-slate-950 font-black shadow-lg shadow-amber-500/20'
                   : 'bg-slate-900 border border-slate-800 text-slate-500 cursor-not-allowed'

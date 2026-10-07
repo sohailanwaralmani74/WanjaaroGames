@@ -437,44 +437,68 @@ export function BinaryByteGame({ onFinish }: GameProps) {
   );
 }
 
-// 46. Pipes Circuit Flow
+// 46. Pipes Circuit Flow (3x3 Source-to-Drain)
 export function PipesFlowGame({ onFinish }: GameProps) {
-  const [pipes, setPipes] = useState<number[]>([90, 0, 270, 90]); // angles
+  // 0: horizontal (━), 1: vertical (┃)
+  // Path needed: (0,0) -> (0,1) -> (1,1) -> (2,1) -> (2,2)
+  // We'll use 4 straight rotatable valves along the main conduit
+  const [pipes, setPipes] = useState<number[]>([90, 90, 90, 90]); // all need to be 0 (horizontal) to connect 💧 -> 🚰
   const [solved, setSolved] = useState(false);
+  const [moves, setMoves] = useState(0);
 
   const rotatePipe = (idx: number) => {
     if (solved) return;
     sound.playTap();
     const next = [...pipes];
-    next[idx] = (next[idx] + 90) % 360;
+    next[idx] = (next[idx] + 90) % 180; // 0 is horizontal, 90 is vertical
     setPipes(next);
+    const nextMoves = moves + 1;
+    setMoves(nextMoves);
 
-    if (next[0] === 0 && next[1] === 90 && next[2] === 270 && next[3] === 180) {
+    if (next.every((angle) => angle === 0)) {
       setSolved(true);
       sound.playSuccess();
-      onFinish(100, 'Pipe Flow Connected!');
+      onFinish(100, `Pipe Flow Connected in ${nextMoves} turns!`);
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-full select-none">
-      <div className="flex justify-between w-full text-sm font-mono text-neutral-300 px-2">
-        <span>Pipe Flow</span>
-        <span className="text-cyan-400 font-bold">{solved ? 'Flowing!' : 'Turn to Connect'}</span>
+    <div className="flex flex-col items-center gap-3 w-full select-none max-w-md mx-auto">
+      <div className="flex justify-between w-full text-xs font-mono text-neutral-300 px-2">
+        <span>Conduit Alignment</span>
+        <span className="text-cyan-400 font-bold">{solved ? 'FLOWING! 💧' : `Turns: ${moves}`}</span>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 p-4 bg-neutral-900 border border-neutral-800 rounded-xl">
+      <div className="flex items-center gap-2 p-4 bg-neutral-900 border border-neutral-800 rounded-xl">
+        <div className="w-10 h-10 rounded-lg bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-lg">
+          💧
+        </div>
         {pipes.map((angle, idx) => (
           <button
             key={idx}
             onClick={() => rotatePipe(idx)}
-            style={{ transform: `rotate(${angle}deg)` }}
-            className="w-20 h-20 bg-neutral-800 hover:bg-neutral-750 rounded-xl border border-neutral-700 flex items-center justify-center transition-transform"
+            className={`w-14 h-14 rounded-xl border flex items-center justify-center transition-all active:scale-95 ${
+              angle === 0
+                ? 'bg-cyan-950/60 border-cyan-500/60'
+                : 'bg-neutral-800 hover:bg-neutral-750 border-neutral-700'
+            }`}
           >
-            <div className="w-12 h-3 bg-cyan-400 rounded-full" />
+            <div
+              style={{ transform: `rotate(${angle}deg)` }}
+              className={`w-10 h-3 rounded-full transition-transform duration-200 ${
+                angle === 0 ? 'bg-cyan-400 shadow-md shadow-cyan-400/50' : 'bg-amber-400/80'
+              }`}
+            />
           </button>
         ))}
+        <div className="w-10 h-10 rounded-lg bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-lg">
+          🚰
+        </div>
       </div>
+
+      <p className="text-[11px] text-neutral-400 font-mono">
+        Click each valve to rotate it horizontally and connect the water supply!
+      </p>
     </div>
   );
 }
