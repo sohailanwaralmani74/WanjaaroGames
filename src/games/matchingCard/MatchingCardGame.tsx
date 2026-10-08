@@ -444,181 +444,69 @@ export const MatchingCardGame: React.FC<MatchingCardGameProps> = ({ onNavigateHo
       {/* Top Ad Container (Strictly Outside Game Area) */}
       <div id="ad-slot-top" className="w-full h-0 overflow-hidden" aria-label="Top sponsor slot" />
 
-      {/* COMPACT GAME HEADER */}
-      <header className="w-full max-w-3xl mx-auto px-2.5 pt-2 pb-1">
-        <div
-          className={`flex items-center justify-between gap-2 px-3 py-2 rounded-2xl border shadow-md ${
-            isLight
-              ? 'bg-white/95 border-emerald-300'
-              : 'bg-slate-900/90 border-emerald-500/30 backdrop-blur-md'
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            {onNavigateHome && (
-              <button
-                type="button"
-                onClick={onNavigateHome}
-                aria-label="Back to ReptileBirds Home"
-                title="ReptileBirds Home"
-                className={`p-1.5 rounded-xl border transition-colors cursor-pointer ${
-                  isLight
-                    ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
-                    : 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-emerald-400'
-                }`}
-              >
-                <Home className="w-4 h-4" />
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={() => setScreen('menu')}
-              className="text-left cursor-pointer group"
-            >
-              <h1 className="text-sm sm:text-base font-extrabold tracking-tight leading-none text-emerald-400">
-                Matching Card Game
-              </h1>
-              <span className="text-[10px] opacity-75 block">ReptileBirds</span>
-            </button>
-          </div>
-
-          <div className="flex items-center gap-1">
-            {screen === 'playing' && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setIsPaused((p) => !p)}
-                  aria-label={isPaused ? 'Resume game' : 'Pause game'}
-                  className={`p-1.5 rounded-xl border cursor-pointer ${
-                    isLight
-                      ? 'bg-slate-100 border-slate-200'
-                      : 'bg-slate-800 border-slate-700'
-                  }`}
-                >
-                  {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => startMatch()}
-                  aria-label="Restart board"
-                  className={`p-1.5 rounded-xl border cursor-pointer ${
-                    isLight
-                      ? 'bg-slate-100 border-slate-200'
-                      : 'bg-slate-800 border-slate-700'
-                  }`}
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                </button>
-              </>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setScreen('gallery')}
-              aria-label="Species Gallery"
-              className={`px-2.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 border cursor-pointer ${
-                screen === 'gallery'
-                  ? 'bg-emerald-600 text-white border-emerald-500'
-                  : isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="hidden xs:inline">Species</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setScreen('records')}
-              aria-label="My Records"
-              className={`px-2.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 border cursor-pointer ${
-                screen === 'records'
-                  ? 'bg-emerald-600 text-white border-emerald-500'
-                  : isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              <Trophy className="w-3.5 h-3.5 text-amber-400" />
-              <span className="hidden sm:inline">Records</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsHowToPlayOpen(true)}
-              aria-label="How to Play"
-              className={`p-1.5 rounded-xl border cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              <HelpCircle className="w-3.5 h-3.5 text-emerald-400" />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsSettingsOpen(true)}
-              aria-label="Settings"
-              className={`p-1.5 rounded-xl border cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              <Settings className="w-3.5 h-3.5" />
-            </button>
-
-            <button
-              type="button"
-              onClick={() =>
-                updateSetting('theme', settings.theme === 'dark' ? 'light' : 'dark')
-              }
-              aria-label="Toggle theme"
-              className={`p-1.5 rounded-xl border cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              {settings.theme === 'dark' ? (
-                <Sun className="w-3.5 h-3.5 text-amber-400" />
-              ) : (
-                <Moon className="w-3.5 h-3.5 text-slate-700" />
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={handleToggleMute}
-              aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
-              className={`p-1.5 rounded-xl border cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              {isMuted ? (
-                <VolumeX className="w-3.5 h-3.5 text-rose-500" />
-              ) : (
-                <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
-              )}
-            </button>
-          </div>
-        </div>
-      </header>
-
       {/* MAIN GAME STAGE */}
-      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-3xl mx-auto px-2.5 py-1">
+      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-6xl mx-auto px-2 sm:px-4 py-1.5">
         {/* SCREEN 1: START MENU */}
         {screen === 'menu' && (
           <div
-            className={`w-full rounded-3xl border-2 p-5 sm:p-7 space-y-5 shadow-2xl ${
+            className={`w-full max-w-3xl rounded-3xl border-2 p-4 sm:p-6 space-y-4 shadow-2xl ${
               isLight
                 ? 'bg-white/95 border-emerald-400'
                 : 'bg-slate-900/95 border-emerald-500/40'
             }`}
           >
+            {/* Compact Utility Header Inside Menu */}
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800/50">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+                Matching Card Game • 18 Species
+              </span>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => setScreen('gallery')}
+                  className="px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1 border bg-slate-800 border-slate-700 text-slate-200 cursor-pointer"
+                >
+                  <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Species</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setScreen('records')}
+                  className="px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1 border bg-slate-800 border-slate-700 text-slate-200 cursor-pointer"
+                >
+                  <Trophy className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Records</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsHowToPlayOpen(true)}
+                  className="p-1.5 rounded-xl border bg-slate-800 border-slate-700 text-emerald-400 cursor-pointer"
+                  aria-label="How to Play"
+                >
+                  <HelpCircle className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsSettingsOpen(true)}
+                  className="p-1.5 rounded-xl border bg-slate-800 border-slate-700 text-slate-200 cursor-pointer"
+                  aria-label="Settings"
+                >
+                  <Settings className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleToggleMute}
+                  className="p-1.5 rounded-xl border bg-slate-800 border-slate-700 cursor-pointer"
+                  aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
+                >
+                  {isMuted ? (
+                    <VolumeX className="w-3.5 h-3.5 text-rose-500" />
+                  ) : (
+                    <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                  )}
+                </button>
+              </div>
+            </div>
             <div className="text-center space-y-2">
               <div className="flex justify-center items-center gap-3">
                 <SpeciesArtSvg species="Scarlet Macaw" size={44} />
@@ -822,118 +710,268 @@ export const MatchingCardGame: React.FC<MatchingCardGameProps> = ({ onNavigateHo
           </div>
         )}
 
-        {/* SCREEN 3: ACTIVE CARD GRID & HUD */}
+        {/* SCREEN 3: ACTIVE CARD GRID & HUD (DESKTOP: STACKED LEFT STATS | MOBILE: TOP STATS) */}
         {(screen === 'playing' || screen === 'result') && (
-          <div className="w-full flex flex-col items-center gap-2">
-            {/* Live Stats Strip: Moves, Time, Score, Combo / Two-Player Turn */}
-            <div className="w-full max-w-[min(95vw,560px)] grid grid-cols-4 gap-1.5 text-center">
+          <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-3 lg:gap-6">
+            {/* BIG SCREEN (lg+): STACKED LEFT STATISTICS & CONTROLS */}
+            <aside className="hidden lg:flex lg:flex-col lg:w-60 shrink-0 gap-2.5">
               <div
-                className={`px-2 py-1.5 rounded-xl border ${
-                  isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
+                className={`rounded-2xl border p-3.5 shadow-lg space-y-2 ${
+                  isLight ? 'bg-white border-emerald-300' : 'bg-slate-900/95 border-emerald-500/30'
                 }`}
               >
-                <span className="text-[10px] opacity-70 block">SCORE</span>
-                <span className="font-mono font-extrabold text-xs sm:text-sm text-emerald-400 tabular-nums">
-                  {score}
-                </span>
-              </div>
-
-              <div
-                className={`px-2 py-1.5 rounded-xl border ${
-                  isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
-                }`}
-              >
-                <span className="text-[10px] opacity-70 block">MOVES</span>
-                <span className="font-mono font-extrabold text-xs sm:text-sm tabular-nums">
-                  {moves}
-                </span>
-              </div>
-
-              <div
-                className={`px-2 py-1.5 rounded-xl border ${
-                  isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
-                }`}
-              >
-                <span className="text-[10px] opacity-70 block">
-                  {mode === 'timed' ? 'TIME LEFT' : 'TIME'}
-                </span>
-                <span
-                  className={`font-mono font-extrabold text-xs sm:text-sm tabular-nums ${
-                    mode === 'timed' && remainingSec <= 10
-                      ? 'text-rose-400 animate-pulse'
-                      : 'text-amber-400'
-                  }`}
-                >
-                  {formatDurationMmSs(mode === 'timed' ? remainingSec : elapsedSec)}
-                </span>
-              </div>
-
-              <div
-                className={`px-2 py-1.5 rounded-xl border ${
-                  isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
-                }`}
-              >
-                <span className="text-[10px] opacity-70 block">COMBO</span>
-                <span className="font-mono font-extrabold text-xs sm:text-sm text-sky-400 tabular-nums">
-                  {comboStreak > 1 ? `${comboStreak}x 🔥` : '—'}
-                </span>
-              </div>
-            </div>
-
-            {/* Two-Player Scoreboard Bar */}
-            {mode === 'two-player' && (
-              <div className="w-full max-w-[min(95vw,560px)] grid grid-cols-2 gap-2 text-xs">
-                <div
-                  className={`px-3 py-1.5 rounded-xl border flex items-center justify-between ${
-                    activePlayer === 1
-                      ? 'bg-emerald-500/20 border-emerald-400 font-bold'
-                      : 'bg-slate-900/60 border-slate-800 opacity-75'
-                  }`}
-                >
-                  <span>Player 1 {activePlayer === 1 ? '●' : ''}</span>
-                  <span className="font-mono text-emerald-400">
-                    {p1Pairs} pairs · {p1Score} pts
+                <div className="flex items-center justify-between border-b border-slate-800/60 pb-2">
+                  <span className="text-[10px] uppercase tracking-wider font-extrabold text-emerald-400">
+                    {mode === 'daily'
+                      ? `Daily (${todayDate})`
+                      : `${activeDiff.toUpperCase()} (${gridCfg.cols}×${gridCfg.rows})`}
+                  </span>
+                  <span className="text-[10px] font-mono text-amber-300">
+                    {matchedPairs}/{gridCfg.pairs} Pairs
                   </span>
                 </div>
+
+                <div className="space-y-1.5">
+                  <div className="bg-slate-950/80 border border-emerald-500/30 rounded-xl px-3 py-2 flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400">
+                      Score
+                    </span>
+                    <span className="text-xl font-black text-emerald-400 tabular-nums">
+                      {score}
+                    </span>
+                  </div>
+
+                  <div className="bg-slate-950/80 border border-amber-500/30 rounded-xl px-3 py-2 flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-amber-300/90">
+                      Best Score
+                    </span>
+                    <span className="text-xl font-black text-amber-400 tabular-nums">
+                      {records.byDiffAndMode[getDiffModeKey(mode, activeDiff)]?.bestScore ?? 0}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-1.5 pt-0.5">
+                  <div className="bg-slate-950/60 border border-slate-800 rounded-xl px-2.5 py-1.5">
+                    <span className="text-[9px] uppercase text-slate-400 font-bold block">
+                      Moves
+                    </span>
+                    <span className="font-mono font-extrabold text-xs text-white tabular-nums">
+                      {moves}
+                    </span>
+                  </div>
+
+                  <div className="bg-slate-950/60 border border-slate-800 rounded-xl px-2.5 py-1.5">
+                    <span className="text-[9px] uppercase text-slate-400 font-bold block">
+                      {mode === 'timed' ? 'Time Left' : 'Time'}
+                    </span>
+                    <span
+                      className={`font-mono font-extrabold text-xs tabular-nums ${
+                        mode === 'timed' && remainingSec <= 10
+                          ? 'text-rose-400 animate-pulse'
+                          : 'text-amber-400'
+                      }`}
+                    >
+                      {formatDurationMmSs(mode === 'timed' ? remainingSec : elapsedSec)}
+                    </span>
+                  </div>
+                </div>
+
+                {comboStreak > 1 && (
+                  <div className="bg-sky-500/15 border border-sky-400/40 rounded-xl px-2.5 py-1 text-center text-xs font-extrabold text-sky-300">
+                    Combo Streak: {comboStreak}x 🔥
+                  </div>
+                )}
+
+                {mode === 'two-player' && (
+                  <div className="space-y-1.5 pt-1">
+                    <div
+                      className={`px-2.5 py-1.5 rounded-xl border flex items-center justify-between text-xs ${
+                        activePlayer === 1
+                          ? 'bg-emerald-500/20 border-emerald-400 font-bold'
+                          : 'bg-slate-900/60 border-slate-800 opacity-75'
+                      }`}
+                    >
+                      <span>P1 {activePlayer === 1 ? '●' : ''}</span>
+                      <span className="font-mono text-emerald-400">
+                        {p1Pairs}p · {p1Score}
+                      </span>
+                    </div>
+                    <div
+                      className={`px-2.5 py-1.5 rounded-xl border flex items-center justify-between text-xs ${
+                        activePlayer === 2
+                          ? 'bg-amber-500/20 border-amber-400 font-bold'
+                          : 'bg-slate-900/60 border-slate-800 opacity-75'
+                      }`}
+                    >
+                      <span>P2 {activePlayer === 2 ? '●' : ''}</span>
+                      <span className="font-mono text-amber-400">
+                        {p2Pairs}p · {p2Score}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Left Stacked Action Controls */}
+              <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-2.5 flex flex-col gap-1.5 shadow-md">
+                <div className="grid grid-cols-2 gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => setIsPaused((p) => !p)}
+                    className="py-2 px-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 flex items-center justify-center gap-1.5 border border-slate-700 cursor-pointer"
+                  >
+                    {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
+                    <span>{isPaused ? 'Resume' : 'Pause'}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => startMatch()}
+                    className="py-2 px-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-xs font-bold text-emerald-300 flex items-center justify-center gap-1.5 border border-emerald-500/30 cursor-pointer"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span>Restart</span>
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setScreen('menu')}
+                  className="w-full py-1.5 px-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 cursor-pointer"
+                >
+                  Change Mode / Grid
+                </button>
+              </div>
+            </aside>
+
+            {/* CENTER COLUMN: MOBILE TOP STATS + ERGONOMIC RESPONSIVE CARD GRID */}
+            <div className="flex-1 flex flex-col items-center w-full max-w-[min(95vw,660px)] gap-2">
+              {/* MOBILE (< lg): COMPACT TOP SCORE, BEST, MOVES & TIME BAR */}
+              <div className="lg:hidden w-full grid grid-cols-5 gap-1 text-center">
                 <div
-                  className={`px-3 py-1.5 rounded-xl border flex items-center justify-between ${
-                    activePlayer === 2
-                      ? 'bg-amber-500/20 border-amber-400 font-bold'
-                      : 'bg-slate-900/60 border-slate-800 opacity-75'
+                  className={`px-1.5 py-1 rounded-xl border ${
+                    isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
                   }`}
                 >
-                  <span>Player 2 {activePlayer === 2 ? '●' : ''}</span>
-                  <span className="font-mono text-amber-400">
-                    {p2Pairs} pairs · {p2Score} pts
+                  <span className="text-[9px] opacity-70 block">SCORE</span>
+                  <span className="font-mono font-extrabold text-xs text-emerald-400 tabular-nums">
+                    {score}
                   </span>
                 </div>
+
+                <div
+                  className={`px-1.5 py-1 rounded-xl border ${
+                    isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
+                  }`}
+                >
+                  <span className="text-[9px] opacity-70 block">BEST</span>
+                  <span className="font-mono font-extrabold text-xs text-amber-400 tabular-nums">
+                    {records.byDiffAndMode[getDiffModeKey(mode, activeDiff)]?.bestScore ?? 0}
+                  </span>
+                </div>
+
+                <div
+                  className={`px-1.5 py-1 rounded-xl border ${
+                    isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
+                  }`}
+                >
+                  <span className="text-[9px] opacity-70 block">MOVES</span>
+                  <span className="font-mono font-extrabold text-xs tabular-nums">
+                    {moves}
+                  </span>
+                </div>
+
+                <div
+                  className={`px-1.5 py-1 rounded-xl border ${
+                    isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
+                  }`}
+                >
+                  <span className="text-[9px] opacity-70 block">
+                    {mode === 'timed' ? 'LEFT' : 'TIME'}
+                  </span>
+                  <span
+                    className={`font-mono font-extrabold text-xs tabular-nums ${
+                      mode === 'timed' && remainingSec <= 10
+                        ? 'text-rose-400 animate-pulse'
+                        : 'text-amber-400'
+                    }`}
+                  >
+                    {formatDurationMmSs(mode === 'timed' ? remainingSec : elapsedSec)}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-center gap-1">
+                  <button
+                    type="button"
+                    onClick={() => startMatch()}
+                    className="p-1.5 rounded-xl bg-emerald-600 text-white cursor-pointer"
+                    aria-label="Restart"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setScreen('menu')}
+                    className="p-1.5 rounded-xl bg-slate-800 text-slate-200 border border-slate-700 text-[10px] font-bold cursor-pointer"
+                  >
+                    Menu
+                  </button>
+                </div>
               </div>
-            )}
 
-            {/* RESPONSIVE CARD GRID (Card width reduced by 50%, height reduced by 30%) */}
-            <div
-              style={{
-                gridTemplateColumns: `repeat(${gridCfg.cols}, minmax(0, 1fr))`,
-                maxWidth:
-                  gridCfg.cols === 4
-                    ? 'min(48vw, 240px)'
-                    : 'min(52vw, 280px)',
-              }}
-              className="relative w-full grid gap-1 sm:gap-1.5 p-2 rounded-2xl border-2 bg-slate-900/80 border-emerald-600/50 shadow-2xl"
-              role="grid"
-              aria-label={`Matching Card Game grid with ${cards.length} cards`}
-            >
-              {cards.map((card, idx) => {
-                const isFaceUp = card.status === 'up' || card.status === 'matched';
-                const isMatched = card.status === 'matched';
-                const ariaLabel = isMatched
-                  ? `Card ${idx + 1}, matched ${card.species}`
-                  : isFaceUp
-                  ? `Card ${idx + 1}, face up, ${card.species}`
-                  : `Card ${idx + 1}, face down`;
+              {/* Two-Player Scoreboard Bar (Mobile) */}
+              {mode === 'two-player' && (
+                <div className="lg:hidden w-full grid grid-cols-2 gap-2 text-xs">
+                  <div
+                    className={`px-3 py-1 rounded-xl border flex items-center justify-between ${
+                      activePlayer === 1
+                        ? 'bg-emerald-500/20 border-emerald-400 font-bold'
+                        : 'bg-slate-900/60 border-slate-800 opacity-75'
+                    }`}
+                  >
+                    <span>Player 1 {activePlayer === 1 ? '●' : ''}</span>
+                    <span className="font-mono text-emerald-400">
+                      {p1Pairs} pairs · {p1Score} pts
+                    </span>
+                  </div>
+                  <div
+                    className={`px-3 py-1 rounded-xl border flex items-center justify-between ${
+                      activePlayer === 2
+                        ? 'bg-amber-500/20 border-amber-400 font-bold'
+                        : 'bg-slate-900/60 border-slate-800 opacity-75'
+                    }`}
+                  >
+                    <span>Player 2 {activePlayer === 2 ? '●' : ''}</span>
+                    <span className="font-mono text-amber-400">
+                      {p2Pairs} pairs · {p2Score} pts
+                    </span>
+                  </div>
+                </div>
+              )}
 
-                const svgSize =
-                  activeDiff === 'expert' ? 20 : activeDiff === 'hard' ? 22 : 26;
+              {/* ERGONOMIC RESPONSIVE CARD GRID FOR HUMANS */}
+              <div
+                style={{
+                  gridTemplateColumns: `repeat(${gridCfg.cols}, minmax(0, 1fr))`,
+                }}
+                className={`relative w-full ${
+                  gridCfg.cols === 6
+                    ? 'max-w-[min(94vw,75dvh,640px)]'
+                    : 'max-w-[min(92vw,72dvh,540px)]'
+                } grid gap-1.5 sm:gap-2.5 p-2.5 sm:p-4 rounded-2xl border-2 bg-slate-900/85 border-emerald-500/50 shadow-2xl`}
+                role="grid"
+                aria-label={`Matching Card Game grid with ${cards.length} cards`}
+              >
+                {cards.map((card, idx) => {
+                  const isFaceUp = card.status === 'up' || card.status === 'matched';
+                  const isMatched = card.status === 'matched';
+                  const ariaLabel = isMatched
+                    ? `Card ${idx + 1}, matched ${card.species}`
+                    : isFaceUp
+                    ? `Card ${idx + 1}, face up, ${card.species}`
+                    : `Card ${idx + 1}, face down`;
+
+                  const svgSize =
+                    activeDiff === 'expert' ? 28 : activeDiff === 'hard' ? 32 : 38;
 
                 return (
                   <button
@@ -1067,6 +1105,7 @@ export const MatchingCardGame: React.FC<MatchingCardGameProps> = ({ onNavigateHo
                   </button>
                 </div>
               )}
+              </div>
             </div>
           </div>
         )}

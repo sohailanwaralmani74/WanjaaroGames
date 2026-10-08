@@ -72,6 +72,22 @@
     "verified": false
   },
   {
+    "species": "Ruby-throated Hummingbird",
+    "scientificName": "Archilochus colubris",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
+    "species": "Red-tailed Hawk",
+    "scientificName": "Buteo jamaicensis",
+    "type": "bird",
+    "fact": "",
+    "source": "",
+    "verified": false
+  },
+  {
     "species": "Ball Python",
     "scientificName": "Python regius",
     "type": "reptile",
@@ -139,14 +155,6 @@
     "species": "Central Bearded Dragon",
     "scientificName": "Pogona vitticeps",
     "type": "reptile",
-    "fact": "",
-    "source": "",
-    "verified": false
-  },
-  {
-    "species": "Red-tailed Hawk",
-    "scientificName": "Buteo jamaicensis",
-    "type": "bird",
     "fact": "",
     "source": "",
     "verified": false

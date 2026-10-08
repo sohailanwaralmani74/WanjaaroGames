@@ -303,14 +303,10 @@ export const EscapeShareModal: React.FC<EscapeShareModalProps> = ({
           </button>
         </div>
 
-        <div className="flex justify-center bg-slate-950/90 border border-slate-800 rounded-xl p-3">
+        <div className="flex justify-center bg-slate-950/90 border border-slate-800 rounded-xl p-2.5 max-h-[44dvh] overflow-hidden">
           <canvas
             ref={canvasRef}
-            className={`rounded-lg shadow-lg border border-emerald-500/30 ${
-              aspect === 'square'
-                ? 'w-60 h-60 sm:w-68 sm:h-68'
-                : 'w-44 h-76 sm:w-48 sm:h-84'
-            } object-contain`}
+            className="rounded-lg shadow-lg border border-emerald-500/30 max-h-[40dvh] max-w-full w-auto object-contain"
           />
         </div>
 

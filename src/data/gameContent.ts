@@ -6,6 +6,12 @@ export interface GameExtraContent {
 }
 
 export const GAME_CONTENT_REGISTRY: Record<string, GameExtraContent> = {
+  'parrot-flap': {
+    historicalContext:
+      'Set in a multi-layered desert canyon with warm sandstone pillars and 5 real avian species, Parrot Flap combines one-tap vertical impulse flight with reachability-verified canyon openings.',
+    cognitiveMechanics:
+      'Requires precise rhythmic timing of upward velocity impulses against constant gravitational acceleration while tracking narrowing vertical apertures.',
+  },
   'snake-escape': {
     historicalContext:
       'Inspired by real ecological predator-prey dynamics between terrestrial snakes and diurnal/nocturnal raptors, Snake Escape blends continuous-trail movement with telegraphed aerial dive zones.',

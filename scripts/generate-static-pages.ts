@@ -110,6 +110,7 @@ function generateStaticNavBar(activeSlug: string): string {
       <a href="/" style="font-size:22px;font-weight:800;color:#10b981;text-decoration:none;">ReptileBirds</a>
       <nav aria-label="Primary navigation" style="display:flex;gap:16px;font-size:14px;flex-wrap:wrap;">
         <a href="/" style="color:${activeSlug === 'home' ? '#10b981' : '#cbd5e1'};text-decoration:none;font-weight:${activeSlug === 'home' ? '700' : '500'};">Home</a>
+        <a href="/parrot-flap" style="color:${activeSlug === 'parrot-flap' ? '#fbbf24' : '#cbd5e1'};text-decoration:none;font-weight:${activeSlug === 'parrot-flap' ? '700' : '500'};">Parrot Flap</a>
         <a href="/snake-escape" style="color:${activeSlug === 'snake-escape' ? '#fb7185' : '#cbd5e1'};text-decoration:none;font-weight:${activeSlug === 'snake-escape' ? '700' : '500'};">Snake Escape</a>
         <a href="/matching-card-game" style="color:${activeSlug === 'matching-card-game' ? '#38bdf8' : '#cbd5e1'};text-decoration:none;font-weight:${activeSlug === 'matching-card-game' ? '700' : '500'};">Matching Cards</a>
         <a href="/snake-game" style="color:${activeSlug === 'snake-game' ? '#10b981' : '#cbd5e1'};text-decoration:none;font-weight:${activeSlug === 'snake-game' ? '700' : '500'};">Snake Game</a>
@@ -136,7 +137,7 @@ function generateStaticFooter(): string {
 // 1. GENERATE HOMEPAGE (dist/index.html)
 const homeTitle = 'ReptileBirds – Free Online Reptile & Bird Browser Games';
 const homeDesc =
-  'Play Snake Escape, Matching Card Game, Snake Game, and Snake and Ladder online free on ReptileBirds. 100% client-side browser games with local high scores and zero accounts.';
+  'Play Parrot Flap, Snake Escape, Matching Card Game, Snake Game, and Snake and Ladder online free on ReptileBirds. 100% client-side browser games with local high scores.';
 
 const homeBody = `
   <div style="background:#020617;color:#f8fafc;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;padding:24px;max-width:960px;margin:0 auto;">
@@ -144,6 +145,11 @@ const homeBody = `
     ${generateStaticNavBar('home')}
     <main>
       <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
+        <div style="background:#0f172a;border:1px solid #1e293b;border-radius:20px;padding:24px;">
+          <h2 style="margin:0 0 8px 0;color:#ffffff;">Parrot Flap</h2>
+          <p style="font-size:14px;color:#cbd5e1;">Tap to fly a Scarlet Macaw through sandstone canyon pillars, collect feathers, and unlock 5 SVG bird skins.</p>
+          <a href="/parrot-flap" style="color:#fbbf24;font-weight:700;text-decoration:none;">Play Parrot Flap &rarr;</a>
+        </div>
         <div style="background:#0f172a;border:1px solid #1e293b;border-radius:20px;padding:24px;">
           <h2 style="margin:0 0 8px 0;color:#ffffff;">Snake Escape</h2>
           <p style="font-size:14px;color:#cbd5e1;">Slither through a field eating mice while dodging diving Hawks, Peregrine Falcons, Bald Eagles, and Barn Owls.</p>
@@ -179,11 +185,34 @@ const homeHtml = generateHtml({
 });
 fs.writeFileSync(path.resolve(distDir, 'index.html'), homeHtml, 'utf8');
 
-// 2. GENERATE SEPARATE STATIC HTML PAGE AT ROOT FOR EACH GAME (/snake-escape, /matching-card-game, /snake-game, /snake-and-ladder)
+// 2. GENERATE SEPARATE STATIC HTML PAGE AT ROOT FOR EACH GAME
 const gamePagesConfig: Record<
   string,
   { title: string; description: string; heading: string; bodyHtml: string }
 > = {
+  'parrot-flap': {
+    title: 'Parrot Flap – Free Tap to Fly Bird Game Online | Reptile Birds',
+    description:
+      'Play Parrot Flap online free on ReptileBirds. Tap to fly a Scarlet Macaw through sandstone canyon pillars, collect feathers, unlock 5 SVG birds, and earn Platinum medals.',
+    heading: 'Parrot Flap',
+    bodyHtml: `
+      <div style="background:#020617;color:#f8fafc;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;padding:24px;max-width:960px;margin:0 auto;">
+        <div id="ad-slot-top"></div>
+        ${generateStaticNavBar('parrot-flap')}
+        <main>
+          <h1 style="font-size:28px;font-weight:800;color:#fbbf24;margin:0 0 16px 0;">Parrot Flap</h1>
+          <section style="background:#0f172a;border:1px solid #1e293b;border-radius:20px;padding:24px;margin-bottom:24px;">
+            <h2 style="font-size:20px;color:#ffffff;margin:0 0 10px 0;">How to Play Parrot Flap – One-Tap Bird Game</h2>
+            <p style="font-size:14px;color:#cbd5e1;margin:0 0 12px 0;">
+              <strong>Parrot Flap</strong> is a 100% client-side <strong>tap to fly game</strong> and <strong>one-tap game</strong> set in a layered sandstone canyon. Tap, click, or press Space / Arrow Up to flap your wings and guide your parrot through sandstone pillar openings (+1 point) while collecting floating feathers (+2 points) to unlock 5 SVG bird skins: Scarlet Macaw, Common Kingfisher, Barn Owl, Ruby-throated Hummingbird, and Indian Peafowl.
+            </p>
+          </section>
+        </main>
+        <div id="ad-slot-bottom"></div>
+        ${generateStaticFooter()}
+      </div>
+    `,
+  },
   'snake-escape': {
     title: 'Snake Escape Game Online – Free | Reptile Birds',
     description:
@@ -199,14 +228,6 @@ const gamePagesConfig: Record<
             <h2 style="font-size:20px;color:#ffffff;margin:0 0 10px 0;">How to Play Snake Escape</h2>
             <p style="font-size:14px;color:#cbd5e1;margin:0 0 12px 0;">
               <strong>Snake Escape</strong> is a top-down 2D survival game where you steer a continuous-body snake hunting mice in an 800&times;800 field while birds of prey circle overhead. Watch for tracking ground shadows (1.5s), escape before the 0.6s lock ring fills, hide in tall grass patches to slow tracking, or press <strong>Space</strong> to burrow underground for 2 seconds.
-            </p>
-            <h2 style="font-size:20px;color:#ffffff;margin:16px 0 10px 0;">Meet the Birds of Prey</h2>
-            <p style="font-size:14px;color:#cbd5e1;margin:0 0 12px 0;">
-              Survive 30-second waves against 4 distinct aerial predators: <strong>Red-tailed Hawk</strong> (standard dive), <strong>Peregrine Falcon</strong> (Wave 3+, fast tracking &amp; 0.4s lock), <strong>Bald Eagle</strong> (Wave 5+, large strike zone), and <strong>Barn Owl</strong> (Wave 7+ night waves with pulsing warning rings).
-            </p>
-            <h2 style="font-size:20px;color:#ffffff;margin:16px 0 10px 0;">Tips for Surviving Longer</h2>
-            <p style="font-size:14px;color:#cbd5e1;margin:0;">
-              Bait raptors into locking onto your position and slither out right before impact for a <strong>+25 Near-Miss bonus</strong>. Collect golden mice for a 4-second speed boost and rare eggs to restore a lost heart.
             </p>
           </section>
         </main>
@@ -391,5 +412,5 @@ fs.writeFileSync(path.resolve(distDir, 'sitemap.xml'), sitemapXml, 'utf8');
 fs.writeFileSync(path.resolve(rootDir, 'public', 'sitemap.xml'), sitemapXml, 'utf8');
 
 console.log(
-  '✅ Static pages generated for ReptileBirds: /, /snake-escape, /matching-card-game, /snake-game, and /snake-and-ladder.'
+  '✅ Static pages generated for ReptileBirds: /, /parrot-flap, /snake-escape, /matching-card-game, /snake-game, and /snake-and-ladder.'
 );

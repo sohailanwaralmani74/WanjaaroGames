@@ -529,181 +529,69 @@ export const SnakeGame: React.FC<SnakeGameProps> = ({ onNavigateHome }) => {
       {/* Top Ad Slot (Strictly Outside Game Board Area) */}
       <div id="ad-slot-top" className="w-full h-0 overflow-hidden" aria-label="Top sponsor slot" />
 
-      {/* COMPACT GAME HEADER */}
-      <header className="w-full max-w-2xl mx-auto px-2.5 pt-2 pb-1">
-        <div
-          className={`flex items-center justify-between gap-2 px-3 py-2 rounded-2xl border shadow-md ${
-            isLight
-              ? 'bg-white/95 border-emerald-300'
-              : 'bg-slate-900/90 border-emerald-500/30 backdrop-blur-md'
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            {onNavigateHome && (
-              <button
-                type="button"
-                onClick={onNavigateHome}
-                aria-label="Back to ReptileBirds Home"
-                title="ReptileBirds Home"
-                className={`p-1.5 rounded-xl border transition-colors cursor-pointer ${
-                  isLight
-                    ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
-                    : 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-emerald-400'
-                }`}
-              >
-                <Home className="w-4 h-4" />
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={() => setScreen('menu')}
-              className="text-left cursor-pointer group"
-            >
-              <h1 className="text-sm sm:text-base font-extrabold tracking-tight leading-none text-emerald-400">
-                Snake Game
-              </h1>
-              <span className="text-[10px] opacity-75 block">ReptileBirds</span>
-            </button>
-          </div>
-
-          <div className="flex items-center gap-1">
-            {screen === 'playing' && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setIsPaused((p) => !p)}
-                  aria-label={isPaused ? 'Resume game' : 'Pause game'}
-                  className={`p-1.5 rounded-xl border cursor-pointer ${
-                    isLight
-                      ? 'bg-slate-100 border-slate-200'
-                      : 'bg-slate-800 border-slate-700'
-                  }`}
-                >
-                  {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => startNewRun()}
-                  aria-label="Restart run"
-                  className={`p-1.5 rounded-xl border cursor-pointer ${
-                    isLight
-                      ? 'bg-slate-100 border-slate-200'
-                      : 'bg-slate-800 border-slate-700'
-                  }`}
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                </button>
-              </>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setScreen('skins')}
-              aria-label="Snake Skins"
-              className={`px-2.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 border cursor-pointer ${
-                screen === 'skins'
-                  ? 'bg-emerald-600 text-white border-emerald-500'
-                  : isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              <Palette className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="hidden xs:inline">Skins</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setScreen('records')}
-              aria-label="My Records"
-              className={`px-2.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 border cursor-pointer ${
-                screen === 'records'
-                  ? 'bg-emerald-600 text-white border-emerald-500'
-                  : isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              <Trophy className="w-3.5 h-3.5 text-amber-400" />
-              <span className="hidden sm:inline">Records</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsHowToPlayOpen(true)}
-              aria-label="How to Play"
-              className={`p-1.5 rounded-xl border cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              <HelpCircle className="w-3.5 h-3.5 text-emerald-400" />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsSettingsOpen(true)}
-              aria-label="Settings"
-              className={`p-1.5 rounded-xl border cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              <Settings className="w-3.5 h-3.5" />
-            </button>
-
-            <button
-              type="button"
-              onClick={() =>
-                updateSetting('theme', settings.theme === 'dark' ? 'light' : 'dark')
-              }
-              aria-label="Toggle theme"
-              className={`p-1.5 rounded-xl border cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              {settings.theme === 'dark' ? (
-                <Sun className="w-3.5 h-3.5 text-amber-400" />
-              ) : (
-                <Moon className="w-3.5 h-3.5 text-slate-700" />
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={handleToggleMute}
-              aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
-              className={`p-1.5 rounded-xl border cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 border-slate-200'
-                  : 'bg-slate-800 border-slate-700'
-              }`}
-            >
-              {isMuted ? (
-                <VolumeX className="w-3.5 h-3.5 text-rose-500" />
-              ) : (
-                <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
-              )}
-            </button>
-          </div>
-        </div>
-      </header>
-
       {/* MAIN GAME STAGE */}
-      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-2xl mx-auto px-2.5 py-1">
+      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-6xl mx-auto px-2 sm:px-4 py-1.5">
         {/* SCREEN 1: START MENU */}
         {screen === 'menu' && (
           <div
-            className={`w-full rounded-3xl border-2 p-5 sm:p-7 space-y-5 shadow-2xl ${
+            className={`w-full max-w-2xl rounded-3xl border-2 p-5 sm:p-7 space-y-5 shadow-2xl ${
               isLight
                 ? 'bg-white/95 border-emerald-400'
                 : 'bg-slate-900/95 border-emerald-500/40'
             }`}
           >
+            {/* Compact Utility Header Inside Menu */}
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800/50">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+                Snake Game • 6 Species Skins
+              </span>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => setScreen('skins')}
+                  className="px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1 border bg-slate-800 border-slate-700 text-slate-200 cursor-pointer"
+                >
+                  <Palette className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Skins</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setScreen('records')}
+                  className="px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1 border bg-slate-800 border-slate-700 text-slate-200 cursor-pointer"
+                >
+                  <Trophy className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Records</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsHowToPlayOpen(true)}
+                  className="p-1.5 rounded-xl border bg-slate-800 border-slate-700 text-emerald-400 cursor-pointer"
+                  aria-label="How to Play"
+                >
+                  <HelpCircle className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsSettingsOpen(true)}
+                  className="p-1.5 rounded-xl border bg-slate-800 border-slate-700 text-slate-200 cursor-pointer"
+                  aria-label="Settings"
+                >
+                  <Settings className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleToggleMute}
+                  className="p-1.5 rounded-xl border bg-slate-800 border-slate-700 cursor-pointer"
+                  aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
+                >
+                  {isMuted ? (
+                    <VolumeX className="w-3.5 h-3.5 text-rose-500" />
+                  ) : (
+                    <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                  )}
+                </button>
+              </div>
+            </div>
             <div className="flex flex-col items-center text-center space-y-2">
               <SnakeSkinPreviewSvg skinId={selectedSkin} size={68} />
               <div className="space-y-0.5">
@@ -975,70 +863,192 @@ export const SnakeGame: React.FC<SnakeGameProps> = ({ onNavigateHome }) => {
           </div>
         )}
 
-        {/* SCREEN 4: ACTIVE GAME BOARD + HUD + OPTIONAL D-PAD */}
+        {/* SCREEN 4: ACTIVE GAME BOARD (DESKTOP: STACKED LEFT STATS | MOBILE: TOP STATS + BOARD) */}
         {(screen === 'playing' || screen === 'gameover') && (
-          <div className="w-full flex flex-col items-center gap-2">
-            {/* Live Score, Length, Level, Multiplier & Best Strip */}
-            <div className="w-full max-w-[min(92vw,56vh,470px)] grid grid-cols-4 gap-1.5 text-center">
+          <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-3 lg:gap-6">
+            {/* BIG SCREEN (lg+): STACKED LEFT SCORE, BEST, LENGTH, LEVEL & CONTROLS */}
+            <aside className="hidden lg:flex lg:flex-col lg:w-60 shrink-0 gap-2.5">
               <div
-                className={`px-2 py-1.5 rounded-xl border ${
-                  isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
+                className={`rounded-2xl border p-3.5 shadow-lg space-y-2 ${
+                  isLight ? 'bg-white border-emerald-300' : 'bg-slate-900/95 border-emerald-500/30'
                 }`}
               >
-                <span className="text-[10px] opacity-70 block">SCORE (x{multiplier})</span>
-                <span className="font-mono font-extrabold text-xs sm:text-sm text-emerald-400 tabular-nums">
-                  {score}
-                </span>
-              </div>
-              <div
-                className={`px-2 py-1.5 rounded-xl border ${
-                  isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
-                }`}
-              >
-                <span className="text-[10px] opacity-70 block">LENGTH</span>
-                <span className="font-mono font-extrabold text-xs sm:text-sm tabular-nums">
-                  {snake.length}
-                </span>
-              </div>
-              <div
-                className={`px-2 py-1.5 rounded-xl border ${
-                  isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
-                }`}
-              >
-                <span className="text-[10px] opacity-70 block">LEVEL</span>
-                <span className="font-mono font-extrabold text-xs sm:text-sm text-amber-400 tabular-nums">
-                  {level}
-                </span>
-              </div>
-              <div
-                className={`px-2 py-1.5 rounded-xl border ${
-                  isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
-                }`}
-              >
-                <span className="text-[10px] opacity-70 block">BEST</span>
-                <span className="font-mono font-extrabold text-xs sm:text-sm text-sky-400 tabular-nums">
-                  {Math.max(modeSizeRecord.bestScore, score)}
-                </span>
-              </div>
-            </div>
+                <div className="flex items-center justify-between border-b border-slate-800/60 pb-2">
+                  <span className="text-[10px] uppercase tracking-wider font-extrabold text-emerald-400">
+                    {mode === 'daily'
+                      ? `Daily (${todayDate})`
+                      : `${mode.toUpperCase()} (${activeGridSize}×${activeGridSize})`}
+                  </span>
+                  <span className="text-[10px] font-mono text-amber-300">
+                    x{multiplier} Mult
+                  </span>
+                </div>
 
-            {/* SVG GAME BOARD (touch-action: none so swiping never scrolls page) */}
-            <div
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              style={{ touchAction: 'none' }}
-              className={`relative w-[min(92vw,56vh,470px)] h-[min(92vw,56vh,470px)] rounded-2xl border-4 overflow-hidden shadow-2xl transition-transform ${
-                deathFlash && !settings.reducedMotion ? 'scale-95 border-rose-500' : ''
-              } ${
-                mode === 'wrap'
-                  ? 'border-dashed border-sky-500/80'
-                  : isLight
-                  ? 'border-emerald-700 bg-amber-50'
-                  : 'border-emerald-600/80 bg-slate-950'
-              }`}
-              role="application"
-              aria-label={`Snake Game ${activeGridSize} by ${activeGridSize} grid board. Use arrow keys, WASD, or swipe to steer.`}
-            >
+                {/* Stacked Score & Best Cards */}
+                <div className="space-y-1.5">
+                  <div className="bg-slate-950/80 border border-emerald-500/30 rounded-xl px-3 py-2 flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400">
+                      Score
+                    </span>
+                    <span className="text-xl font-black text-emerald-400 tabular-nums">
+                      {score}
+                    </span>
+                  </div>
+
+                  <div className="bg-slate-950/80 border border-amber-500/30 rounded-xl px-3 py-2 flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-amber-300/90">
+                      Best Score
+                    </span>
+                    <span className="text-xl font-black text-amber-400 tabular-nums">
+                      {Math.max(modeSizeRecord.bestScore, score)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Length & Level */}
+                <div className="grid grid-cols-2 gap-1.5 pt-0.5">
+                  <div className="bg-slate-950/60 border border-slate-800 rounded-xl px-2.5 py-1.5">
+                    <span className="text-[9px] uppercase text-slate-400 font-bold block">
+                      Length
+                    </span>
+                    <span className="font-mono font-extrabold text-xs text-white tabular-nums">
+                      {snake.length} segs
+                    </span>
+                  </div>
+                  <div className="bg-slate-950/60 border border-slate-800 rounded-xl px-2.5 py-1.5">
+                    <span className="text-[9px] uppercase text-slate-400 font-bold block">
+                      Level
+                    </span>
+                    <span className="font-mono font-extrabold text-xs text-amber-400 tabular-nums">
+                      Lv.{level}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Active Snake Skin */}
+                <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-2 flex items-center gap-2">
+                  <SnakeSkinPreviewSvg skinId={selectedSkin} size={32} />
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-bold text-white truncate">
+                      {currentSkin.speciesName}
+                    </p>
+                    <p className="text-[9px] italic text-slate-400 truncate">
+                      {currentSkin.scientificName}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Left Stacked Action Controls */}
+              <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-2.5 flex flex-col gap-1.5 shadow-md">
+                <div className="grid grid-cols-2 gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => setIsPaused((p) => !p)}
+                    className="py-2 px-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 flex items-center justify-center gap-1.5 border border-slate-700 cursor-pointer"
+                  >
+                    {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
+                    <span>{isPaused ? 'Resume' : 'Pause'}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => startNewRun()}
+                    className="py-2 px-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-xs font-bold text-emerald-300 flex items-center justify-center gap-1.5 border border-emerald-500/30 cursor-pointer"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span>Restart</span>
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setScreen('menu')}
+                  className="w-full py-1.5 px-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 cursor-pointer"
+                >
+                  Change Mode / Skin
+                </button>
+              </div>
+            </aside>
+
+            {/* CENTER COLUMN: MOBILE TOP STATS + RESPONSIVE SNAKE BOARD */}
+            <div className="flex flex-col items-center gap-2">
+              {/* MOBILE (< lg): COMPACT TOP SCORE, BEST, LENGTH & LEVEL BAR */}
+              <div className="lg:hidden w-[94vw] max-w-[70dvh] grid grid-cols-5 gap-1 text-center">
+                <div
+                  className={`px-1.5 py-1 rounded-xl border ${
+                    isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
+                  }`}
+                >
+                  <span className="text-[9px] opacity-70 block">SCORE</span>
+                  <span className="font-mono font-extrabold text-xs text-emerald-400 tabular-nums">
+                    {score}
+                  </span>
+                </div>
+                <div
+                  className={`px-1.5 py-1 rounded-xl border ${
+                    isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
+                  }`}
+                >
+                  <span className="text-[9px] opacity-70 block">BEST</span>
+                  <span className="font-mono font-extrabold text-xs text-sky-400 tabular-nums">
+                    {Math.max(modeSizeRecord.bestScore, score)}
+                  </span>
+                </div>
+                <div
+                  className={`px-1.5 py-1 rounded-xl border ${
+                    isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
+                  }`}
+                >
+                  <span className="text-[9px] opacity-70 block">LENGTH</span>
+                  <span className="font-mono font-extrabold text-xs tabular-nums">
+                    {snake.length}
+                  </span>
+                </div>
+                <div
+                  className={`px-1.5 py-1 rounded-xl border ${
+                    isLight ? 'bg-white border-emerald-200' : 'bg-slate-900 border-slate-800'
+                  }`}
+                >
+                  <span className="text-[9px] opacity-70 block">LEVEL</span>
+                  <span className="font-mono font-extrabold text-xs text-amber-400 tabular-nums">
+                    {level}
+                  </span>
+                </div>
+                <div className="flex items-center justify-center gap-1">
+                  <button
+                    type="button"
+                    onClick={() => startNewRun()}
+                    className="p-1.5 rounded-xl bg-emerald-600 text-white cursor-pointer"
+                    aria-label="Restart"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setScreen('menu')}
+                    className="p-1.5 rounded-xl bg-slate-800 text-slate-200 border border-slate-700 text-[10px] font-bold cursor-pointer"
+                  >
+                    Menu
+                  </button>
+                </div>
+              </div>
+
+              {/* SVG GAME BOARD (touch-action: none so swiping never scrolls page) */}
+              <div
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                style={{ touchAction: 'none' }}
+                className={`relative w-[94vw] h-[94vw] max-w-[70dvh] max-h-[70dvh] lg:w-[min(58vw,80dvh)] lg:h-[min(58vw,80dvh)] lg:max-w-none lg:max-h-none rounded-2xl border-4 overflow-hidden shadow-2xl transition-transform ${
+                  deathFlash && !settings.reducedMotion ? 'scale-95 border-rose-500' : ''
+                } ${
+                  mode === 'wrap'
+                    ? 'border-dashed border-sky-500/80'
+                    : isLight
+                    ? 'border-emerald-700 bg-amber-50'
+                    : 'border-emerald-600/80 bg-slate-950'
+                }`}
+                role="application"
+                aria-label={`Snake Game ${activeGridSize} by ${activeGridSize} grid board. Use arrow keys, WASD, or swipe to steer.`}
+              >
               <svg
                 viewBox={`0 0 ${activeGridSize} ${activeGridSize}`}
                 className="w-full h-full block"
@@ -1312,6 +1322,7 @@ export const SnakeGame: React.FC<SnakeGameProps> = ({ onNavigateHome }) => {
                 </button>
               </div>
             )}
+            </div>
           </div>
         )}
 

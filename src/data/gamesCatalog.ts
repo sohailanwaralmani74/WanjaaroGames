@@ -8,11 +8,61 @@ export const CATEGORIES: CategoryInfo[] = [
     description:
       'Play original reptile and bird browser games on ReptileBirds with zero accounts and local high scores.',
     iconName: 'Gamepad2',
-    gameCount: 4,
+    gameCount: 5,
   },
 ];
 
 export const ALL_GAMES: GameMeta[] = [
+  {
+    id: 'parrot-flap',
+    title: 'Parrot Flap',
+    category: 'casual-arcade',
+    summary:
+      'Play Parrot Flap online free on ReptileBirds. Tap to fly a Scarlet Macaw through sandstone canyon pillars, collect feathers, unlock 5 SVG birds, and earn Platinum medals.',
+    description:
+      'An original one-tap bird game set in a multi-layered sandstone canyon with a 25-point day/night cycle. Includes Classic, Chill, and Daily Challenge modes plus 5 unlockable bird species skins.',
+    instructions:
+      'Tap, click, or press Space / Arrow Up to flap upward against gravity. Fly cleanly through sandstone pillar gaps (+1 pt) and collect floating canyon feathers (+2 pts).',
+    mechanic: 'Fixed-timestep one-tap vertical flight with reachability-bounded sandstone canyon pillars',
+    controls: 'all',
+    skillsTested: ['Rhythm Timing', 'Vertical Trajectory Control', 'Precision Reflexes'],
+    difficulty: 'Medium',
+    scoringUnit: 'points',
+    scoringCriterion: 'higher',
+    tags: ['parrot flap', 'tap to fly game', 'bird game', 'one-tap game', 'daily challenge'],
+    objective:
+      'Fly through sandstone canyon pillar gaps and collect floating feathers to achieve the highest score and unlock all 5 bird skins.',
+    whatItMeasures:
+      'Measures tap-impulse timing, vertical velocity estimation, and sustained focus.',
+    tips: [
+      'Use small, rhythmic taps just below the center of the next sandstone opening so your upward impulse never clips the top ledge.',
+      'Collect floating feathers inside gaps (+2 points each) to unlock Common Kingfisher, Barn Owl, Ruby-throated Hummingbird, and Indian Peafowl.',
+      'Try Chill Mode (220px wide gaps and safe ceiling) or toggle Assist Mode (+20% wider gaps) in Settings to practice.',
+    ],
+    faq: [
+      {
+        question: 'How does the reachability check work in this tap to fly game?',
+        answer:
+          'Every sandstone pillar gap is mathematically bounded relative to the previous gap under the 1500 px/s² gravity and -480 px/s flap impulse constants so every course is 100% passable.',
+      },
+      {
+        question: 'What are the 3 modes in Parrot Flap?',
+        answer:
+          'Classic (standard 170px to 130px narrowing gaps), Chill (wider 220px gaps, slower speed, and no ceiling game over), and Daily Challenge (date-seeded YYYY-MM-DD course identical for everyone that day).',
+      },
+      {
+        question: 'What medals can I earn in Parrot Flap?',
+        answer:
+          'You earn Bronze at 10 points, Silver at 25 points, Gold at 50 points, and Platinum at 100 points.',
+      },
+    ],
+    benchmark: {
+      metric: 'Classic Canyon Score',
+      average: '18 pts',
+      elite: '65 pts',
+      source: 'ReptileBirds One-Tap Canyon Flight Distribution',
+    },
+  },
   {
     id: 'snake-escape',
     title: 'Snake Escape',

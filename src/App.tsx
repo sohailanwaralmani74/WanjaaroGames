@@ -3,6 +3,7 @@ import { SnakeAndLadderGame } from './games/snakeAndLadder/SnakeAndLadderGame';
 import { SnakeGame } from './games/snakeGame/SnakeGame';
 import { MatchingCardGame } from './games/matchingCard/MatchingCardGame';
 import { SnakeEscapeGame } from './games/snakeEscape/SnakeEscapeGame';
+import { ParrotFlapGame } from './games/parrotFlap/ParrotFlapGame';
 import { WanjaaroLogo } from './components/WanjaaroLogo';
 import { BenchmarksView } from './components/BenchmarksView';
 import { PrivacyView } from './components/PrivacyView';
@@ -11,12 +12,23 @@ import { BirdTokenSvg } from './games/snakeAndLadder/BirdTokens';
 import { SnakeSkinPreviewSvg } from './games/snakeGame/SnakeSkins';
 import { SpeciesArtSvg } from './games/matchingCard/SpeciesArt';
 import { BirdOfPreySvg, EscapeSkinSvg } from './games/snakeEscape/EscapeSkins';
-import { Gamepad2, Dices, ShieldCheck, Trophy, Sparkles, Grid, Shield } from 'lucide-react';
+import { ParrotSkinSvg } from './games/parrotFlap/ParrotSkins';
+import {
+  Gamepad2,
+  Dices,
+  ShieldCheck,
+  Trophy,
+  Sparkles,
+  Grid,
+  Shield,
+  Feather,
+} from 'lucide-react';
 
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState<{
     view:
       | 'home'
+      | 'parrot-flap'
       | 'snake-escape'
       | 'matching-card-game'
       | 'snake-game'
@@ -33,7 +45,8 @@ export default function App() {
     }
     const path = window.location.pathname || '/';
     if (window.location.search.startsWith('?/')) {
-      const cleanFromSearch = '/' + window.location.search.slice(2).replace(/~and~/g, '&');
+      const cleanFromSearch =
+        '/' + window.location.search.slice(2).replace(/~and~/g, '&');
       window.history.replaceState(null, '', cleanFromSearch);
       return cleanFromSearch;
     }
@@ -44,9 +57,23 @@ export default function App() {
     const rawPath = getCurrentCleanPath();
     const slug = rawPath.replace(/^\//, '').replace(/\/$/, '').replace(/\.html$/, '');
 
-    if (window.location.pathname.length > 1 && window.location.pathname.endsWith('/')) {
+    if (
+      window.location.pathname.length > 1 &&
+      window.location.pathname.endsWith('/')
+    ) {
       const cleanPath = window.location.pathname.replace(/\/+$/, '');
       window.history.replaceState(null, '', cleanPath + window.location.search);
+    }
+
+    if (slug === 'parrot-flap') {
+      setCurrentRoute({ view: 'parrot-flap' });
+      updateMetaTags({
+        title: 'Parrot Flap – Free Tap to Fly Bird Game Online | Reptile Birds',
+        description:
+          'Play Parrot Flap online free on ReptileBirds. Tap to fly a Scarlet Macaw through sandstone canyon pillars, collect feathers, unlock 5 SVG birds, and earn Platinum medals.',
+        path: '/parrot-flap',
+      });
+      return;
     }
 
     if (slug === 'snake-escape') {
@@ -63,7 +90,8 @@ export default function App() {
     if (slug === 'matching-card-game') {
       setCurrentRoute({ view: 'matching-card-game' });
       updateMetaTags({
-        title: 'Matching Card Game Online – Free Bird & Reptile Memory Game | Reptile Birds',
+        title:
+          'Matching Card Game Online – Free Bird & Reptile Memory Game | Reptile Birds',
         description:
           'Play Matching Card Game (Memory Game / Concentration) online free on ReptileBirds. Flip cards to match pairs of 9 birds and 9 reptiles across Easy, Medium, Hard, and Expert grids.',
         path: '/matching-card-game',
@@ -97,7 +125,8 @@ export default function App() {
       setCurrentRoute({ view: 'benchmarks' });
       updateMetaTags({
         title: 'Global Benchmarks | ReptileBirds',
-        description: 'Standardized reference distributions and percentile tools on ReptileBirds.',
+        description:
+          'Standardized reference distributions and percentile tools on ReptileBirds.',
         path: '/benchmarks',
       });
       return;
@@ -119,7 +148,7 @@ export default function App() {
     updateMetaTags({
       title: 'ReptileBirds – Free Online Reptile & Bird Browser Games',
       description:
-        'Play Snake Escape, Matching Card Game, Snake Game, and Snake and Ladder online free on ReptileBirds. 100% client-side games with local device records.',
+        'Play Parrot Flap, Snake Escape, Matching Card Game, Snake Game, and Snake and Ladder online free on ReptileBirds. 100% client-side games with local device records.',
       path: '/',
     });
   };
@@ -149,8 +178,8 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-950 via-slate-950 to-black text-slate-100 flex flex-col font-sans select-none">
       {/* Shared Top Navigation Bar Available on Index and Every Game Page */}
-      <header className="w-full max-w-5xl mx-auto px-2.5 sm:px-4 pt-2.5 pb-1">
-        <div className="flex flex-wrap items-center justify-between gap-2 px-3.5 py-2.5 rounded-2xl bg-slate-900/90 border border-emerald-500/30 shadow-lg backdrop-blur-md">
+      <header className="w-[min(96vw,86rem)] mx-auto px-[clamp(0.5rem,2vw,1.5rem)] pt-[clamp(0.4rem,1dvh,0.75rem)] pb-1">
+        <div className="flex flex-wrap items-center justify-between gap-2 px-[clamp(0.75rem,2vw,1.25rem)] py-[clamp(0.45rem,1dvh,0.75rem)] rounded-2xl bg-slate-900/90 border border-emerald-500/30 shadow-lg backdrop-blur-md">
           <a
             href="/"
             onClick={(e) => {
@@ -179,6 +208,20 @@ export default function App() {
               }`}
             >
               Home
+            </a>
+            <a
+              href="/parrot-flap"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateTo('/parrot-flap');
+              }}
+              className={`transition-colors no-underline ${
+                currentRoute.view === 'parrot-flap'
+                  ? 'text-amber-400 font-bold underline underline-offset-4'
+                  : 'text-slate-200 hover:text-amber-400'
+              }`}
+            >
+              Parrot Flap
             </a>
             <a
               href="/snake-escape"
@@ -255,7 +298,25 @@ export default function App() {
       </header>
 
       {/* Route Views */}
-      {currentRoute.view === 'snake-escape' ? (
+      {currentRoute.view === 'parrot-flap' ? (
+        <div className="flex-1 flex flex-col">
+          <div
+            id="ad-slot-top"
+            className="w-full h-0 overflow-hidden"
+            aria-label="Top sponsor slot"
+          />
+          <ParrotFlapGame />
+          <div
+            id="ad-slot-bottom"
+            className="w-full h-0 overflow-hidden"
+            aria-label="Bottom sponsor slot"
+          />
+          <footer className="w-full max-w-5xl mx-auto px-4 py-5 border-t border-slate-800/70 text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p>Scores are stored only on your device. No data leaves your browser.</p>
+            <span className="font-bold text-amber-400">ReptileBirds</span>
+          </footer>
+        </div>
+      ) : currentRoute.view === 'snake-escape' ? (
         <div className="flex-1 flex flex-col">
           <SnakeEscapeGame />
         </div>
@@ -288,7 +349,11 @@ export default function App() {
       ) : (
         /* ReptileBirds Home Hub (/) */
         <>
-          <div id="ad-slot-top" className="w-full h-0 overflow-hidden" aria-label="Top sponsor slot" />
+          <div
+            id="ad-slot-top"
+            className="w-full h-0 overflow-hidden"
+            aria-label="Top sponsor slot"
+          />
 
           <main className="flex-1 flex flex-col items-center justify-center max-w-5xl w-full mx-auto px-4 py-6 space-y-8">
             <div className="text-center space-y-2 max-w-xl">
@@ -299,14 +364,55 @@ export default function App() {
                 ReptileBirds
               </h1>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Choose a game below to play immediately in your browser. Every game has its own
-                dedicated page and stores your high scores locally on your device.
+                Choose a game below to play immediately in your browser. Every game
+                has its own dedicated page and stores your high scores locally on
+                your device.
               </p>
             </div>
 
-            {/* 4 Featured Game Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-              {/* Card 1: Snake Escape (/snake-escape) */}
+            {/* 5 Featured Game Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
+              {/* Card 1: Parrot Flap (/parrot-flap) */}
+              <a
+                href="/parrot-flap"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo('/parrot-flap');
+                }}
+                className="group rounded-3xl bg-slate-900/95 border-2 border-amber-500/40 hover:border-amber-400 p-5 flex flex-col justify-between gap-5 shadow-2xl transition-all hover:-translate-y-0.5 no-underline text-left"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5 text-amber-400 text-xs font-bold">
+                      <Feather className="w-4 h-4" />
+                      <span>ONE-TAP FLIGHT · 5 BIRDS</span>
+                    </div>
+                    <ParrotSkinSvg skinId="scarlet-macaw" size={40} wingUp />
+                  </div>
+
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-white group-hover:text-amber-400 transition-colors">
+                    Parrot Flap
+                  </h2>
+
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Tap to fly a Scarlet Macaw through sandstone canyon pillars with
+                    a 25-point day/night cycle. Collect feathers (+2 pts), unlock 5
+                    SVG bird species, and earn Platinum medals!
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between pt-3 border-t border-slate-800">
+                  <span className="text-xs text-slate-400 flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Classic, Chill &amp; Daily</span>
+                  </span>
+                  <span className="px-3.5 py-2 rounded-xl bg-amber-500 group-hover:bg-amber-400 text-slate-950 font-extrabold text-xs shadow">
+                    Play Parrot Flap →
+                  </span>
+                </div>
+              </a>
+
+              {/* Card 2: Snake Escape (/snake-escape) */}
               <a
                 href="/snake-escape"
                 onClick={(e) => {
@@ -332,9 +438,9 @@ export default function App() {
                   </h2>
 
                   <p className="text-xs text-slate-300 leading-relaxed">
-                    Slither through an 800×800 meadow eating mice while Hawks, Peregrine Falcons,
-                    Bald Eagles, and nocturnal Barn Owls hunt from above. Hide in tall grass,
-                    burrow underground, and chain near-miss dodges!
+                    Slither through an 800×800 meadow eating mice while Hawks,
+                    Peregrine Falcons, Bald Eagles, and nocturnal Barn Owls hunt from
+                    above. Hide in tall grass and burrow underground!
                   </p>
                 </div>
 
@@ -349,7 +455,7 @@ export default function App() {
                 </div>
               </a>
 
-              {/* Card 2: Matching Card Game (/matching-card-game) */}
+              {/* Card 3: Matching Card Game (/matching-card-game) */}
               <a
                 href="/matching-card-game"
                 onClick={(e) => {
@@ -375,9 +481,9 @@ export default function App() {
                   </h2>
 
                   <p className="text-xs text-slate-300 leading-relaxed">
-                    Flip cards to match pairs of 9 birds and 9 reptiles across Easy (4×3), Medium
-                    (4×4), Hard (6×4), and Expert (6×6) grids. Includes Classic, Timed, Daily
-                    Challenge, and Two-Player modes.
+                    Flip cards to match pairs of 9 birds and 9 reptiles across Easy
+                    (4×3), Medium (4×4), Hard (6×4), and Expert (6×6) grids. Includes
+                    Classic, Timed, Daily Challenge, and Two-Player modes.
                   </p>
                 </div>
 
@@ -392,7 +498,7 @@ export default function App() {
                 </div>
               </a>
 
-              {/* Card 3: Snake Game (/snake-game) */}
+              {/* Card 4: Snake Game (/snake-game) */}
               <a
                 href="/snake-game"
                 onClick={(e) => {
@@ -415,9 +521,9 @@ export default function App() {
                   </h2>
 
                   <p className="text-xs text-slate-300 leading-relaxed">
-                    Guide a python hunting mice across 15×15, 20×20, or 25×25 grids. Features
-                    Classic, Wrap-Around, Jungle Obstacles, Daily Challenge, bonus golden eggs, and
-                    6 unlockable real snake species skins.
+                    Guide a python hunting mice across 15×15, 20×20, or 25×25 grids.
+                    Features Classic, Wrap-Around, Jungle Obstacles, Daily Challenge,
+                    bonus golden eggs, and 6 unlockable snake skins.
                   </p>
                 </div>
 
@@ -432,7 +538,7 @@ export default function App() {
                 </div>
               </a>
 
-              {/* Card 4: Snake and Ladder (/snake-and-ladder) */}
+              {/* Card 5: Snake and Ladder (/snake-and-ladder) */}
               <a
                 href="/snake-and-ladder"
                 onClick={(e) => {
@@ -459,9 +565,9 @@ export default function App() {
                   </h2>
 
                   <p className="text-xs text-slate-300 leading-relaxed">
-                    Roll the 3D die directly across the 10×10 jungle board. Climb 8 vines, dodge 8
-                    real snake species, and race to square 100 in Solo Race, Daily Board, Vs
-                    Computer, or Local Pass-and-Play.
+                    Roll the 3D die directly across the 10×10 jungle board. Climb 8
+                    vines, dodge 8 real snake species, and race to square 100 in Solo
+                    Race, Daily Board, Vs Computer, or Local Pass-and-Play.
                   </p>
                 </div>
 
@@ -478,7 +584,11 @@ export default function App() {
             </div>
           </main>
 
-          <div id="ad-slot-bottom" className="w-full h-0 overflow-hidden" aria-label="Bottom sponsor slot" />
+          <div
+            id="ad-slot-bottom"
+            className="w-full h-0 overflow-hidden"
+            aria-label="Bottom sponsor slot"
+          />
 
           {/* Home Footer */}
           <footer className="w-full max-w-5xl mx-auto px-4 py-5 border-t border-slate-800/70 text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-3">

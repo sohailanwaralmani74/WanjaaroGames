@@ -1368,274 +1368,398 @@ export const SnakeEscapeGame: React.FC = () => {
       }`}
     >
       {/* MAIN GAME CONTAINER */}
-      <div className="w-full max-w-5xl px-3 sm:px-6 py-4 flex flex-col items-center">
-        {/* TOP HEADER BAR */}
-        <div className="w-full flex flex-wrap items-center justify-between gap-2 mb-3 bg-slate-900/90 border border-emerald-500/20 rounded-2xl px-4 py-2.5 shadow-lg">
-          <div className="flex items-center gap-2.5">
-            <button
-              onClick={() => {
-                simRef.current.active = false;
-                setScreen('title');
-              }}
-              className="flex items-center gap-2 text-left cursor-pointer group"
-            >
-              <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center">
-                <EscapeSkinSvg skinId={records.selectedSkin} size={28} />
-              </div>
-              <div>
-                <h1 className="text-base sm:text-lg font-extrabold tracking-tight text-white group-hover:text-emerald-300 transition-colors">
-                  Snake Escape
-                </h1>
-                <p className="text-[11px] text-emerald-400 font-medium">
-                  ReptileBirds Arena Survival
-                </p>
-              </div>
-            </button>
-          </div>
-
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <button
-              onClick={() => setScreen('skins')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 border transition-all cursor-pointer ${
-                screen === 'skins'
-                  ? 'bg-emerald-500 text-slate-950 border-emerald-400'
-                  : 'bg-slate-800/90 hover:bg-slate-700 text-emerald-300 border-slate-700'
-              }`}
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Skins & Birds</span>
-            </button>
-
-            <button
-              onClick={() => setScreen('records')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 border transition-all cursor-pointer ${
-                screen === 'records'
-                  ? 'bg-emerald-500 text-slate-950 border-emerald-400'
-                  : 'bg-slate-800/90 hover:bg-slate-700 text-amber-300 border-slate-700'
-              }`}
-            >
-              <Trophy className="w-3.5 h-3.5" />
-              <span>My Records</span>
-            </button>
-
-            <button
-              onClick={() => setShowHowToPlay(true)}
-              aria-label="How to Play"
-              className="p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer"
-            >
-              <HelpCircle className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={() => updateSetting('soundEnabled', !settings.soundEnabled)}
-              aria-label={settings.soundEnabled ? 'Mute sound' : 'Unmute sound'}
-              className="p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer"
-            >
-              {settings.soundEnabled ? (
-                <Volume2 className="w-4 h-4 text-emerald-400" />
-              ) : (
-                <VolumeX className="w-4 h-4 text-slate-400" />
-              )}
-            </button>
-
-            <button
-              onClick={() => setShowSettingsModal(true)}
-              aria-label="Settings"
-              className="p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer"
-            >
-              <Settings className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-
+      <div className="w-full max-w-6xl mx-auto px-2 sm:px-4 py-1.5 flex flex-col items-center">
         {/* ========================================================= */}
         {/* 1. TITLE & MODE SELECTION SCREEN                          */}
         {/* ========================================================= */}
         {screen === 'title' && (
-          <div className="w-full bg-slate-900/90 border border-emerald-500/25 rounded-3xl p-5 sm:p-8 shadow-2xl flex flex-col items-center text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold mb-3">
-              <Shield className="w-3.5 h-3.5" />
-              <span>TOP-DOWN RAPTOR EVASION ARENA</span>
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-2">
-              Slither, Hunt Mice &amp; Dodge Diving Raptors
-            </h2>
-            <p className="text-slate-300 text-sm sm:text-base max-w-xl mb-6">
-              Guide your{' '}
-              <span className="text-emerald-300 font-semibold">
-                {selectedSkinObj.species}
-              </span>{' '}
-              through the field. Watch for tracking bird shadows from above, hide in
-              tall grass to slow lock-ons, or press{' '}
-              <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-xs font-mono text-sky-300">
-                Space
-              </kbd>{' '}
-              to burrow underground!
-            </p>
-
-            {/* MODE CARDS */}
-            <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-6">
-              {(
-                [
-                  {
-                    id: 'survival',
-                    title: 'Survival Mode',
-                    subtitle: 'Endless 30s Waves',
-                    desc: 'Survive escalating raptor waves with Hawks, Peregrine Falcons, Bald Eagles & night Barn Owls.',
-                    badge: `Best: ${records.byMode.survival.bestScore} pts (Wave ${records.byMode.survival.bestWave})`,
-                    icon: Flame,
-                  },
-                  {
-                    id: 'timed',
-                    title: 'Timed Hunt',
-                    subtitle: '3-Minute Score Attack',
-                    desc: '3 minutes on the clock! Hunt mice, golden mice & chain near-miss dodges (+25 pts) for maximum score.',
-                    badge: `Best: ${records.byMode.timed.bestScore} pts`,
-                    icon: Zap,
-                  },
-                  {
-                    id: 'daily',
-                    title: 'Daily Challenge',
-                    subtitle: `Seed: ${todayDateStr}`,
-                    desc: 'Identical field layout, obstacle positions & raptor wave schedule for all players today.',
-                    badge: records.dailyByDate[todayDateStr]
-                      ? `Today's Best: ${records.dailyByDate[todayDateStr].score} pts`
-                      : `Streak: ${records.dailyStreak} day${records.dailyStreak === 1 ? '' : 's'}`,
-                    icon: Calendar,
-                  },
-                ] as const
-              ).map((m) => {
-                const Icon = m.icon;
-                const active = mode === m.id;
-                return (
-                  <button
-                    key={m.id}
-                    onClick={() => setMode(m.id)}
-                    className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
-                      active
-                        ? 'bg-emerald-950/80 border-emerald-400 shadow-lg shadow-emerald-950/50'
-                        : 'bg-slate-950/60 border-slate-800 hover:border-slate-700'
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
-                          {m.subtitle}
-                        </span>
-                        <Icon
-                          className={`w-4 h-4 ${
-                            active ? 'text-emerald-400' : 'text-slate-400'
-                          }`}
-                        />
-                      </div>
-                      <h3 className="text-lg font-extrabold text-white mb-1">
-                        {m.title}
-                      </h3>
-                      <p className="text-xs text-slate-300 leading-relaxed mb-3">
-                        {m.desc}
-                      </p>
-                    </div>
-                    <div className="text-[11px] font-bold text-amber-300 bg-slate-900/90 px-2.5 py-1 rounded-lg border border-slate-800 w-fit">
-                      {m.badge}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* ACTIVE SKIN & START CTA */}
-            <div className="flex flex-wrap items-center justify-center gap-3 w-full">
-              <button
-                onClick={() => startNewGame(mode)}
-                className="px-8 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-base flex items-center gap-2 shadow-lg shadow-emerald-500/20 cursor-pointer transition-transform active:scale-95"
-              >
-                <Play className="w-5 h-5 fill-current" />
-                <span>
-                  Start{' '}
-                  {mode === 'survival'
-                    ? 'Survival'
-                    : mode === 'timed'
-                    ? 'Timed Hunt'
-                    : 'Daily Challenge'}
+          <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-3">
+            {/* DESKTOP LEFT STACKED STATS & CONTROLS PANEL */}
+            <aside className="hidden lg:flex lg:flex-col gap-2.5 w-[14.5rem] shrink-0">
+              <div className="bg-slate-900/95 border border-emerald-500/35 rounded-2xl p-3 shadow-lg flex flex-col gap-1.5">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-400 border-b border-slate-800 pb-1">
+                  Personal Bests
                 </span>
-              </button>
+                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-slate-950/80 border border-emerald-500/25">
+                  <span className="text-xs font-bold text-slate-400 uppercase">
+                    Best ({mode})
+                  </span>
+                  <span className="text-base font-black text-emerald-400 tabular-nums">
+                    {modeBest.toLocaleString()}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                  <span className="text-xs font-bold text-slate-400 uppercase">
+                    Total Mice
+                  </span>
+                  <span className="text-sm font-black text-amber-300 tabular-nums">
+                    {records.totalMiceEaten} 🐁
+                  </span>
+                </div>
+                <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                  <span className="text-xs font-bold text-slate-400 uppercase">
+                    Daily Streak
+                  </span>
+                  <span className="text-sm font-black text-sky-300 tabular-nums">
+                    {records.dailyStreak}d 🔥
+                  </span>
+                </div>
+              </div>
 
-              <button
-                onClick={() => setScreen('skins')}
-                className="px-4 py-3.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold text-sm flex items-center gap-2 border border-slate-700 cursor-pointer"
-              >
-                <EscapeSkinSvg skinId={records.selectedSkin} size={24} />
-                <span>Skin: {selectedSkinObj.species}</span>
-              </button>
+              <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-2.5 shadow flex flex-col gap-2">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-8 h-8 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0">
+                      <EscapeSkinSvg skinId={records.selectedSkin} size={24} />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[11px] font-extrabold text-white truncate">
+                        {selectedSkinObj.species}
+                      </div>
+                      <div className="text-[10px] italic text-slate-400 truncate">
+                        {selectedSkinObj.scientificName}
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setScreen('skins')}
+                    className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 text-[10px] font-bold border border-slate-700 cursor-pointer shrink-0"
+                  >
+                    Skins
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-4 gap-1.5">
+                <button
+                  onClick={() => setScreen('records')}
+                  title="Records"
+                  className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-800 flex items-center justify-center cursor-pointer"
+                >
+                  <Trophy className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setShowHowToPlay(true)}
+                  title="How to Play"
+                  className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 flex items-center justify-center cursor-pointer"
+                >
+                  <HelpCircle className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => updateSetting('soundEnabled', !settings.soundEnabled)}
+                  title="Toggle Sound"
+                  className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 flex items-center justify-center cursor-pointer"
+                >
+                  {settings.soundEnabled ? (
+                    <Volume2 className="w-4 h-4 text-emerald-400" />
+                  ) : (
+                    <VolumeX className="w-4 h-4 text-slate-400" />
+                  )}
+                </button>
+                <button
+                  onClick={() => setShowSettingsModal(true)}
+                  title="Settings"
+                  className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 flex items-center justify-center cursor-pointer"
+                >
+                  <Settings className="w-4 h-4" />
+                </button>
+              </div>
+            </aside>
+
+            <div className="w-[94vw] max-w-[26rem] lg:w-[min(56vw,44rem)] lg:max-w-none flex flex-col items-center">
+              {/* MOBILE TOP STATS & TOOLS BAR */}
+              <div className="w-full lg:hidden flex items-center justify-between gap-1.5 mb-1.5 bg-slate-900/95 border border-emerald-500/30 rounded-xl px-2.5 py-1.5 shadow">
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="text-slate-400 font-bold text-[10px] uppercase">
+                    Best:
+                  </span>
+                  <span className="font-black text-emerald-400 tabular-nums">
+                    {modeBest.toLocaleString()}
+                  </span>
+                  <span className="text-slate-600">·</span>
+                  <span className="font-bold text-amber-300 tabular-nums text-[11px]">
+                    {records.totalMiceEaten}🐁
+                  </span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => setScreen('skins')}
+                    className="px-2 py-0.5 rounded-lg bg-slate-800 text-emerald-300 text-[10px] font-bold border border-slate-700 cursor-pointer"
+                  >
+                    Skins
+                  </button>
+                  <button
+                    onClick={() => setScreen('records')}
+                    aria-label="Records"
+                    className="p-1 rounded-lg bg-slate-800 text-amber-400 border border-slate-700 cursor-pointer"
+                  >
+                    <Trophy className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={() => setShowHowToPlay(true)}
+                    aria-label="How to Play"
+                    className="p-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 cursor-pointer"
+                  >
+                    <HelpCircle className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={() =>
+                      updateSetting('soundEnabled', !settings.soundEnabled)
+                    }
+                    aria-label="Toggle Sound"
+                    className="p-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 cursor-pointer"
+                  >
+                    {settings.soundEnabled ? (
+                      <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                    ) : (
+                      <VolumeX className="w-3.5 h-3.5 text-slate-400" />
+                    )}
+                  </button>
+                  <button
+                    onClick={() => setShowSettingsModal(true)}
+                    aria-label="Settings"
+                    className="p-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 cursor-pointer"
+                  >
+                    <Settings className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="w-full bg-slate-900/90 border border-emerald-500/25 rounded-2xl p-4 sm:p-5 shadow-2xl flex flex-col items-center text-center">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-bold mb-2">
+                  <Shield className="w-3 h-3" />
+                  <span>TOP-DOWN RAPTOR EVASION ARENA</span>
+                </div>
+
+                <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-1.5">
+                  Slither, Hunt Mice &amp; Dodge Diving Raptors
+                </h2>
+                <p className="text-slate-300 text-xs max-w-md mb-4">
+                  Guide your{' '}
+                  <span className="text-emerald-300 font-semibold">
+                    {selectedSkinObj.species}
+                  </span>{' '}
+                  through the field. Hide in tall grass to slow lock-ons, or press{' '}
+                  <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-[10px] font-mono text-sky-300">
+                    Space
+                  </kbd>{' '}
+                  to burrow underground!
+                </p>
+
+                {/* COMPACT SMALL MODE CARDS */}
+                <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
+                  {(
+                    [
+                      {
+                        id: 'survival',
+                        title: 'Survival Mode',
+                        subtitle: 'Endless 30s Waves',
+                        desc: 'Survive escalating raptor waves with Hawks, Falcons, Eagles & Owls.',
+                        badge: `Best: ${records.byMode.survival.bestScore} pts (W${records.byMode.survival.bestWave})`,
+                        icon: Flame,
+                      },
+                      {
+                        id: 'timed',
+                        title: 'Timed Hunt',
+                        subtitle: '3-Min Score Attack',
+                        desc: '3 minutes on the clock! Hunt mice & chain near-miss dodges (+25 pts).',
+                        badge: `Best: ${records.byMode.timed.bestScore} pts`,
+                        icon: Zap,
+                      },
+                      {
+                        id: 'daily',
+                        title: 'Daily Challenge',
+                        subtitle: `Seed: ${todayDateStr}`,
+                        desc: 'Identical field layout & raptor wave schedule for all players today.',
+                        badge: records.dailyByDate[todayDateStr]
+                          ? `Today: ${records.dailyByDate[todayDateStr].score} pts`
+                          : `Streak: ${records.dailyStreak}d`,
+                        icon: Calendar,
+                      },
+                    ] as const
+                  ).map((m) => {
+                    const Icon = m.icon;
+                    const active = mode === m.id;
+                    return (
+                      <button
+                        key={m.id}
+                        onClick={() => setMode(m.id)}
+                        className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+                          active
+                            ? 'bg-emerald-950/80 border-emerald-400 shadow-md'
+                            : 'bg-slate-950/60 border-slate-800 hover:border-slate-700'
+                        }`}
+                      >
+                        <div>
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+                              {m.subtitle}
+                            </span>
+                            <Icon
+                              className={`w-3.5 h-3.5 ${
+                                active ? 'text-emerald-400' : 'text-slate-400'
+                              }`}
+                            />
+                          </div>
+                          <h3 className="text-xs sm:text-sm font-extrabold text-white mb-0.5">
+                            {m.title}
+                          </h3>
+                          <p className="text-[11px] text-slate-300 leading-snug mb-2">
+                            {m.desc}
+                          </p>
+                        </div>
+                        <div className="text-[10px] font-bold text-amber-300 bg-slate-900/90 px-2 py-0.5 rounded border border-slate-800 w-fit">
+                          {m.badge}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* ACTIVE SKIN & START CTA */}
+                <div className="flex flex-wrap items-center justify-center gap-2.5 w-full">
+                  <button
+                    onClick={() => startNewGame(mode)}
+                    className="px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/20 cursor-pointer transition-transform active:scale-95"
+                  >
+                    <Play className="w-4 h-4 fill-current" />
+                    <span>
+                      Start{' '}
+                      {mode === 'survival'
+                        ? 'Survival'
+                        : mode === 'timed'
+                        ? 'Timed Hunt'
+                        : 'Daily Challenge'}
+                    </span>
+                  </button>
+
+                  <button
+                    onClick={() => setScreen('skins')}
+                    className="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold text-xs flex items-center gap-1.5 border border-slate-700 cursor-pointer"
+                  >
+                    <EscapeSkinSvg skinId={records.selectedSkin} size={20} />
+                    <span>Skin: {selectedSkinObj.species}</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}
 
         {/* ========================================================= */}
         {/* 2. ACTIVE ARENA GAMEPLAY SCREEN                           */}
+        {/* Desktop: Stacked Score/Best/Stats on LEFT + Arena on RIGHT*/}
+        {/* Mobile: Compact Score/Best/Stats on TOP + Arena below     */}
         {/* ========================================================= */}
         {screen === 'playing' && (
-          <div className="w-full flex flex-col items-center">
-            {/* COMPACT HUD BAR */}
-            <div className="w-full max-w-[680px] grid grid-cols-2 sm:grid-cols-5 gap-2 mb-2.5 bg-slate-900/95 border border-emerald-500/30 rounded-2xl p-2.5 shadow-md">
-              {/* Hearts / Lives */}
-              <div className="flex items-center gap-1.5 px-2 py-1 rounded-xl bg-slate-950/70 border border-slate-800">
-                {[1, 2, 3].map((h) => (
-                  <Heart
-                    key={h}
-                    className={`w-4 h-4 transition-transform ${
-                      h <= lives
-                        ? 'text-rose-500 fill-rose-500 scale-100'
-                        : 'text-slate-700 scale-90'
-                    }`}
-                  />
-                ))}
-                {inGrassState && (
-                  <span className="ml-auto text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                    GRASS
+          <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-3">
+            {/* DESKTOP LEFT STACKED STATISTICS PANEL (lg: visible, mobile hidden) */}
+            <aside className="hidden lg:flex lg:flex-col gap-2.5 w-[14.5rem] shrink-0">
+              <div className="bg-slate-900/95 border border-emerald-500/35 rounded-2xl p-3 shadow-lg flex flex-col gap-2">
+                <div className="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-400">
+                    Arena Telemetry
                   </span>
-                )}
-              </div>
+                  <button
+                    onClick={() => {
+                      simRef.current.paused = !simRef.current.paused;
+                      setIsPaused(simRef.current.paused);
+                    }}
+                    aria-label="Pause Game"
+                    className="px-2 py-0.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-[10px] font-bold flex items-center gap-1 cursor-pointer"
+                  >
+                    {isPaused ? (
+                      <>
+                        <Play className="w-3 h-3 text-emerald-400" />
+                        <span>Resume</span>
+                      </>
+                    ) : (
+                      <>
+                        <Pause className="w-3 h-3" />
+                        <span>Pause</span>
+                      </>
+                    )}
+                  </button>
+                </div>
 
-              {/* Score & Best */}
-              <div className="flex flex-col justify-center px-2.5 py-1 rounded-xl bg-slate-950/70 border border-slate-800">
-                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
-                  Score (Best {Math.max(score, modeBest)})
-                </span>
-                <span className="text-sm sm:text-base font-black text-emerald-400">
-                  {score.toLocaleString()}
-                </span>
-              </div>
+                {/* Stacked Rows: Lives, Score, Best, Wave, Mice, Time */}
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                    <span className="text-xs font-bold text-slate-400 uppercase">
+                      Lives
+                    </span>
+                    <div className="flex items-center gap-1">
+                      {[1, 2, 3].map((h) => (
+                        <Heart
+                          key={h}
+                          className={`w-4 h-4 ${
+                            h <= lives
+                              ? 'text-rose-500 fill-rose-500'
+                              : 'text-slate-700'
+                          }`}
+                        />
+                      ))}
+                      {inGrassState && (
+                        <span className="ml-1 text-[9px] font-bold px-1 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                          GRASS
+                        </span>
+                      )}
+                    </div>
+                  </div>
 
-              {/* Wave & Mice */}
-              <div className="flex flex-col justify-center px-2.5 py-1 rounded-xl bg-slate-950/70 border border-slate-800">
-                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
-                  Wave · Mice
-                </span>
-                <span className="text-sm font-extrabold text-amber-300">
-                  W{wave} · {miceEaten} 🐁
-                </span>
-              </div>
+                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-slate-950/80 border border-emerald-500/25">
+                    <span className="text-xs font-bold text-slate-400 uppercase">
+                      Score
+                    </span>
+                    <span className="text-lg font-black text-emerald-400 tabular-nums leading-none">
+                      {score.toLocaleString()}
+                    </span>
+                  </div>
 
-              {/* Timer */}
-              <div className="flex flex-col justify-center px-2.5 py-1 rounded-xl bg-slate-950/70 border border-slate-800">
-                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
-                  {mode === 'timed' ? 'Time Left' : 'Survived'}
-                </span>
-                <span className="text-sm font-extrabold text-sky-300">
-                  {mode === 'timed'
-                    ? formatTime(TIMED_HUNT_DURATION_SEC - elapsedSec)
-                    : formatTime(elapsedSec)}
-                </span>
-              </div>
+                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                    <span className="text-xs font-bold text-slate-400 uppercase">
+                      Best
+                    </span>
+                    <span className="text-base font-black text-white tabular-nums leading-none">
+                      {Math.max(score, modeBest).toLocaleString()}
+                    </span>
+                  </div>
 
-              {/* Burrow Button + Pause */}
-              <div className="col-span-2 sm:col-span-1 flex items-center justify-end gap-1.5">
+                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                    <span className="text-xs font-bold text-slate-400 uppercase">
+                      Wave
+                    </span>
+                    <span className="text-sm font-extrabold text-amber-300 tabular-nums leading-none">
+                      Wave {wave}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                    <span className="text-xs font-bold text-slate-400 uppercase">
+                      Mice Eaten
+                    </span>
+                    <span className="text-sm font-extrabold text-amber-200 tabular-nums leading-none">
+                      {miceEaten} 🐁
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                    <span className="text-xs font-bold text-slate-400 uppercase">
+                      {mode === 'timed' ? 'Time Left' : 'Survived'}
+                    </span>
+                    <span className="text-sm font-extrabold text-sky-300 tabular-nums leading-none">
+                      {mode === 'timed'
+                        ? formatTime(TIMED_HUNT_DURATION_SEC - elapsedSec)
+                        : formatTime(elapsedSec)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Burrow Action Button */}
                 <button
                   onClick={triggerBurrow}
                   disabled={burrowCooldownLeft > 0 || isBurrowed}
-                  className={`flex-1 sm:flex-initial px-2.5 py-1.5 rounded-xl text-xs font-extrabold border transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                  className={`w-full py-2 rounded-xl text-xs font-extrabold border transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                     isBurrowed
                       ? 'bg-sky-500 text-slate-950 border-sky-300'
                       : burrowCooldownLeft <= 0
@@ -1643,35 +1767,146 @@ export const SnakeEscapeGame: React.FC = () => {
                       : 'bg-slate-900 text-slate-500 border-slate-800 cursor-not-allowed'
                   }`}
                 >
-                  <Shield className="w-3.5 h-3.5" />
+                  <Shield className="w-3.5 h-3.5 shrink-0" />
                   <span>
                     {isBurrowed
-                      ? 'Burrowed!'
+                      ? 'Burrowed Underground!'
                       : burrowCooldownLeft <= 0
-                      ? 'Burrow'
-                      : `${burrowCooldownLeft.toFixed(1)}s`}
+                      ? 'Burrow (Space)'
+                      : `Cooldown ${burrowCooldownLeft.toFixed(1)}s`}
                   </span>
                 </button>
+              </div>
 
+              {/* Compact Tools Row */}
+              <div className="grid grid-cols-4 gap-1.5">
                 <button
-                  onClick={() => {
-                    simRef.current.paused = !simRef.current.paused;
-                    setIsPaused(simRef.current.paused);
-                  }}
-                  aria-label="Pause Game"
-                  className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer"
+                  onClick={() => setScreen('records')}
+                  title="Records"
+                  className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-800 flex items-center justify-center cursor-pointer"
                 >
-                  {isPaused ? (
-                    <Play className="w-4 h-4 text-emerald-400" />
+                  <Trophy className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setShowHowToPlay(true)}
+                  title="How to Play"
+                  className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 flex items-center justify-center cursor-pointer"
+                >
+                  <HelpCircle className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => updateSetting('soundEnabled', !settings.soundEnabled)}
+                  title="Toggle Sound"
+                  className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 flex items-center justify-center cursor-pointer"
+                >
+                  {settings.soundEnabled ? (
+                    <Volume2 className="w-4 h-4 text-emerald-400" />
                   ) : (
-                    <Pause className="w-4 h-4" />
+                    <VolumeX className="w-4 h-4 text-slate-400" />
                   )}
                 </button>
+                <button
+                  onClick={() => setShowSettingsModal(true)}
+                  title="Settings"
+                  className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 flex items-center justify-center cursor-pointer"
+                >
+                  <Settings className="w-4 h-4" />
+                </button>
               </div>
-            </div>
+            </aside>
 
-            {/* ARENA CANVAS WRAPPER (800x800 logical, responsive square) */}
-            <div className="relative w-full max-w-[min(92vw,640px)] aspect-square rounded-3xl overflow-hidden border-2 border-emerald-500/40 shadow-2xl bg-slate-950">
+            {/* MAIN ARENA COLUMN */}
+            <div className="w-[94vw] max-w-[26rem] lg:w-[min(58vw,82dvh)] lg:max-w-none flex flex-col items-center">
+              {/* MOBILE TOP HUD BAR (Visible on Mobile/Tablet, Hidden on Desktop lg:) */}
+              <div className="w-full lg:hidden grid grid-cols-2 sm:grid-cols-5 gap-1.5 mb-1.5 bg-slate-900/95 border border-emerald-500/30 rounded-xl p-1.5 shadow">
+                <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-950/70 border border-slate-800">
+                  {[1, 2, 3].map((h) => (
+                    <Heart
+                      key={h}
+                      className={`w-3.5 h-3.5 ${
+                        h <= lives
+                          ? 'text-rose-500 fill-rose-500'
+                          : 'text-slate-700'
+                      }`}
+                    />
+                  ))}
+                  {inGrassState && (
+                    <span className="ml-auto text-[9px] font-bold px-1 py-0.5 rounded bg-emerald-500/20 text-emerald-300">
+                      GRASS
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex items-center justify-between gap-1 px-2 py-1 rounded-lg bg-slate-950/70 border border-slate-800">
+                  <span className="text-[10px] uppercase text-slate-400 font-bold">
+                    Score
+                  </span>
+                  <span className="text-xs font-black text-emerald-400 tabular-nums">
+                    {score.toLocaleString()}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between gap-1 px-2 py-1 rounded-lg bg-slate-950/70 border border-slate-800">
+                  <span className="text-[10px] uppercase text-slate-400 font-bold">
+                    Best
+                  </span>
+                  <span className="text-xs font-extrabold text-white tabular-nums">
+                    {Math.max(score, modeBest).toLocaleString()}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between gap-1 px-2 py-1 rounded-lg bg-slate-950/70 border border-slate-800">
+                  <span className="text-[10px] uppercase text-slate-400 font-bold">
+                    W{wave}
+                  </span>
+                  <span className="text-xs font-extrabold text-sky-300 tabular-nums">
+                    {mode === 'timed'
+                      ? formatTime(TIMED_HUNT_DURATION_SEC - elapsedSec)
+                      : formatTime(elapsedSec)}
+                  </span>
+                </div>
+
+                <div className="col-span-2 sm:col-span-1 flex items-center justify-end gap-1">
+                  <button
+                    onClick={triggerBurrow}
+                    disabled={burrowCooldownLeft > 0 || isBurrowed}
+                    className={`flex-1 sm:flex-initial px-2 py-1 rounded-lg text-[11px] font-extrabold border transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                      isBurrowed
+                        ? 'bg-sky-500 text-slate-950 border-sky-300'
+                        : burrowCooldownLeft <= 0
+                        ? 'bg-sky-500/20 text-sky-300 border-sky-500/40'
+                        : 'bg-slate-900 text-slate-500 border-slate-800 cursor-not-allowed'
+                    }`}
+                  >
+                    <Shield className="w-3 h-3 shrink-0" />
+                    <span>
+                      {isBurrowed
+                        ? 'Burrowed!'
+                        : burrowCooldownLeft <= 0
+                        ? 'Burrow'
+                        : `${burrowCooldownLeft.toFixed(1)}s`}
+                    </span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      simRef.current.paused = !simRef.current.paused;
+                      setIsPaused(simRef.current.paused);
+                    }}
+                    aria-label="Pause Game"
+                    className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer shrink-0"
+                  >
+                    {isPaused ? (
+                      <Play className="w-3.5 h-3.5 text-emerald-400" />
+                    ) : (
+                      <Pause className="w-3.5 h-3.5" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* ARENA CANVAS WRAPPER: 94vw x 72dvh on Mobile, 82dvh 1:1 Square on Desktop */}
+              <div className="relative w-full h-[72dvh] lg:h-[min(58vw,82dvh)] rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-emerald-500/40 shadow-2xl bg-slate-950">
               <canvas
                 ref={canvasRef}
                 onPointerDown={(e) => {
@@ -1797,6 +2032,7 @@ export const SnakeEscapeGame: React.FC = () => {
                   ? 'Hide Virtual Joystick'
                   : 'Show Virtual Joystick'}
               </button>
+            </div>
             </div>
           </div>
         )}
@@ -2197,21 +2433,21 @@ export const SnakeEscapeGame: React.FC = () => {
         {/* HOW TO PLAY MODAL                                         */}
         {/* ========================================================= */}
         {showHowToPlay && (
-          <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="w-full max-w-lg bg-slate-900 border border-emerald-500/30 rounded-3xl p-6 shadow-2xl">
+          <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-[clamp(0.75rem,3vw,1.5rem)] overflow-y-auto">
+            <div className="w-[min(92vw,34rem)] max-h-[88dvh] overflow-y-auto bg-slate-900 border border-emerald-500/30 rounded-3xl p-[clamp(1rem,3vw,1.75rem)] shadow-2xl my-auto">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-black text-white">
+                <h3 className="text-[clamp(1.1rem,2vw,1.35rem)] font-black text-white">
                   How to Play Snake Escape
                 </h3>
                 <button
                   onClick={() => setShowHowToPlay(false)}
-                  className="p-1.5 rounded-xl bg-slate-800 text-slate-300 hover:text-white cursor-pointer"
+                  className="p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className="space-y-3 text-xs sm:text-sm text-slate-200 leading-relaxed">
+              <div className="space-y-3 text-[clamp(0.78rem,1.2vw,0.92rem)] text-slate-200 leading-relaxed">
                 <p>
                   <strong>1. Smooth Steering:</strong> Guide your snake with your
                   mouse/finger, <kbd className="px-1.5 py-0.5 rounded bg-slate-800">WASD</kbd>{' '}
@@ -2234,7 +2470,7 @@ export const SnakeEscapeGame: React.FC = () => {
                 </p>
                 <p>
                   <strong>4. Scoring &amp; Near-Misses:</strong> Mouse ={' '}
-                  <strong>+10 pts</strong>, Golden Mouse = <strong>+30 pts</strong> +
+                  <strong>+10 pts</strong>, Golden Mouse = <strong>+50 pts</strong> +
                   4s speed boost, Wave Survived = <strong>+100 pts</strong>, and
                   escaping a locked strike circle right before impact awards a{' '}
                   <strong>+25 pt Near-Miss bonus</strong>!
@@ -2243,7 +2479,7 @@ export const SnakeEscapeGame: React.FC = () => {
 
               <button
                 onClick={() => setShowHowToPlay(false)}
-                className="mt-5 w-full py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-black text-sm cursor-pointer"
+                className="mt-5 w-full py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-black text-[clamp(0.8rem,1.2vw,0.95rem)] cursor-pointer"
               >
                 Got It!
               </button>
@@ -2255,21 +2491,21 @@ export const SnakeEscapeGame: React.FC = () => {
         {/* SETTINGS & ACCESSIBILITY MODAL                            */}
         {/* ========================================================= */}
         {showSettingsModal && (
-          <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-slate-900 border border-emerald-500/30 rounded-3xl p-6 shadow-2xl">
+          <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-[clamp(0.75rem,3vw,1.5rem)] overflow-y-auto">
+            <div className="w-[min(92vw,30rem)] max-h-[88dvh] overflow-y-auto bg-slate-900 border border-emerald-500/30 rounded-3xl p-[clamp(1rem,3vw,1.75rem)] shadow-2xl my-auto">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-black text-white">
+                <h3 className="text-[clamp(1.05rem,2vw,1.3rem)] font-black text-white">
                   Game &amp; Accessibility Settings
                 </h3>
                 <button
                   onClick={() => setShowSettingsModal(false)}
-                  className="p-1.5 rounded-xl bg-slate-800 text-slate-300 hover:text-white cursor-pointer"
+                  className="p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className="space-y-3 text-sm">
+              <div className="space-y-2.5 text-[clamp(0.78rem,1.2vw,0.9rem)]">
                 {[
                   {
                     key: 'soundEnabled' as const,
@@ -2304,25 +2540,27 @@ export const SnakeEscapeGame: React.FC = () => {
                 ].map((item) => (
                   <label
                     key={item.key}
-                    className="flex items-center justify-between p-3 rounded-2xl bg-slate-950/70 border border-slate-800 cursor-pointer"
+                    className="flex items-center justify-between p-[clamp(0.65rem,1.5vw,0.9rem)] rounded-2xl bg-slate-950/70 border border-slate-800 cursor-pointer gap-3"
                   >
-                    <div className="pr-3">
-                      <div className="font-bold text-white text-xs sm:text-sm">
+                    <div className="min-w-0">
+                      <div className="font-bold text-white text-[clamp(0.78rem,1.1vw,0.9rem)]">
                         {item.label}
                       </div>
-                      <div className="text-[11px] text-slate-400">{item.desc}</div>
+                      <div className="text-[clamp(0.68rem,0.95vw,0.78rem)] text-slate-400">
+                        {item.desc}
+                      </div>
                     </div>
                     <input
                       type="checkbox"
                       checked={settings[item.key]}
                       onChange={(e) => updateSetting(item.key, e.target.checked)}
-                      className="w-4 h-4 accent-emerald-500 cursor-pointer"
+                      className="w-5 h-5 accent-emerald-500 cursor-pointer shrink-0"
                     />
                   </label>
                 ))}
 
-                <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-950/70 border border-slate-800">
-                  <span className="font-bold text-white text-xs sm:text-sm">
+                <div className="flex items-center justify-between p-[clamp(0.65rem,1.5vw,0.9rem)] rounded-2xl bg-slate-950/70 border border-slate-800 gap-3">
+                  <span className="font-bold text-white text-[clamp(0.78rem,1.1vw,0.9rem)]">
                     Arena Theme
                   </span>
                   <button
@@ -2332,7 +2570,7 @@ export const SnakeEscapeGame: React.FC = () => {
                         settings.theme === 'dark' ? 'light' : 'dark'
                       )
                     }
-                    className="px-3 py-1 rounded-xl bg-slate-800 text-emerald-300 text-xs font-bold border border-slate-700 cursor-pointer"
+                    className="px-3 py-1.5 rounded-xl bg-slate-800 text-emerald-300 text-[clamp(0.7rem,1vw,0.8rem)] font-bold border border-slate-700 cursor-pointer shrink-0"
                   >
                     {settings.theme === 'dark' ? 'Dark Jungle' : 'Daylight Meadow'}
                   </button>
@@ -2341,7 +2579,7 @@ export const SnakeEscapeGame: React.FC = () => {
 
               <button
                 onClick={() => setShowSettingsModal(false)}
-                className="mt-5 w-full py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-black text-sm cursor-pointer"
+                className="mt-5 w-full py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-black text-[clamp(0.8rem,1.2vw,0.95rem)] cursor-pointer"
               >
                 Save &amp; Close
               </button>

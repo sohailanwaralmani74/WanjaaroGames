@@ -629,176 +629,61 @@ export const SnakeAndLadderGame: React.FC<SnakeAndLadderGameProps> = ({ onNaviga
       {/* Top Ad Container (Strictly Outside Game Board Area) */}
       <div id="ad-slot-top" className="w-full h-0 overflow-hidden" aria-label="Top sponsor slot" />
 
-      {/* COMPACT ARCADE GAME HUD BAR */}
-      <header className="w-full max-w-2xl mx-auto px-2.5 pt-2 pb-1">
-        <div
-          className={`flex items-center justify-between gap-2 px-3 py-2 rounded-2xl border shadow-md ${
-            isLight
-              ? 'bg-white/90 border-emerald-300'
-              : 'bg-slate-900/90 border-emerald-500/30 backdrop-blur-md'
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            {onNavigateHome && (
-              <button
-                type="button"
-                onClick={onNavigateHome}
-                aria-label="Back to ReptileBirds Home"
-                title="ReptileBirds Home"
-                className={`p-1.5 rounded-xl border transition-colors cursor-pointer ${
-                  isLight
-                    ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
-                    : 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-emerald-400'
-                }`}
-              >
-                <Home className="w-4 h-4" />
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={() => {
-                clearAllTimers();
-                setScreen('menu');
-              }}
-              className="flex items-center gap-2 text-left cursor-pointer group"
-            >
-              <div>
-                <h1 className="text-sm sm:text-base font-extrabold tracking-tight leading-none text-emerald-400 group-hover:text-emerald-300">
-                  Snake and Ladder
-                </h1>
-                <span className="text-[10px] opacity-70 block">ReptileBirds</span>
-              </div>
-            </button>
-          </div>
-
-          {/* Compact Icon Controls */}
-          <div className="flex items-center gap-1">
-            {screen === 'playing' && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setIsPaused(true)}
-                  aria-label="Pause game"
-                  title="Pause"
-                  className={`p-1.5 rounded-xl border transition-colors cursor-pointer ${
-                    isLight
-                      ? 'bg-slate-100 hover:bg-slate-200 border-slate-200'
-                      : 'bg-slate-800 hover:bg-slate-700 border-slate-700'
-                  }`}
-                >
-                  <Pause className="w-3.5 h-3.5" />
-                </button>
-                <button
-                  type="button"
-                  onClick={startMatch}
-                  aria-label="Restart match"
-                  title="Restart"
-                  className={`p-1.5 rounded-xl border transition-colors cursor-pointer ${
-                    isLight
-                      ? 'bg-slate-100 hover:bg-slate-200 border-slate-200'
-                      : 'bg-slate-800 hover:bg-slate-700 border-slate-700'
-                  }`}
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                </button>
-              </>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setScreen('records')}
-              aria-label="My Records"
-              title="My Records"
-              className={`px-2.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 border transition-colors cursor-pointer ${
-                screen === 'records'
-                  ? 'bg-emerald-600 text-white border-emerald-500'
-                  : isLight
-                  ? 'bg-slate-100 hover:bg-slate-200 border-slate-200'
-                  : 'bg-slate-800 hover:bg-slate-700 border-slate-700'
-              }`}
-            >
-              <Trophy className="w-3.5 h-3.5 text-amber-400" />
-              <span className="hidden xs:inline">Records</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsHowToPlayOpen(true)}
-              aria-label="How to play"
-              title="How to Play"
-              className={`p-1.5 rounded-xl border transition-colors cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 hover:bg-slate-200 border-slate-200'
-                  : 'bg-slate-800 hover:bg-slate-700 border-slate-700'
-              }`}
-            >
-              <HelpCircle className="w-3.5 h-3.5 text-emerald-400" />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsSettingsOpen(true)}
-              aria-label="Settings"
-              title="Settings"
-              className={`p-1.5 rounded-xl border transition-colors cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 hover:bg-slate-200 border-slate-200'
-                  : 'bg-slate-800 hover:bg-slate-700 border-slate-700'
-              }`}
-            >
-              <Settings className="w-3.5 h-3.5" />
-            </button>
-
-            <button
-              type="button"
-              onClick={() =>
-                updateSetting('theme', settings.theme === 'dark' ? 'light' : 'dark')
-              }
-              aria-label="Toggle theme"
-              className={`p-1.5 rounded-xl border transition-colors cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 hover:bg-slate-200 border-slate-200'
-                  : 'bg-slate-800 hover:bg-slate-700 border-slate-700'
-              }`}
-            >
-              {settings.theme === 'dark' ? (
-                <Sun className="w-3.5 h-3.5 text-amber-400" />
-              ) : (
-                <Moon className="w-3.5 h-3.5 text-slate-700" />
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={handleToggleMute}
-              aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
-              className={`p-1.5 rounded-xl border transition-colors cursor-pointer ${
-                isLight
-                  ? 'bg-slate-100 hover:bg-slate-200 border-slate-200'
-                  : 'bg-slate-800 hover:bg-slate-700 border-slate-700'
-              }`}
-            >
-              {isMuted ? (
-                <VolumeX className="w-3.5 h-3.5 text-rose-500" />
-              ) : (
-                <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
-              )}
-            </button>
-          </div>
-        </div>
-      </header>
-
       {/* MAIN GAME STAGE */}
-      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-2xl mx-auto px-2.5 py-1">
+      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-6xl mx-auto px-2 sm:px-4 py-1.5">
         {/* SCREEN 1: GAME-LIKE ARCADE LAUNCHER */}
         {screen === 'menu' && (
           <div
-            className={`w-full rounded-3xl border-2 p-5 sm:p-7 space-y-5 shadow-2xl ${
+            className={`w-full max-w-2xl rounded-3xl border-2 p-5 sm:p-7 space-y-5 shadow-2xl ${
               isLight
                 ? 'bg-white/95 border-emerald-400'
                 : 'bg-slate-900/95 border-emerald-500/40'
             }`}
           >
+            {/* Compact Utility Bar Inside Menu */}
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800/50">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+                Snake and Ladder • 10×10 Board
+              </span>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => setScreen('records')}
+                  className="px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1 border bg-slate-800 border-slate-700 text-slate-200 cursor-pointer"
+                >
+                  <Trophy className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Records</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsHowToPlayOpen(true)}
+                  className="p-1.5 rounded-xl border bg-slate-800 border-slate-700 text-emerald-400 cursor-pointer"
+                  aria-label="How to Play"
+                >
+                  <HelpCircle className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsSettingsOpen(true)}
+                  className="p-1.5 rounded-xl border bg-slate-800 border-slate-700 text-slate-200 cursor-pointer"
+                  aria-label="Settings"
+                >
+                  <Settings className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleToggleMute}
+                  className="p-1.5 rounded-xl border bg-slate-800 border-slate-700 cursor-pointer"
+                  aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
+                >
+                  {isMuted ? (
+                    <VolumeX className="w-3.5 h-3.5 text-rose-500" />
+                  ) : (
+                    <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                  )}
+                </button>
+              </div>
+            </div>
             <div className="text-center space-y-1.5">
               <div className="flex justify-center gap-2 pb-1">
                 {BIRD_TOKEN_LIST.map((b) => (
@@ -1042,50 +927,199 @@ export const SnakeAndLadderGame: React.FC<SnakeAndLadderGameProps> = ({ onNaviga
           </div>
         )}
 
-        {/* SCREEN 3: COMPACT ALL-SCREEN GAME BOARD + ON-BOARD ROLLING DICE + DICE ICON BUTTON */}
+        {/* SCREEN 3: COMPACT ALL-SCREEN GAME BOARD (DESKTOP: LEFT STACKED STATS & DICE | MOBILE: TOP STATS + BOARD) */}
         {(screen === 'playing' || screen === 'win') && (
-          <div className="w-full flex flex-col items-center gap-2">
-            {/* Compact Player Turn & Status Strip Above Board */}
-            <div className="w-full max-w-[min(92vw,58vh,480px)] flex items-center justify-between gap-1.5 px-2 py-1.5 rounded-2xl border bg-slate-900/90 border-slate-800 text-xs">
-              <div className="flex items-center gap-1.5 overflow-x-auto">
-                {players.map((p, idx) => {
-                  const active = idx === currentPlayerIndex && screen === 'playing';
-                  return (
-                    <div
-                      key={p.id}
-                      className={`flex items-center gap-1.5 px-2 py-1 rounded-xl border transition-all ${
-                        active
-                          ? 'bg-emerald-500/20 border-emerald-400 text-white font-bold'
-                          : 'bg-slate-950/60 border-slate-800 text-slate-400 opacity-75'
-                      }`}
-                    >
-                      <BirdTokenSvg token={p.token} size={20} />
-                      <span className="text-[11px] truncate max-w-[68px]">{p.name}</span>
-                      <span className="font-mono text-[10px] px-1 rounded bg-slate-800 text-emerald-400">
-                        {p.position === 0 ? '0' : p.position}
-                      </span>
-                    </div>
-                  );
-                })}
+          <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-3 lg:gap-6">
+            {/* BIG SCREEN (lg+): STACKED LEFT PLAYER POSITIONS, BEST RECORDS, DICE ROLLER & ACTIONS */}
+            <aside className="hidden lg:flex lg:flex-col lg:w-64 shrink-0 gap-2.5">
+              <div
+                className={`rounded-2xl border p-3.5 shadow-lg space-y-2 ${
+                  isLight ? 'bg-white border-emerald-300' : 'bg-slate-900/95 border-emerald-500/30'
+                }`}
+              >
+                <div className="flex items-center justify-between border-b border-slate-800/60 pb-2">
+                  <span className="text-[10px] uppercase tracking-wider font-extrabold text-emerald-400">
+                    {mode === 'daily'
+                      ? `Daily (${todayDate})`
+                      : mode === 'solo'
+                      ? 'Solo Race'
+                      : mode === 'cpu'
+                      ? 'Vs Computer'
+                      : 'Pass & Play'}
+                  </span>
+                  <span className="text-[10px] font-mono text-amber-300">
+                    Best: {records.bestSoloTurns ? `${records.bestSoloTurns}t` : '—'}
+                  </span>
+                </div>
+
+                {/* Stacked Player Cards */}
+                <div className="space-y-1.5">
+                  {players.map((p, idx) => {
+                    const active = idx === currentPlayerIndex && screen === 'playing';
+                    return (
+                      <div
+                        key={p.id}
+                        className={`p-2 rounded-xl border flex items-center justify-between ${
+                          active
+                            ? 'bg-emerald-500/20 border-emerald-400 text-white font-bold shadow-sm'
+                            : 'bg-slate-950/60 border-slate-800 text-slate-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <BirdTokenSvg token={p.token} size={22} />
+                          <span className="text-xs truncate">
+                            {p.name} {active ? '◀' : ''}
+                          </span>
+                        </div>
+                        <span className="font-mono text-xs font-extrabold text-emerald-400">
+                          Sq {p.position}/100
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {currentPlayer && (
+                  <div className="bg-slate-950/70 border border-slate-800 rounded-xl px-2.5 py-1.5 flex items-center justify-between text-xs">
+                    <span className="text-[10px] uppercase text-slate-400 font-bold">
+                      Turns Taken
+                    </span>
+                    <span className="font-mono font-extrabold text-amber-400">
+                      {currentPlayer.turnsTaken}
+                    </span>
+                  </div>
+                )}
               </div>
 
-              {currentPlayer && (
-                <span className="text-[11px] font-mono text-amber-400 shrink-0">
-                  Turns: {currentPlayer.turnsTaken}
-                </span>
-              )}
-            </div>
+              {/* Desktop Dice Roller Stacked on Left */}
+              <div
+                className={`rounded-2xl border p-3 shadow-xl space-y-2.5 ${
+                  isLight ? 'bg-white border-emerald-300' : 'bg-slate-900/95 border-emerald-500/40'
+                }`}
+              >
+                <div className="flex items-center gap-2 min-w-0">
+                  {currentPlayer && <BirdTokenSvg token={currentPlayer.token} size={30} />}
+                  <div className="min-w-0">
+                    <p className="text-xs font-extrabold truncate">
+                      {currentPlayer?.name}&apos;s Turn
+                    </p>
+                    <p className="text-[10px] opacity-75 truncate">{statusAnnouncement}</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  disabled={
+                    isRolling ||
+                    isAnimatingMove ||
+                    Boolean(currentPlayer?.isCpu) ||
+                    screen === 'win'
+                  }
+                  onClick={performTurnRoll}
+                  className="w-full flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 active:scale-95 disabled:opacity-50 text-white font-black text-xs shadow-lg cursor-pointer"
+                >
+                  <DiceFaceSvg value={diceValue} size={32} isRolling={isRolling} />
+                  <div className="text-left leading-tight">
+                    <span className="flex items-center gap-1">
+                      <Dices className="w-3.5 h-3.5" />
+                      {isRolling
+                        ? 'Rolling...'
+                        : currentPlayer?.isCpu
+                        ? 'CPU Turn'
+                        : 'Roll Dice'}
+                    </span>
+                    <span className="text-[10px] font-mono opacity-85 block">
+                      {diceValue ? `Last: ${diceValue}` : 'Space / Click'}
+                    </span>
+                  </div>
+                </button>
+              </div>
 
-            {/* 10x10 RESPONSIVE BOARD SCALED TO FIT EVERY SCREEN WITHOUT SCROLLING */}
-            <div
-              className={`relative w-[min(92vw,58vh,480px)] h-[min(92vw,58vh,480px)] rounded-2xl border-4 overflow-hidden shadow-2xl ${
-                isLight
-                  ? 'bg-amber-50 border-emerald-700'
-                  : 'bg-slate-900 border-emerald-600/80'
-              }`}
-              role="region"
-              aria-label="10 by 10 Snake and Ladder board"
-            >
+              {/* Left Stacked Action Controls */}
+              <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-2.5 flex gap-1.5 shadow-md">
+                <button
+                  type="button"
+                  onClick={startMatch}
+                  className="flex-1 py-2 px-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-xs font-bold text-emerald-300 flex items-center justify-center gap-1.5 border border-emerald-500/30 cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Restart</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    clearAllTimers();
+                    setScreen('menu');
+                  }}
+                  className="flex-1 py-2 px-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 cursor-pointer"
+                >
+                  Menu
+                </button>
+              </div>
+            </aside>
+
+            {/* CENTER COLUMN: MOBILE TOP STATS + 10x10 BOARD + MOBILE DICE DOCK */}
+            <div className="flex flex-col items-center gap-1.5">
+              {/* MOBILE (< lg): COMPACT TOP PLAYER TURN & STATUS STRIP */}
+              <div className="lg:hidden w-[94vw] sm:w-[min(86vw,74dvh)] flex items-center justify-between gap-1.5 px-2.5 py-1.5 rounded-xl border bg-slate-900/90 border-slate-800 text-xs">
+                <div className="flex items-center gap-1.5 overflow-x-auto">
+                  {players.map((p, idx) => {
+                    const active = idx === currentPlayerIndex && screen === 'playing';
+                    return (
+                      <div
+                        key={p.id}
+                        className={`flex items-center gap-1 px-2 py-0.5 rounded-lg border transition-all ${
+                          active
+                            ? 'bg-emerald-500/20 border-emerald-400 text-white font-bold'
+                            : 'bg-slate-950/60 border-slate-800 text-slate-400 opacity-75'
+                        }`}
+                      >
+                        <BirdTokenSvg token={p.token} size={18} />
+                        <span className="text-[11px] truncate max-w-[60px]">{p.name}</span>
+                        <span className="font-mono text-[10px] px-1 rounded bg-slate-800 text-emerald-400">
+                          {p.position === 0 ? '0' : p.position}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {currentPlayer && (
+                    <span className="text-[10px] font-mono text-amber-400">
+                      T:{currentPlayer.turnsTaken}
+                    </span>
+                  )}
+                  <button
+                    type="button"
+                    onClick={startMatch}
+                    className="p-1 rounded-lg bg-emerald-600 text-white cursor-pointer"
+                    aria-label="Restart"
+                  >
+                    <RotateCcw className="w-3 h-3" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      clearAllTimers();
+                      setScreen('menu');
+                    }}
+                    className="px-1.5 py-0.5 rounded-lg bg-slate-800 text-slate-200 text-[10px] font-bold cursor-pointer"
+                  >
+                    Menu
+                  </button>
+                </div>
+              </div>
+
+              {/* 10x10 RESPONSIVE BOARD SCALED FOR MOBILE & DESKTOP */}
+              <div
+                className={`relative w-[94vw] h-[94vw] max-w-[68dvh] max-h-[68dvh] lg:w-[min(58vw,78dvh)] lg:h-[min(58vw,78dvh)] lg:max-w-none lg:max-h-none rounded-2xl border-4 overflow-hidden shadow-2xl ${
+                  isLight
+                    ? 'bg-amber-50 border-emerald-700'
+                    : 'bg-slate-900 border-emerald-600/80'
+                }`}
+                role="region"
+                aria-label="10 by 10 Snake and Ladder board"
+              >
               {/* 10x10 Grid */}
               <div className="grid grid-cols-10 grid-rows-10 w-full h-full">
                 {visualSquares.map((sq) => {
@@ -1370,52 +1404,53 @@ export const SnakeAndLadderGame: React.FC<SnakeAndLadderGameProps> = ({ onNaviga
               )}
             </div>
 
-            {/* INTERACTIVE DICE BUTTON DOCK BELOW BOARD */}
-            <div
-              className={`w-full max-w-[min(92vw,58vh,480px)] flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-2xl border shadow-xl ${
-                isLight
-                  ? 'bg-white border-emerald-300'
-                  : 'bg-slate-900/95 border-emerald-500/40'
-              }`}
-            >
-              <div className="flex items-center gap-2.5 min-w-0">
-                {currentPlayer && <BirdTokenSvg token={currentPlayer.token} size={34} />}
-                <div className="min-w-0">
-                  <p className="text-xs font-extrabold truncate">
-                    {currentPlayer?.name}&apos;s Turn
-                  </p>
-                  <p className="text-[11px] opacity-75 truncate">{statusAnnouncement}</p>
-                </div>
-              </div>
-
-              {/* Clickable Dice Icon Button to Roll */}
-              <button
-                type="button"
-                disabled={
-                  isRolling ||
-                  isAnimatingMove ||
-                  Boolean(currentPlayer?.isCpu) ||
-                  screen === 'win'
-                }
-                onClick={performTurnRoll}
-                aria-label="Click dice to roll on board"
-                className="shrink-0 flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-white font-black text-xs sm:text-sm shadow-lg transition-all cursor-pointer"
+              {/* MOBILE (< lg) INTERACTIVE DICE BUTTON DOCK BELOW BOARD */}
+              <div
+                className={`lg:hidden w-[94vw] sm:w-[min(86vw,74dvh)] mt-2 flex items-center justify-between gap-2 px-3 py-2 rounded-2xl border shadow-xl ${
+                  isLight
+                    ? 'bg-white border-emerald-300'
+                    : 'bg-slate-900/95 border-emerald-500/40'
+                }`}
               >
-                <DiceFaceSvg value={diceValue} size={36} isRolling={isRolling} />
-                <div className="text-left leading-tight">
-                  <span className="flex items-center gap-1">
-                    <Dices className="w-4 h-4" />
-                    {isRolling
-                      ? 'Rolling...'
-                      : currentPlayer?.isCpu
-                      ? 'CPU Turn'
-                      : 'Roll Dice'}
-                  </span>
-                  <span className="text-[10px] font-mono opacity-85 block">
-                    {diceValue ? `Last: ${diceValue}` : 'Tap / Space'}
-                  </span>
+                <div className="flex items-center gap-2 min-w-0">
+                  {currentPlayer && <BirdTokenSvg token={currentPlayer.token} size={28} />}
+                  <div className="min-w-0">
+                    <p className="text-xs font-extrabold truncate">
+                      {currentPlayer?.name}&apos;s Turn
+                    </p>
+                    <p className="text-[10px] opacity-75 truncate">{statusAnnouncement}</p>
+                  </div>
                 </div>
-              </button>
+
+                {/* Clickable Dice Icon Button to Roll */}
+                <button
+                  type="button"
+                  disabled={
+                    isRolling ||
+                    isAnimatingMove ||
+                    Boolean(currentPlayer?.isCpu) ||
+                    screen === 'win'
+                  }
+                  onClick={performTurnRoll}
+                  aria-label="Click dice to roll on board"
+                  className="shrink-0 flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-white font-black text-xs shadow-lg transition-all cursor-pointer"
+                >
+                  <DiceFaceSvg value={diceValue} size={30} isRolling={isRolling} />
+                  <div className="text-left leading-tight">
+                    <span className="flex items-center gap-1">
+                      <Dices className="w-3.5 h-3.5" />
+                      {isRolling
+                        ? 'Rolling...'
+                        : currentPlayer?.isCpu
+                        ? 'CPU Turn'
+                        : 'Roll Dice'}
+                    </span>
+                    <span className="text-[9px] font-mono opacity-85 block">
+                      {diceValue ? `Last: ${diceValue}` : 'Tap / Space'}
+                    </span>
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
         )}
